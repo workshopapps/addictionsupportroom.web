@@ -16,7 +16,7 @@ class Settings(BaseSettings):
     # quantity of workers for uvicorn
     WORKERS_COUNT: int = 1
     # Enable uvicorn reloading
-    RELOAD: bool = False
+    RELOAD: bool = True
     # Database settings
     DB_HOST: str = "localhost"
     DB_PORT: int = 5432

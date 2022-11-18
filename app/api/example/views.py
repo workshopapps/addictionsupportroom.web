@@ -1,4 +1,4 @@
-from api.example.schemas import ExampleCreateSchema, ExampleSchema
+from api.example.schemas import DayCreate, ExampleSchema
 from api.example.services import ExampleService
 from db.db import db_session
 from db.models.example import Example
@@ -18,7 +18,7 @@ async def get_examples(
 
 @router.post("/", response_model=ExampleSchema)
 async def create_example(
-    data: ExampleCreateSchema,
+    data: DayCreate,
     session: AsyncSession = Depends(db_session),
 ) -> Example:
     example_service = ExampleService(session=session)
