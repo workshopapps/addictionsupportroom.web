@@ -8,13 +8,13 @@ from db.db import Base
 
 '''Example'''
 
+
 class Example(Base):
     __tablename__ = "example"
 
-    id = Column(Integer, primary_key=True, index=True)
+    id = Column(String, primary_key=True, index=True)
     name = Column(String)
     active = Column(Boolean, default=True)
-
 
 
 class Day(Base):
@@ -27,4 +27,3 @@ class Day(Base):
     # owner_id = Column(Integer, ForeignKey("users.id"))
 
     # owner = relationship("User", back_populates="todos")
-

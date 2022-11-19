@@ -5,7 +5,7 @@ import OurValues from "../../Components/ourvalues/OurValues";
 import interview from "../../assets/interview.png";
 import Job from "../../Components/jobcontainer/Job";
 import Button from "../../UI/Button";
-import AppStats from "../../Components/appstats/AppStats";
+import AppStats from "../../Components/AppStats/Appstats";
 
 const About = () => {
   return (
