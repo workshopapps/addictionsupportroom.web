@@ -21,7 +21,7 @@ const Services = () => {
             The Department of Health and Social Care owns the NHS website. The
             content, data and services on the NHS website are delivered by NHS
             Digital. You may access and use this website if you agree to be
-            legally bound by the terms set out here. If you do not agree to be
+            legally bound by set out here. If you do not agree to be
             legally bound by these terms, please do not access and/or use the
             NHS website
           </p>
