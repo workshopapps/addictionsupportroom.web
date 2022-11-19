@@ -19,11 +19,13 @@ class Settings(BaseSettings):
     RELOAD: bool = True
     # Database settings
     DB_HOST: str = "localhost"
-    DB_PORT: int = 5432
-    DB_USER: str = "postgres"
-    DB_PASS: str = "postgres"
-    DB_BASE: str = "db"
+    DB_PORT: int = 3306
+    DB_USER: str = "root"
+    DB_PASS: str = "admin123!"
+    DB_BASE: str = "addictionsupportroom"
     DB_ECHO: bool = False
+    
+    'mysql+asyncmy://root:admin123!@localhost:3306/addictionsupportroom'
 
     @property
     def BASE_URL(self) -> str:
@@ -37,8 +39,9 @@ class Settings(BaseSettings):
         :return: Database URL.
         """
 
-        return f"postgresql+asyncpg://{self.DB_USER}:{self.DB_PASS}@{self.DB_HOST}:{self.DB_PORT}/{self.DB_BASE}"
-
+        # return f"postgresql+asyncpg://{self.DB_USER}:{self.DB_PASS}@{self.DB_HOST}:{self.DB_PORT}/{self.DB_BASE}"
+        return f"mysql+asyncmy://{self.DB_USER}:{self.DB_PASS}@{self.DB_HOST}:{self.DB_PORT}/{self.DB_BASE}"
+    
     class Config:
         env_file = f"{BASE_DIR}/.env"
         env_file_encoding = "utf-8"
