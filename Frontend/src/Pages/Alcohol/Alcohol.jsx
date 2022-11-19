@@ -11,12 +11,11 @@ const Alcohol = () => {
       <h1 className="text-[#48A1C8] md:text-[#204E65] text-[20px] md:text-[48px] font-[700] text-center">
         Alcohol Addiction and Abuse
       </h1>
-      <p className="text-[13px] md:text-[18px] font-[400] text-center text-[#575757] mt-3 md:mt-0 p-3 lg:px-16">
+      <p className="text-[13px] md:text-[18px] font-[400] text-center text-[#575757] mt-3 md:mt-0 p-3 md:p-0">
         Alcoholism is one of the most common addictions all over the world. The
         social acceptance of drinking can often lead to denial — and, if left
         untreated, severe consequences.
       </p>
-
       <div className="flex justify-center md:gap-10 text-[#1D475C] gap-5 text-[14px] md:text-[20px] font-[700] my-8">
         <a href="#symptoms" className="hover:opacity-80 duration-300">
           Symptoms
@@ -32,7 +31,6 @@ const Alcohol = () => {
         </a>
       </div>
 
-
       <div className="flex justify-center md:gap-10 text-[#1D475C] gap-5 text-[14px] md:text-[20px] font-[700] my-8">
         <a href="#symptoms" className="hover:opacity-80 duration-300">
           Symptoms
@@ -47,7 +45,6 @@ const Alcohol = () => {
           Outlook
         </a>
       </div>
-
       <div className="py-2">
         <h3 className="text-[16px] md:text-[20px] font-[700] text-[#204E65] text-center mb-5">
           Overview

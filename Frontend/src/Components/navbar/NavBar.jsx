@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { NavLink, Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import { navbarList } from "../../Data/navbar";
 import Button from "../../UI/Button";
 import MobileNav from "./MobileNav";
@@ -9,23 +9,21 @@ const NavBar = () => {
   return (
     <div>
       <div className="py-4 max-w-[1400px] w-[90%] mx-auto flex justify-between">
-        <Link to="/">
-          <p className="tablet:text-[32px] text-[24px] text-blue font-[700]">
-            {navbarList.logo}
-          </p>
-        </Link>
+        <NavLink to="/">
+          <p className="tablet:text-[32px] text-[24px] text-blue font-[700]">{navbarList.logo}</p>
+        </NavLink>
         <div>
           <ul className="hidden laptop:flex">
             {navbarList.navList.map(({ index, page, link }) => (
-              <NavLink className="mx-5" key={index} to={link}>
-                <li className="p-2 pt-4 font-[700]">{page}</li>
+              <NavLink key={index}  to={link}>
+                <li className="p-4 font-[700] mx-3">{page}</li>
               </NavLink>
             ))}
           </ul>
         </div>
-        <Link className="hidden laptop:block" to={navbarList.appLink}>
+        <NavLink className="hidden laptop:block" to={navbarList.appLink}>
           <Button text={navbarList.app} />
-        </Link>
+        </NavLink>
 
         <div
           className="flex flex-col justify-center laptop:hidden"

@@ -6,9 +6,8 @@ from fastapi.security import OAuth2PasswordBearer
 from pydantic import ValidationError
 from sqlalchemy.orm import Session
 
-from app import crud, models, schemas
-from app.core import security
-from db.session import SessionLocal
+# from app import models, schemas
+from db.db import SessionLocal
 # from app.core.config import settings
 # from app.db.session import SessionLocal
 
