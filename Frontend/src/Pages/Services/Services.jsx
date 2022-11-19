@@ -45,6 +45,66 @@ const Services = () => {
       </li><li className="ml-[20px] my-5">
       Survey questions about reaching your milestone.
       </li>
+      <p className="text-[22px] mt-10 font-[500]" >
+      Account Data
+      </p>
+      <p className="mt-4">
+      When you subscribe to SoberPal, we provide cloud data backups as a service. This means that any information you provide will be backed up securely in the cloud. This can include information such as your alcohol addictions, start dates, reasons for staying sober, daily notes, etc. This may include sensitive personal data about personal health issues and/or information related to your past, present, or future physical or mental health condition.
+      </p>
+      <p className="my-4">
+      We will also collect data you give us regarding your interaction with the app. This may include technical information, such as your IP address based on your location, app version, or device platform.
+      </p>
+      <p className="text-[22px] mt-10 font-[500]" >
+      Community Data
+      </p>
+      <p className="text-[26px] mt-10 font-[500]" >
+      Where Is This Data Stored?
+      </p>
+      <p className="mt-4">
+      The data mentioned above will be stored securely on Amazon Web Services (“AWS”) .
+      </p>
+      <p className="text-[26px] mt-10 font-[500]" >
+      What Do We Do With This Data?
+      </p>
+      <li className="ml-[20px] my-5 ">The app usage and account data help us improve the user experience of our App.</li>
+      <li className="ml-[20px] my-5 ">
+      We use anonymized addiction names, start dates, and survey questions to display interesting statistics to our app users to provide motivation for reaching their next milestone.
+      </li>
+      <li className="ml-[20px] my-5 ">Community data is displayed on our community pages. We are not a subsidiary of a larger corporation that can access your information.</li>
+      <p className="text-[26px] mt-10 font-[500]" >
+      Who Do You Share This Data with??
+      </p>
+      <p className="mt-4">
+      We never share information with third parties beyond those required to serve you and we will never share any of this data unless required by law.
+      We use the following third-party providers to provide the following processes:
+      </p>
+      <p className="mt-4">
+      Amazon Web Services: https://aws.amazon.com/privacy/
+We use Amazon Web Services as a data storage provider and we use it to securely store the data outlined above.
+      </p>
+      <p className="mt-4">
+      Google Analytics: https://www.google.com/policies/privacy/
+We use Google Analytics to help us improve the user experience of Sober Pal.
+      </p>
+      <p className="mt-4">
+      Email Octopus: https://emailoctopus.com/legal/privacy
+We use Emailoctopus to send communications to users who have opted in to receiving such communications from us. The only personal info we share with Emailoctopus is your email address.
+      </p>
+      <p className="mt-4">
+      Revenue Cat: https://www.revenuecat.com/privacy
+We use Revenue Cat to process our subscriptions. The only personal info Revenue Cat collects is an app user ID.
+      </p>
+
+      <p className="text-[26px] mt-10 font-[500]" >
+      Child Safety
+      </p>
+      <p className="mt-4">
+      Upon setting up the app, you will be asked to confirm that you are at least 16 years of age. By using the app, you confirm to us that you meet this requirement. If you are under the age of 18, you confirm you have received permission from your parent or guardian before using this app or sending us personal information.
+      </p>
+
+
+
+
 
 
 
@@ -54,206 +114,9 @@ const Services = () => {
 
       <div className="mt-[30px]">
        
-        <section>
-          <p className=" my-5 text-[#3E3E3E] text-[32px] ">
-            <span className="mr-2">4.</span>
-            Medical information
-          </p>
-          <p className="text-[#4F4F4F]">
-            <span className="text-[20px] block">4.1</span>
-            The NHS website provides medical information for use as information
-            or for educational purposes. We do not warrant that information we
-            provide will meet your health or medical requirements. It is up to
-            you to contact a health professional if you are concerned about your
-            health.
-          </p>
-          <p className="text-[#4F4F4F]">
-            <span className="text-[20px] block">4.2</span>
-            The NHS website does not give medical advice in relation to any
-            individual case or patient, nor does the NHS website provide medical
-            or diagnostic services.
-          </p>
-          <p className="text-[#4F4F4F]">
-            <span className="text-[20px] block">4.3</span>
-            If you are a medical or health professional then you are encouraged
-            to use the NHS website for general information purposes. However,
-            you should not rely on material included on the NHS website and we
-            do not accept any responsibility if you do.
-          </p>
-        </section>
-        <section>
-          <p className=" my-5 text-[#3E3E3E] text-[32px] ">
-            <span className="mr-2">5.</span>
-            Third party website
-          </p>
-          <p className="text-[#4F4F4F]">
-            <span className="text-[20px] block">5.1</span>
-            We do not monitor the content of third-party websites or third-party
-            applications. Any link provided on NHS.UK is solely for your
-            convenience. We do not accept any responsibility for any third-party
-            website or third-party applications.
-          </p>
-          <p className="text-[#4F4F4F]">
-            <span className="text-[20px] block">5.2</span>
-            Where we provide links to third-party websites, that does not imply
-            any association with or recommendation for those websites. See our
-            external links policy.
-          </p>
-          <p className="text-[#4F4F4F]">
-            <span className="text-[20px] block">5.3</span>
-            Where we provide links to third-party applications, that does not
-            imply any association with or recommendation for those applications.
-            See our external links policy.
-          </p>
-        </section>
-        <section>
-          <p className=" my-5 text-[#3E3E3E] text-[32px] ">
-            <span className="mr-2">6.</span>
-            Liability
-          </p>
-          <p className="text-[#4F4F4F]">
-            <span className="text-[20px] block">6.1</span>
-            We accept no liability to you should the NHS website not be
-            available at any particular time.
-          </p>
-          <p className="text-[#4F4F4F]">
-            <span className="text-[20px] block">6.2</span>
-            You acknowledge and agree that we will not be responsible for any
-            injury, loss, damage, costs or expenses (whether direct or indirect)
-            arising out of, or relating to the use or misuse of the NHS website,
-            except to the extent that such liability cannot be excluded by law
-            (i.e. our liability for death or personal injury arising from our
-            negligence, or our fraud or fraudulent misrepresentation or any
-            other liability that cannot be excluded or limited under English
-            law). This means that we have no liability to you (or anyone else on
-            whose behalf you may use the NHS website) for:
-            <p>
-              (a) any financial loss you may suffer or any inability to claim
-              any payments you may experience;
-            </p>
-            <p>
-              (b) any business loss you may suffer, including loss of revenue,
-              loss of profits or loss of anticipated savings (whether those
-              losses are the direct or indirect result of our default);
-            </p>
-            <p>
-              (c) any loss which you suffer other than as a result of our
-              negligence or breach of statutory duty;
-            </p>
-            <p>
-              (d) any loss suffered due to the default of any party other than
-              us.
-            </p>
-          </p>
-          <p className="text-[#4F4F4F]">
-            <span className="text-[20px] block">6.3</span>
-            Although we follow our governance processes and make reasonable
-            efforts to maintain service and accurate, up-to-date content this
-            website is provided "as is" and, to the extent permitted by law, we
-            do not warrant or represent (expressly or impliedly and including
-            but not limited to the implied warranties of satisfactory quality
-            and fitness for a particular purpose) that the NHS website or any
-            content is accurate, complete or up-to-date, will meet your
-            particular requirements or needs, will be available uninterrupted or
-            error free, that defects will be corrected, or that NHS.UK or its
-            supporting systems are free of viruses or bugs.
-          </p>
-          <p className="text-[#4F4F4F]">
-            <span className="text-[20px] block">6.4</span>
-            We do not accept any liability to you if we fail, or are interrupted
-            or delayed in the performance of any obligation because of:
-            <p>
-              (a) the non-availability or failure of any telecommunications or
-              computer services, systems, equipment or software operated or
-              provided by you or any third party;
-            </p>
-            <p>(b) any other event not reasonably within our control.</p>
-          </p>
-          <p className="text-[#4F4F4F]">
-            <span className="text-[20px] block">6.5</span>
-            We do not give any commitments or accept any liability to you in
-            respect of NHS.UK content provided by other users of the website or
-            third parties.
-          </p>
-          <p className="text-[#4F4F4F]">
-            <span className="text-[20px] block">6.6</span>
-            Terms set out here should be read in conjunction with our external
-            links policy. You acknowledge and agree that we will not be
-            responsible for any injury, loss or damage (whether direct or
-            indirect) arising out of, or relating to the misuse of, or
-            inappropriate reliance on the contents or advice provided via an
-            external link on this website, except to the extent that such
-            liability cannot be limited or excluded by law.
-          </p>
-        </section>
-        <section>
-          <p className=" my-5 text-blue text-[32px] ">Legal</p>
-          <p className="text-[#4F4F4F]">
-            <span className="text-[20px] block">
-              Attacks, unauthorised access and other violations
-            </span>
-            You must not try to gain unauthorised access to the NHS website, our
-            services, the servers on which they're stored, or any server,
-            computer or database connected to them. You must not attack the NHS
-            website or services hosted on it in any way, (this includes
-            denial-of-service attacks). We'll report any attacks or attempts to
-            gain unauthorised access to the site or service to the relevant law
-            enforcement authorities and shall share information about you with
-            them. You must not use the NHS website:
-            <p>
-              (a) to transmit any false, misleading, fraudulent, defamatory,
-              offensive or illegal communications;
-            </p>
-            <p>
-              (b) in a way that could damage, disable, overburden, impair or
-              compromise our systems or security or interfere with other users;
-            </p>
-            <p>
-              (c) in any unlawful manner, for any unlawful purpose, or in any
-              manner inconsistent with these terms of use, or act fraudulently
-              or maliciously, for example, by hacking into or inserting
-              malicious code, such as viruses or harmful data.
-            </p>
-          </p>
-          <p className="text-[#4F4F4F]">
-            <span className="text-[20px] block mt-5">Remedies</span>
-            To the extent that we are practically able to do so, we may
-            terminate your access to all or any part of NHS.UK and services at
-            any time without notice if you breach any of the terms. You may
-            terminate your account registration using the "Deactivate my NHS
-            website account" link in your account pages. This will clear any
-            personal information you have saved. Subscriptions to our emails can
-            be terminated using the "Unsubscribe" links provided in the emails.
-          </p>
-          <p className="text-[#4F4F4F]">
-            We reserve the right to investigate complaints or reported
-            violations of our terms and to take any action we consider
-            appropriate, including but not limited to reporting any suspected
-            unlawful activity to law enforcement officials, regulators, or other
-            third parties and disclosing any information necessary or
-            appropriate to such persons or entities relating to user
-            information, email addresses, usage history, IP addresses and
-            traffic information.
-          </p>
-          <p className="text-[#4F4F4F]">
-            <span className="text-[20px] block mt-5">General</span>
-            If any of these terms are determined to be illegal, invalid or
-            otherwise unenforceable then the remaining terms shall remain in
-            full force and effect. We may transfer our rights and obligations
-            under these terms to another organisation. You may only transfer
-            your rights or your obligations under these terms to another person
-            if we agree in writing.
-          </p>
-          <p className=" text-[#4F4F4F]">
-            Your use of the NHS website and these terms, together with any
-            service specific additional terms, shall be governed by and
-            interpreted in accordance with the laws of England, and you agree to
-            the exclusive jurisdiction of the courts of England in respect of
-            any disputes that may arise in relation to the NHS website.'
-          </p>
-        </section>
+        
         <section className="text-[#4F4F4F]">
-          <p className=" my-5 text-blue text-[32px] ">Privacy policy</p>
+          <p className=" my-5  text-[32px] ">Privacy policy</p>
           <p className="">
             The NHS website views its users' privacy as paramount. Find out more
             about privacy on the NHS website.
