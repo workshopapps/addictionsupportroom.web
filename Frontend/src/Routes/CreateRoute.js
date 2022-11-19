@@ -7,8 +7,6 @@ import Faq from '../Pages/Faq/Faq'
 import Team from '../Pages/Team/Team';
 import Services from '../Pages/Services/Services';
 import Forum from '../Pages/Forum/Forum';
-import JobApplication from '../Pages/JobApplication/JobApplication';
-import Alcohol from '../Pages/Alcohol/Alcohol';
 
 
 const CreateRoute = () => {
@@ -21,8 +19,6 @@ const CreateRoute = () => {
       <Route path='team' element={<Team/>} />
       <Route path='forum' element={<Forum />} />
       <Route path='terms-services' element={<Services />} />
-      <Route path='/careers/job-application' element={<JobApplication />} />
-      <Route path='/alcohol' element={<Alcohol />} />
       {/* <Route path="*" element={<NotFound />} /> */}
     </Routes>
   )
