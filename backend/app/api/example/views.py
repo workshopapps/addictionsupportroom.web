@@ -1,7 +1,7 @@
-from api.example.schemas import DayCreate, ExampleSchema
+from api.example.schemas import Examples, ExampleSchema
 from api.example.services import ExampleService
 from db.db import db_session
-from db.models.example import Example
+from db.models import Example
 from fastapi import APIRouter, Depends
 from sqlmodel.ext.asyncio.session import AsyncSession
 
@@ -18,7 +18,7 @@ async def get_examples(
 
 @router.post("/", response_model=ExampleSchema)
 async def create_example(
-    data: DayCreate,
+    data: Examples,
     session: AsyncSession = Depends(db_session),
 ) -> Example:
     example_service = ExampleService(session=session)

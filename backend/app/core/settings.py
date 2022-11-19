@@ -24,7 +24,7 @@ class Settings(BaseSettings):
     DB_PASS: str = "admin123!"
     DB_BASE: str = "addictionsupportroom"
     DB_ECHO: bool = False
-    
+
     'mysql+asyncmy://root:admin123!@localhost:3306/addictionsupportroom'
 
     @property
@@ -41,7 +41,7 @@ class Settings(BaseSettings):
 
         # return f"postgresql+asyncpg://{self.DB_USER}:{self.DB_PASS}@{self.DB_HOST}:{self.DB_PORT}/{self.DB_BASE}"
         return f"mysql+asyncmy://{self.DB_USER}:{self.DB_PASS}@{self.DB_HOST}:{self.DB_PORT}/{self.DB_BASE}"
-    
+
     class Config:
         env_file = f"{BASE_DIR}/.env"
         env_file_encoding = "utf-8"
