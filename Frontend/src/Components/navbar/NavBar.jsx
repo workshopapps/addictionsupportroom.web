@@ -18,7 +18,7 @@ const NavBar = () => {
           <ul className="hidden laptop:flex">
             {navbarList.navList.map(({ index, page, link }) => (
               <NavLink className="mx-5" key={index} to={link}>
-                <li className="p-2 pt-4 font-[700]">{page}</li>
+                <li  className="p-2 pt-4 font-[700]">{page}</li>
               </NavLink>
             ))}
           </ul>
