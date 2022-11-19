@@ -14,6 +14,20 @@ const Alcohol = () => {
         social acceptance of drinking can often lead to denial — and, if left
         untreated, severe consequences.
       </p>
+      <div className="flex justify-center md:gap-10 text-[#1D475C] gap-5 text-[14px] md:text-[20px] font-[700] my-8">
+        <a href="#symptoms" className="hover:opacity-80 duration-300">
+          Symptoms
+        </a>
+        <a href="#complications" className="hover:opacity-80 duration-300">
+          Complications
+        </a>
+        <a href="#treatment" className="hover:opacity-80 duration-300">
+          Treatment
+        </a>
+        <a href="#outlook" className="hover:opacity-80 duration-300">
+          Outlook
+        </a>
+      </div>
 
     </div>
   );
