@@ -3,6 +3,7 @@ import { Route, Routes } from 'react-router-dom';
 import Home from '../Pages/Home/Home';
 import About from '../Pages/About/About';
 import Contact from '../Pages/Contact/Contact';
+
 import Faq from '../Pages/Faq/Faq'
 import Team from '../Pages/Team/Team';
 import Services from '../Pages/Services/Services';
@@ -15,7 +16,6 @@ const CreateRoute = () => {
       <Route path='/' element={<Home/>} />
       <Route path='about' element={<About/>} />
       <Route path='contact' element={<Contact/>} />
-
       <Route path='faq' element={<Faq/>} />
       <Route path='team' element={<Team/>} />
       <Route path='forum' element={<Forum />} />

@@ -1,7 +1,7 @@
 import React from 'react'
 import './Faq.css'
 import FaqData from "../../Data/FaqData";
-import helpcenter from "../../assets/help-center.png";
+import helpcenter from "../../assets/helpcenter.png";
 import Button from "../../UI/Button";
 import Input from '../../UI/Input';
 /* import Button2 from "../../UI/Button2"; */

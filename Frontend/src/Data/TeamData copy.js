@@ -57,7 +57,6 @@ const TeamData = [
         designation: 'Customer Success',
         avatar: Amos,
     },
-    
 ]
 
 export default TeamData;
