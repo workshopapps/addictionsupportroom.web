@@ -1,0 +1,138 @@
+.soberpal__footer {
+    background-color: var(--primary-50);
+    padding: 3rem 3rem 1rem 3rem;
+}
+
+.soberpal__footer hr {
+    border: 1px solid #d7d7d7;
+    margin: 2rem 0 2rem 0;
+}
+
+.soberpal__footer p {
+    font-weight: 400;
+    font-size: 1rem;
+    line-height: 1.5rem;
+    color: var(--gray-500);
+}
+
+.soberpal__footer-flex {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.soberpal__footer-flex__box1 {
+    align-self: flex-start;
+    flex: 1;
+}
+
+.soberpal__footer-flex__box1 h1 {
+    font-weight: 500;
+    font-size: 1.5rem;
+    line-height: 3rem;
+    color: var(--primary-500);
+}
+
+.soberpal__footer-flex__box1 p {
+    line-height: 1.5rem;
+    color: var(--gray-500);
+}
+
+.soberpal__footer-flex__box2 {
+    display: flex;
+    flex: 1;
+    justify-content: space-between;
+}
+
+.soberpal__footer-flex__box2 a {
+    font-size: .875rem;
+    line-height: 3rem;
+    color: var(--primary-500);
+    display: block;
+}
+
+.soberpal__footer-flex__box2 h3 {
+    font-weight: 500;
+    font-size: 1rem;
+    line-height: 2rem;
+    color: var(--primary-500);
+}
+
+@media screen and (min-width: 780px) and (max-width: 900px) {
+    .soberpal__footer p {
+        font-size: .9rem;
+    }
+
+    .soberpal__footer-flex__box1 h1 {
+        font-size: 1.3rem;
+    }
+
+    .soberpal__footer-flex__box1 p {
+        font-size: .9rem;
+    }
+
+    .soberpal__footer-flex__box2 h3 {
+        font-size: .85rem;
+    }
+
+    .soberpal__footer-flex__box2 a {
+        font-size: .7rem;
+    }
+}
+
+@media screen and (max-width: 779px) {
+    .soberpal__footer-flex {
+        display: block;
+    }
+
+    .soberpal__footer-flex__box1 {
+        margin-bottom: 2rem;
+    }
+}
+
+@media screen and (max-width: 500px) {
+    .soberpal__footer-flex__box2 {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .soberpal__footer p {
+        font-size: .9rem;
+    }
+
+    .soberpal__footer-flex__box1 h1 {
+        font-size: 1.3rem;
+    }
+
+    .soberpal__footer-flex__box1 a {
+        font-size: .9rem;
+    }
+
+    .soberpal__footer-flex__box2 a {
+        font-size: .9rem;
+    }
+
+    .soberpal__footer-flex__box2 p {
+        font-size: .8rem;
+    }
+}
+
+@media screen and (max-width: 360px) {
+    .soberpal__footer p {
+        font-size: .8rem;
+    }
+
+    .soberpal__footer-flex__box2 a {
+        font-size: .85rem;
+    }
+}
+
+@media screen and (max-width: 300px) {
+    .soberpal__footer p {
+        font-size: .7rem;
+    }
+
+    .soberpal__footer-flex__box2 a {
+        font-size: .75rem;
+    }
+}
