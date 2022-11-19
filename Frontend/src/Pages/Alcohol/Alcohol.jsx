@@ -14,6 +14,7 @@ const Alcohol = () => {
         social acceptance of drinking can often lead to denial — and, if left
         untreated, severe consequences.
       </p>
+
     </div>
   );
 }
