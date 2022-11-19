@@ -16,7 +16,7 @@ const CreateRoute = () => {
       <Route path='contact' element={<Contact/>} />
       <Route path='faq' element={<Faq/>} />
       <Route path='forum' element={<Forum />} />
-      <Route path='services' element={<Services />} />
+      <Route path='terms-services' element={<Services />} />
       {/* <Route path="*" element={<NotFound />} /> */}
     </Routes>
   )
