@@ -1,4 +1,6 @@
 import React from "react";
+import Button from "../UI/Button";
+
 
 const Download = () => {
   return (
@@ -11,7 +13,11 @@ const Download = () => {
           Join over 200+ people already growing with Soberpal.
         </p>
       </div>
+
       <button className="h-[44px] w-[131px] bg-[#0E8ACB] rounded-[8px] text-white mt-4">
+
+      <button className="h-[44px] w-[131px] bg-[#204E65] rounded-[8px] text-white mt-4">
+
         Download app
       </button>
     </div>
