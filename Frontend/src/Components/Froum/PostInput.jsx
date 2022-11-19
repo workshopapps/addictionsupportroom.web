@@ -17,7 +17,7 @@ const PostInput = ({postFeed}) => {
               icon={Telegram}
             />
           </div>
-          <div className='hidden tablet:block mt-4 flex justify-between'>
+          <div className='hidden tablet:flex mt-4 justify-between'>
             {postFeed?.map((item) => (
               <div key={item.name} className="flex w-full max-w-[524px] items-center ">
                 <img className='w-[20px] h-[20px] ' src={item.img} alt="img" />
@@ -28,7 +28,7 @@ const PostInput = ({postFeed}) => {
         </div>
         
       </div>
-      <div className='block tablet:hidden mt-4 w-full max-w-[524px] flex flex-wrap justify-between'>
+      <div className='tablet:hidden mt-4 w-full max-w-[524px] flex flex-wrap justify-between'>
             {postFeed?.map((item) => (
               <div key={item.name} className="flex  ">
                 <img className='w-[20px] h-[20px] ' src={item.img} alt="img" />

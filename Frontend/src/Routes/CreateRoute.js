@@ -8,6 +8,8 @@ import Faq from '../Pages/Faq/Faq'
 import Team from '../Pages/Team/Team';
 import Services from '../Pages/Services/Services';
 import Forum from '../Pages/Forum/Forum';
+import Alcohol from '../Pages/Alcohol/Alcohol';
+import JobApplication from '../Pages/JobApplication/JobApplication';
 
 
 const CreateRoute = () => {
@@ -20,6 +22,9 @@ const CreateRoute = () => {
       <Route path='team' element={<Team/>} />
       <Route path='forum' element={<Forum />} />
       <Route path='service' element={<Services />} />
+      <Route path='alcohol' element={<Alcohol />} />
+      <Route path='job' element={<JobApplication />} />
+
       {/* <Route path="*" element={<NotFound />} /> */}
     </Routes>
   )
