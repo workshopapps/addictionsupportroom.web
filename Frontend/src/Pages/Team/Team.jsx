@@ -1,6 +1,6 @@
 import React from 'react'
 import './Team.css'
-import TeamData from "../../Data/TeamData copy";
+import TeamData from "../../Data/TeamData";
 import Button from "../../UI/Button";
 import TeamImg from '../../assets/team.png'
 import TeamImgmobile from '../../assets/team-mobile.png'

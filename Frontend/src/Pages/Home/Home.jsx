@@ -1,5 +1,5 @@
 import React from "react";
-import AppStats from '../../Components/appstats/AppStats'
+import Appstats from '../../Components/AppStats/Appstats'
 import {AiOutlineHeart} from 'react-icons/ai'
 import {BiLineChart} from 'react-icons/bi'
 import {TiFlashOutline} from 'react-icons/ti'
@@ -26,7 +26,7 @@ const size = 40
         <img src={people} alt="people" />
       </section>
 
-      <section><AppStats/></section>
+      <section><Appstats/></section>
 
       <section className="soberpal__home-third__section">
         <h1>You are not alone in the fight against addiction</h1>

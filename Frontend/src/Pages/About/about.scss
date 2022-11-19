@@ -1,0 +1,168 @@
+.about__container {
+    background-color: white;
+    text-align: center;
+    & > .header {
+      .about {
+        color: var(--secondary-700);
+        font-weight: 700;
+        font-size: 1.2rem;
+      }
+      h1 {
+        font-size: 2rem;
+        font-weight: 700;
+        font-size: 48px;
+        color: var(--primary-600);
+      }
+      .about__soberpal {
+        color: var(--gray-500);
+        line-height: 2.3rem;
+      }
+      .learn__more {
+        color: var(--primary-500);
+        font-weight: 400;
+        margin-top: 2rem;
+      }
+    }
+  
+    .team {
+      text-align: center;
+      margin-bottom: 5rem;
+  
+      h3 {
+        color: var(--primary-500);
+        font-weight: 700;
+        font-size: 36px;
+        margin-top: 3rem;
+      }
+      & > p {
+        color: var(--secondary-600);
+        font-weight: 400;
+        line-height: 2rem;
+        margin-top: 1rem;
+      }
+      .team__members {
+        // display: grid;
+        // grid-template-columns: repeat(4, 1fr);
+        display: flex;
+        flex-wrap: wrap;
+        gap: 2rem;
+        justify-content: center;
+        .member {
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          align-items: center;
+          text-align: center;
+          width: 300px;
+          .avatar {
+            transform: scale(0.8);
+            margin-bottom: 1rem;
+          }
+          .name {
+            color: var(--primary-500);
+            font-weight: 700;
+            font-size: 1rem;
+            margin-bottom: 0.7rem;
+          }
+          .designation {
+            color: var(--primary-500);
+            font-weight: 400;
+            font-size: 1.2rem;
+            margin-top: -1rem;
+            margin-bottom: 1rem;
+          }
+        }
+      }
+    }
+    .position {
+      text-align: center;
+      & > p {
+        color: var(--secondary-600);
+        font-weight: 700;
+        font-size: 14px;
+        margin-bottom: 1rem;
+      }
+      & > h4 {
+        font-weight: 700;
+        font-size: 27px;
+        line-height: 32px;
+        color: var(--primary-500);
+      }
+      .position__text {
+        color: var(--gray-500);
+        font-weight: 400;
+        word-spacing: 0.3rem;
+      }
+      .interview {
+        margin: 3% 10%;
+        display: grid;
+        align-items: center;
+      }
+    }
+  
+    .download {
+      text-align: center;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 4rem;
+      flex-wrap: wrap;
+      padding-bottom: 2rem;
+      margin-top: 6rem;
+      & > div {
+        width: 50rem;
+        text-align: left;
+        & > h6 {
+          color: var(--primary-500);
+          font-weight: 500;
+          font-size: 32px;
+        }
+        & > p {
+          font-weight: 400;
+          font-size: 17px;
+          word-spacing: 0.2rem;
+          color: var(--gray-500);
+        }
+      }
+    }
+  }
+  
+  /* On tablet screens */
+  @media screen and (max-width: 992px) {
+    .about {
+      & > .header {
+        h1 {
+          font-size: 1.4rem;
+        }
+      }
+      .download {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        & > div {
+          text-align: center;
+        }
+      }
+    }
+  }
+  
+  /* On mobile screens */
+  @media (min-width: 600px) {
+    .about {
+      & > .header {
+        & > h1 {
+          transform: scale(0.8);
+        }
+      }
+    }
+  }
+  
+  /* On mobile screens */
+  @media (min-width: 749px) {
+    .about {
+      .download {
+        margin: 0 15%;
+        text-align: center;
+      }
+    }
+  }

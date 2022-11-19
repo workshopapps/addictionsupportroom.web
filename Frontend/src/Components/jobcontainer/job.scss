@@ -1,0 +1,76 @@
+.job {
+    margin: 2% 20%;
+    & > h5 {
+      text-align: left;
+      font-weight: 500;
+      font-size: 20px;
+      color: var(--primary-500);
+    }
+    .job__container {
+      text-align: left;
+      border: 1px solid #d7d7d7;
+      border-radius: 10px;
+      height: auto;
+      width: 45rem;
+      margin-top: 0.8rem;
+      margin-bottom: 0.8rem;
+      margin-left: 4rem;
+      padding: 2% 2%;
+      & > h6 {
+        font-weight: 500;
+        font-size: 17px;
+        color: var(--primary-500);
+        margin-bottom: .4rem;
+      }
+      & > p {
+        color: var(--gray-500);
+        font-weight: 400;
+        font-size: 14px;
+        margin-bottom: 3rem;
+      }
+      .price__container {
+        display: flex;
+        gap: 1rem;
+        & > div{
+          display: flex;
+          justify-content: center;
+          align-items: center ;
+          gap: .4rem;
+          font-size: 1.1rem;
+        }
+      }
+    }
+  }
+  
+  
+  /* On tablet screens 900px or less */
+  @media screen and (max-width: 900px) {
+    .job {
+     display: grid;
+     justify-content: center;
+     & > h5 {
+      margin-left: .5rem;
+    }
+      .job__container{
+        margin-left: .5rem;
+        width: 25rem;
+      }
+      
+    }
+  }
+  
+   /* On mobile screens 600px or less */
+   @media screen and (max-width: 600px) {
+    .job {
+     display: grid;
+     justify-content: center;
+     & > h5 {
+      margin-left: .5rem;
+    }
+      .job__container{
+        margin-left: .5rem;
+        width: 25rem;
+      }
+      
+    }
+  }
