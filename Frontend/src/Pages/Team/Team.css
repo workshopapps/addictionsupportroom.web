@@ -1,0 +1,329 @@
+*{
+    box-sizing: border-box;
+}
+.team__container {
+    padding: 80px 6.25rem 80px;
+}
+.team {
+    text-align: center;
+}
+.team__text {
+    margin: 0 0 29px;
+}
+.team__text span {
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 24px;
+    color: #387E9C;
+    margin: 0 0 16px;
+    display: block;
+}
+.team__text h1 {
+    font-weight: 700;
+    font-size: 48px;
+    line-height: 60px;
+    margin: 0 0 16px;
+    color: #204E65;
+}
+.team__text p {
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 24px;
+    color: #48A1C8;
+    width: 70%;
+    margin: auto;
+}
+.team__img {
+    display: flex;
+    justify-content: space-between;
+    /* align-items: center; */
+    flex-wrap: wrap;
+    width: 100%;
+    padding: 50px 0 0;
+}
+.team__img .team-info {
+    flex-basis: 25%;
+    text-align: center;
+    margin: 0 0 94px;
+}
+.team__img .team-info img{
+    margin: auto;
+    width: 150px;
+    margin-bottom: 17px;
+}
+.team__img .team-info h4{
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 24px;
+    color: #204E65;
+    margin: 0 0 16px;
+}
+.team__img .team-info p{
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 16px;
+    color: #204E65;
+}
+
+.Team__position {
+    text-align: center;
+    margin: 96px 0 0;
+}
+.Team__position span{
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 24px;
+    color: #48A1C8;
+    margin: 0 0 24px;
+    display: block;
+}
+.Team__position h2{
+    font-weight: 700;
+    font-size: 36px;
+    line-height: 44px;
+    letter-spacing: -0.02em;
+    color: #204E65;
+    margin: 0 0 12px;
+}
+.Team__position p{
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 30px;
+    color: #575757;
+    margin: 0 0 68px;
+}
+#teamImg{
+    margin: 0 0 76px;
+}
+#teamImgmobile {
+    display: none;
+}
+
+
+.team__position__roles {
+    text-align: left;
+    padding: 0 12.8rem;
+}
+
+.role__title {
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 30px;
+    color: #204E65;
+    margin: 0 0 24px;
+}
+.product__designer, .frontend__developer {
+    border: 1px solid #D7D7D7;
+    border-radius: 16px;
+    padding: 24px;
+    margin: 0 0 16px;
+}
+.product__designer .role, .role{
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 28px;
+    color: #204E65;
+    margin: 0 0 8px;
+}
+.product__designer p, .frontend__developer p{
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 20px;
+    color: #575757;
+    margin: 0 0 20px;
+}
+.product__designer .role__desc__icons, .role__desc__icons {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    width: fit-content;
+}
+.product__designer .role__desc__icons span, .role__desc__icons span{
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    width: fit-content;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 24px;
+    color: #575757;
+}
+.software__development {
+    margin:  56px 0 0;
+}
+.team__download-app {
+    margin: 114px 0 0;
+    flex-direction: column;
+    text-align: center;
+}
+.team__download-app h3{
+    font-weight: 500;
+    font-size: 32px;
+    line-height: 36px;
+    margin: 0 40px 40px;
+}
+.team__download-app .download__p{
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 24px;
+    margin: 0 0 40px;
+}
+
+
+.team__download-app{
+    margin: 163px 0 0;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+}
+.team__download-app h3{
+    font-weight: 500;
+    font-size: 32px;
+    line-height: 30px;
+    color: #204E65;
+    margin: 0 0 24px;
+    text-align: left;
+}
+@media screen and (max-width: 1050px){
+    .team__position__roles {
+        text-align: left;
+        padding: 0 8rem;
+    }
+}
+@media screen and (max-width: 900px){
+    .team__container {
+        padding: 80px 4.25rem ;
+    }
+    .team__img .team-info img{
+        margin: auto;
+        width: 100px;
+        margin-bottom: 39px;
+    }
+}
+@media screen and (max-width: 670px){
+    .team__container {
+        padding: 40px 16px 81px;
+    }
+    .team__text {
+        margin: 0 0 72px;
+    }
+    .team__text span {
+        font-size: 14px;
+    }
+    .team__text h1 {
+        font-weight: 700;
+        font-size: 36px;
+        line-height: 40px;
+        margin: 0 0 40px;
+    }
+    .team__text p {
+        line-height: 24px;
+        width: 100%;
+    }
+    .team__img {
+        flex-direction: column;
+        flex-basis: 100%;
+    }
+    .team__img .team-info{
+        padding: 47px 0 78px;
+    }
+    .team__img .team-info img{
+        margin: auto;
+        width: 80px;
+        margin-bottom: 39px;
+    }
+    .team__img .team-info h4{
+        font-weight: 700;
+        font-size: 20px;
+        line-height: 16px;
+        color: #204E65;
+        margin: 0 0 16px;
+    }
+    .team__img .team-info p{
+        font-weight: 400;
+        font-size: 20px;
+        line-height: 16px;
+        color: #204E65;
+    }
+    .Team__position {
+        text-align: center;
+        margin: 96px 0 0;
+    }
+    .Team__position span{
+        font-weight: 700;
+        font-size: 16px;
+        line-height: 24px;
+        color: #48A1C8;
+        margin: 0 0 24px;
+        display: block;
+    }
+    .Team__position h2{
+        font-weight: 700;
+        font-size: 36px;
+        line-height: 35px;
+        letter-spacing: -0.02em;
+        color: #204E65;
+        margin: 0 0 24px;
+    }
+    .Team__position p{
+        font-weight: 400;
+        font-size: 20px;
+        line-height: 24px;
+        color: #575757;
+        margin: 0 0 32px;
+    }
+    #teamImg {
+        display: none;
+    }
+    #teamImgmobile {
+        display: block;
+        margin: auto;
+        margin-bottom: 32px;
+    }
+
+    .team__position__roles {
+        text-align: left;
+        padding: 0;
+    }
+
+    .product__designer p, .frontend__developer p{
+        font-weight: 400;
+        font-size: 16px;
+        line-height: 20px;
+        color: #575757;
+        margin: 0 0 20px;
+    }
+
+    .product__designer .role__desc__icons span, .role__desc__icons span{
+        display: flex;
+        align-items: center;
+        gap: 16px;
+        width: fit-content;
+        font-weight: 400;
+        font-size: 16px;
+        line-height: 24px;
+        color: #575757;
+    }
+    .software__development {
+        margin:  40px 0 0;
+    }
+    .team__download-app {
+        margin: 114px 0 0;
+        flex-direction: column;
+        text-align: center;
+    }
+    .team__download-app h3{
+        font-weight: 500;
+        font-size: 32px;
+        line-height: 36px;
+        margin: 0 40px 40px;
+        text-align: center;
+    }
+    .team__download-app .download__p{
+        font-weight: 400;
+        font-size: 20px;
+        line-height: 24px;
+        margin: 0 0 40px;
+    }
+}
+
