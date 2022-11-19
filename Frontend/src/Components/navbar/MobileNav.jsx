@@ -3,7 +3,7 @@ import { NavLink } from 'react-router-dom'
 import { navbarList } from '../../Data/navbar'
 
 
-const MobileNav = ({setIsOpen}) => {
+const MobileNav = ({ setIsOpen }) => {
   return (
     <div className='fixed bg-blue w-[100%] h-[100rem] right-0 top-0 '>
         <button

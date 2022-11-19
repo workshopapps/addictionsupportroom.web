@@ -7,6 +7,7 @@ module.exports = {
     extend: {
       colors: {
         blue: "#0E8ACB",
+        grey: "#3E3E3E"
       },
       screens: {
         mobile: "360px",
