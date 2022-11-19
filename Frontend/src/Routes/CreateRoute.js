@@ -1,9 +1,11 @@
 import React from 'react'
 import { Route, Routes } from 'react-router-dom';
-// import Home from '../Pages/Home/Home';
+import Home from '../Pages/Home/Home';
 import About from '../Pages/About/About';
 import Contact from '../Pages/Contact/Contact';
+
 import Faq from '../Pages/Faq/Faq'
+import Team from '../Pages/Team/Team';
 import Services from '../Pages/Services/Services';
 import Forum from '../Pages/Forum/Forum';
 
@@ -11,12 +13,13 @@ import Forum from '../Pages/Forum/Forum';
 const CreateRoute = () => {
   return (
     <Routes>
-      {/* <Route path='/' element={<Home/>} /> */}
+      <Route path='/' element={<Home/>} />
       <Route path='about' element={<About/>} />
       <Route path='contact' element={<Contact/>} />
       <Route path='faq' element={<Faq/>} />
+      <Route path='team' element={<Team/>} />
       <Route path='forum' element={<Forum />} />
-      <Route path='terms-services' element={<Services />} />
+      <Route path='service' element={<Services />} />
       {/* <Route path="*" element={<NotFound />} /> */}
     </Routes>
   )
