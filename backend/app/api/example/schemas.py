@@ -5,7 +5,7 @@ from uuid import UUID
 from pydantic import BaseModel
 
 
-class DayCreate(BaseModel):
+class Examples(BaseModel):
     id: Optional[UUID] = None
     name: str
     active: bool
@@ -14,6 +14,6 @@ class DayCreate(BaseModel):
         orm_mode = True
 
 
-class ExampleSchema(DayCreate):
+class ExampleSchema(Examples):
     created_at: Optional[datetime]
     updated_at: Optional[datetime]
