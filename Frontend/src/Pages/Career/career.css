@@ -1,0 +1,399 @@
+.soberpal__career-first__section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 5rem 3.5rem 3rem 3.5rem;
+  gap: 3.5rem;
+}
+
+.soberpal__career-first__section img {
+  width: 32rem;
+  height: 25.5rem;
+}
+
+.soberpal__career-first__section-box h1 {
+  font-weight: 500;
+  font-size: 4rem;
+  line-height: 6rem;
+  color: var(--gray-500);
+}
+
+.soberpal__career-first__section-box h1 span {
+  color: #0e8acb;
+}
+
+.soberpal__career-first__section-box p {
+  font-weight: 400;
+  font-size: 1.25rem;
+  line-height: 2rem;
+  color: var(--gray-500);
+  margin: 2rem 0 2rem 0;
+}
+
+.button__style {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: 500;
+  font-size: 1.3rem;
+  line-height: 1.5rem;
+  height: 3rem;
+  width: 18.6rem;
+  color: #fff;
+  background-color: #0e8acb;
+  border-radius: 8px;
+  text-align: center;
+}
+
+.soberpal__career-second__section {
+  text-align: center;
+  padding: 1rem 5rem 1rem 5rem;
+  margin-top: 2rem;
+}
+
+.soberpal__career-second__section h1 {
+  font-weight: 500;
+  font-size: 3.5rem;
+  line-height: 5rem;
+  color: var(--gray-600);
+  margin-bottom: 1rem;
+}
+
+.soberpal__career-second__section-box {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.soberpal__career-second__section-box h3 {
+  font-weight: 700;
+  font-size: 3.75rem;
+  line-height: 5rem;
+  color: #0e8acb;
+}
+
+.soberpal__career-second__section-box p {
+  font-weight: 500;
+  font-size: 1.125rem;
+  line-height: 2rem;
+  color: var(--gray-500);
+}
+
+.soberpal__career-third__section {
+  text-align: center;
+  display: block;
+  margin-bottom: 3rem;
+  margin-top: 3rem;
+}
+
+.soberpal__career-third__section h4 {
+  font-weight: 700;
+  font-size: 1.25rem;
+  line-height: 1.5rem;
+  color: #48a1c8;
+}
+
+.soberpal__career-third__section h1 {
+  font-weight: 700;
+  font-size: 2rem;
+  line-height: 3rem;
+  color: var(--primary-500);
+}
+
+.soberpal__career-third__section p {
+  font-weight: 400;
+  font-size: 1.25rem;
+  line-height: 2rem;
+  color: var(--primary-500);
+  margin: 0.5rem 0 3rem 0;
+}
+
+.soberpal__career-third__section-box {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.soberpal__career-third__section-box button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 58rem;
+  height: 5.25rem;
+  border: 0.5px solid #797979;
+  border-radius: 16px;
+  font-weight: 500;
+  font-size: 2rem;
+  line-height: 2.5rem;
+  color: var(--gray-600);
+  padding: 0 1.5rem 0 1.5rem;
+  margin-bottom: 1.5rem;
+  text-align: left;
+}
+
+.soberpal__career-third__section-box button img {
+  margin-left: auto;
+}
+
+@media screen and (max-width: 1232px) {
+  .soberpal__career-first__section img {
+    width: 30rem;
+    height: 25rem;
+  }
+
+  .soberpal__career-first__section-box h1 {
+    font-size: 3.5rem;
+  }
+}
+
+@media screen and (max-width: 1138px) {
+  .soberpal__career-first__section img {
+    width: 25rem;
+    height: 20rem;
+  }
+
+  .soberpal__career-first__section-box h1 {
+    font-size: 2.5rem;
+    line-height: 4rem;
+  }
+
+  .soberpal__career-first__section-box p {
+    font-size: 1rem;
+    margin: 1.5rem 0 1.5rem 0;
+  }
+
+  .soberpal__career-second__section h1 {
+    font-size: 2.8rem;
+  }
+
+  .soberpal__career-second__section-box h3 {
+    font-size: 3rem;
+    line-height: 4rem;
+  }
+
+  .soberpal__career-second__section-box p {
+    font-size: 1rem;
+  }
+
+  .soberpal__career-third__section-box button {
+    width: 48rem;
+    height: 5rem;
+    font-size: 1.5rem;
+    line-height: 2rem;
+    padding: 0 1.5rem 0 1.5rem;
+  }
+}
+
+@media screen and (max-width: 960px) {
+  .soberpal__career-first__section {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .soberpal__career-first__section-box {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 0;
+  }
+}
+
+@media screen and (max-width: 945px) {
+  .soberpal__career-second__section h1 {
+    line-height: 3.7rem;
+  }
+
+  .soberpal__career-second__section h1 br {
+    display: none;
+  }
+
+  .soberpal__career-second__section-box h3 {
+    font-size: 3rem;
+    line-height: 3rem;
+  }
+
+  .soberpal__career-second__section-box p {
+    font-size: 0.8rem;
+  }
+
+  .soberpal__career-third__section h4 {
+    font-size: 1.1rem;
+    line-height: 1.1rem;
+  }
+  
+  .soberpal__career-third__section h1 {
+    font-size: 1.8rem;
+    line-height: 2.8rem;
+  }
+  
+  .soberpal__career-third__section p {
+    font-size: 1.1rem;
+    line-height: 2rem;
+    margin: .5rem 0 3rem 0;
+  }
+
+  .soberpal__career-third__section-box button {
+    width: 42rem;
+    height: 4rem;
+    font-size: 1.2rem;
+  }
+}
+
+@media screen and (max-width: 794px) {
+  .soberpal__career-second__section h1 {
+    font-size: 2.5rem;
+    line-height: 3.7rem;
+  }
+}
+
+@media screen and (max-width: 730px) {
+  .soberpal__career-second__section-box {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-self: center;
+    row-gap: 3rem;
+  }
+
+  .soberpal__career-second__section h1 {
+    font-size: 2rem;
+    line-height: 3.5rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .soberpal__career-third__section-box button {
+    width: 30rem;
+  }
+}
+
+@media screen and (max-width: 600px) {
+    .soberpal__career-third__section h4 {
+        font-size: 1.2rem;
+      }
+      
+      .soberpal__career-third__section h1 {
+        font-size: 1.4rem;
+        line-height: 2.2rem;
+      }
+      
+      .soberpal__career-third__section p {
+        font-size: .9rem;
+        line-height: 1.5rem;
+      }
+    
+      .soberpal__career-third__section-box button {
+        width: 20rem;
+        height: 3.5rem;
+        font-size: 1rem;
+      }
+}
+
+@media screen and (max-width: 550px) {
+    .soberpal__career-second__section {
+        padding: 1rem .5rem 1rem .5rem;
+      }
+
+  .soberpal__career-second__section h1 {
+    font-size: 1.75rem;
+  }
+
+  .soberpal__career-second__section-box {
+    padding: 0;
+  }
+
+  .soberpal__career-second__section-box h3 {
+    font-size: 2.5rem;
+  }
+}
+
+@media screen and (max-width: 500px) {
+
+  .soberpal__career-first__section-box h1 {
+    font-size: 2rem;
+  }
+
+  .button__style {
+    font-size: 1.1rem;
+    line-height: 1.5rem;
+    height: 3.2rem;
+    width: 16rem;
+  }
+
+  .soberpal__career-first__section img {
+    height: 15rem;
+  }
+
+  .soberpal__career-third__section {
+    padding: 1rem;
+  }
+}
+
+
+@media screen and (max-width: 400px) {
+  .soberpal__career-first__section-box h1 {
+    font-size: 1.5rem;
+    line-height: 3rem;
+  }
+
+  .soberpal__career-first__section-box p {
+    font-size: 0.9rem;
+  }
+
+  .button__style {
+    font-size: 1rem;
+    line-height: 1.5rem;
+    height: 3rem;
+    width: 16rem;
+  }
+
+  .soberpal__career-first__section img {
+    width: 20rem;
+    height: 12rem;
+  }
+}
+
+@media screen and (max-width: 359px) {
+    .soberpal__career-second__section h1 {
+      font-size: 1.3rem;
+      line-height: 2.5rem;
+    }
+  
+    .soberpal__career-second__section-box h3 {
+      font-size: 1.2rem;
+      line-height: 1rem;
+    }
+  
+    .soberpal__career-second__section-box p {
+      font-size: 0.7rem;
+    }
+
+    .soberpal__career-third__section h4 {
+        font-size: 1.2rem;
+      }
+      
+      .soberpal__career-third__section h1 {
+        font-size: 1.4rem;
+        line-height: 2.2rem;
+      }
+      
+      .soberpal__career-third__section p {
+        font-size: .9rem;
+        line-height: 1.5rem;
+      }
+    
+      .soberpal__career-third__section-box button {
+        width: 15rem;
+        height: 3.2rem;
+        font-size: .8rem;
+      }
+
+      .soberpal__career-third__section-box button img {
+        width: .7rem;
+        height: 1rem;
+      }
+  }
+
+  .center {
+    text-align: center;
+  }
