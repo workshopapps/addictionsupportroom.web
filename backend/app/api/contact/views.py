@@ -1,4 +1,4 @@
-from fastapi import APIRouter, Depends
+from fastapi import APIRouter, Depends, HTTPException
 from pydantic import BaseModel
 from sqlalchemy.orm import Session
 
@@ -23,7 +23,7 @@ def contact(
         db.add(message)
         db.commit()
     except Exception:
-        raise 
+        raise HTTPException(status_code=500, detail="Couldn't add message")
 
     return {
         "msg": "Message received"
