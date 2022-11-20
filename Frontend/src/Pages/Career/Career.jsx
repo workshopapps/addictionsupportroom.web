@@ -22,7 +22,7 @@ const Career = () => {
             contribute to this effort.
           </p>
           <button className="button__style">
-          <Link to='jobs'>View all our open positions</Link>
+          <Link to='job'>View all our open positions</Link>
           </button>
         </div>
         <img src={people} alt="people" />
