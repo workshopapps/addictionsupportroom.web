@@ -8,7 +8,7 @@ confused = [
 	"When something is gone; something better is coming",
 	"Sometimes it takes an overwhelming breakdown to have an undeniable breakthrough",
 ]
-anger = [
+angry = [
 	"And if today all you did was hold yourself together, I'm proud of you",
 	"Sometimes it's ok if the only thing you managed to do today is breathe",
 	"Getting knocked down in life is a given. Getting up and moving forward is a choice, so cheer up and move on",

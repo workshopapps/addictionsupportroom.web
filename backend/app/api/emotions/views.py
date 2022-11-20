@@ -1,5 +1,5 @@
 from fastapi import APIRouter
-from .quotes import happy,confused,anger,sober,defeated
+from .quotes import happy,confused,angry,sober,defeated
 import random
 router = APIRouter()
 
@@ -13,7 +13,7 @@ async def post_emotion(request):
 		return(sober[random.randint(0,2)])
 	elif request == "defeated":
 		return(defeated[random.randint(0,2)])
-	elif request == "anger":
+	elif request == "angry":
 		return(anger[random.randint(0,2)])
 	else:
 		return(confused[random.randint(0,2)])
