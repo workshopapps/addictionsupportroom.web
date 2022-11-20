@@ -1,24 +1,22 @@
-from api.example.schemas import DayCreate
-from db.db import db_session
-from db.models.example import Example
-from fastapi import Depends
+from api.example import schemas
+from db.models import Example
 from sqlalchemy import select
-from sqlalchemy.ext.asyncio import AsyncSession
+from sqlalchemy.orm import Session
 
 
 class ExampleService:
-    def __init__(self, session: AsyncSession = Depends(db_session)):
-        self.session = session
+    # def __init__(self, session: AsyncSession = Depends(db_session)):
+    #     self.session = session
 
-    async def get_all_examples(self) -> list[Example]:
-        examples = await self.session.execute(select(Example))
+    async def get_all_examples(self, db: Session) -> list[schemas.Examples]:
+        examples = db.query(Example).all()
 
-        return examples.scalars().fetchall()
+        return examples
 
-    async def create_example(self, data: DayCreate) -> Example:
+    def create_example(self, db: Session, data) -> Example:
         example = Example(**data.dict())
-        self.session.add(example)
-        await self.session.commit()
-        await self.session.refresh(example)
+        db.add(example)
+        db.commit()
+        db.refresh(example)
 
         return example

@@ -2,8 +2,13 @@ from api.router import api_router
 from fastapi import FastAPI
 from fastapi.responses import UJSONResponse
 
+from db.models import Base
+from db.db import engine
+
 
 def get_app() -> FastAPI:
+    Base.metadata.create_all(bind=engine)
+
     """
     Get FastAPI application.
 

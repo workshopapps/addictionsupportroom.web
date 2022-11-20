@@ -101,3 +101,7 @@ body {
   --info-900: #183666;
 
 }
+
+.active{
+  border-bottom: 3px solid #0E8ACB;
+}

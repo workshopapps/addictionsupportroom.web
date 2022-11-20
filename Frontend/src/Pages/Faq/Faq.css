@@ -1,0 +1,277 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter&family=Montserrat:wght@300;400;700&family=Poppins:wght@400;500;700&family=Red+Rose:wght@400;700&family=Rubik&display=swap');
+
+*{
+    box-sizing: border-box;
+}
+.faq__container {
+    padding: 6.7rem 9.3rem;
+    scroll-behavior: smooth;
+}
+.faq__help-center {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 200px;
+    margin: 0 0 15px;
+}
+.faq__help-center .faq__help-center__text {
+    flex-basis: 50%;
+}
+.faq__help-center .faq__help-center__text h1{
+    font-weight: 700;
+    font-size: 64px;
+    line-height: 32px;
+    color: #204E65;
+    margin: 0 0 30px;
+}
+.faq__help-center .faq__help-center__text p{
+    font-size: 20px;
+}
+.faq__help-center .faq__help-center__img{
+    margin: 0 7rem 0 0;
+}
+
+.faq__p {
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 30px;
+    color: #575757;
+}
+.faq__form-question {
+    margin: auto;
+    text-align: center;
+    margin: 0 0 50px;
+}
+.faq__form__title {
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 16px;
+    color: #204E65;
+    margin: 0 0 29px;
+}
+.faq__form-question form{
+    border: 1px solid #204E65;
+    border-radius: 10px;
+    width: fit-content;
+    margin: auto;
+    padding: 5px 7px 5px 19px;
+}
+.faq__form-question form input{
+    outline: none;
+    width: 270px;
+}
+.faq__form-question form input::placeholder{
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 24px;
+    font-family: 'Poppins', sans-serif;
+    color: rgb(65, 65, 65);
+}
+#btn {
+    padding: 10px 32px;
+    background: #000;
+}
+
+.hr {
+    border-top: 0.5px solid #307091;
+    margin: 0 0 59px;
+    max-width: 1000px;
+}
+
+.faq__section2 {
+    text-align: left;
+    padding: 0 10.3rem 0 9.3rem;
+    margin: 0 0 100px;
+}
+.faq__section2 h2{
+    font-weight: 700;
+    font-size: 48px;
+    line-height: 32px;
+    color: #204E65;
+    margin: 0 0 30px;
+}
+.faq__section2 p{
+    width: 85%;
+    margin: 0 0 79px;
+}
+.faq__questions-answer-section {
+    padding: 0 1rem;
+}
+.faq__questions-answer-section p{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 30px;
+    color: #000000;
+    margin: 0 0 30px;
+}
+.faq__questions-answer-section p span{
+    font-size: 47px;
+    cursor: pointer;
+    font-weight: 300;
+}
+.faq__questions-answer-section .faq__border-bottom {
+    margin: auto;
+    max-width: 94%;
+    border-top: 1px solid rgb(163, 163, 163);
+    margin-bottom: 20px;
+}
+.faq__download-app {
+    margin: 163px 0 0;
+    display: flex;
+    justify-content: space-between;
+}
+.faq__download-app h3{
+    font-weight: 500;
+    font-size: 32px;
+    line-height: 30px;
+    color: #204E65;
+    margin: 0 0 24px;
+}
+
+@media screen and (max-width: 1100px){
+    .faq__help-center .faq__help-center__text {
+        flex-basis: 70%;
+    }
+    .faq__help-center {
+        gap: 150px;
+    }
+    .faq__help-center .faq__help-center__img{
+        margin: 0 4rem 0 0;
+    }
+    .faq__section2 {
+        text-align: left;
+        padding: 0 8.3rem 0 7.3rem;
+        margin: 0 0 100px;
+    }
+
+}
+@media screen and (max-width: 1000px){
+    .faq__help-center .faq__help-center__text {
+        flex-basis: 70%;
+    }
+    .faq__help-center {
+        gap: 100px;
+    }
+    .faq__help-center .faq__help-center__img{
+        margin: 0 2rem 0 0;
+    }
+    .faq__section2 {
+        text-align: left;
+        padding: 0 6.3rem 0 5.3rem;
+        margin: 0 0 100px;
+    }
+
+}
+@media screen and (max-width: 900px){
+    .faq__container {
+        padding: 4.7rem 5.3rem;
+        scroll-behavior: smooth;
+    }
+
+    .faq__section2 {
+        text-align: left;
+        padding: 0 5.3rem 0 4.3rem;
+        margin: 0 0 100px;
+    }
+
+}
+@media screen and (max-width: 800px){
+
+    .faq__section2 {
+        text-align: left;
+        padding: 0 3.3rem 0 1.3rem;
+        margin: 0 0 100px;
+    }
+    .faq__help-center .faq__help-center__text h1{
+        line-height: 65px;
+    }
+
+}
+@media screen and (max-width: 670px){
+    .faq__container {
+        padding: 52px 27px;
+        scroll-behavior: smooth;
+    }
+    .faq__help-center {
+        flex-direction: column;
+        margin: 0 0 22px;
+        text-align: left;
+        align-items: flex-start;
+    }
+    .faq__help-center .faq__help-center__text {
+        flex-basis: 100%;
+    }
+    .faq__help-center .faq__help-center__text h1, .faq__section2 h2{
+        font-size: 36px;
+        line-height: 25px;
+        margin: 0 0 15px;
+    }
+    .faq__help-center .faq__help-center__text p, .faq__p{
+        font-weight: 400;
+        font-size: 13px;
+        line-height: 24px;
+    }
+    .faq__help-center .faq__help-center__img{
+        display: none;
+    }
+    .first__form {
+        display: none;
+    }
+    .faq__section2 {
+        text-align: left;
+        padding: 0;
+        margin: 0 0 52px;
+    }
+    .faq__section2 p{
+        width: 100%;
+        margin: 0 0 52px;
+    }
+    .faq__questions-answer-section p{
+        font-weight: 500;
+        font-size: 14px;
+        line-height: 30px;
+        margin: 0 0 15px;
+    }
+    .faq__questions-answer-section p span{
+        font-size: 35px;
+    }
+    .faq__form-question form{
+        padding: 0 0 0 13px;
+        display: flex;
+        justify-content: space-between;
+        gap: 0;
+        width: 100%;
+    }
+    .faq__form__title {
+        display: none;
+    }
+    .faq__form-question form input{
+        width: 50%;
+    }
+    .faq__form-question form input::placeholder{
+        font-weight: 400;
+        font-weight: 300;
+        font-size: 12px;
+        line-height: 10px;
+        padding: 11px 0;
+    }
+    .faq__download-app {
+        margin: 163px 0 0;
+        flex-direction: column;
+        text-align: center;
+    }
+    .faq__download-app h3{
+        font-weight: 500;
+        font-size: 24px;
+        line-height: 20px;
+    }
+    .faq__download-app .download__p{
+        font-weight: 400;
+        font-size: 20px;
+        line-height: 30px;
+        margin: 0 0 40px;
+    }
+}
