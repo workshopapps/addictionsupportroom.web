@@ -38,3 +38,13 @@ class Messages(Base):
     id = Column(Integer, autoincrement=True, primary_key=True, index=True)
     username = Column(String, nullable=False)
     message = Column(String, nullable=False)
+
+class Quote(Base):
+    """ Table for storing quotes"""
+
+    __tablename__ = "quotes"
+
+    id = Column(Integer, autoincrement=True, primary_key=True, index=True)
+    mood = Column(String, nullable=False)
+    quote = Column(String, nullable=False)
+
