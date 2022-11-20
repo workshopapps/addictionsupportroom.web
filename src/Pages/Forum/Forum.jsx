@@ -20,7 +20,7 @@ const Forum = () => {
                 <PostFeed posts={posts} />
             </div>
         </section>
-        <div className='mx-auto max-w-[1300px]'>
+        <div className='mx-auto mt-20 mb-10 max-w-[1300px]'>
           <Download />
         </div>
         <br />
