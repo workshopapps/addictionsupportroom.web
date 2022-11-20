@@ -14,7 +14,7 @@ async def post_emotion(request):
 	elif request == "defeated":
 		return(defeated[random.randint(0,2)])
 	elif request == "angry":
-		return(anger[random.randint(0,2)])
+		return(angry[random.randint(0,2)])
 	else:
 		return(confused[random.randint(0,2)])
 
