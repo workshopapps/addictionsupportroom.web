@@ -27,7 +27,7 @@ const Footer = () => {
             <p>Resources</p>
             <Link to='/forum'>Forum</Link>
             <Link to='/newsletter'>Newsletter</Link>
-            <Link to='/alcohol_addiction'> Alcohol Addiction</Link>
+            <Link to='/alcohol'> Alcohol Addiction</Link>
           </div>
           <div>
             <p>Socials</p>
