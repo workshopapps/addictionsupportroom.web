@@ -54,7 +54,7 @@ docker-compose exec web pytest .
 #### Install
 
 ```bash
-cd app/
+cd backend/app/
 pip install -r requirements/development.txt
 ```
 
