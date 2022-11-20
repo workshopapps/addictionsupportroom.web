@@ -20,8 +20,8 @@ class Example(Base):
 class Day(Base):
     __tablename__ = "days"
 
-    id = Column(Integer, primary_key=True, index=True)
-    bottles = Column(Integer)
+    day_id = Column(String, primary_key=True, index=True)
+    bottles = Column(Integer, default = 0)
     marked = Column(Boolean, default=True)
 
     # owner_id = Column(Integer, ForeignKey("users.id"))
