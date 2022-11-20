@@ -1,5 +1,5 @@
 import React from 'react'
-import CardDownload from '../../Components/Froum/CardDownload'
+import Download from '../../Components/Download/Download'
 import Community from '../../Components/Froum/Community'
 import HashTag from '../../Components/Froum/HashTag'
 import PostFeed from '../../Components/Froum/PostFeed'
@@ -20,7 +20,9 @@ const Forum = () => {
                 <PostFeed posts={posts} />
             </div>
         </section>
-        <CardDownload />
+        <Download />
+        <br />
+        <br />
     </div>
   )
 }

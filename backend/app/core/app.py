@@ -17,8 +17,8 @@ def get_app() -> FastAPI:
     :return: application.
     """
     app = FastAPI(
-        title="FastAPI Starter Project",
-        description="FastAPI Starter Project",
+        title="SoberPal Project",
+        description="SoberPal API",
         version="1.0",
         docs_url="/api/docs/",
         redoc_url="/api/redoc/",
