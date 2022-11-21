@@ -15,14 +15,14 @@ jobs:
             cd frontend
             sudo npm install -g
       - restore_cache:
-          key: dependency-cache-{{ checksum "package.json" }}
+          key: dependency-cache-{{ checksum "./frontend/package.json" }}
       - run:
           name: Build front-end
           command: |
             sudo npm install
             npm run build
       - save_cache:
-          key: dependency-cache-{{ checksum "package.json" }}
+          key: dependency-cache-{{ checksum "./frontend/package.json" }}
           paths:
             - ./frontend/node_modules
 
