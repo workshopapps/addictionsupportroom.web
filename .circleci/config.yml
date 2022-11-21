@@ -10,10 +10,10 @@ jobs:
     steps:
       - checkout # pulls code from github repo
       - run:
-          name: install & build
+          name: cd & update
           command: |
             cd frontend
-            'sudo npm install -g'
+            sudo npm install -g
       - restore_cache:
           key: dependency-cache-{{ checksum "package.json" }}
       - run:
