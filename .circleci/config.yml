@@ -13,7 +13,7 @@ jobs:
           name: install & build
           command: |
             cd frontend
-            sudo npm install -g'
+            'sudo npm install -g'
       - restore_cache:
           key: dependency-cache-{{ checksum "package.json" }}
       - run:
