@@ -9,14 +9,21 @@ jobs:
       - restore_cache:
           keys: [frontend-build]
       - run:
-          name: Build front-end
+          name: install & build
           command: |
             cd frontend
-            npm install
-            npm run build
+            command: sudo npm install -g
+          - restore_cache:
+          key: dependency-cache-{{ checksum "package.json" }}
+      - run:
+          name: Build front-end
+          command: |
+          sudo npm install
+          npm run build
       - save_cache:
-          paths: [frontend/node_modules]
-          key: frontend-build
+          key: dependency-cache-{{ checksum "package.json" }}
+          paths:
+            - ./frontend/node_modules
 
   build-backend:
     docker:
