@@ -25,9 +25,6 @@
       "react-app"
     ]
   },
-  "transform": {
-    "\\.js$": "<rootDir>/node_modules/babel-jest"
-  },
   "browserslist": {
     "production": [
       ">0.2%",
