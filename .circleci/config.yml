@@ -19,8 +19,8 @@ jobs:
       - run:
           name: Build front-end
           command: |
-          sudo npm install
-          npm run build
+            sudo npm install
+            npm run build
       - save_cache:
           key: dependency-cache-{{ checksum "package.json" }}
           paths:
