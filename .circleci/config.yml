@@ -21,7 +21,7 @@ jobs:
           command: |
             cd frontend
             sudo npm install
-            sudo CI= npm run build
+            node --max-old-space-size=4096 `which npm` run build
       - save_cache:
           key: dependency-cache-{{ checksum "./frontend/package.json" }}
           paths:
