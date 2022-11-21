@@ -1,19 +1,20 @@
 version: 2.1
 
+orbs:
+  docker: circleci/docker@0.5.13
+
 jobs:
   build-frontend:
     docker:
-      - image: circleci/node:13.8.0
+      - image: circleci/node:10.16.3
     steps:
       - checkout # pulls code from github repo
-      - restore_cache:
-          keys: [frontend-build]
       - run:
           name: install & build
           command: |
             cd frontend
             sudo npm install -g'
-          - restore_cache:
+      - restore_cache:
           key: dependency-cache-{{ checksum "package.json" }}
       - run:
           name: Build front-end
