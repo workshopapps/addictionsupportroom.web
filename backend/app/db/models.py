@@ -36,5 +36,6 @@ class Messages(Base):
     __tablename__ = "messages"
 
     id = Column(Integer, autoincrement=True, primary_key=True, index=True)
-    username = Column(String, nullable=False)
+    name = Column(String, nullable=False)
+    email = Column(String, nullable=False)
     message = Column(String, nullable=False)
