@@ -7,6 +7,7 @@ jobs:
       - image: docker:17.09.1-ce-git
     steps:
       - checkout # pulls code from github repo
+      - setup_remote_docker
       - run:
           name: cd & update
           command: |
@@ -45,6 +46,7 @@ jobs:
       - image: docker:17.09.1-ce-git
     steps:
       - checkout
+      - setup_remote_docker
       - restore_cache:
           keys: [backend-build]
       - run:
