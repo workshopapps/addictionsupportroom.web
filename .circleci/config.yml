@@ -1,11 +1,9 @@
 version: 2.1
 
 jobs:
-  build-and-push:
+  build-frontend:
     docker:
       - image: circleci/node:16.10.0
-      - image: cimg/python:3.10
-      - image: docker:17.09.1-ce-git
     steps:
       - checkout # pulls code from github repo
       - run:
@@ -25,7 +23,25 @@ jobs:
           key: dependency-cache-{{ checksum "./frontend/package.json" }}
           paths:
             - ./frontend/node_modules
-
+      - run:
+          name: Docker
+          when: on_success
+          command: |
+            docker --version
+            docker login -u=$DOCKER_LOGIN -p=$DOCKER_PASSWORD
+            docker build -t codak77/addictionsupportweb:frontend --build-arg codak77=addictionsupportweb-frontend .
+            docker push codak77/addictionsupportweb:frontend
+            echo "Docker build made sucessfully!! for addictionsupportweb frontend"
+      - run:
+          name: Build Failure
+          when: on_fail
+          command: |
+            echo "ERROR building addictionsupportweb:frontend $CIRCLE_BRANCH" 
+    
+  build-backend:
+    docker:
+      - image: cimg/python:3.10
+    steps:
       - restore_cache:
           keys: [backend-build]
       - run:
@@ -46,16 +62,18 @@ jobs:
           command: |
             docker --version
             docker login -u=$DOCKER_LOGIN -p=$DOCKER_PASSWORD
-            docker build -t codak77/addictionsupportweb:$CIRCLE_BRANCH --build-arg codak77=addictionsupportweb-$CIRCLE_BRANCH .
-            docker push codak77/addictionsupportweb:$CIRCLE_BRANCH
-            echo "Docker build made sucessfully!! for addictionsupportweb $CIRCLE_BRANCH"
+            docker build -t codak77/addictionsupportweb:backend --build-arg codak77=addictionsupportweb-backend .
+            docker push codak77/addictionsupportweb:backend
+            echo "Docker build made sucessfully!! for addictionsupportweb backend"
       - run:
           name: Build Failure
           when: on_fail
           command: |
-            echo "ERROR building addictionsupportweb $CIRCLE_BRANCH" 
+            echo "ERROR building addictionsupportweb:backend $CIRCLE_BRANCH" 
 
 workflows:
   default:
     jobs:
-      - build-and-push
+      - build-frontend
+      - build-backend
+    
