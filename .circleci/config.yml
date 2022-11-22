@@ -4,6 +4,7 @@ jobs:
   build-frontend:
     docker:
       - image: circleci/node:16.10.0
+      - image: docker:17.09.1-ce-git
     steps:
       - checkout # pulls code from github repo
       - run:
@@ -36,11 +37,12 @@ jobs:
           name: Build Failure
           when: on_fail
           command: |
-            echo "ERROR building addictionsupportweb:frontend $CIRCLE_BRANCH" 
-    
+            echo "ERROR building addictionsupportweb:frontend"
+
   build-backend:
     docker:
       - image: cimg/python:3.10
+      - image: docker:17.09.1-ce-git
     steps:
       - checkout
       - restore_cache:
@@ -68,11 +70,10 @@ jobs:
           name: Build Failure
           when: on_fail
           command: |
-            echo "ERROR building addictionsupportweb:backend $CIRCLE_BRANCH" 
+            echo "ERROR building addictionsupportweb:backend"
 
 workflows:
   default:
     jobs:
       - build-frontend
       - build-backend
-    
