@@ -4,6 +4,7 @@ jobs:
   build-frontend:
     docker:
       - image: circleci/node:16.10.0
+      - image: docker:17.09.1-ce-git
     steps:
       - checkout # pulls code from github repo
       - run:
@@ -41,6 +42,7 @@ jobs:
   build-backend:
     docker:
       - image: cimg/python:3.10
+      - image: docker:17.09.1-ce-git
     steps:
       - checkout
       - restore_cache:
