@@ -4,7 +4,7 @@ jobs:
   build-and-push:
     docker:
       - image: circleci/node:16.10.0
-      - image: cimg/python:3.8
+      - image: cimg/python:3.10
       - image: docker:17.09.1-ce-git
     steps:
       - checkout # pulls code from github repo
