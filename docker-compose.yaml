@@ -6,6 +6,8 @@ services:
       build: 
         context: ./backend
         dockerfile: Dockerfile
+      image: addiction-backend
+      container_name: addiction-backend
       command: bash -c "python app/server.py"
       ports:
         - 8000:8000
@@ -15,10 +17,13 @@ services:
       build: 
         context: ./frontend
         dockerfile: Dockerfile
+      image: addiction-frontend
+      container_name: addiction-frontend
       networks:
         - db-net
   nginx-proxy:
       image: nginx:1.17.10
+      container_name: addiction-nginx
       depends_on:
         - backend
         - frontend
