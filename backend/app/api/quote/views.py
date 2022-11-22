@@ -7,7 +7,12 @@ from sqlalchemy.orm import Session
 from api import deps
 from db.models import Quote
 
+from .defaultquotes import default_quotes
+
+
+
 router = APIRouter()
+
 
 class QuoteRequest(BaseModel):
     mood: str
@@ -15,14 +20,9 @@ class QuoteRequest(BaseModel):
 
 @router.post("/")
 def get_quote(data: QuoteRequest, db: Session = Depends(deps.get_db)):
-    mood = data.mood
+    default_quotes(db)
 
-    #temporarily create records in Quote table
-    new_quote = Quote(mood="happy", quote="don't worry.")
-    new_quote2 = Quote(mood="happy", quote="be happy.")
-    db.add(new_quote)
-    db.add(new_quote2)
-    Session.commit(db)
+    mood = data.mood
 
     quotes = list(db.query(Quote).filter(Quote.mood==mood).all())
     quote = random.choice(quotes)
