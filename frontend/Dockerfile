@@ -1,5 +1,5 @@
 
-FROM node:16.10.0 as build
+FROM node:16.18.1 as builder-step
 
 WORKDIR /frontend
 
@@ -13,9 +13,11 @@ RUN npm run build
 
 EXPOSE 3000
 
-COPY --from=builder /frontend/build /usr/share/nginx/html
+FROM nginx:alpine
 
-COPY ./nginx/nginx.conf /etc/nginx/conf.d/default.conf
+COPY --from=builder-step /frontend/build /usr/share/nginx/html
+
+COPY ./nginx.conf /etc/nginx/conf.d/default.conf
 
 EXPOSE 80
 
