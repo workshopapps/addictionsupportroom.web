@@ -42,14 +42,13 @@ jobs:
     docker:
       - image: cimg/python:3.10
     steps:
+      - checkout
       - restore_cache:
           keys: [backend-build]
       - run:
           name: Back-end build
           command: |
-            cd backend
-            cd app
-            cd requirements
+            cd backend/app/requirements
             python -m pip install --upgrade pip
             pip install -r requirements.txt
       - save_cache:
