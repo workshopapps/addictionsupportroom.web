@@ -12,9 +12,9 @@ from api import deps
 router = APIRouter()
 
 
-@router.post("/signup")
+@router.post("/signup",  response_model=schemas.UserOut)
 def signup(user: schemas.UserCreate,
-           db: Session = Depends(deps.get_db), response_model=schemas.UserOut):
+           db: Session = Depends(deps.get_db)):
 
     db_user = models.User()
     db_user.username = user.username

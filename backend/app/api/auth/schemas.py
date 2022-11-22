@@ -32,7 +32,6 @@ class ExampleSchema(Examples):
 class UserBase(BaseModel):
     username: str
     avatar: str
-    is_active: bool
 
 
 class UserCreate(UserBase):
