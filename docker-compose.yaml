@@ -6,7 +6,7 @@ services:
       build: 
         context: ./backend
         dockerfile: Dockerfile
-      command: bash -c "python backend/app/server.py"
+      command: bash -c "python /app/server.py"
       ports:
         - 8000:8000
       networks:
