@@ -13,6 +13,9 @@ from .schemas import (
 from sqlalchemy.sql import (
     text,
 )
+from api.auth.schemas import (
+    UserObjectSchema,
+)
 import uuid
 from api import deps
 
@@ -92,3 +95,81 @@ async def send_new_message(  # pylint: disable=R0911
         "data": messages,
     }
     return results
+
+async def get_sender_receiver_messages(
+    sender: UserObjectSchema, receiver: str, session: Session
+):
+    print(receiver)
+    print(sender.id)
+
+    """
+    A method to fetch messages between a sender and a receiver.
+
+    Args:
+        sender (UserObjectSchema) : A user object schema that contains infor about a sender.
+        receiver (EmailStr) : An email for the recipient of the message.
+        session (AsyncSession) : SqlAlchemy session object.
+
+    Returns:
+        Result: Database result.
+    """
+    receiver = await deps.find_existed_user(id=receiver, session=session)
+    if not receiver:
+        return {
+            "status_code": 400,
+            "message": "Contact not found!",
+        }
+    query = """
+        SELECT
+            id,
+            content,
+            CASE
+                WHEN sender = :sender_id THEN "sent"
+                WHEN receiver = :sender_id THEN "received"
+                ELSE NULL
+            END as type,
+            media,
+            creation_date
+        FROM
+            messages
+        WHERE (
+          sender = :sender_id
+            AND
+          receiver = :receiver_id
+        )
+        OR (
+          sender = :receiver_id
+            AND
+          receiver = :sender_id
+        )
+        ORDER BY
+          creation_date
+    """
+    values = {"sender_id": sender.id, "receiver_id": receiver.id}
+
+    result = session.execute(text(query), values)
+    messages_sent_received = result.fetchall()
+    results = {
+        "status_code": 200,
+        "result": messages_sent_received,
+    }
+    # Mark received messages by this sender as read
+    query = """
+        UPDATE
+          messages
+        SET
+          status = 0,
+          modified_date = :modified_date
+        WHERE
+          sender = :receiver_id
+        AND
+          receiver = :sender_id
+    """
+    values = {
+        "sender_id": sender.id,
+        "receiver_id": receiver.id,
+        "modified_date": datetime.datetime.utcnow(),
+    }
+    session.execute(text(query), values)
+    return results
+

@@ -12,7 +12,7 @@ from typing import List
 from .crud import (
     # delete_chat_messages,
     # get_chats_user,
-    # get_sender_receiver_messages,
+    get_sender_receiver_messages,
     send_new_message,
 )
 
@@ -78,119 +78,63 @@ async def send_message(
     return results
 
 
-# @router.get(
-#     "/conversation",
-#     response_model=Union[ResponseSchema, GetAllMessageResults],
-#     status_code=200,
-#     name="chats:get-all-conversations",
-#     responses={
-#         200: {
-#             "model": GetAllMessageResults,
-#             "description": "Return a list of messages between two parties.",
-#         },
-#     },
-# )
+@router.get(
+    "/conversation",
+    response_model=ResponseSchema | GetAllMessageResults,
+    status_code=200,
+    name="chats:get-all-conversations",
+    responses={
+        200: {
+            "model": GetAllMessageResults,
+            "description": "Return a list of messages between two parties.",
+        },
+    },
+)
+async def get_conversation(
+    receiver: str,
+    currentUser: UserObjectSchema = Depends(
+        deps.get_current_user
+    ),  # pylint: disable=C0103
+    session: Session = Depends(deps.get_db),
+):
+    """
+    The get_conversation endpoint.
 
+    Args:
+        receiver (EmailStr) : The recipient email.
+        currentUser (UserObjectSchema): The authenticated user as the sender of the message.
+        session (AsyncSession) : An autocommit sqlalchemy session object.
 
-html = """
-<!DOCTYPE html>
-<html>
-    <head>
-        <title>Chat</title>
-    </head>
-    <body>
-        <h1>WebSocket Chat</h1>
-        <h2>Your ID: <span id="ws-id"></span></h2>
-        <form action="" onsubmit="sendMessage(event)">
-            <input type="text" id="messageText" autocomplete="off"/>
-            <button>Send</button>
-        </form>
-        <ul id='messages'>
-        </ul>
-        <script>
-            var client_id = Date.now()
-            document.querySelector("#ws-id").textContent = client_id;
-            var ws = new WebSocket(`ws://localhost:8000/api/communication/ws/${client_id}`);
-            ws.onmessage = function(event) {
-                var messages = document.getElementById('messages')
-                var message = document.createElement('li')
-                var content = document.createTextNode(event.data)
-                message.appendChild(content)
-                messages.appendChild(message)
-            };
-            function sendMessage(event) {
-                var input = document.getElementById("messageText")
-                ws.send(input.value)
-                input.value = ''
-                event.preventDefault()
-            }
-        </script>
-    </body>
-</html>
-"""
+    Returns:
+        ResponseSchema | GetAllMessageResults: return a list of messages between sender and receiver
+    """
 
+    # results = {
+    #     "status_code": 201,
+    #     "message": "A new message has been delivered successfully!",
+    #     "data": currentUser,
+    # }
+    # return results
+    results = await get_sender_receiver_messages(currentUser, receiver, session)
+    return results
 
-class ConnectionManager:
-    def __init__(self):
-        self.active_connections: List[WebSocket] = []
+# @router.get("/chat/images/user/{user_id}/{uuid_val}")
+# async def get_sent_user_chat_images(user_id: int, uuid_val: str):
+#     """
+#     The get_sent_user_chat_images endpoint.
 
-    async def connect(self, websocket: WebSocket):
-        await websocket.accept()
-        self.active_connections.append(websocket)
+#     Args:
+#         user_id (id) : The id of the sender of the image.
+#         uuid_val (str): A unique uuid generated upon upload.
 
-    def disconnect(self, websocket: WebSocket):
-        self.active_connections.remove(websocket)
-
-    async def send_personal_message(self, message: str, websocket: WebSocket):
-        await websocket.send_text(message)
-
-    async def broadcast(self, message: str):
-        for connection in self.active_connections:
-            await connection.send_text(message)
-
-
-manager = ConnectionManager()
-
-
-@router.get("/web")
-async def get():
-    return HTMLResponse(html)
-
-
-# @router.websocket("/ws")
-# async def websocket_endpoint(websocket: WebSocket):
-#     await websocket.accept()
-#     while True:
-#         data = await websocket.receive_text()
-#         await websocket.send_text(f"Message text was: {data}")
-
-
-@router.websocket("/ws/{client_id}")
-async def websocket_endpoint(websocket: WebSocket, client_id: int):
-    await manager.connect(websocket)
-    try:
-        while True:
-            data = await websocket.receive_text()
-            await manager.send_personal_message(f"You wrote: {data}", websocket)
-            await manager.broadcast(f"Client #{client_id} says: {data}")
-    except WebSocketDisconnect:
-        manager.disconnect(websocket)
-        await manager.broadcast(f"Client #{client_id} left the chat")
-
-
-@router.get("/", response_model=list[ExampleSchema])
-async def get_examples(
-    db: Session = Depends(deps.get_db),
-) -> list[Example]:
-    example_service = ExampleService()
-    return await example_service.get_all_examples(db=db)
-
-
-@router.post("/", response_model=ExampleSchema)
-async def create_example(
-    data: Examples,
-    db: Session = Depends(deps.get_db),
-) -> Example:
-    example_service = ExampleService()
-    example = example_service.create_example(db=db, data=data)
-    return example
+#     Returns:
+#         responses: return a response object for a given url(image).
+#     """
+#     try:
+#         img = sent_images.get(f"/chat/images/user/{user_id}/{uuid_val}")
+#         return responses.StreamingResponse(
+#             img.iter_chunks(), media_type="image/png"
+#         )
+#     except Exception:  # pylint: disable=W0703
+#         return {"status_code": 400, "message": "Something went wrong!"}
+    
