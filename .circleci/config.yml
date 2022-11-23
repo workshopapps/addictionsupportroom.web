@@ -8,18 +8,18 @@ jobs:
     steps:
       - checkout # pulls code from github repo
       - setup_remote_docker
-      - run:
-          name: cd & update
-          command: |
-            cd frontend
-            sudo npm install -g
+      # - run:
+      #     name: cd & update
+      #     command: |
+      #       cd frontend
+      #       sudo npm install -g
       - restore_cache:
           key: dependency-cache-{{ checksum "./frontend/package.json" }}
       - run:
           name: Build front-end
           command: |
-            
-            sudo npm install
+            cd frontend
+            npm install
           # npm run build
       - save_cache:
           key: dependency-cache-{{ checksum "./frontend/package.json" }}
@@ -40,42 +40,42 @@ jobs:
           command: |
             echo "ERROR building addictionsupportweb:frontend"
 
-  build-backend:
-    docker:
-      - image: cimg/python:3.10
-      - image: docker:17.09.1-ce-git
-    steps:
-      - checkout
-      - setup_remote_docker
-      - restore_cache:
-          keys: [backend-build]
-      - run:
-          name: Back-end build
-          command: |
-            cd backend/app/requirements
-            python -m pip install --upgrade pip
-            pip install -r requirements.txt
-      - save_cache:
-          paths: [backend/dependencies/app]
-          key: backend-build
+  # build-backend:
+  #   docker:
+  #     - image: cimg/python:3.10
+  #     - image: docker:17.09.1-ce-git
+  #   steps:
+  #     - checkout
+  #     - setup_remote_docker
+  #     - restore_cache:
+  #         keys: [backend-build]
+  #     - run:
+  #         name: Back-end build
+  #         command: |
+  #           cd backend/app/requirements
+  #           python -m pip install --upgrade pip
+  #           pip install -r requirements.txt
+  #     - save_cache:
+  #         paths: [backend/dependencies/app]
+  #         key: backend-build
 
-      - run:
-          name: Docker
-          when: on_success
-          command: |
-            docker --version
-            docker login -u=$DOCKER_LOGIN -p=$DOCKER_PASSWORD
-            docker build -t codak77/addictionsupportweb:backend --build-arg codak77=addictionsupportweb-backend .
-            docker push codak77/addictionsupportweb:backend
-            echo "Docker build made sucessfully!! for addictionsupportweb backend"
-      - run:
-          name: Build Failure
-          when: on_fail
-          command: |
-            echo "ERROR building addictionsupportweb:backend"
+  #     - run:
+  #         name: Docker
+  #         when: on_success
+  #         command: |
+  #           docker --version
+  #           docker login -u=$DOCKER_LOGIN -p=$DOCKER_PASSWORD
+  #           docker build -t codak77/addictionsupportweb:backend --build-arg codak77=addictionsupportweb-backend .
+  #           docker push codak77/addictionsupportweb:backend
+  #           echo "Docker build made sucessfully!! for addictionsupportweb backend"
+  #     - run:
+  #         name: Build Failure
+  #         when: on_fail
+  #         command: |
+  #           echo "ERROR building addictionsupportweb:backend"
 
 workflows:
   default:
     jobs:
       - build-frontend
-      - build-backend
+      # - build-backend
