@@ -32,14 +32,14 @@ jobs:
             cd frontend
             docker --version
             docker login -u=$DOCKER_LOGIN -p=$DOCKER_PASSWORD
-            docker build -t codak77/addictionsupportweb:frontend --build-arg codak77=addictionsupportweb-frontend .
-            docker push codak77/addictionsupportweb:frontend
-            echo "Docker build made sucessfully!! for addictionsupportweb:frontend"
+            docker build -t codak77/addictionsupportwebfrontend:frontend --build-arg codak77=addictionsupportwebfrontend-frontend .
+            docker push codak77/addictionsupportwebfrontend:frontend
+            echo "Docker build made sucessfully!! for addictionsupportwebfrontend:frontend"
       - run:
           name: Build Failure
           when: on_fail
           command: |
-            echo "ERROR building addictionsupportweb:frontend"
+            echo "ERROR building addictionsupportwebfrontend:frontend"
 
   build-backend:
     docker:
@@ -67,14 +67,14 @@ jobs:
             cd backend/app
             docker --version
             docker login -u=$DOCKER_LOGIN -p=$DOCKER_PASSWORD
-            docker build -t codak77/addictionsupportweb:backend --build-arg codak77=addictionsupportweb-backend .
-            docker push codak77/addictionsupportweb:backend
-            echo "Docker build made sucessfully!! for addictionsupportweb:backend"
+            docker build -t codak77/addictionsupportwebbackend:backend --build-arg codak77=addictionsupportwebbackend-backend .
+            docker push codak77/addictionsupportwebbackend:backend
+            echo "Docker build made sucessfully!! for addictionsupportwebbackend:backend"
       - run:
           name: Build Failure
           when: on_fail
           command: |
-            echo "ERROR building addictionsupportweb:backend"
+            echo "ERROR building addictionsupportwebbackend:backend"
 
 workflows:
   default:
