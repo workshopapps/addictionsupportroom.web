@@ -12,15 +12,14 @@ from api import deps
 router = APIRouter()
 
 
-@router.post("/signup",  response_model=schemas.UserOut)
-def signup(user: schemas.UserCreate,
-           db: Session = Depends(deps.get_db)):
+@router.post("/signup", response_model=schemas.UserOut)
+def signup(user: schemas.UserCreate, db: Session = Depends(deps.get_db)):
 
     db_user = models.User()
     db_user.username = user.username
     db_user.avatar = user.avatar
     db_user.is_active = True
-    db_user.hashed_password = deps.get_password_hash('general_password')
+    db_user.hashed_password = deps.get_password_hash("general_password")
 
     try:
         db.add(db_user)
@@ -29,13 +28,12 @@ def signup(user: schemas.UserCreate,
     except Exception:
         raise HTTPException(
             status_code=status.HTTP_400_BAD_REQUEST,
-            detail='Username already exists',
+            detail="Username already exists",
             headers={"WWW-Authenticate": "Bearer"},
         )
 
     # Create token to authorize user to make further API
-    access_token = deps.create_access_token(
-        data={'sub': db_user.id})
+    access_token = deps.create_access_token(data={"sub": str(db_user.id)})
     user_out = schemas.UserOut(**user.dict(), access_token=access_token)
     return user_out
 
