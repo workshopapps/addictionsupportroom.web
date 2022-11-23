@@ -13,3 +13,5 @@ COPY ./app /backend/app
 
 EXPOSE 8000
 
+
+CMD ["python", "server.py", "runserver", "0.0.0.0:8000"]
