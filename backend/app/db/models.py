@@ -36,5 +36,19 @@ class Messages(Base):
     __tablename__ = "messages"
 
     id = Column(Integer, autoincrement=True, primary_key=True, index=True)
-    username = Column(String, nullable=False)
+    name = Column(String, nullable=False)
+    email = Column(String, nullable=False)
     message = Column(String, nullable=False)
+    
+
+class User(Base):
+    __tablename__ = "users"
+
+    id = Column(Integer, primary_key=True, index=True)
+    username = Column(String, unique=True)
+    avatar = Column(String)
+    hashed_password = Column(String)
+    is_active = Column(Boolean, default=True)
+
+    # todos = relationship("Todo", back_populates="owner")
+   
