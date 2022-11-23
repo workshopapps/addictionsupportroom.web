@@ -53,7 +53,7 @@ jobs:
       - run:
           name: Back-end build
           command: |
-            cd backend/app/requirements
+            cd backend/app
             python -m pip install --upgrade pip
             pip install -r requirements.txt
       - save_cache:
@@ -64,8 +64,7 @@ jobs:
           name: Docker
           when: on_success
           command: |
-            cd backend
-            cd app
+            cd backend/app
             docker --version
             docker login -u=$DOCKER_LOGIN -p=$DOCKER_PASSWORD
             docker build -t codak77/addictionsupportweb:backend --build-arg codak77=addictionsupportweb-backend .
