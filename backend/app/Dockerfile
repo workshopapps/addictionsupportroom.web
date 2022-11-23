@@ -5,7 +5,7 @@ ENV PYTHONUNBUFFERED 1
 
 WORKDIR /app/backend/app
 
-COPY ./requirements/requirements.txt ./
+COPY ./requirements/requirements.txt ./requirements/
 
 RUN python -m pip install --upgrade pip
 
