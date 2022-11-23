@@ -65,6 +65,7 @@ jobs:
           when: on_success
           command: |
             cd backend
+            cd app
             docker --version
             docker login -u=$DOCKER_LOGIN -p=$DOCKER_PASSWORD
             docker build -t codak77/addictionsupportwebbackend:backend --build-arg codak77=addictionsupportweb-backend .
