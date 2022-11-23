@@ -5,7 +5,6 @@ jobs:
     docker:
       - image: circleci/node:16.10.0
       - image: docker:17.09.1-ce-git
-    path: ./frontend
     steps:
       - checkout # pulls code from github repo
       - setup_remote_docker
@@ -30,6 +29,7 @@ jobs:
           name: Docker
           when: on_success
           command: |
+            cd frontend
             docker --version
             docker login -u=$DOCKER_LOGIN -p=$DOCKER_PASSWORD
             docker build -t codak77/addictionsupportweb:frontend --build-arg codak77=addictionsupportweb-frontend .
