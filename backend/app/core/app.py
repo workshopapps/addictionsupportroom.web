@@ -6,15 +6,6 @@ from fastapi.middleware.cors import CORSMiddleware
 from db.models import Base
 from db.db import engine
 
-origins = [
-    "https://localhost",
-    "http://localhost",
-    'https://sober-pal.herokuapp.com'
-    'http://sober-pal.herokuapp.com'
-    'http://soberpal.hng.tech'
-    'https://soberpal.hng.tech'
-]
-
 
 def get_app() -> FastAPI:
     Base.metadata.create_all(bind=engine)
@@ -38,7 +29,7 @@ def get_app() -> FastAPI:
 
     app.add_middleware(
         CORSMiddleware,
-        allow_origins=origins,
+        allow_origins=["*"],
         allow_credentials=True,
         allow_methods=["*"],
         allow_headers=["*"],
