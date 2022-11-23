@@ -5,6 +5,7 @@ jobs:
     docker:
       - image: circleci/node:16.10.0
       - image: docker:17.09.1-ce-git
+    path: ./frontend
     steps:
       - checkout # pulls code from github repo
       - setup_remote_docker
