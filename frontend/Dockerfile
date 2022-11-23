@@ -3,11 +3,11 @@ FROM node:16.18.1 as builder-step
 
 WORKDIR /frontend
 
-COPY package*.json /frontend
+COPY package*.json /frontend/
 
 RUN npm install 
 
-COPY . /frontend
+COPY . /frontend/
 
 RUN npm run build
 
