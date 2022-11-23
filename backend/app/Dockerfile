@@ -3,11 +3,13 @@ FROM python:3.10
 
 ENV PYTHONUNBUFFERED 1
 
-WORKDIR /backend/
+WORKDIR /app/backend/app
 
-COPY ./requirements/requirements.txt /backend/requirements.txt
+COPY ./requirements/requirements.txt ./
 
-RUN pip install --no-cache-dir --upgrade -r /backend/requirements.txt
+RUN python -m pip install --upgrade pip
+
+RUN pip3 install --no-cache-dir -r /requirements/requirements.txt
 
 COPY . .
 
