@@ -7,7 +7,6 @@ services:
       dockerfile: Dockerfile
     image: addictionsupportwebbackend
     container_name: addiction-backend
-    command: bash -c "python app/server.py"
     ports:
       - 8000:8000
     networks:
