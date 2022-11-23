@@ -3,7 +3,7 @@ FROM python:3.10
 
 ENV PYTHONUNBUFFERED 1
 
-WORKDIR /backend
+WORKDIR /backend/
 
 COPY ./app/requirements/requirements.txt /backend/requirements.txt
 
