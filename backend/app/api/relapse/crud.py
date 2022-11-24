@@ -68,7 +68,7 @@ class CRUDRelapse(CRUDBase[Relapse, RelapseCreate, RelapseCreate]):
         self, db: Session, *, obj_in: RelapseCreate, user_id: int
     ) -> Relapse:
         obj_in_data = jsonable_encoder(obj_in)
-        db_obj = self.model(**obj_in_data, user=user_id)
+        db_obj = Relapse(day=obj_in.day, month=obj_in.month, year=obj_in.year, user=user_id)
         db.add(db_obj)
         db.commit()
         db.refresh(db_obj)
@@ -77,12 +77,19 @@ class CRUDRelapse(CRUDBase[Relapse, RelapseCreate, RelapseCreate]):
     def get_multi_by_user(self, db: Session, *, user_id: int, skip: int = 0, limit: int = 100
     ) -> List[Relapse]:
         return (
-            db.query(self.model)
+            db.query(Relapse)
             .filter(Relapse.user == user_id)
             .offset(skip)
             .limit(limit)
             .all()
         )
 
+def create_relapse_with_user(db: Session, user_id: int, relapse: RelapseCreate):
+    db_relapse = Relapse(day=relapse.day, month=relapse.month, year=relapse.year, user=user_id)
+    db.add(db_relapse)
+    db.commit()
+    db.refresh(db_relapse)
+    return db_relapse
+    
 relapse = CRUDRelapse(Relapse)
 

@@ -56,11 +56,9 @@ async def find_existed_user(id: str, session: Session) -> UserBase:
     print(f"{id}")
     """
     A method to fetch a user info given an ID.
-
     Args:
         ID (Str) : A given user ID.
         session (AsyncSession) : SqlAlchemy session object.
-
     Returns:
         Dict[str, Any]: a dict object that contains info about a user.
     """

@@ -23,6 +23,4 @@ api_router.include_router(contact_router, prefix="/contact", tags=["Contact"])
 api_router.include_router(relapse_router, prefix="/relapse", tags=["relapse"])
 
 api_router.include_router(note_router)
-api_router.include_router(emergency_router, prefix="/emergency", tags=["Emergency"])
-api_router.include_router(call_socket_router, prefix="/callwait", tags=["CallWait"])
-api_router.include_router(call_router, prefix="/call", tags=["Call"])
+
