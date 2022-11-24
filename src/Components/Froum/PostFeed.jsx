@@ -24,9 +24,9 @@ const PostFeed = ({posts}) => {
           <p className='font-[500] mt-8 text-[18px] tablet:text-[20px]'>{item.post}</p>
           {item?.hashs?.map((item, index) => (
             <div className='text-blue mt-2 flex flex-wrap gap-x-3 w-[80%] max-w-[360px] ' key={index}>
-              <span>{item.hash1}</span>
-              <span className=''>{item.hash2}</span>
-              <span className=''>{item.hash3}</span>
+              <span className=' cursor-pointer'>{item.hash1}</span>
+              <span className=' cursor-pointer'>{item.hash2}</span>
+              <span className=' cursor-pointer'>{item.hash3}</span>
             </div>
           ))}
           

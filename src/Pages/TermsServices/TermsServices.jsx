@@ -281,13 +281,15 @@ Crash Data</li>
         If you have any questions about our policies, please feel free to email
         us at soberpal001@gmail.com.
       </p>
-
-      <p
+      <p className="text-blue text-center text-[40px] font-[700]">
+      Terms Of Use
+      </p>
+      {/* <p
         className="tablet:text-[30px] text-[#4F4F4F] text-[26px] mt-10 
       font-[500]"
       >
         Terms Of Use
-      </p>
+      </p> */}
       <p className="mt-4">
         This Terms of Use Agreement and our Privacy Statement (together, these
         "Terms") describes the terms and conditions on which Sober Pal offers
