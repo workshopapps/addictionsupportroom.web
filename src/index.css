@@ -109,7 +109,7 @@ body {
 .hover--effect:hover {
   filter: brightness(.9);
 
-
+}
 .no-list {
   list-style-type: none;
 
