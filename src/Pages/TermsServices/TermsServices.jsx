@@ -1,12 +1,12 @@
 import React from "react";
 
-const Services = () => {
+const TermsServices = () => {
   return (
-    <div className="mt-[50px] text-grey max-w-[1400px] w-[90%] mx-auto">
-      <p className="mt-[50px] text-blue text-center text-[40px] font-[700]">
+    <div className="mt-[30px] text-grey max-w-[1400px] w-[90%] mx-auto">
+      <p className="text-blue text-center text-[40px] font-[700]">
         Privacy policy
       </p>
-      <p className="mt-[50px] mb-4 text-grey">
+      <p className="mt-[40px] mb-4 text-grey">
         Privacy is fundamental to sobriety.
       </p>
       <p className="mb-4">
@@ -661,4 +661,4 @@ Please note: By agreeing to these terms, you explicitly agree that any claims or
   );
 };
 
-export default Services;
+export default TermsServices;

@@ -1,59 +1,79 @@
-// import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
+import { Wrapper, Status } from "@googlemaps/react-wrapper";
 import "./contact.scss";
 import { GrLocation } from "react-icons/gr";
 import { BsTelephone } from "react-icons/bs";
 import { BsInstagram } from "react-icons/bs";
 import { AiOutlineFacebook } from "react-icons/ai";
 import { ImTwitter } from "react-icons/im";
-import Map from "../../assets/Map.png";
-import { FormApi } from "../../API/FormApi";
+import mapImg from "../../assets/Map.png";
+import Map from "../../Components/Map/Map";
+// import { FormApi } from "../../API/FormApi";
+import { ThreeDots } from "react-loading-icons";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as Yup from "yup";
 
 const validationSchema = Yup.object().shape({
-  fullName: Yup.string()
+  name: Yup.string()
     .required("fullName is required")
     .min(6, "fullName must be at least 6 characters"),
   email: Yup.string().required("Email is required").email("Email is invalid"),
-  message: Yup.string()
-    .required("Password is required")
-    .min(6, "Password must be at least 6 characters"),
+  message: Yup.string().required("Password is required"),
 });
 
 const Contact = () => {
+  const [formData, setFormData] = useState([]);
+
+  
+
   const {
     register,
     getValues,
     handleSubmit,
-    formState: { errors },
-    reset,
+    formState: { errors, isValid, isDirty },
+    // reset,
   } = useForm({
     resolver: yupResolver(validationSchema),
-    mode: "onChange",
+    mode: "onSubmit",
     defaultValues: {
-      fullName: "",
+      name: "",
       email: "",
       message: "",
     },
   });
 
-  const onSubmit = (e) => {
-    // e.preventDefault();
-    if (errors.fullName && errors.email && errors.message === true) {
-      return errors;
-    } else {
-     FormApi(getValues());
-    }
-    // reset();
-    console.log(getValues());
+  const [spinner, setSpinner] = useState(false);
+
+  const fetchData = () => {
+    fetch("https://sober-pal.herokuapp.com/api/contact", {
+      method: "POST",
+      body: JSON.stringify(getValues()),
+      headers: {
+        "Content-type": "application/json; charset=UTF-8",
+      },
+    })
+      .then((res) => {
+        res.json();
+        setFormData(res.body);
+        setSpinner(false);
+      })
+      .catch((err) => {
+        console.log(err.message);
+      });
   };
 
-  async function handleLogin(e) {
-    await handleSubmit(onSubmit)(e);
-}
-handleLogin()
- 
+  if (!isDirty && !isValid) {
+    console.log(formData, "working");
+  }
+  
+  const onSubmit = (e) => {
+   
+      fetchData();
+    
+
+    console.log(getValues());
+  };
 
   return (
     <div className="contact">
@@ -71,22 +91,18 @@ handleLogin()
             <div className="input__container">
               <label>Name</label>
               <input
-                className={`${
-                  errors.fullName === true
-                    ? `style={{border:1px solid red}}`
-                    : ""
-                }`}
-                name="fullName"
+                style={{ borderColor: "1px solid red !important" }}
+                name="name"
                 type="text"
-                {...register("fullName", { required: true, minLength: 4 })}
+                {...register("name", { required: true, minLength: 4 })}
                 placeholder="Omowunmi Olawehinmi"
               />
-              {errors.fullName?.type === "required" && (
+              {errors.name?.type === "required" && (
                 <p className="alert" role="alert">
                   Full name is required
                 </p>
               )}
-              {errors.fullName?.type === "min" && (
+              {errors.name?.type === "min" && (
                 <p className="alert" role="alert">
                   Full name must be 6 characters at least
                 </p>
@@ -101,8 +117,7 @@ handleLogin()
                 type="text"
                 {...register("email", {
                   required: true,
-                  pattern:
-                    "([!#-'*+/-9=?A-Z^-~-]+(.[!#-'*+/-9=?A-Z^-~-]+)*|\"([]!#-[^-~ \t]|(\\[\t -~]))+\")@([!#-'*+/-9=?A-Z^-~-]+(.[!#-'*+/-9=?A-Z^-~-]+)*|[[\t -Z^-~]*])",
+                  pattern:"/^w+([.-]?w+)*@w+([.-]?w+)*(.w{2,3})+$/",
                 })}
                 placeholder="omowunmi2022@gmail.com"
               />
@@ -140,9 +155,10 @@ handleLogin()
               onClick={() => {
                 onSubmit();
               }}
+
+              // disabled={!isValid  || !isDirty }
             >
-              {" "}
-              Submit{" "}
+              {spinner ? <ThreeDots /> : "Submit"}
             </button>
           </form>
         </div>
@@ -176,7 +192,10 @@ handleLogin()
           </div>
           {/* map */}
           <div>
-            <img src={Map} className="map" alt="Map" />
+            <img src={mapImg} className="map" alt="Map" />
+            {/* <Wrapper apiKey={"YOUR_API_KEY"}>
+              <Map />
+            </Wrapper> */}
           </div>
         </div>
       </div>
