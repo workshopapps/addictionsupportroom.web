@@ -16,7 +16,6 @@ api_router.include_router(auth_router, prefix="/auth", tags=["Auth"])
 api_router.include_router(
     communication_router, prefix="/communication", tags=["Communication"]
 )
-api_router.include_router(web_socket_router, prefix="/chat", tags=["Chat"])
 api_router.include_router(progress_router, prefix="/progress", tags=["Progress"])
 api_router.include_router(emotions_router, prefix="/emotion", tags=["Emotion"])
 api_router.include_router(contact_router, prefix="/contact", tags=["Contact"])

@@ -1,9 +1,21 @@
 from pydantic import BaseModel
-from datetime import datetime
 
 class RelapseBase(BaseModel):
-    day: datetime
+    day: int
+    month: int
+    year: int
 
-class RelapseModify(RelapseBase):
-    day: datetime
+class RelapseCreate(RelapseBase):
+    pass
 
+class RelapseInDBBase(RelapseBase):
+    day: int
+    month: int
+    year: int
+    user: int
+
+    class config:
+        orm_mode = True
+
+class RelapseInDB(RelapseInDBBase):
+    pass

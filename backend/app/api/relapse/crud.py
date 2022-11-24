@@ -5,7 +5,7 @@ from pydantic import BaseModel
 from sqlalchemy.orm import Session
 
 from api.utils.mixins import Base
-from .schemas import RelapseModify
+from .schemas import RelapseCreate
 from db.models import Relapse
 from datetime import datetime
 
@@ -60,15 +60,14 @@ class CRUDBase(Generic[ModelType, CreateSchemaType, UpdateSchemaType]):
         return obj
 
 
-class CRUDRelapse(CRUDBase[Relapse, RelapseModify, RelapseModify]):
+class CRUDRelapse(CRUDBase[Relapse, RelapseCreate, RelapseCreate]):
     """
     Relapse CRUD
     """
     def create_with_user(
-        self, db: Session, *, obj_in: RelapseModify, user_id: int
+        self, db: Session, *, obj_in: RelapseCreate, user_id: int
     ) -> Relapse:
         obj_in_data = jsonable_encoder(obj_in)
-        obj_in_data['day'] = datetime.fromisoformat(obj_in_data['day'])
         db_obj = self.model(**obj_in_data, user=user_id)
         db.add(db_obj)
         db.commit()

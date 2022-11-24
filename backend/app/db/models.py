@@ -51,7 +51,7 @@ class ContactusMessages(Base):
 
     id = Column(Integer, autoincrement=True, primary_key=True, index=True)
     name = Column(String, nullable=False)
-    email = Column(String, nullable=False)
+    user_id = Column(String, nullable=False)
     message = Column(String, nullable=False)
 
 class User(Base):
@@ -69,15 +69,17 @@ class User(Base):
 class Relapse(Base):
     __tablename__ = "relapses"
     id = Column(Integer, primary_key=True, index=True)
-    day = Column(DateTime, nullable=False, default=datetime.utcnow)
+    day = Column(Integer, nullable=False)
+    month = Column(Integer, nullable=False)
+    year = Column(Integer, nullable=False)
     user = Column(ForeignKey('users.id'), index=True)
 
-class Streak(Base):
-    __tablename__ = "streaks"
-    id = Column(Integer, primary_key=True, index=True)
-    start_date = Column(DateTime, nullable=False, default=datetime.utcnow)
-    current_date = Column(DateTime, nullable=False, default=datetime.utcnow)
-    user = Column(ForeignKey('users.id'), index=True)
+# class Streak(Base):
+#     __tablename__ = "streaks"
+#     id = Column(Integer, primary_key=True, index=True)
+#     start_date = Column(DateTime, nullable=False, default=datetime.utcnow)
+#     current_date = Column(DateTime, nullable=False, default=datetime.utcnow)
+#     user = Column(ForeignKey('users.id'), index=True)
 
 class MessageStatus(int, Enum):
     """
