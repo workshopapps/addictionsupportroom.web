@@ -2,10 +2,7 @@ from api.example.schemas import Examples, ExampleSchema
 from api.example.services import ExampleService
 from sqlalchemy.orm import Session
 from api.common.schemas import ResponseSchema
-from .schemas import (
-    RoomCreate,
-    MessageCreateRoom
-)
+from .schemas import RoomCreate, MessageCreateRoom
 
 from fastapi import APIRouter, Depends
 
@@ -32,8 +29,12 @@ from .schemas import (
 from api.auth.schemas import (
     UserObjectSchema,
 )
+from api.web_sockets.router import router as web_socket_router
 
 router = APIRouter()
+
+router.include_router(web_socket_router, tags=["WebSocket"])
+
 
 from fastapi import FastAPI, WebSocket, WebSocketDisconnect
 from fastapi.responses import HTMLResponse
@@ -108,7 +109,7 @@ async def get_conversation(
     The get_conversation endpoint.
 
     Args:
-        receiver (EmailStr) : The recipient email.
+        receiver (user_id) : The recipient id.
         currentUser (UserObjectSchema): The authenticated user as the sender of the message.
         session (AsyncSession) : An autocommit sqlalchemy session object.
 
@@ -176,6 +177,7 @@ async def create_room(
     results = await create_assign_new_room(currentUser.id, room, session)
     return results
 
+
 @router.get("/room/conversation", name="room:get-conversations")
 async def get_room_users_conversation(
     room: str,
@@ -198,10 +200,9 @@ async def send_room_message(
     """
     Send a new message.
     """
-    results = await send_new_room_message(
-        currentUser.id, request, None, session
-    )
+    results = await send_new_room_message(currentUser.id, request, None, session)
     return results
+
 
 @router.get("/rooms", status_code=200, name="rooms:get-rooms-for-user")
 async def get_rooms_for_user(
@@ -213,4 +214,3 @@ async def get_rooms_for_user(
     """
     results = await get_rooms_user(currentUser.id, session)
     return results
-

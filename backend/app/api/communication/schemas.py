@@ -2,7 +2,6 @@ import datetime
 
 from pydantic import (
     BaseModel,
-    EmailStr,
     Field,
 )
 from typing import (
@@ -17,13 +16,13 @@ class MessageCreate(BaseModel):
     A Pydantic class that defines the message response schema for sending messages.
 
     Args:
-        receiver (EmailStr) : The email of the message's recipient.
+        receiver (user_id) : The id of the message's recipient.
         content (str) : The content of the message.
         message_type (str) : The type of the message(e.g. 'text' or 'media').
         media (str) : A relative URL to the Deta drive.
 
     Example:
-        >>> receiver = "testing@gmail.com"
+        >>> receiver = "4"
         >>> content = "Hello there!"
         >>> message_type = "text"
         >>> media = ""
@@ -75,18 +74,17 @@ class GetAllMessageResults(BaseModel):
     status_code: int = Field(..., example=200)
     result: List[Dict[str, Any]]
 
-
 class DeleteChatMessages(BaseModel):
     """
     A Pydantic class that defines the message response schema for deleting messages.
 
     Args:
-        contact (EmailStr) : The recipient email for the sent messages to be deleted.
+        contact (user_id) : The recipient id for the sent messages to be deleted.
     """
 
-    contact: EmailStr = Field(
+    contact: str = Field(
         ...,
-        example="The recipient email for the sent messages to be deleted.",
+        example="The recipient id for the sent messages to be deleted.",
     )
 
 

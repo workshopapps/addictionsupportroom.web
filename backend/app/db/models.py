@@ -50,7 +50,7 @@ class ContactusMessages(Base):
 
     id = Column(Integer, autoincrement=True, primary_key=True, index=True)
     name = Column(String, nullable=False)
-    email = Column(String, nullable=False)
+    user_id = Column(String, nullable=False)
     message = Column(String, nullable=False)
 
 class User(Base):

@@ -1,7 +1,7 @@
 import datetime
 import logging
 from api.example import schemas
-from db.models import Example, Messages, Rooms
+from db.models import Example, Messages, Rooms, RoomMembers
 from sqlalchemy import select
 from sqlalchemy.orm import Session
 
@@ -63,41 +63,133 @@ async def send_new_message(  # pylint: disable=R0911
     Returns:
         Result: Database result.
     """
+    message = Messages()
+    # if request.message_type == "media":  # pylint: disable=R1705
+    #     pass
+    #     if not room_id:
+    #         if not request.media["preview"]:
+    #             return {
+    #                 "status_code": 400,
+    #                 "message": "You can't upload an empty file!",
+    #             }
+    #         receiver = await find_existed_user(email=request.receiver, session=session)
+    #         file_name = (
+    #             f"/chat/images/user/{str(sender_id)}/image_{str(uuid.uuid4())}.png"
+    #         )
+    #         images.put(file_name, file)
+    #         # create a new message
+    #         query = """
+    #             INSERT INTO messages (
+    #               sender,
+    #               receiver,
+    #               content,
+    #               message_type,
+    #               media,
+    #               status,
+    #               creation_date
+    #             )
+    #             VALUES (
+    #               :sender,
+    #               :receiver,
+    #               :content,
+    #               :message_type,
+    #               :media,
+    #               1,
+    #               :creation_date
+    #             )
+    #         """
+    #         values = {
+    #             "sender": sender_id,
+    #             "receiver": receiver.id,
+    #             "content": request.content,
+    #             "message_type": request.message_type,
+    #             "media": file_name,
+    #             "creation_date": datetime.datetime.utcnow(),
+    #         }
+    #     else:
+    #         if not request.media["preview"]:
+    #             return {
+    #                 "status_code": 400,
+    #                 "message": "You can't upload an empty file!",
+    #             }
+    #         room = await find_existed_room(room_name=request.room, session=session)
+    #         file_name = (
+    #             f"/chat/images/room/{str(sender_id)}/image_{str(uuid.uuid4())}.png"
+    #         )
+    #         images.put(file_name, file)
+    #         # create a new message
+    #         query = """
+    #             INSERT INTO messages (
+    #               sender,
+    #               room,
+    #               content,
+    #               message_type,
+    #               media,
+    #               status,
+    #               creation_date
+    #             )
+    #             VALUES (
+    #               :sender,
+    #               :room,
+    #               :content,
+    #               :message_type,
+    #               :media,
+    #               1,
+    #               :creation_date
+    #             )
+    #         """
+    #         values = {
+    #             "sender": sender_id,
+    #             "room": room.id,
+    #             "content": request.content,
+    #             "message_type": request.message_type,
+    #             "media": file_name,
+    #             "creation_date": datetime.datetime.utcnow(),
+    #         }
+    #     await session.execute(text(query), values)
+    #     return file_name
+    # else:
+    if not room_id:
+        if not request.content:
+            return {
+                "status_code": 400,
+                "message": "You can't send an empty message!",
+            }
+        receiver = await deps.find_existed_user(id=request.receiver, session=session)
+        if not receiver:
+            return {
+                "status_code": 400,
+                "message": "You can't send a message to a non existing" " user!",
+            }
+        if receiver.id == sender_id:
+            return {
+                "status_code": 400,
+                "message": "You can't send a message to yourself!",
+            }
+        message.sender = sender_id
+        message.receiver = receiver.id
+        message.content = request.content
+        message.status = 1
+        message.message_type = request.message_type
+        message.media = request.media
+        message.creation_date = datetime.datetime.utcnow()
 
-    if not request.content:
-        return {
-            "status_code": 400,
-            "message": "You can't send an empty message!",
-        }
-    receiver = await deps.find_existed_user(id=request.receiver, session=session)
-    if not receiver:
-        return {
-            "status_code": 400,
-            "message": "You can't send a message to a non existing" " user!",
-        }
-    if receiver.id == sender_id:
-        return {
-            "status_code": 400,
-            "message": "You can't send a message to yourself!",
-        }
+    else:
+        message.sender = sender_id
+        message.room = room_id
+        message.content = request.content
+        message.status = 1
+        message.message_type = request.message_type
+        message.media = request.media
+        message.creation_date = datetime.datetime.utcnow()
 
-    messages = Messages()
-    messages.sender = sender_id
-    messages.receiver = receiver.id
-    messages.content = request.content
-    messages.message_type = request.message_type
-    messages.media = request.media
-    messages.creation_date = datetime.datetime.utcnow()
-
-    session.add(messages)
+    session.add(message)
     session.commit()
-    session.refresh(messages)
+    session.refresh(message)
 
-    # await session.execute(text(query), values)
     results = {
         "status_code": 201,
         "message": "A new message has been delivered successfully!",
-        "data": messages,
     }
     return results
 
@@ -113,7 +205,7 @@ async def get_sender_receiver_messages(
 
     Args:
         sender (UserObjectSchema) : A user object schema that contains infor about a sender.
-        receiver (EmailStr) : An email for the recipient of the message.
+        receiver (user_id) : An id for the recipient of the message.
         session (AsyncSession) : SqlAlchemy session object.
 
     Returns:
@@ -133,7 +225,7 @@ async def get_sender_receiver_messages(
                 WHEN sender = :sender_id THEN "sent"
                 WHEN receiver = :sender_id THEN "received"
                 ELSE NULL
-            END as type,
+            END as status,
             media,
             creation_date
         FROM
@@ -191,11 +283,15 @@ async def create_assign_new_room(user_id: int, room_obj, session: Session):
             "message": "Make sure the room name is not empty!",
         }
         return results
+    # Check if room already exists
     room = await find_existed_room(room_obj.room_name, session)
     if not room:
+        # Room doesn't exist: do this
         if room_obj.join == 0:
+            # User wants to join a room, so create a new one
             await create_room(room_obj.room_name, room_obj.description, session)
         else:
+            # User doesn't want to join whatever room
             return {
                 "status_code": 400,
                 "message": "Room not found!",
@@ -203,6 +299,7 @@ async def create_assign_new_room(user_id: int, room_obj, session: Session):
         logger.info(f"Creating room `{room_obj.room_name}`.")
         room = await find_existed_room(room_obj.room_name, session)
         user = await find_existed_user_in_room(user_id, room.id, session)
+        # Check if user is in newly created room
         if user:
             logger.info(f"`{user_id}` has already joined this room!")
             results = {
@@ -210,6 +307,7 @@ async def create_assign_new_room(user_id: int, room_obj, session: Session):
                 "message": "You have already joined room" f"{room_obj.room_name}!",
             }
         else:
+            # Join the room
             await join_room(user_id, room.id, session, True)
             logger.info(f"Adding {user_id} to room `{room_obj.room_name}` as a member.")
             results = {
@@ -219,8 +317,11 @@ async def create_assign_new_room(user_id: int, room_obj, session: Session):
         return results
 
     else:
+        # Room already exists: Check if User is in room
         user = await find_existed_user_in_room(user_id, room.id, session)
+        print(user)
         if user and room_obj.join == 1:
+            # If user was already in the room
             if user.banned == 1:
                 logger.info(f"`{user_id}` can't join this room!")
                 results = {
@@ -233,6 +334,7 @@ async def create_assign_new_room(user_id: int, room_obj, session: Session):
                     "status_code": 400,
                     "message": "You have already joined room" f"{room_obj.room_name}!",
                 }
+            # If user was never in the room
         elif not user and room_obj.join == 1:
             await join_room(user_id, room.id, session)
             logger.info(f"Adding {user_id} to room `{room_obj.room_name}` as a member.")
@@ -372,7 +474,20 @@ async def join_room(user_id: int, room_id: int, session: Session, is_admin=False
         "creation_date": datetime.datetime.utcnow(),
     }
 
-    return session.execute(text(query), values)
+    roommembers = RoomMembers()
+    roommembers.room = room_id
+    roommembers.member = user_id
+    roommembers.banned = 0
+    if is_admin:
+        roommembers.admin = 1
+    else:
+        roommembers.admin = 0
+
+    session.add(roommembers)
+    session.commit()
+    session.refresh(roommembers)
+
+    return roommembers
 
 
 async def get_room_conversations(room_name: str, sender_id: int, session: Session):
@@ -392,17 +507,12 @@ async def get_room_conversations(room_name: str, sender_id: int, session: Sessio
                 CASE
                     WHEN messages.sender = :sender_id THEN "sent"
                     ELSE "received"
-                END as type,
+                END as status,
                 messages.media,
                 messages.creation_date,
                 users.id as id,
-                users.first_name,
-                users.last_name,
-                users.bio,
-                users.chat_status,
-                users.email,
-                users.phone_number,
-                users.profile_picture,
+                users.username,
+                users.avatar,
                 room_members.admin
             FROM
                 messages
@@ -429,17 +539,12 @@ async def get_room_conversations(room_name: str, sender_id: int, session: Sessio
                 CASE
                     WHEN messages.sender = :sender_id THEN "sent"
                     ELSE "received"
-                END as type,
+                END as status,
                 messages.media,
                 messages.creation_date,
                 users.id as id,
-                users.first_name,
-                users.last_name,
-                users.bio,
-                users.chat_status,
-                users.email,
-                users.phone_number,
-                users.profile_picture
+                users.username,
+                users.avatar
             FROM
                 messages
             LEFT JOIN
@@ -474,7 +579,6 @@ async def send_new_room_message(
             "message": "You can't send an empty message!",
         }
     room = await find_existed_room(request.room, session)
-    print(room)
     if not room:
         return {
             "status_code": 400,
