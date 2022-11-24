@@ -11,7 +11,10 @@ def create_note(db: Session, note: schemas.Note):
     """ 
     This function is used to create new note
     """
-    db_note = models.Note(title=note.title, description=note.description)
+    db_note = models.Note(title=note.title, description=note.description,
+                          created_at=note.created_at, updated_at=note
+                          
+                          )
     db.add(db_note)
     db.commit()
     db.refresh(db_note)
@@ -78,5 +81,4 @@ def get_all_notes(db: Session):
     This function return all Note if not return an empty list like this []
     """
     notes = db.query(models.Note).all()
-    print(notes)
     return notes
