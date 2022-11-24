@@ -8,6 +8,7 @@ from jose import JWTError
 # from jose import jwt
 from pydantic import ValidationError
 from sqlalchemy.orm import Session
+from api.auth.schemas import UserObjectSchema
 
 from db import models
 from db.db import SessionLocal
@@ -51,20 +52,22 @@ def verify_password(plain_password, hashed_password):
     return pwd_context.verify(plain_password, hashed_password)
 
 
-async def find_existed_user(id: str, session: Session) -> Dict[str, Any]:
+async def find_existed_user(id: str, session: Session) -> UserObjectSchema:
     print(f"{id}")
     """
-    A method to fetch a user info given an email.
+    A method to fetch a user info given an ID.
 
     Args:
-        email (EmailStr) : A given user email.
+        ID (Str) : A given user ID.
         session (AsyncSession) : SqlAlchemy session object.
 
     Returns:
         Dict[str, Any]: a dict object that contains info about a user.
     """
 
-    user: models.User = session.query(models.User).filter(models.User.id == id).first()
+    user = session.query(models.User).filter(models.User.id == id).first()
+    if user:
+        return UserObjectSchema(**user.__dict__)
     return user
 
 
