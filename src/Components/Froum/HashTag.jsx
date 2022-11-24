@@ -8,8 +8,8 @@ const HashTag = ({ForumHash}) => {
         {ForumHash.tags?.map((item, index) => (
           <div key={index}>
             <div className='border-y-2 p-2'>
-              <p className='text-blue font-[500] text-[20px]'>{item.hash}</p>
-              <p className='text-[#4F4F4F] text-[20px] '>{item.postCount}</p>
+              <p className='text-blue font-[500] text-[20px] cursor-pointer'>{item.hash}</p>
+              <p className='text-[#4F4F4F] text-[20px]  cursor-pointer'>{item.postCount}</p>
             </div>
           </div>
         ))}
@@ -20,8 +20,8 @@ const HashTag = ({ForumHash}) => {
         <p className='text-[20px] font-[700] text-[#3E3E3E] py-3 px-2 '>{ForumHash.header}</p>
         {ForumHash.tags?.map((item, index) => (
           <div key={index}>
-            <div className=' p-2 flex justify-between '>
-              <p className='text-blue font-[500] text-[16px]'>{item.hash}</p>
+            <div className=' p-2 flex justify-between  cursor-pointer'>
+              <p className='text-blue font-[500] text-[16px] '>{item.hash}</p>
               <p className='text-[#4F4F4F] text-[16px] '>{item.postCount}</p>
             </div>
           </div>
