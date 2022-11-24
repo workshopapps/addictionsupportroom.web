@@ -1,5 +1,5 @@
 from sqlalchemy import Boolean, Column, Integer, String, DateTime
-
+import datetime
 # from db.db import Base
 
 from enum import Enum
@@ -41,8 +41,19 @@ class Day(Base):
     # owner_id = Column(Integer, ForeignKey("users.id"))
 
     # owner = relationship("User", back_populates="todos")
+  
 
-
+class Rank(Base):
+    __tablename__ = "ranking"
+    id = Column(Integer, primary_key=True, index=True)
+    username = Column(String, unique=True)
+    avatar = Column(String)
+    start_date = Column(DateTime, nullable=False, default=datetime.datetime.utcnow)
+    current_date = Column(DateTime, nullable=False, default=datetime.datetime.utcnow)
+    clean_days = Column(DateTime, default=datetime.timedelta(1))
+    user = Column(ForeignKey('users.id'), index=True)
+    
+    
 class ContactusMessages(Base):
     """Table to store contact messages from users"""
 
@@ -60,6 +71,7 @@ class User(Base):
     id = Column(Integer, primary_key=True, index=True)
     username = Column(String, unique=True)
     avatar = Column(String)
+    
     hashed_password = Column(String)
     is_active = Column(Boolean, default=True)
 

@@ -18,14 +18,14 @@ const Footer = () => {
           <div>
             <p>Company</p>
             <Link to='/about'>About us</Link>
-            <Link to='/career'>Career</Link>
+            <Link to='/careers'>Career</Link>
             <Link to='/contact'>Contact us</Link>
-            <Link to='/the_team'>The Team</Link>
+            <Link to='/team'>The Team</Link>
             <Link to='/faq'>FAQs</Link>
           </div>
           <div>
             <p>Resources</p>
-            <Link to='/blog'>Blog</Link>
+            <Link to='/forum'>Forum</Link>
             <Link to='/newsletter'>Newsletter</Link>
             <Link to='/alcohol'> Alcohol Addiction</Link>
           </div>
