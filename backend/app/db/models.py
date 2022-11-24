@@ -1,4 +1,4 @@
-from sqlalchemy import Boolean, Column, Integer, String
+from sqlalchemy import Boolean, Column, Integer, String, DateTime
 
 # from db.db import Base
 
@@ -137,3 +137,13 @@ class RoomMembers(Base, CommonMixin, TimestampMixin):
     member: int = Column(ForeignKey("users.id"), index=True)
     banned: UserStatus | None = Column(Integer, index=True)
     admin: UserRole | None = Column(Integer, index=True)
+
+
+class Emergency(Base):
+
+    __tablename__ = "emergencies"
+
+    id = Column(Integer, primary_key=True, index=True)
+    name = Column(String)
+    avatar = Column(String)
+    created_at = Column(DateTime)
