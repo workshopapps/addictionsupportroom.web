@@ -19,28 +19,29 @@ from sqlalchemy.sql import (
     text,
 )
 from api.auth.schemas import (
-    UserObjectSchema,
+    UserBase,
 )
 import uuid
 from api import deps
 
 
-class ExampleService:
-    # def __init__(self, session: AsyncSession = Depends(db_session)):
-    #     self.session = session
-
-    async def get_all_examples(self, db: Session) -> list[schemas.Examples]:
-        examples = db.query(Example).all()
-
-        return examples
-
-    def create_example(self, db: Session, data) -> Example:
-        example = Example(**data.dict())
-        db.add(example)
-        db.commit()
-        db.refresh(example)
-
-        return example
+async def get_user_contacts(user_id: int, session: Session):
+    user = await deps.find_existed_user(user_id, session)
+    if user:
+        # get all contacts for each user.
+        query = """
+            SELECT
+              *
+            FROM
+              users
+        """
+        result = session.execute(text(query))
+        contacts = result.fetchall()
+        results = {"status_code": 200, "result": contacts}
+        return results
+    elif not user:
+        return {"status_code": 400, "message": "User not found!"}
+    return {"status_code": 200, "result": []}
 
 
 async def send_new_message(  # pylint: disable=R0911
@@ -195,7 +196,7 @@ async def send_new_message(  # pylint: disable=R0911
 
 
 async def get_sender_receiver_messages(
-    sender: UserObjectSchema, receiver: str, session: Session
+    sender: UserBase, receiver: str, session: Session
 ):
     print(receiver)
     print(sender.id)

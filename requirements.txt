@@ -12,3 +12,5 @@ websockets==10.4
 ujson==5.5.0
 bcrypt==4.0.1
 aioredis==2.0.1
+agora-token-builder==1.0.0
+websocket==0.2.1

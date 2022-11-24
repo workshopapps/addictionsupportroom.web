@@ -31,7 +31,7 @@ from api.communication.crud import (
     find_existed_room,
     send_new_room_message,
 )
-from api.auth.schemas import UserObjectSchema
+from api.auth.schemas import UserBase
 
 # from app.rooms.crud import (
 #     ban_user_from_room,
