@@ -7,7 +7,7 @@ const Community = ({ForumCommunity}) => {
         <p className='text-[28px] font-[700] text-[#3E3E3E] py-3 text-center '>{ForumCommunity.header}</p>
         {ForumCommunity.tags?.map((item, index) => (
           <div key={index}>
-            <div className='border-y-2 py-2 px-4 justify-between flex '>
+            <div className='border-y-2 py-2 px-4 gap-5 flex '>
               <img src={item.img} alt="img" className='w-[100px] h-[100px] ' />
               <div className=' my-auto '>
                 <p className='text-[#3E3E3E] text-[16px] '>{item.coummunity}</p>
@@ -19,7 +19,7 @@ const Community = ({ForumCommunity}) => {
         ))}
       </div>
 
-      <div className=' flex laptop:hidden bg-[#FAFAFA] mt-6'>
+      <div className=' flex laptop:hidden bg-[#FAFAFA] mt-6 justify-between'>
         <p className='text-[20px] font-[700] text-[#3E3E3E] py-3'>{ForumCommunity.header}</p>
         <select name="forum" id="forum">
         {ForumCommunity.tags?.map((item, index) => (

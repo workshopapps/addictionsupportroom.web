@@ -156,7 +156,7 @@
 }
 
 .soberpal__home-fifth__section hr {
-    border: 1px solid #204e65;
+    border: 0.5px solid #204e65;
     margin: 3rem 0 3rem 0;
 }
 
@@ -235,7 +235,7 @@
 
 .soberpal__home-fifth__section__padding hr {
     margin: 1rem 0 1rem 0;
-    border: 1px solid #000000;
+    border: 0.5px solid #000000;
 }
 
 @media screen and (max-width: 1059px) {
