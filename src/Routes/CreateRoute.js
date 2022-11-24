@@ -32,7 +32,7 @@ const CreateRoute = () => {
       <Route path='forum' element={<Forum />} />
       <Route path='terms_policy' element={<Services />} />
       <Route path='alcohol' element={<Alcohol />} />
-      <Route path='job' element={<JobApplication />} />
+      <Route path='careers/job' element={<JobApplication />} />
 
       {/* <Route path="*" element={<NotFound />} /> */}
     </Routes>
