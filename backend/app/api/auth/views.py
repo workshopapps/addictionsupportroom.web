@@ -34,7 +34,7 @@ def signup(user: schemas.UserCreate, db: Session = Depends(deps.get_db)):
 
     # Create token to authorize user to make further API
     access_token = deps.create_access_token(data={"sub": str(db_user.id)})
-    user_out = schemas.UserOut(**user.dict(), access_token=access_token)
+    user_out = schemas.UserOut(**db_user.__dict__, access_token=access_token)
     return user_out
 
 

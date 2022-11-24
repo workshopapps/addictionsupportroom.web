@@ -18,7 +18,7 @@ from api import deps
 from core import settings
 
 from api.auth.schemas import (
-    UserObjectSchema,
+    UserBase,
 )
 
 # from app.utils.dependencies import (
@@ -28,6 +28,7 @@ from api.utils.pub_sub_handlers import (
     consumer_handler,
     producer_handler,
 )
+
 
 async def redis_conn() -> str:
     """
@@ -55,6 +56,7 @@ async def redis_conn() -> str:
         "0",
         decode_responses=True,
     )
+
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)

@@ -11,6 +11,8 @@ from typing import (
     Optional,
 )
 
+from api.auth.schemas import UserObjectSchema
+
 class MessageCreate(BaseModel):
     """
     A Pydantic class that defines the message response schema for sending messages.
@@ -108,3 +110,7 @@ class RoomGetALL(BaseModel):
     messages: list[dict[str, str | datetime.datetime]]
     active: str
     creation_date: datetime.datetime
+
+class GetAllContactsResults(BaseModel):
+    status_code: int
+    result: list[UserObjectSchema]

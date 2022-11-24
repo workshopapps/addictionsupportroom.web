@@ -64,3 +64,5 @@ virtualenv==20.16.3
 watchgod==0.8.2
 websockets==10.2
 Werkzeug==2.2.2
+agora-token-builder==1.0.0
+websocket==0.2.1
