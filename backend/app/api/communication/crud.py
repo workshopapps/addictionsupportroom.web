@@ -64,6 +64,7 @@ async def send_new_message(  # pylint: disable=R0911
     Returns:
         Result: Database result.
     """
+    print("save message")
     message = Messages()
     # if request.message_type == "media":  # pylint: disable=R1705
     #     pass
@@ -170,18 +171,16 @@ async def send_new_message(  # pylint: disable=R0911
         message.sender = sender_id
         message.receiver = receiver.id
         message.content = request.content
-        message.status = 1
+        message.state = 1
         message.message_type = request.message_type
-        message.media = request.media
         message.creation_date = datetime.datetime.utcnow()
 
     else:
         message.sender = sender_id
         message.room = room_id
         message.content = request.content
-        message.status = 1
+        message.state = 1
         message.message_type = request.message_type
-        message.media = request.media
         message.creation_date = datetime.datetime.utcnow()
 
     session.add(message)
@@ -227,7 +226,8 @@ async def get_sender_receiver_messages(
                 WHEN receiver = :sender_id THEN "received"
                 ELSE NULL
             END as status,
-            media,
+            state,
+            message_type,
             creation_date
         FROM
             messages
@@ -509,7 +509,7 @@ async def get_room_conversations(room_name: str, sender_id: int, session: Sessio
                     WHEN messages.sender = :sender_id THEN "sent"
                     ELSE "received"
                 END as status,
-                messages.media,
+                messages.message_type,
                 messages.creation_date,
                 users.id as id,
                 users.username,
@@ -541,7 +541,7 @@ async def get_room_conversations(room_name: str, sender_id: int, session: Sessio
                     WHEN messages.sender = :sender_id THEN "sent"
                     ELSE "received"
                 END as status,
-                messages.media,
+                messages.message_type,
                 messages.creation_date,
                 users.id as id,
                 users.username,
@@ -594,7 +594,7 @@ async def send_new_room_message(
         }
     else:
         # create a new message
-        if request.media:
+        if not request.message_type == "text":
             results = await send_new_message(
                 sender_id, request, bin_photo, room.id, session
             )

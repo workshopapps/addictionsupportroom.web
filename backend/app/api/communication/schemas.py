@@ -13,6 +13,7 @@ from typing import (
 
 from api.auth.schemas import UserObjectSchema
 
+
 class MessageCreate(BaseModel):
     """
     A Pydantic class that defines the message response schema for sending messages.
@@ -20,8 +21,8 @@ class MessageCreate(BaseModel):
     Args:
         receiver (user_id) : The id of the message's recipient.
         content (str) : The content of the message.
-        message_type (str) : The type of the message(e.g. 'text' or 'media').
-        media (str) : A relative URL to the Deta drive.
+        message_type (str) : The type of the message(e.g. 'text' or 'audio' or 'image').
+        preview (str) : A relative URL to the Deta drive.
 
     Example:
         >>> receiver = "4"
@@ -30,11 +31,14 @@ class MessageCreate(BaseModel):
         >>> media = ""
     """
 
-    receiver: str = Field(..., example="The recipient id for this message.")
-    content: str = Field(..., example="The message text content.")
-    message_type: str = Field(..., example="Message type(e.g. 'text' or 'media')")
-    media: Optional[str] = Field(
-        ...,
+    receiver: str = Field(..., example="The recipient user_id for this message.")
+    content: str = Field(
+        ..., example="The message text content or URL to the media file."
+    )
+    message_type: str = Field(
+        ..., example="Message type(e.g. 'text' or 'audio' or 'image')."
+    )
+    preview: str | None = Field(
         example="A relative URL to the Deta drive.",
     )
 
@@ -57,10 +61,14 @@ class MessageCreateRoom(BaseModel):
     """
 
     room: str = Field(..., example="A unique room name(e.g. 'nerds'). Case Sensitive.")
-    content: str = Field(..., example="The message text content.")
-    message_type: str = Field(..., example="Message type(e.g. 'text' or 'media')")
-    media: Optional[str] = Field(
-        ..., example="A dictionary that contains media url, type..."
+    content: str = Field(
+        ..., example="The message text content or URL to the media file."
+    )
+    message_type: str = Field(
+        ..., example="Message type(e.g. 'text' or 'audio' or 'image')."
+    )
+    preview: str | None = Field(
+        example="A relative URL to the Deta drive.",
     )
 
 
@@ -75,6 +83,7 @@ class GetAllMessageResults(BaseModel):
 
     status_code: int = Field(..., example=200)
     result: List[Dict[str, Any]]
+
 
 class DeleteChatMessages(BaseModel):
     """
@@ -110,6 +119,7 @@ class RoomGetALL(BaseModel):
     messages: list[dict[str, str | datetime.datetime]]
     active: str
     creation_date: datetime.datetime
+
 
 class GetAllContactsResults(BaseModel):
     status_code: int

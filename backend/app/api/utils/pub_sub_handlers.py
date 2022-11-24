@@ -52,14 +52,14 @@ class RequestRoomObject(NamedTuple):
     room: str
     content: str
     message_type: str
-    media: str
+    # preview: str
 
 
 class RequestContactObject(NamedTuple):
     receiver: str
     content: str
     message_type: str
-    media: str
+    # media: str
 
 
 async def consumer_handler(
@@ -111,7 +111,7 @@ async def consumer_handler(
                     await connection.publish(topic, json.dumps(data, default=str))
                     await web_socket.close()
                     break
-                elif message_data.get("type", None) == "media":
+                elif message_data.get("type", None) == "image":
                     data = message_data.pop("content")
                     bin_photo = base64.b64decode(data)
                     # f.write(bin_photo)
@@ -126,11 +126,11 @@ async def consumer_handler(
                         url = await send_new_message(
                             sender_id, request, bin_photo, None, session
                         )
-                        message_data["media"] = url
+                        message_data["preview"] = url
                         message_data["content"] = ""
                         message_data.pop("preview")
                     else:
-                        pass
+                        pass  # Remove --------------------------------
                         request = RequestRoomObject(
                             topic,
                             "",
@@ -140,7 +140,7 @@ async def consumer_handler(
                         url = await send_new_room_message(
                             sender_id, request, bin_photo, session
                         )
-                        message_data["media"] = url
+                        message_data["preview"] = url
                         message_data["content"] = ""
                         message_data.pop("preview")
                     await connection.publish(
