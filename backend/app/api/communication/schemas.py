@@ -83,9 +83,9 @@ class DeleteChatMessages(BaseModel):
         contact (EmailStr) : The recipient email for the sent messages to be deleted.
     """
 
-    contact: EmailStr = Field(
+    contact: str = Field(
         ...,
-        example="The recipient email for the sent messages to be deleted.",
+        example="The recipient id for the sent messages to be deleted.",
     )
 
 
