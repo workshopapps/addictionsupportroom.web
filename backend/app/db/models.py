@@ -53,7 +53,6 @@ class ContactusMessages(Base):
     email = Column(String, nullable=False)
     message = Column(String, nullable=False)
 
-
 class User(Base):
     __tablename__ = "users"
 

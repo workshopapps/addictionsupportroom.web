@@ -13,7 +13,6 @@ router = APIRouter()
 APP_PASSWORD = "vwpoedpavesodepe"
 TEAM_EMAIL = "crankshaft3182@gmail.com"
 
-
 class Contact(BaseModel):
     name: str
     email: str

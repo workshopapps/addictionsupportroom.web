@@ -1,4 +1,6 @@
 import "./ourvalues.scss";
+import { BiUser } from "react-icons/bi";
+import ValueData from "../../Data/ValueData";
 
 const OurValues = ({prg1, heading, prg2, value}) => {
   return (

@@ -5,7 +5,6 @@ import OurValues from "../../Components/ourvalues/OurValues";
 import interview from "../../assets/interview.png";
 import Job from "../../Components/jobcontainer/Job";
 import Button from "../../UI/Button";
-import ValueData from '../../Data/ValueData';
 import AppStats from "../../Components/AppStats/Appstats";
 
 const About = () => {
@@ -45,13 +44,8 @@ const About = () => {
       </div>
 
       {/* ourvalues section */}
-      <section className="center">
-      <OurValues
-      prg1='Our values'
-      heading='How we work at soberpal'
-      prg2='Our shared values keep us connected and guide us as one team'
-      value={ValueData}
-      />
+      <section>
+        <OurValues />
       </section>
 
       {/* open postions section */}
