@@ -12,6 +12,7 @@ class Ranking(BaseModel):
     avatar: str
     start_date: datetime
     current_date: datetime
+    clean_days: str
     
     class Config:
         orm_mode = True 
