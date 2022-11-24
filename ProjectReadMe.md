@@ -37,5 +37,9 @@ create-react-app : Pandora
 react-router-dom : Pandora
 scss : Pandora
 react-icons : Pandora
+axios: Pandora
+google map: Pandora
+react-hook-form : Pandora
+yup*resolver : Pandora
 
 

@@ -20,15 +20,11 @@ const CreateRoute = () => {
   return (
     <Routes>
       <Route path='/' element={<Home/>} />
-
       <Route path='careers' element={<Career/>} />
-    
-
       <Route path='about' element={<About/>} />
       <Route path='contact' element={<Contact/>} />
       <Route path='faq' element={<Faq/>} />
       <Route path='team' element={<Team/>} />
-
       <Route path='forum' element={<Forum />} />
       <Route path='terms_policy' element={<Services />} />
       <Route path='alcohol' element={<Alcohol />} />
