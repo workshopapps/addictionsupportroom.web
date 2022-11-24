@@ -105,3 +105,12 @@ body {
 .active{
   border-bottom: 3px solid #0E8ACB;
 }
+
+.hover--effect:hover {
+  filter: brightness(.9);
+
+
+.no-list {
+  list-style-type: none;
+
+}

@@ -1,0 +1,27 @@
+{
+    "hashs" : {
+        "header": "Popular hashtags",
+        "tags": [
+            {
+                "hash": "#Breakthebottle",
+                "postCount": "280 posts",
+                "id": 1
+            },
+            {
+                "hash": "#Breakthebottle",
+                "id": 2,
+                "postCount": "280 posts"
+            },
+            {
+                "hash": "#Breakthebottle",
+                "id": 3,
+                "postCount": "280 posts"
+            },
+            {
+                "hash": "#Breakthebottle",
+                "id": 4,
+                "postCount": "280 posts"
+            }
+        ]
+    }
+}

@@ -25,7 +25,7 @@ const JobApp = () => {
             </div>
           </div>
         </div>
-        <button className="px-[10px] w-[120px] h-[56px] md:w-[190px] bg-[#0E8ACB] rounded-[8px] text-white">
+        <button className="px-[10px] w-[120px] h-[56px] md:w-[190px] bg-[#0E8ACB] rounded-[8px] text-white hover--effect">
           Apply now
         </button>
       </div>
@@ -40,11 +40,11 @@ const JobApp = () => {
         </h1>
         <ul className="text-[14px] md:text-[20px] text-[#575757] font-[400] list-disc list-inside">
           <li>
-            You will ensure that all rules of enegagement amongst users in the
+            You will ensure that all rules of engagement amongst users in the
             chat room are observed
           </li>
           <li>
-            You will ensure that all rules of enegagement amongst users in the
+            You will ensure that all rules of engagement amongst users in the
             chat room are observed
           </li>
         </ul>
@@ -80,7 +80,7 @@ const JobApp = () => {
           Please send us your Resume or LinkedIn profile at{" "}
           <a
             href="mailto:join@soberpal.com"
-            className="underline text-[#204E65]"
+            className="underline text-[#204E65] hover:text-[#204e65ba]"
           >
             join@soberpal.com
           </a>
