@@ -1,5 +1,7 @@
 .job {
     margin: 2% 20%;
+    width: auto;
+    padding: 1rem;
     & > h5 {
       text-align: left;
       font-weight: 500;
@@ -70,6 +72,21 @@
       .job__container{
         margin-left: .5rem;
         width: 25rem;
+      }
+      
+    }
+  }
+
+  @media screen and (max-width: 300px) {
+    .job {
+     display: grid;
+     justify-content: center;
+     & > h5 {
+      margin-left: .5rem;
+    }
+      .job__container{
+        margin-left: .5rem;
+        width: 18rem;
       }
       
     }
