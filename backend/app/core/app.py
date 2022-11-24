@@ -7,6 +7,8 @@ from db.models import Base
 from db.db import engine
 
 
+
+
 def get_app() -> FastAPI:
     Base.metadata.create_all(bind=engine)
 
