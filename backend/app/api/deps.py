@@ -4,10 +4,11 @@ from typing import Generator
 from fastapi import Depends, HTTPException, status
 from fastapi.security import OAuth2PasswordBearer
 from jose import JWTError
+
 # from jose import jwt
 from pydantic import ValidationError
 from sqlalchemy.orm import Session
-from api.auth.schemas import UserObjectSchema
+from api.auth.schemas import UserBase
 
 from db import models
 from db.db import SessionLocal
@@ -51,7 +52,7 @@ def verify_password(plain_password, hashed_password):
     return pwd_context.verify(plain_password, hashed_password)
 
 
-async def find_existed_user(id: str, session: Session) -> UserObjectSchema:
+async def find_existed_user(id: str, session: Session) -> UserBase:
     print(f"{id}")
     """
     A method to fetch a user info given an ID.
@@ -66,7 +67,7 @@ async def find_existed_user(id: str, session: Session) -> UserObjectSchema:
 
     user = session.query(models.User).filter(models.User.id == id).first()
     if user:
-        return UserObjectSchema(**user.__dict__)
+        return UserBase(**user.__dict__)
     return user
 
 
