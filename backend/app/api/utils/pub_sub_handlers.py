@@ -6,6 +6,7 @@ from asyncio import (
     ensure_future,
 )
 import base64
+
 from fastapi.websockets import (
     WebSocket,
 )
@@ -26,6 +27,9 @@ from api.deps import (
 )
 from api.communication.crud import (
     send_new_message,
+    find_admin_in_room,
+    find_existed_room,
+    send_new_room_message,
 )
 from api.auth.schemas import UserObjectSchema
 
@@ -77,16 +81,15 @@ async def consumer_handler(
                 "user": dict(user),
             }
         else:
-            pass
-        room = await find_existed_room(topic, session)
-        admin = await find_admin_in_room(sender_id, room.id, session)
-        data = {
-            "content": f"{user.username} is online!",
-            "room_name": topic,
-            "type": "online",
-            "user": dict(user),
-        }
-        await update_chat_status("online", user, session)
+            room = await find_existed_room(topic, session)
+            # admin = await find_admin_in_room(sender_id, room.id, session)
+            # data = {
+            #     "content": f"{user.username} is online!",
+            #     "room_name": topic,
+            #     "type": "online",
+            #     "user": dict(user),
+            # }
+            # await update_chat_status("online", user, session)
         await connection.publish(topic, json.dumps(data, default=str))
         # wait for messages
         while True:
@@ -128,18 +131,18 @@ async def consumer_handler(
                         message_data.pop("preview")
                     else:
                         pass
-                        # request = RequestRoomObject(
-                        #     topic,
-                        #     "",
-                        #     message_data["type"],
-                        #     message_data,
-                        # )
-                        # url = await send_new_room_message(
-                        #     sender_id, request, bin_photo, session
-                        # )
-                        # message_data["media"] = url
-                        # message_data["content"] = ""
-                        # message_data.pop("preview")
+                        request = RequestRoomObject(
+                            topic,
+                            "",
+                            message_data["type"],
+                            message_data,
+                        )
+                        url = await send_new_room_message(
+                            sender_id, request, bin_photo, session
+                        )
+                        message_data["media"] = url
+                        message_data["content"] = ""
+                        message_data.pop("preview")
                     await connection.publish(
                         topic, json.dumps(message_data, default=str)
                     )
@@ -194,9 +197,9 @@ async def consumer_handler(
                             message_data["type"],
                             "",
                         )
-                        # ensure_future(
-                        #     send_new_room_message(sender_id, request, None, session)
-                        # )
+                        ensure_future(
+                            send_new_room_message(sender_id, request, None, session)
+                        )
                     del request
             else:
                 logger.warning(

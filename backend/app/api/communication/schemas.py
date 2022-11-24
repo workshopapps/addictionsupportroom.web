@@ -1,5 +1,4 @@
-from datetime import datetime
-
+import datetime
 
 from pydantic import (
     BaseModel,
@@ -12,21 +11,6 @@ from typing import (
     List,
     Optional,
 )
-
-
-class Examples(BaseModel):
-    id: str | None
-    name: str
-    active: bool
-
-    class Config:
-        orm_mode = True
-
-
-class ExampleSchema(Examples):
-    created_at: datetime
-    updated_at: datetime
-
 
 class MessageCreate(BaseModel):
     """
@@ -104,3 +88,25 @@ class DeleteChatMessages(BaseModel):
         ...,
         example="The recipient email for the sent messages to be deleted.",
     )
+
+
+class RoomCreate(BaseModel):
+    join: int
+    room_name: str
+    description: str
+
+
+class RoomCreateResult(BaseModel):
+    room_name: str
+    members: list[str]
+    conversation: list[str]
+    active: str
+    creation_date: datetime.datetime
+
+
+class RoomGetALL(BaseModel):
+    room_name: str
+    members: list[dict[str, str | datetime.datetime]]
+    messages: list[dict[str, str | datetime.datetime]]
+    active: str
+    creation_date: datetime.datetime

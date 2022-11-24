@@ -2,8 +2,11 @@ from api.example.schemas import Examples, ExampleSchema
 from api.example.services import ExampleService
 from sqlalchemy.orm import Session
 from api.common.schemas import ResponseSchema
-from db.models import Example, Base
-from db.db import engine
+from .schemas import (
+    RoomCreate,
+    MessageCreateRoom
+)
+
 from fastapi import APIRouter, Depends
 
 
@@ -14,6 +17,10 @@ from .crud import (
     # get_chats_user,
     get_sender_receiver_messages,
     send_new_message,
+    create_assign_new_room,
+    get_room_conversations,
+    get_rooms_user,
+    send_new_room_message,
 )
 
 from .schemas import (
@@ -118,6 +125,7 @@ async def get_conversation(
     results = await get_sender_receiver_messages(currentUser, receiver, session)
     return results
 
+
 # @router.get("/chat/images/user/{user_id}/{uuid_val}")
 # async def get_sent_user_chat_images(user_id: int, uuid_val: str):
 #     """
@@ -137,4 +145,72 @@ async def get_conversation(
 #         )
 #     except Exception:  # pylint: disable=W0703
 #         return {"status_code": 400, "message": "Something went wrong!"}
-    
+
+
+@router.post(
+    "/room",
+    status_code=200,
+    name="room:create-join",
+    responses={
+        200: {
+            "model": ResponseSchema,
+            "description": "Return a message that indicates a user has"
+            " joined the room.",
+        },
+        400: {
+            "model": ResponseSchema,
+            "description": "Return a message that indicates if a user"
+            " has already"
+            " joined a room ",
+        },
+    },
+)
+async def create_room(
+    room: RoomCreate,
+    currentUser: UserObjectSchema = Depends(deps.get_current_user),
+    session: Session = Depends(deps.get_db),
+):
+    """
+    Create or join a room.
+    """
+    results = await create_assign_new_room(currentUser.id, room, session)
+    return results
+
+@router.get("/room/conversation", name="room:get-conversations")
+async def get_room_users_conversation(
+    room: str,
+    currentUser: UserObjectSchema = Depends(deps.get_current_user),
+    session: Session = Depends(deps.get_db),
+):
+    """
+    Get Room by room name
+    """
+    results = await get_room_conversations(room, currentUser.id, session)
+    return results
+
+
+@router.post("/room/message", name="room:send-text-message")
+async def send_room_message(
+    request: MessageCreateRoom,
+    currentUser: UserObjectSchema = Depends(deps.get_current_user),
+    session: Session = Depends(deps.get_db),
+):
+    """
+    Send a new message.
+    """
+    results = await send_new_room_message(
+        currentUser.id, request, None, session
+    )
+    return results
+
+@router.get("/rooms", status_code=200, name="rooms:get-rooms-for-user")
+async def get_rooms_for_user(
+    currentUser: UserObjectSchema = Depends(deps.get_current_user),
+    session: Session = Depends(deps.get_db),
+):
+    """
+    Fetch all the joined room for an authenticated user.
+    """
+    results = await get_rooms_user(currentUser.id, session)
+    return results
+
