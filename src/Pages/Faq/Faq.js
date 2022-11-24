@@ -56,7 +56,7 @@ const Faq = () => {
 
           <p>Do i get a personal sponser?<span>+</span></p>
           <hr className='faq__border-bottom'/>
-
+ 
           <p>How does billing work<span>+</span></p>
           <hr className='faq__border-bottom'/>
 
