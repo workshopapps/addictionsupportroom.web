@@ -3,7 +3,7 @@ from typing import Generator
 
 from fastapi import Depends, HTTPException, status
 from fastapi.security import OAuth2PasswordBearer
-from jose import JWTError
+# from jose import JWTError
 # from jose import jwt
 from pydantic import ValidationError
 from sqlalchemy.orm import Session
@@ -11,7 +11,7 @@ from api.auth.schemas import UserObjectSchema
 
 from db import models
 from db.db import SessionLocal
-from jose import jwt, JWTError
+# from jose import jwt, JWTError
 
 from typing import (
     Any,
