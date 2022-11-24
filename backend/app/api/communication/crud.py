@@ -155,7 +155,7 @@ async def send_new_message(  # pylint: disable=R0911
                 "status_code": 400,
                 "message": "You can't send an empty message!",
             }
-        receiver = await deps.find_existed_user(email=request.receiver, session=session)
+        receiver = await deps.find_existed_user(id=request.receiver, session=session)
         if not receiver:
             return {
                 "status_code": 400,
@@ -205,7 +205,7 @@ async def get_sender_receiver_messages(
 
     Args:
         sender (UserObjectSchema) : A user object schema that contains infor about a sender.
-        receiver (EmailStr) : An email for the recipient of the message.
+        receiver (user_id) : An id for the recipient of the message.
         session (AsyncSession) : SqlAlchemy session object.
 
     Returns:
@@ -225,7 +225,7 @@ async def get_sender_receiver_messages(
                 WHEN sender = :sender_id THEN "sent"
                 WHEN receiver = :sender_id THEN "received"
                 ELSE NULL
-            END as type,
+            END as status,
             media,
             creation_date
         FROM
@@ -507,7 +507,7 @@ async def get_room_conversations(room_name: str, sender_id: int, session: Sessio
                 CASE
                     WHEN messages.sender = :sender_id THEN "sent"
                     ELSE "received"
-                END as type,
+                END as status,
                 messages.media,
                 messages.creation_date,
                 users.id as id,
@@ -539,7 +539,7 @@ async def get_room_conversations(room_name: str, sender_id: int, session: Sessio
                 CASE
                     WHEN messages.sender = :sender_id THEN "sent"
                     ELSE "received"
-                END as type,
+                END as status,
                 messages.media,
                 messages.creation_date,
                 users.id as id,
