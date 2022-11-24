@@ -75,7 +75,6 @@ class GetAllMessageResults(BaseModel):
     status_code: int = Field(..., example=200)
     result: List[Dict[str, Any]]
 
-
 class DeleteChatMessages(BaseModel):
     """
     A Pydantic class that defines the message response schema for deleting messages.
