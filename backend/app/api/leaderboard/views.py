@@ -3,7 +3,6 @@ from sqlalchemy.orm import Session
 from db.models import Rank
 from fastapi import APIRouter, Depends
 from . import schemas
-
 from sqlalchemy.orm import Session
 
 from api import deps
