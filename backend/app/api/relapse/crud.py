@@ -7,6 +7,7 @@ from sqlalchemy.orm import Session
 from api.utils.mixins import Base
 from .schemas import RelapseModify
 from db.models import Relapse
+from datetime import datetime
 
 
 ModelType = TypeVar("ModelType", bound=Base)
@@ -67,6 +68,7 @@ class CRUDRelapse(CRUDBase[Relapse, RelapseModify, RelapseModify]):
         self, db: Session, *, obj_in: RelapseModify, user_id: int
     ) -> Relapse:
         obj_in_data = jsonable_encoder(obj_in)
+        obj_in_data['day'] = datetime.fromisoformat(obj_in_data['day'])
         db_obj = self.model(**obj_in_data, user=user_id)
         db.add(db_obj)
         db.commit()

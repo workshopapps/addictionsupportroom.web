@@ -67,13 +67,17 @@ class User(Base):
     # todos = relationship("Todo", back_populates="owner")
 
 class Relapse(Base):
+    __tablename__ = "relapses"
+    id = Column(Integer, primary_key=True, index=True)
     day = Column(DateTime, nullable=False, default=datetime.utcnow)
-    user = relationship("User", back_populates="Relapses")
+    user = Column(ForeignKey('users.id'), index=True)
 
 class Streak(Base):
+    __tablename__ = "streaks"
+    id = Column(Integer, primary_key=True, index=True)
     start_date = Column(DateTime, nullable=False, default=datetime.utcnow)
     current_date = Column(DateTime, nullable=False, default=datetime.utcnow)
-    user = relationship("User", back_populates="Streak", uselist=False)
+    user = Column(ForeignKey('users.id'), index=True)
 
 class MessageStatus(int, Enum):
     """

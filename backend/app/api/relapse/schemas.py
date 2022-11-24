@@ -1,9 +1,9 @@
-from typing import str
 from pydantic import BaseModel
+from datetime import datetime
 
 class RelapseBase(BaseModel):
-    day: str
+    day: datetime
 
 class RelapseModify(RelapseBase):
-    day: str
+    day: datetime
 
