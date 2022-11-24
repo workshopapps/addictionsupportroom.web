@@ -2,10 +2,7 @@ from api.example.schemas import Examples, ExampleSchema
 from api.example.services import ExampleService
 from sqlalchemy.orm import Session
 from api.common.schemas import ResponseSchema
-from .schemas import (
-    RoomCreate,
-    MessageCreateRoom
-)
+from .schemas import GetAllContactsResults, RoomCreate, MessageCreateRoom
 
 from fastapi import APIRouter, Depends
 
@@ -21,6 +18,7 @@ from .crud import (
     get_room_conversations,
     get_rooms_user,
     send_new_room_message,
+    get_user_contacts
 )
 
 from .schemas import (
@@ -30,13 +28,43 @@ from .schemas import (
 )
 
 from api.auth.schemas import (
-    UserObjectSchema,
+    UserBase,
 )
+from api.web_sockets.router import router as web_socket_router
 
 router = APIRouter()
 
+router.include_router(web_socket_router, tags=["WebSocket"])
+
+
 from fastapi import FastAPI, WebSocket, WebSocketDisconnect
 from fastapi.responses import HTMLResponse
+
+@router.get(
+    "/contacts",
+    response_model= GetAllContactsResults | ResponseSchema,
+    status_code=200,
+    name="contacts:get-all-user-contacts",
+    responses={
+        200: {
+            "model": GetAllContactsResults,
+            "description": "A list of contacts for each user.",
+        },
+        400: {
+            "model": ResponseSchema,
+            "description": "User not found.",
+        },
+    },
+)
+async def get_contacts_user(
+    currentUser: UserBase = Depends(deps.get_current_user),
+    session: Session = Depends(deps.get_db),
+):
+    """
+    Get all contacts for an authenticated user.
+    """
+    results = await get_user_contacts(currentUser.id, session)
+    return results
 
 
 @router.post(
@@ -57,9 +85,7 @@ from fastapi.responses import HTMLResponse
 )
 async def send_message(
     request: MessageCreate,
-    currentUser: UserObjectSchema = Depends(
-        deps.get_current_user
-    ),  # pylint: disable=C0103
+    currentUser: UserBase = Depends(deps.get_current_user),  # pylint: disable=C0103
     session: Session = Depends(deps.get_db),
 ):
 
@@ -99,16 +125,14 @@ async def send_message(
 )
 async def get_conversation(
     receiver: str,
-    currentUser: UserObjectSchema = Depends(
-        deps.get_current_user
-    ),  # pylint: disable=C0103
+    currentUser: UserBase = Depends(deps.get_current_user),  # pylint: disable=C0103
     session: Session = Depends(deps.get_db),
 ):
     """
     The get_conversation endpoint.
 
     Args:
-        receiver (EmailStr) : The recipient email.
+        receiver (user_id) : The recipient id.
         currentUser (UserObjectSchema): The authenticated user as the sender of the message.
         session (AsyncSession) : An autocommit sqlalchemy session object.
 
@@ -167,7 +191,7 @@ async def get_conversation(
 )
 async def create_room(
     room: RoomCreate,
-    currentUser: UserObjectSchema = Depends(deps.get_current_user),
+    currentUser: UserBase = Depends(deps.get_current_user),
     session: Session = Depends(deps.get_db),
 ):
     """
@@ -176,10 +200,11 @@ async def create_room(
     results = await create_assign_new_room(currentUser.id, room, session)
     return results
 
+
 @router.get("/room/conversation", name="room:get-conversations")
 async def get_room_users_conversation(
     room: str,
-    currentUser: UserObjectSchema = Depends(deps.get_current_user),
+    currentUser: UserBase = Depends(deps.get_current_user),
     session: Session = Depends(deps.get_db),
 ):
     """
@@ -192,20 +217,19 @@ async def get_room_users_conversation(
 @router.post("/room/message", name="room:send-text-message")
 async def send_room_message(
     request: MessageCreateRoom,
-    currentUser: UserObjectSchema = Depends(deps.get_current_user),
+    currentUser: UserBase = Depends(deps.get_current_user),
     session: Session = Depends(deps.get_db),
 ):
     """
     Send a new message.
     """
-    results = await send_new_room_message(
-        currentUser.id, request, None, session
-    )
+    results = await send_new_room_message(currentUser.id, request, None, session)
     return results
+
 
 @router.get("/rooms", status_code=200, name="rooms:get-rooms-for-user")
 async def get_rooms_for_user(
-    currentUser: UserObjectSchema = Depends(deps.get_current_user),
+    currentUser: UserBase = Depends(deps.get_current_user),
     session: Session = Depends(deps.get_db),
 ):
     """
@@ -213,4 +237,3 @@ async def get_rooms_for_user(
     """
     results = await get_rooms_user(currentUser.id, session)
     return results
-
