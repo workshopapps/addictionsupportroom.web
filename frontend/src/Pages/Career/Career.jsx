@@ -76,27 +76,27 @@ const Career = () => {
         <h1>We're looking for talented people</h1>
         <p>We're 100% remote team spread all across the world. Join us!</p>
         <div className="soberpal__career-third__section-box">
-          <button>
+          <Link to='job'>
             Senior moderator <img src={arrow} alt="arrow" />
-          </button>
-          <button>
+          </Link>
+          <Link to='job'>
             Product designer <img src={arrow} alt="arrow" />
-          </button>
-          <button>
+          </Link>
+          <Link to='job'>
             Front web developer <img src={arrow} alt="arrow" />
-          </button>
-          <button>
+          </Link>
+          <Link to='job'>
             Junior devops engineer <img src={arrow} alt="arrow" />
-          </button>
-          <button>
+          </Link>
+          <Link to='job'>
             Data analyst <img src={arrow} alt="arrow" />
-          </button>
-          <button>
+          </Link>
+          <Link to='job'>
             Ux writer <img src={arrow} alt="arrow" />
-          </button>
-          <button>
+          </Link>
+          <Link to='job'>
             Ux researcher <img src={arrow} alt="arrow" />
-          </button>
+          </Link>
         </div>
       </section>
     </div>
