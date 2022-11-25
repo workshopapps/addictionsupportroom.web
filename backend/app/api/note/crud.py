@@ -1,7 +1,7 @@
 from datetime import datetime
 from sqlalchemy.orm import Session
-from . import schemas
-from . import models
+from api.note import schemas
+from api.note import models
 from fastapi import HTTPException, status
 
 
