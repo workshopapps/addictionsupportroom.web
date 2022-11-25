@@ -7,7 +7,7 @@ from fastapi import APIRouter, Depends
 
 from api import deps
 from db.models import User
-from db.db import get_db
+from db.database import get_db
 from datetime import datetime
 
 router = APIRouter()

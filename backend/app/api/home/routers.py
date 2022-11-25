@@ -4,7 +4,7 @@ from fastapi import APIRouter, Depends
 from sqlalchemy.orm import Session
 from api.home import schemas, crud
 from db.models import Emergency, User
-from db.db import get_db
+from db.database import get_db
 from . import quotes
 from api import deps
 
