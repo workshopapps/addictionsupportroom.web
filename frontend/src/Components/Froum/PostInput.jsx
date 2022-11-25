@@ -3,7 +3,6 @@ import avatart from "../../assets/Ellipse.png"
 import Telegram from "../../assets/telegram.svg"
 import Modal from '../../Modal/Modal'
 import Input from '../../UI/Input'
-// import Modal from '../../../frontend/src/Modal/Modal'
 
 const PostInput = ({postFeed}) => {
   const [showModal, setShowModal] = useState(false)
@@ -25,7 +24,6 @@ const PostInput = ({postFeed}) => {
             />
           </button>
           {showModal && <Modal setShowModal={setShowModal} />}
-          
           <div className='hidden tablet:flex mt-4 justify-between '>
             {postFeed?.map((item) => (
               <div key={item.name} className=" cursor-pointer flex w-full  max-w-[524px] items-center ">
