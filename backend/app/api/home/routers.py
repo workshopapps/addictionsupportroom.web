@@ -1,7 +1,7 @@
 from random import random
 from fastapi import APIRouter, Depends
 from sqlalchemy.orm import Session
-from api.note import schemas, crud
+from api.home import schemas, crud
 from db.db import get_db
 from . import quotes
 
