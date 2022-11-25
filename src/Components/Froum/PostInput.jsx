@@ -13,7 +13,7 @@ const PostInput = ({postFeed}) => {
         <img src={avatart} alt="ff" className='h-[65px] w-[65px] tablet:w-[85px] tablet:h-[85px] ' />
         <div className='w-full ml-3  tablet:ml-[16px]'>
           <button
-          className='w-full'
+          className='w-full cursor-pointer'
             onClick={() => setShowModal(true)}
           >
             <Input
