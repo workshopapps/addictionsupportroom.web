@@ -19,7 +19,7 @@ def joinCall(data: Call, db: Session = Depends(deps.get_db)):
 
     token = agora.generate_token(data.id)
 
-    call_user = User.query.get(data.id)
+    call_user = db.query(User).filter(User.id == id).first()
 
     return {
         "token": token,
