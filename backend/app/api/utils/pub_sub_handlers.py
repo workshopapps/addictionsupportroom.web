@@ -3,19 +3,16 @@ from aioredis.client import (
     Redis,
 )
 from asyncio import (
-    ensure_future,
-)
+    ensure_future, )
 import base64
 
 from fastapi.websockets import (
-    WebSocket,
-)
+    WebSocket, )
 import json
 import logging
 
 from starlette.websockets import (
-    WebSocketState,
-)
+    WebSocketState, )
 from typing import (
     NamedTuple,
     Optional,
@@ -23,8 +20,7 @@ from typing import (
 from sqlalchemy.orm import Session
 
 from api.deps import (
-    find_existed_user,
-)
+    find_existed_user, )
 from api.communication.crud import (
     send_new_message,
     find_admin_in_room,
@@ -52,14 +48,14 @@ class RequestRoomObject(NamedTuple):
     room: str
     content: str
     message_type: str
-    media: str
+    preview: str
 
 
 class RequestContactObject(NamedTuple):
     receiver: str
     content: str
     message_type: str
-    media: str
+    preview: str
 
 
 async def consumer_handler(
@@ -108,29 +104,30 @@ async def consumer_handler(
                         "type": "offline",
                         "user": dict(user),
                     }
-                    await connection.publish(topic, json.dumps(data, default=str))
+                    await connection.publish(topic,
+                                             json.dumps(data, default=str))
                     await web_socket.close()
                     break
-                elif message_data.get("type", None) == "media":
+                elif message_data.get("type", None) == "image":
                     data = message_data.pop("content")
                     bin_photo = base64.b64decode(data)
                     # f.write(bin_photo)
                     if receiver_id:
-                        receiver = await find_existed_user(receiver_id, session)
+                        receiver = await find_existed_user(
+                            receiver_id, session)
                         request = RequestContactObject(
                             receiver.id,
                             "",
                             message_data["type"],
                             message_data,
                         )
-                        url = await send_new_message(
-                            sender_id, request, bin_photo, None, session
-                        )
-                        message_data["media"] = url
+                        url = await send_new_message(sender_id, request,
+                                                     bin_photo, None, session)
+                        message_data["preview"] = url
                         message_data["content"] = ""
                         message_data.pop("preview")
                     else:
-                        pass
+                        pass  # Remove --------------------------------
                         request = RequestRoomObject(
                             topic,
                             "",
@@ -138,14 +135,12 @@ async def consumer_handler(
                             message_data,
                         )
                         url = await send_new_room_message(
-                            sender_id, request, bin_photo, session
-                        )
-                        message_data["media"] = url
+                            sender_id, request, bin_photo, session)
+                        message_data["preview"] = url
                         message_data["content"] = ""
                         message_data.pop("preview")
                     await connection.publish(
-                        topic, json.dumps(message_data, default=str)
-                    )
+                        topic, json.dumps(message_data, default=str))
                     del request
                 # elif message_data.get("type", None) == "ban":
                 #     ensure_future(
@@ -177,10 +172,10 @@ async def consumer_handler(
                         f"CONSUMER RECIEVED: {json.dumps(message_data, default=str)}"  # noqa: E501
                     )
                     await connection.publish(
-                        topic, json.dumps(message_data, default=str)
-                    )
+                        topic, json.dumps(message_data, default=str))
                     if receiver_id:
-                        receiver = await find_existed_user(receiver_id, session)
+                        receiver = await find_existed_user(
+                            receiver_id, session)
                         request = RequestContactObject(
                             receiver.id,
                             message_data["content"],
@@ -188,8 +183,8 @@ async def consumer_handler(
                             "",
                         )
                         ensure_future(
-                            send_new_message(sender_id, request, None, None, session)
-                        )
+                            send_new_message(sender_id, request, None, None,
+                                             session))
                     else:
                         request = RequestRoomObject(
                             topic,
@@ -198,8 +193,8 @@ async def consumer_handler(
                             "",
                         )
                         ensure_future(
-                            send_new_room_message(sender_id, request, None, session)
-                        )
+                            send_new_room_message(sender_id, request, None,
+                                                  session))
                     del request
             else:
                 logger.warning(
@@ -214,15 +209,20 @@ async def consumer_handler(
         logger.warning("Disconnecting Websocket")
 
 
-async def producer_handler(pub_sub: PubSub, topic: str, web_socket: WebSocket) -> None:
+async def producer_handler(pub_sub: PubSub, topic: str,
+                           web_socket: WebSocket) -> None:
     await pub_sub.subscribe(topic)
     try:
         while True:
             if web_socket.application_state == WebSocketState.CONNECTED:
-                message = await pub_sub.get_message(ignore_subscribe_messages=True)
+                message = await pub_sub.get_message(
+                    ignore_subscribe_messages=True)
                 if message:
-                    logger.info(f"PRODUCER SENDING: {json.dumps(message, default=str)}")
-                    await web_socket.send_text(json.dumps(message["data"], default=str))
+                    logger.info(
+                        f"PRODUCER SENDING: {json.dumps(message, default=str)}"
+                    )
+                    await web_socket.send_text(
+                        json.dumps(message["data"], default=str))
             else:
                 logger.warning(
                     f"Websocket state: {web_socket.application_state}."  # noqa: E501

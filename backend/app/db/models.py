@@ -54,6 +54,7 @@ class ContactusMessages(Base):
     user_id = Column(String, nullable=False)
     message = Column(String, nullable=False)
 
+
 class User(Base):
     __tablename__ = "users"
 
@@ -67,9 +68,9 @@ class User(Base):
     # todos = relationship("Todo", back_populates="owner")
 
 
-class MessageStatus(int, Enum):
+class MessageState(int, Enum):
     """
-    Enum class to define a message status.
+    Enum class to define a message state.
 
     Args:
         READ (int) : A constant integer to indicate that the recipient read the message.
@@ -90,7 +91,8 @@ class Messages(Base, CommonMixin, TimestampMixin):  # pylint: disable=R0903
         receiver (int) : A user id foreign key value for the recipient of the message.
         room (int) : A room id foreign key value of the message.
         content (str) : The content of the message.
-        status (int) : The status of the message(e.g. read or not read).
+        state (int) : The status of the message(e.g. read or not read).
+        status (int) : The status of the message(e.g. sent or not recieved).
         message_type (str) : The message type(e.g. 'text' or 'media').
         media (str) : A relative URL to the location of the image on the Deta drive.
     """
@@ -104,9 +106,11 @@ class Messages(Base, CommonMixin, TimestampMixin):  # pylint: disable=R0903
     receiver: int = Column(ForeignKey("users.id"), index=True)
     room: int = Column(ForeignKey("rooms.id"), index=True, default=None)
     content: str = Column(String(1024), index=True)
-    status: int = Column(Integer, index=True, default=MessageStatus.NOT_READ.value)
-    message_type: str = Column(String(10), index=True)
-    media: str | None = Column(String(220), nullable=True)
+    status: str = Column(String(1024), index=True)
+    state: int = Column(Integer, index=True, default=MessageState.NOT_READ.value)
+    message_type: str = Column(String(20), index=True)
+    # media: str | None = Column(String(220), nullable=True)
+    # preview
 
 
 class UserStatus(int, Enum):

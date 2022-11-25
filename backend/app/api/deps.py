@@ -12,7 +12,7 @@ from api.auth.schemas import UserBase
 
 from db import models
 from db.db import SessionLocal
-# from jose import jwt, JWTError
+from jose import jwt, JWTError
 
 from typing import (
     Any,
