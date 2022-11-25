@@ -42,16 +42,6 @@ class Day(Base):
 
     # owner = relationship("User", back_populates="todos")
   
-
-class Rank(Base):
-    __tablename__ = "ranking"
-    id = Column(Integer, primary_key=True, index=True)
-    username = Column(String, unique=True)
-    avatar = Column(String)
-    start_date = Column(DateTime, nullable=False, default=datetime.datetime.utcnow)
-    current_date = Column(DateTime, nullable=False, default=datetime.datetime.utcnow)
-    clean_days = Column(DateTime, default=datetime.timedelta(1))
-    user = Column(ForeignKey('users.id'), index=True)
     
     
 class ContactusMessages(Base):
@@ -178,3 +168,15 @@ class Emergency(Base):
     name = Column(String)
     avatar = Column(String)
     created_at = Column(DateTime)
+    
+    
+class Rank(Base):
+    __tablename__ = "ranks"
+    id = Column(Integer, primary_key=True, index=True)
+    username = Column(String, unique=True)
+    avatar = Column(String)
+    start_date = Column(DateTime, nullable=False, default=datetime.datetime.utcnow())
+    current_date = Column(DateTime, nullable=False, default=datetime.datetime.utcnow())
+    clean_days = Column(String, default="0")
+    user = Column(ForeignKey('users.id'), index=True)
+    
