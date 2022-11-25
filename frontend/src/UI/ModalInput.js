@@ -13,9 +13,9 @@ const Input = ({type, placeholder, id, icon, value, onChange, }) => {
   }
   
   return (
-    <div className='flex w-full'>
+    <div className='w-full'>
       <input 
-        className='p-2 border-[2px] rounded-[4px] w-full outline-blue ' 
+        className='p-2 border-[2px] rounded-[4px] w-full' 
         type={type}
         placeholder={placeholder}  
         id={id}

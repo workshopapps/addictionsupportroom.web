@@ -1,24 +1,31 @@
 import React, { useState } from 'react'
 import avatart from "../../assets/Ellipse.png"
 import Telegram from "../../assets/telegram.svg"
+import Modal from '../../Modal/Modal'
 import Input from '../../UI/Input'
 
 const PostInput = ({postFeed}) => {
-  
+  const [showModal, setShowModal] = useState(false)
 
   return (
-    <div className='p-2 tablet:p-4 bg-[#FAFAFA] border-[2px] rounded-[16px]'>
+    <div className='p-2 tablet:p-4 shadow bg-[#FAFAFA] border-[2px] rounded-[16px]'>
       <div className='flex'>
         <img src={avatart} alt="ff" className='h-[65px] w-[65px] tablet:w-[85px] tablet:h-[85px] ' />
         <div className='w-full ml-3  tablet:ml-[16px]'>
-          <form>
+          <button
+          className='w-full cursor-pointer'
+            onClick={() => setShowModal(true)}
+          >
             <Input
               type ="text"
               placeholder="Post something to everyone"
               id="post"
               icon={Telegram}
             />
-          </form>
+          </button>
+          
+          {showModal && <Modal setShowModal={setShowModal} />}
+
           <div className='hidden tablet:flex mt-4 justify-between '>
             {postFeed?.map((item) => (
               <div key={item.name} className=" cursor-pointer flex w-full  max-w-[524px] items-center ">
