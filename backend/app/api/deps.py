@@ -19,7 +19,6 @@ from typing import (
     Dict,
 )
 
-
 # from app.core.config import settings
 # from app.db.session import SessionLocal
 
@@ -69,13 +68,32 @@ async def find_existed_user(id: str, session: Session) -> UserBase:
     return user
 
 
+async def find_existed_user_by_username(username: str,
+                                        session: Session) -> UserBase:
+    """
+    A method to fetch a user info given an username.
+    Args:
+        username (Str) : A given user username.
+        session (AsyncSession) : SqlAlchemy session object.
+    Returns:
+        Dict[str, Any]: a dict object that contains info about a user.
+    """
+
+    user = session.query(
+        models.User).filter(models.User.username == username).first()
+    if user:
+        return UserBase(**user.__dict__)
+    return user
+
+
 def authenticate_user(username, password, db):
-    user = find_existed_user(session=db, username=username)
+    # get user by username
+    user = find_existed_user_by_username(session=db, username=username)
 
     if not user:
         return False
-    if not verify_password(password, user.hashed_password):
-        return False
+    # if not verify_password(password, hashed_password):
+    #     return False
     return user
 
 
@@ -90,9 +108,8 @@ def create_access_token(data: dict):
     return {"token": encoded_jwt, "token_type": "bearer"}
 
 
-async def get_current_user(
-    db: Session = Depends(get_db), token: str = Depends(oauth2_bearer)
-):
+async def get_current_user(db: Session = Depends(get_db),
+                           token: str = Depends(oauth2_bearer)):
     try:
         payload = jwt.decode(token, SECRET_KEY, algorithms=[ALGORITHM])
         id: str = payload.get("sub")
@@ -113,7 +130,6 @@ async def get_current_user(
 #     if not crud.user.is_active(current_user):
 #         raise HTTPException(status_code=400, detail="Inactive user")
 #     return current_user
-
 
 # def get_current_active_superuser(
 #     current_user: models.User = Depends(get_current_user),

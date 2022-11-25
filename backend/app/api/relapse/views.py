@@ -13,6 +13,7 @@ from .crud import relapse, create_relapse_with_user
 router = APIRouter()
 
 auth_scheme = HTTPBearer()
+
 @router.post("/")
 async def create_relapse(
     *, db: Session = Depends(deps.get_db), relapse_in: RelapseCreate,
