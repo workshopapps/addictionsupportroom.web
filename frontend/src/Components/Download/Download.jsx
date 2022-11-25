@@ -11,7 +11,7 @@ const Download = () => {
           Join over 200+ people already growing with Soberpal.
         </p>
       </div>
-      <button className="h-[44px] w-[131px] bg-blue rounded-[8px] text-white mt-4">
+      <button className="h-[44px] w-[131px] bg-blue rounded-[8px] text-white mt-4 hover--effect">
         Download app
       </button>
     </div>

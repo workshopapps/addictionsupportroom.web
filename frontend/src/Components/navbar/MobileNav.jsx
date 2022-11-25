@@ -1,10 +1,6 @@
 import React from 'react'
-
 import {GrClose} from 'react-icons/gr'
-
-
 import {  Link } from 'react-router-dom'
-
 import { navbarList } from '../../Data/navbar'
 
 
@@ -18,9 +14,9 @@ const MobileNav = ({setIsOpen}) => {
             <GrClose/>
         </button>
           <ul className='mt-[60px]'>
-            {navbarList.navList.map(({index, page, link}) => 
+            {navbarList.navList.map(({ page, link}) => 
               <Link 
-                key={index} 
+                key={page} 
                 to={link}
                 onClick={() => setIsOpen(false)}
               >

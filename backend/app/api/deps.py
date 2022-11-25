@@ -4,7 +4,6 @@ from typing import Generator
 from fastapi import Depends, HTTPException, status
 from fastapi.security import OAuth2PasswordBearer
 from jose import JWTError
-
 # from jose import jwt
 from pydantic import ValidationError
 from sqlalchemy.orm import Session
@@ -13,12 +12,6 @@ from api.auth.schemas import UserBase
 from db import models
 from db.db import SessionLocal
 from jose import jwt, JWTError
-
-from typing import (
-    Any,
-    Dict,
-)
-
 # from app.core.config import settings
 # from app.db.session import SessionLocal
 
@@ -83,6 +76,10 @@ async def find_existed_user_by_username(username: str,
         models.User).filter(models.User.username == username).first()
     if user:
         return UserBase(**user.__dict__)
+def get_user(db, username: str):
+    user: models.User = db.query(models.User).filter(
+        models.User.username == username).first()
+  
     return user
 
 

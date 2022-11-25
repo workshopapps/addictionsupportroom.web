@@ -41,7 +41,6 @@ class Day(Base):
 
     # owner = relationship("User", back_populates="todos")
 
-
 class ContactusMessages(Base):
     """Table to store contact messages from users"""
 
@@ -51,7 +50,7 @@ class ContactusMessages(Base):
     name = Column(String, nullable=False)
     user_id = Column(String, nullable=False)
     message = Column(String, nullable=False)
-
+    
 
 class User(Base):
     __tablename__ = "users"
@@ -59,7 +58,6 @@ class User(Base):
     id = Column(Integer, primary_key=True, index=True)
     username = Column(String, unique=True)
     avatar = Column(String)
-
     hashed_password = Column(String)
     is_active = Column(Boolean, default=True)
     date_added = Column(DateTime,

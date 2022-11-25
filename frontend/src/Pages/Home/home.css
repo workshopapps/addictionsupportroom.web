@@ -63,6 +63,11 @@
     padding: 1.5rem 1rem 2rem 1rem;
     border: 1px solid #d7d7d7;
     border-radius: 16px;
+    box-shadow: 2px 2px 5px grey 2px;
+}
+
+.cards__padding:hover {
+    border: 1px solid var(--primary-500);
 }
 
 .cards__flex {
@@ -87,21 +92,33 @@
     color: var(--primary-500);
 }
 
+.icon__round:hover {
+    filter: brightness(.9);
+}
+
 .icon__padding {
     border-radius: 100%;
     background-color: var(--primary-50);
     color: var(--primary-500);
-    padding: 10px 15px 10px 15px;
+    padding: 9px
+}
+
+.icon__padding:hover {
+    filter: brightness(.9);
 }
 
 .soberpal__home-fourth__section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
     text-align: center;
     margin-top: 4rem;
     padding: 0 1rem 0 1rem;
     background-color: #fff;
 }
 
-.phone {
+.small_device {
     display: none;
 }
 
@@ -121,7 +138,7 @@
 
 .soberpal__home-fourth__section__flex {
     display: flex;
-    padding: 5rem 5rem 0 5rem;
+    padding: 5rem 2rem 0 2rem;
     text-align: left;
 }
 
@@ -150,13 +167,17 @@
 
 }
 
+.soberpal__home-fourth__section__flex button:hover {
+    filter: brightness(.9);
+}
+
 .soberpal__home-fifth__section {
     padding: 0 8rem 5rem 8rem;
     background-color: #fff;
 }
 
 .soberpal__home-fifth__section hr {
-    border: 0.5px solid #204e65;
+    border: 0.5px solid #307091;
     margin: 3rem 0 3rem 0;
 }
 
@@ -170,6 +191,10 @@
 
 .soberpal__home-fifth__section__padding {
     padding: 0 2rem 5rem 2rem;
+}
+
+.soberpal__home-fifth__section__padding2 {
+    margin: 0 1.5rem 0 1.5rem;
 }
 
 .soberpal__home-fifth__section__padding h1 {
@@ -219,10 +244,19 @@
     width: 25rem;
 }
 
-.soberpal__home-fifth__section__flex2 p {
-    font-weight: 400;
-    font-size: 1rem;
-    padding: 12px;
+.soberpal__home-fifth__section__flex2 input {
+    border: 1px solid white;
+    height: 2.5rem;
+}
+
+.soberpal__home-fifth__section__flex2 input::placeholder {
+    padding-left: 8px;
+    color: #000000;
+}
+
+.soberpal__home-fifth__section__flex2 input:focus {
+    border: 1px solid white;
+    outline: none;
 }
 
 .soberpal__home-fifth__section__flex2 button {
@@ -233,8 +267,12 @@
     margin-left: auto;
 }
 
+.soberpal__home-fifth__section__flex2 button:hover {
+    filter: brightness(.9);
+}
+
 .soberpal__home-fifth__section__padding hr {
-    margin: 1rem 0 1rem 0;
+    margin: 1.5rem 3rem 1.5rem 3rem;
     border: 0.5px solid #000000;
 }
 
@@ -305,6 +343,21 @@
     }
 }
 
+@media screen and (max-width: 730px) {
+    .soberpal__home-fifth__section {
+        padding: 0 2rem 5rem 2rem;
+    }
+
+    .soberpal__home-fifth__section__padding hr {
+        margin: 1.5rem;
+    }
+
+    .soberpal__home-fourth__section__flex {
+        display: block;
+        text-align: center;
+    }
+}
+
 
 @media screen and (max-width: 656px) {
     .soberpal__home-third__section-cards {
@@ -315,11 +368,6 @@
 
     .soberpal__home-third__section h1 {
         margin-bottom: 4rem;
-    }
-
-    .soberpal__home-fourth__section__flex {
-        display: block;
-        text-align: center;
     }
 
     .soberpal__home-fourth__section h1 {
@@ -333,19 +381,16 @@
     .soberpal__home-fourth__section p br {
         display: none;
     }
-
-    .soberpal__home-fifth__section {
-        padding: 0 2rem 5rem 2rem;
-    }
 }
 
-@media screen and (max-width: 500px) {
-    .phones {
-        display: none;
+@media screen and (max-width: 550px) {
+    .soberpal__home-fifth__section__padding {
+        padding: 0 0.5rem 5rem 0.5rem;
     }
 
-    .phone {
-        display: block;
+    .soberpal__home-fifth__section__flex1 h3 {
+        font-size: 1.1rem;
+        line-height: 2rem;
     }
 
     .soberpal__home-fifth__section {
@@ -360,10 +405,49 @@
         font-size: 1rem;
         line-height: 2.2rem;
     }
+}
+
+@media screen and (max-width: 500px) {
+    .big_device {
+        display: none;
+    }
+
+    .small_device {
+        display: block;
+    }
 
     .display_none {
         display: none;
     }
+
+    .soberpal__home-fourth__section img {
+        width: 15rem;
+        height: 25rem;
+    }
+
+    .soberpal__home-fifth__section__padding2 {
+        margin: 0 1.5rem 0 1.5rem;
+    }
+
+    /* .soberpal__home-fourth__section h1 {
+        font-size: 2rem;
+        line-height: 2.5rem;
+    }
+
+    .soberpal__home-fourth__section p {
+        font-size: 1rem;
+        line-height: 2rem;
+    }
+
+    .soberpal__home-fourth__section__flex h4 {
+        font-size: 2rem;
+        line-height: 2rem;
+    }
+
+    .soberpal__home-fourth__section__flex p {
+        font-size: 1.25rem;
+        line-height: 1.5rem;
+    } */
 }
 
 @media screen and (max-width: 471px) {
@@ -395,19 +479,53 @@
         font-size: 1.8rem;
     }
 
-    .soberpal__home-fifth__section {
-        padding: 0 1rem 5rem 1rem;
+    .soberpal__home-fifth__section__padding hr {
+        margin: 1.5rem 1rem 1.5rem 1rem;
     }
 
-    .soberpal__home-fifth__section__padding {
-        padding: 0 0 5rem 0;
+    .soberpal__home-fifth__section__padding h1 {
+        font-size: 2rem;
     }
 
-    .soberpal__home-fifth__section__flex1 h3 {
-        font-size: 1.1rem;
-        line-height: 2rem;
+    .soberpal__home-fifth__section__padding2 p {
+        font-size: .8rem;
+        line-height: 1.8rem;
     }
 }  
+
+@media screen and (max-width: 400px) {
+    /* .soberpal__home-fourth__section h1 {
+        font-size: 1.9rem;
+    }
+
+    .soberpal__home-fourth__section p {
+        font-size: .9rem;
+        line-height: 2rem;
+    }
+
+    .soberpal__home-fourth__section__flex h4 {
+        font-size: 1.9rem;
+        line-height: 2rem;
+    }
+
+    .soberpal__home-fourth__section__flex p {
+        font-size: 1.2rem;
+        line-height: 1.5rem;
+    } */
+
+    .soberpal__home-fifth__section__padding2 p {
+        font-size: .75rem;   
+    }
+
+    .soberpal__home-fifth__section__padding h1 {
+        font-size: 2rem;
+    }
+
+    .soberpal__home-fifth__section__padding p {
+        font-size: .75rem;
+        line-height: 2rem;
+    }
+}
 
 @media screen and (max-width: 360px) {
     .soberpal__home-third__section-cards p {

@@ -1,0 +1,44 @@
+.faq {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.faq h3 {
+    font-weight: 500;
+    font-size: 1.25rem;
+    line-height: 2rem;
+}
+
+.faq img {
+    margin-left: auto;
+}
+
+.ans {
+    padding: 0 1rem 0 1rem;
+}
+
+@media screen and (max-width: 471px) {
+    .faq h3 {
+        font-size: .875rem;
+        line-height: 2rem;
+    }
+
+    .ans {
+        font-size: .8rem;
+    }
+}
+
+@media screen and (max-width: 400px) {
+    .faq h3 {
+        font-size: .75rem;
+    }
+
+    .ans {
+        font-size: .75rem;
+    }
+
+    .faq img {
+        width: 1rem;
+    }
+}
