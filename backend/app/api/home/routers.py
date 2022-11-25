@@ -22,7 +22,7 @@ async def post_emotion(request):
         return (quotes.confused[random.randint(0, 2)])
 
 
-@router.get("/notes/", response_model=list[schemas.ShowNote])
+@router.get("/notes/")
 def get_all_notes(db: Session = Depends(get_db)):
     notes = crud.get_all_notes(db=db)
     return notes
@@ -37,7 +37,6 @@ def create_note(note: schemas.Note, db: Session = Depends(get_db)):
 @router.get("/notes/today")  #  response_model=list[schemas.ShowNote]
 def get_all_notes_created_today(db: Session = Depends(get_db)):
     notes = crud.get_all_notes_created_today(db=db)
-    print(notes)
     return notes
 
 
@@ -59,4 +58,4 @@ def update_note(note_id: int,
                 note: schemas.Note,
                 db: Session = Depends(get_db)):
     note = crud.update_note(db=db, note_id=note_id, note=note)
-    return note
+    return 'note'
