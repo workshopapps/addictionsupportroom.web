@@ -1,0 +1,26 @@
+version: '3'
+
+services:
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    image: addictionsupportwebbackend
+    container_name: addiction-backend
+    ports:
+      - 8000:8000
+    networks:
+      - db-net
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    image: addictionsupportwebfrontend
+    container_name: addiction-frontend
+    ports:
+      - 3000:3000
+    networks:
+      - db-net
+networks:
+  db-net:
+    driver: bridge
