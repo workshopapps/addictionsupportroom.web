@@ -1,5 +1,5 @@
-import { useState, useEffect, useRef } from "react";
-import { Wrapper, Status } from "@googlemaps/react-wrapper";
+import { useState } from "react";
+// import { Wrapper, Status } from "@googlemaps/react-wrapper";
 import "./contact.scss";
 import { GrLocation } from "react-icons/gr";
 import { BsTelephone } from "react-icons/bs";
@@ -7,34 +7,24 @@ import { BsInstagram } from "react-icons/bs";
 import { AiOutlineFacebook } from "react-icons/ai";
 import { ImTwitter } from "react-icons/im";
 import mapImg from "../../assets/Map.png";
-import Map from "../../Components/Map/Map";
+// import Map from "../../Components/Map/Map";
 // import { FormApi } from "../../API/FormApi";
 import { ThreeDots } from "react-loading-icons";
 import { useForm } from "react-hook-form";
-import { yupResolver } from "@hookform/resolvers/yup";
-import * as Yup from "yup";
 
-const validationSchema = Yup.object().shape({
-  name: Yup.string()
-    .required("fullName is required")
-    .min(6, "fullName must be at least 6 characters"),
-  email: Yup.string().required("Email is required").email("Email is invalid"),
-  message: Yup.string().required("Password is required"),
-});
 
 const Contact = () => {
-  const [formData, setFormData] = useState([]);
-
-  
+  const [formData, setFormData] = useState({});
 
   const {
     register,
     getValues,
     handleSubmit,
+    reset,
+    clearErrors,
     formState: { errors, isValid, isDirty },
     // reset,
   } = useForm({
-    resolver: yupResolver(validationSchema),
     mode: "onSubmit",
     defaultValues: {
       name: "",
@@ -44,6 +34,7 @@ const Contact = () => {
   });
 
   const [spinner, setSpinner] = useState(false);
+  const [disabled, setDisable] = useState(true);
 
   const fetchData = () => {
     fetch("https://sober-pal.herokuapp.com/api/contact", {
@@ -53,27 +44,32 @@ const Contact = () => {
         "Content-type": "application/json; charset=UTF-8",
       },
     })
-      .then((res) => {
+      .then((res) => { 
         res.json();
-        setFormData(res.body);
+        setFormData(res);
         setSpinner(false);
+     
+        // alert('Form Submitted Successfully')
       })
       .catch((err) => {
         console.log(err.message);
       });
   };
 
-  if (!isDirty && !isValid) {
-    console.log(formData, "working");
-  }
-  
-  const onSubmit = (e) => {
-   
-      fetchData();
-    
 
+  console.log(formData, "working");
+  
+
+  const onSubmit = (data) => {
+    console.log(data)
+    fetchData();
+    reset()
+    clearErrors('email' && 'message' && 'name')
+    alert("Form Submitted Successfully !!")
     console.log(getValues());
   };
+  
+   
 
   return (
     <div className="contact">
@@ -91,20 +87,20 @@ const Contact = () => {
             <div className="input__container">
               <label>Name</label>
               <input
-                style={{ borderColor: "1px solid red !important" }}
+                className={`${
+                  errors.name?.message ? "input__border" : ""
+                }`}
                 name="name"
                 type="text"
-                {...register("name", { required: true, minLength: 4 })}
+                {...register("name", { required: "Full name is required !!", minLength: {
+                  value: 6,
+                  message: "Name should be at least 6 characters!!" 
+                }})}
                 placeholder="Omowunmi Olawehinmi"
               />
-              {errors.name?.type === "required" && (
+              {errors.name?.message && (
                 <p className="alert" role="alert">
-                  Full name is required
-                </p>
-              )}
-              {errors.name?.type === "min" && (
-                <p className="alert" role="alert">
-                  Full name must be 6 characters at least
+                  {errors.name.message}
                 </p>
               )}
             </div>
@@ -115,20 +111,21 @@ const Contact = () => {
               <input
                 name="email"
                 type="text"
+                className={`${
+                  errors.email?.type === "required" || errors.email?.type === "pattern" ? "input__border" : ""
+                }`}
                 {...register("email", {
-                  required: true,
-                  pattern:"/^w+([.-]?w+)*@w+([.-]?w+)*(.w{2,3})+$/",
+                  required: "Email is required!!",
+                  pattern: {
+                    value: /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/,
+                    message: 'Email is invalid!!'
+                  },
                 })}
                 placeholder="omowunmi2022@gmail.com"
               />
-              {errors.email?.type === "required" && (
+              {errors.email?.message && (
                 <p className="alert" role="alert">
-                  Email is required
-                </p>
-              )}
-              {errors.email?.type === "pattern" && (
-                <p className="alert" role="alert">
-                  Email is invalid
+                  {errors.email.message}
                 </p>
               )}
             </div>
@@ -141,12 +138,15 @@ const Contact = () => {
                 rows="10"
                 name="message"
                 type="text"
-                {...register("message", { required: true })}
+                className={`${
+                  errors.message?.type === "required" ? "input__border" : ""
+                }`}
+                {...register("message", { required: "Message is required!!" })}
                 placeholder="Enter your message here..."
               />
-              {errors.message?.type === "required" && (
+              {errors.message?.message && (
                 <p className="alert" role="alert">
-                  Message is required
+                  {errors.message.message}
                 </p>
               )}
             </div>
@@ -154,10 +154,7 @@ const Contact = () => {
               type="submit"
               onClick={() => {
                 onSubmit();
-              }}
-
-              // disabled={!isValid  || !isDirty }
-            >
+              }}>
               {spinner ? <ThreeDots /> : "Submit"}
             </button>
           </form>
