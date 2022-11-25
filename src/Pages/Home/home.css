@@ -63,6 +63,11 @@
     padding: 1.5rem 1rem 2rem 1rem;
     border: 1px solid #d7d7d7;
     border-radius: 16px;
+    box-shadow: 2px 2px 5px grey 2px;
+}
+
+.cards__padding:hover {
+    border: 1px solid var(--primary-500);
 }
 
 .cards__flex {
@@ -87,11 +92,19 @@
     color: var(--primary-500);
 }
 
+.icon__round:hover {
+    filter: brightness(.9);
+}
+
 .icon__padding {
     border-radius: 100%;
     background-color: var(--primary-50);
     color: var(--primary-500);
-    padding: 10px 15px 10px 15px;
+    padding: 9px
+}
+
+.icon__padding:hover {
+    filter: brightness(.9);
 }
 
 .soberpal__home-fourth__section {
@@ -125,7 +138,7 @@
 
 .soberpal__home-fourth__section__flex {
     display: flex;
-    padding: 5rem 5rem 0 5rem;
+    padding: 5rem 2rem 0 2rem;
     text-align: left;
 }
 
@@ -152,6 +165,10 @@
     margin-left: auto;
     height: 2.5rem;
 
+}
+
+.soberpal__home-fourth__section__flex button:hover {
+    filter: brightness(.9);
 }
 
 .soberpal__home-fifth__section {
@@ -227,10 +244,19 @@
     width: 25rem;
 }
 
-.soberpal__home-fifth__section__flex2 p {
-    font-weight: 400;
-    font-size: 1rem;
-    padding: 12px;
+.soberpal__home-fifth__section__flex2 input {
+    border: 1px solid white;
+    height: 2.5rem;
+}
+
+.soberpal__home-fifth__section__flex2 input::placeholder {
+    padding-left: 8px;
+    color: #000000;
+}
+
+.soberpal__home-fifth__section__flex2 input:focus {
+    border: 1px solid white;
+    outline: none;
 }
 
 .soberpal__home-fifth__section__flex2 button {
@@ -239,6 +265,10 @@
     color: #fff;
     padding: 1px 3rem 1px 3rem;
     margin-left: auto;
+}
+
+.soberpal__home-fifth__section__flex2 button:hover {
+    filter: brightness(.9);
 }
 
 .soberpal__home-fifth__section__padding hr {
