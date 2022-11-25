@@ -63,11 +63,6 @@
     padding: 1.5rem 1rem 2rem 1rem;
     border: 1px solid #d7d7d7;
     border-radius: 16px;
-    box-shadow: 2px 2px 5px grey 2px;
-}
-
-.cards__padding:hover {
-    border: 1px solid var(--primary-500);
 }
 
 .cards__padding:hover {
@@ -272,10 +267,6 @@
     padding: 1px 3rem 1px 3rem;
     margin-left: auto;
     cursor: pointer;
-}
-
-.soberpal__home-fifth__section__flex2 button:hover {
-    filter: brightness(.9);
 }
 
 .soberpal__home-fifth__section__flex2 button:hover {
