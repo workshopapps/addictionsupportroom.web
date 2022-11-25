@@ -40,7 +40,7 @@ def signup(user: schemas.UserCreate, db: Session = Depends(deps.get_db)):
     return user_out
 
 
-@router.post("/token", include_in_schema=False)
+@router.post("/login")
 async def login(form_data: OAuth2PasswordRequestForm = Depends(),
                 db: Session = Depends(deps.get_db)):
 

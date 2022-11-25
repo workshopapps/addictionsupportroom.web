@@ -21,7 +21,7 @@ from api import deps
 api_router = APIRouter()
 
 
-@api_router.post("/docs/token")
+@api_router.post("/docs/token", include_in_schema=False)
 async def token(form_data: OAuth2PasswordRequestForm = Depends(),
                 db: Session = Depends(deps.get_db)):
     """
