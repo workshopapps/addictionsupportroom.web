@@ -26,4 +26,4 @@ api_router.include_router(progress_router,
                           prefix="/progress",
                           tags=["Progress"])
 api_router.include_router(contact_router, prefix="/contact", tags=["Contact"])
-api_router.include_router(relapse_router, prefix="/relapse", tags=["relapse"])
+#api_router.include_router(relapse_router, prefix="/relapse", tags=["relapse"])

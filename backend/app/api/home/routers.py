@@ -1,9 +1,12 @@
-from random import random
+import datetime
+import random
 from fastapi import APIRouter, Depends
 from sqlalchemy.orm import Session
 from api.home import schemas, crud
+from db.models import Emergency, User
 from db.db import get_db
 from . import quotes
+from api import deps
 
 router = APIRouter()
 
@@ -20,6 +23,24 @@ async def post_emotion(request):
         return (quotes.angry[random.randint(0, 2)])
     else:
         return (quotes.confused[random.randint(0, 2)])
+
+
+@router.post("/relapse")
+def about_to_relapse(currentUser: User = Depends(deps.get_current_user),
+                     db: Session = Depends(deps.get_db)):
+
+    #Add the user to the emergency database
+    try:
+        add_emergency = Emergency(name=currentUser.username,
+                                  avatar=currentUser.avatar,
+                                  created_at=datetime.datetime.utcnow())
+        db.add(add_emergency)
+        db.commit()
+    except Exception as e:
+        print(e.args)
+        return {"error": "internal server error. try again later."}
+
+    return {"success": "keep calm. someone will reach out soon."}
 
 
 @router.get("/notes/")
@@ -53,9 +74,10 @@ def delete_note(note_id: int, db: Session = Depends(get_db)):
     return note
 
 
-@router.put("/notes/update/{note_id}")
-def update_note(note_id: int,
-                note: schemas.Note,
-                db: Session = Depends(get_db)):
-    note = crud.update_note(db=db, note_id=note_id, note=note)
-    return 'note'
+# TODO: fix this
+# @router.put("/notes/update/{note_id}")
+# def update_note(note_id: int,
+#                 note: schemas.Note,
+#                 db: Session = Depends(get_db)):
+#     note = crud.update_note(db=db, note_id=note_id, note=note)
+#     return 'note'

@@ -19,7 +19,6 @@ from api.utils.mixins import (
     CommonMixin,
     TimestampMixin,
 )
-
 """Example"""
 
 
@@ -41,9 +40,8 @@ class Day(Base):
     # owner_id = Column(Integer, ForeignKey("users.id"))
 
     # owner = relationship("User", back_populates="todos")
-  
-    
-    
+
+
 class ContactusMessages(Base):
     """Table to store contact messages from users"""
 
@@ -61,12 +59,15 @@ class User(Base):
     id = Column(Integer, primary_key=True, index=True)
     username = Column(String, unique=True)
     avatar = Column(String)
-    
+
     hashed_password = Column(String)
     is_active = Column(Boolean, default=True)
-    date_added = Column(DateTime, default=datetime.datetime.utcnow, nullable=False)
+    date_added = Column(DateTime,
+                        default=datetime.datetime.utcnow,
+                        nullable=False)
 
     # todos = relationship("Todo", back_populates="owner")
+
 
 class Relapse(Base):
     __tablename__ = "relapses"
@@ -76,12 +77,14 @@ class Relapse(Base):
     year = Column(Integer, nullable=False)
     user = Column(ForeignKey('users.id'), index=True)
 
+
 # class Streak(Base):
 #     __tablename__ = "streaks"
 #     id = Column(Integer, primary_key=True, index=True)
 #     start_date = Column(DateTime, nullable=False, default=datetime.utcnow)
 #     current_date = Column(DateTime, nullable=False, default=datetime.utcnow)
 #     user = Column(ForeignKey('users.id'), index=True)
+
 
 class MessageState(int, Enum):
     """
@@ -122,7 +125,9 @@ class Messages(Base, CommonMixin, TimestampMixin):  # pylint: disable=R0903
     room: int = Column(ForeignKey("rooms.id"), index=True, default=None)
     content: str = Column(String(1024), index=True)
     status: str = Column(String(1024), index=True)
-    state: int = Column(Integer, index=True, default=MessageState.NOT_READ.value)
+    state: int = Column(Integer,
+                        index=True,
+                        default=MessageState.NOT_READ.value)
     message_type: str = Column(String(20), index=True)
     # media: str | None = Column(String(220), nullable=True)
     # preview
@@ -168,15 +173,18 @@ class Emergency(Base):
     name = Column(String)
     avatar = Column(String)
     created_at = Column(DateTime)
-    
-    
+
+
 class Rank(Base):
     __tablename__ = "ranks"
     id = Column(Integer, primary_key=True, index=True)
     username = Column(String, unique=True)
     avatar = Column(String)
-    start_date = Column(DateTime, nullable=False, default=datetime.datetime.utcnow())
-    current_date = Column(DateTime, nullable=False, default=datetime.datetime.utcnow())
+    start_date = Column(DateTime,
+                        nullable=False,
+                        default=datetime.datetime.utcnow())
+    current_date = Column(DateTime,
+                          nullable=False,
+                          default=datetime.datetime.utcnow())
     clean_days = Column(String, default="0")
     user = Column(ForeignKey('users.id'), index=True)
-    

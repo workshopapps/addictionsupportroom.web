@@ -25,7 +25,8 @@ def signup(user: schemas.UserCreate, db: Session = Depends(deps.get_db)):
         db.add(db_user)
         db.commit()
         db.refresh(db_user)
-    except Exception:
+    except Exception as ex:
+        print(ex.args)
         raise HTTPException(
             status_code=status.HTTP_400_BAD_REQUEST,
             detail="Username already exists",
@@ -57,7 +58,6 @@ def signup(user: schemas.UserCreate, db: Session = Depends(deps.get_db)):
 # ) -> list[Example]:
 #     example_service = ExampleService()
 #     return await example_service.get_all_examples(db=db)
-
 
 # @router.post("/", response_model=ExampleSchema)
 # async def create_example(
