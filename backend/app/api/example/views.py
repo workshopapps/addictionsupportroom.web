@@ -2,7 +2,7 @@ from api.example.schemas import Examples, ExampleSchema
 from api.example.services import ExampleService
 from sqlalchemy.orm import Session
 from db.models import Example, Base
-from db.db import engine
+from db.database import engine
 from fastapi import APIRouter, Depends
 
 from api import deps

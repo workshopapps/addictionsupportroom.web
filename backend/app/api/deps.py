@@ -7,7 +7,7 @@ from pydantic import ValidationError
 from sqlalchemy.orm import Session
 
 # from app import models, schemas
-from db.db import SessionLocal
+from db.database import SessionLocal
 # from app.core.config import settings
 # from app.db.session import SessionLocal
 
@@ -16,7 +16,7 @@ from db.db import SessionLocal
 # )
 
 
-def get_db() -> Generator:
+def get_db():
     try:
         db = SessionLocal()
         yield db

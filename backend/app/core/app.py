@@ -3,7 +3,7 @@ from fastapi import FastAPI
 from fastapi.responses import UJSONResponse
 
 from db.models import Base
-from db.db import engine
+from db.database import engine
 
 
 def get_app() -> FastAPI:

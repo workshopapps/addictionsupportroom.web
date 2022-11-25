@@ -1,13 +1,12 @@
-from api.example.schemas import Examples, ExampleSchema
-from api.example.services import ExampleService
 from sqlalchemy.orm import Session
-from db.models import Day
+#from db.models import Day
 from fastapi import APIRouter, Depends
 from . import schemas
-
+from db.database import engine, SessionLocal
 from sqlalchemy.orm import Session
+from db.models import Day
+from db import models
 
-from api import deps
 
 router = APIRouter()
 
@@ -28,23 +27,37 @@ router = APIRouter()
 #     example_service = ExampleService()
 #     example = example_service.create_example(db=db, data=data)
 #     return example
+models.Base.metadata.create_all(engine)
 
-@router.post("/calender/days/", response_model=schemas.Day)
-async def create_example(
-    data: schemas.Day,
-    db: Session = Depends(deps.get_db),
-):
-    example = Day()
-    example.day_id = data.day_id
-    example.bottles = data.bottles
-    example.marked = data.marked
+def get_db():
+    db = SessionLocal()
+    try:
+        yield db
+    finally:
+        db.close()
 
-    db.add(example)
+
+@router.post("/calender/days/")
+async def how_many_bottles(request: schemas.Day, db: Session = Depends(get_db)):
+    new_day = Day(date=request.date, bottles=request.bottles)
+    payload = {}
+    if new_day.bottles > 0:
+        payload["marked"] = False
+        new_day.marked = False
+
+    else:
+        payload["marked"] = True
+        new_day.marked = True
+
+    db.add(new_day)
     db.commit()
-    db.refresh(example)
+    db.refresh(new_day)
+    return(payload)
 
-    return example
-
+@router.get("/calender/days/") #to get all the dates and their responses
+def all(db:Session = Depends(get_db)):
+	days = db.query(models.Day).all()
+	return days
 # @router.post("/calender/days/")  # , response_model=schemas.Day)
 # async def mark_a_day(
 #     day: schemas.Day,
