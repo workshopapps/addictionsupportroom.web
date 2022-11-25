@@ -4,6 +4,9 @@ from sys import modules
 from pydantic import BaseSettings
 
 BASE_DIR = Path(__file__).parent.resolve()
+from aioredis import (
+    from_url,
+)
 
 
 class Settings(BaseSettings):
@@ -24,8 +27,21 @@ class Settings(BaseSettings):
     DB_PASS: str = "admin123!"
     DB_BASE: str = "addictionsupportroom"
     DB_ECHO: bool = False
+    REDIS_HOST: str = "redis-18482.c232.us-east-1-2.ec2.cloud.redislabs.com"  # os.getenv("REDIS_HOST")
+    REDIS_PORT: str = 18482  # os.getenv("REDIS_PORT")
+    REDIS_USERNAME: str = "default"  # os.getenv("REDIS_USERNAME")
+    REDIS_PASSWORD: str = (
+        "sEovbKUESFKny4fvg4IgzOIcdLwpZ6EZ"  # os.getenv("REDIS_PASSWORD")
+    )
 
-    'mysql+asyncmy://root:admin123!@localhost:3306/addictionsupportroom'
+    #   import redis
+
+    # r = redis.Redis(
+    #   host='redis-18482.c232.us-east-1-2.ec2.cloud.redislabs.com',
+    #   port=18482,
+    #   password='sEovbKUESFKny4fvg4IgzOIcdLwpZ6EZ')
+
+    "mysql+asyncmy://root:admin123!@localhost:3306/addictionsupportroom"
 
     @property
     def BASE_URL(self) -> str:
@@ -50,6 +66,31 @@ class Settings(BaseSettings):
                 "env": "BASE_URL",
             },
         }
+
+    async def redis_conn(self) -> str:
+        """
+        Assemble Redis URL from self.
+
+        Args:
+            self ( _obj_ ) : object reference.
+
+        Returns:
+            str: The assembled Redis host URL.
+        """
+
+        return await from_url(
+            "redis://"
+            + self.REDIS_USERNAME
+            + ":"
+            + self.REDIS_PASSWORD
+            + "@"
+            + self.REDIS_HOST
+            + ":"
+            + self.REDIS_PORT
+            + "/"
+            "0",
+            decode_responses=True,
+        )
 
 
 class TestSettings(Settings):
