@@ -31,7 +31,7 @@ const Contact = () => {
     register,
     getValues,
     handleSubmit,
-    formState: { errors, isValid, isDirty },
+    formState: { resetField, errors, isValid, isDirty },
     // reset,
   } = useForm({
     resolver: yupResolver(validationSchema),
@@ -68,7 +68,6 @@ const Contact = () => {
   }
   
   const onSubmit = (e) => {
-   
       fetchData();
     
 
@@ -91,7 +90,7 @@ const Contact = () => {
             <div className="input__container">
               <label>Name</label>
               <input
-                style={{ borderColor: "1px solid red !important" }}
+                className={`${errors.name?.type === 'required' ? '.input__border': ''}`}
                 name="name"
                 type="text"
                 {...register("name", { required: true, minLength: 4 })}

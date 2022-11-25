@@ -51,6 +51,11 @@
             margin-bottom: 0.3rem;
             margin-top: 0.8rem;
           }
+          input, .input__border{
+            &:focus{
+              outline: 1px solid red;
+            }
+          }
           input {
             padding-left: 0.5rem;
             height: 3.6rem;
@@ -60,7 +65,7 @@
             color:black;
             background: none;
             &:focus {
-              outline: none;
+              outline:1px solid #9eb3bc;
               color: black;
             }
             &::placeholder {
@@ -161,7 +166,6 @@
                 filter: brightness(.8);
                 
               }
-              // font-size: 1rem;
             }
           }
         }
@@ -170,6 +174,11 @@
         margin-top: 3rem;
         width: 25rem;
         height: 20rem;
+        &:hover{
+          cursor: pointer;
+          transform: scale(1.1);
+          transition: all 1s ease-in-out;
+        }
       }
     }
   }
