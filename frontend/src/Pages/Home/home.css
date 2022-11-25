@@ -138,8 +138,10 @@
 
 .soberpal__home-fourth__section__flex {
     display: flex;
-    padding: 5rem 2rem 0 2rem;
+    justify-content: flex-start;
+    padding: 5rem 0rem 0 0rem;
     text-align: left;
+    width: 95%;
 }
 
 .soberpal__home-fourth__section__flex h4 {
@@ -337,7 +339,7 @@
     }
 
     .soberpal__home-fourth__section__flex {
-        padding: 5rem 2rem 0 2rem ;
+        padding: 5rem 0rem 0 0rem ;
     }
 
     .soberpal__home-fifth__section {
