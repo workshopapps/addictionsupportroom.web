@@ -1,7 +1,7 @@
 from sqlalchemy import Boolean, Column, Integer, String, DateTime
 import datetime
 # from db.db import Base
-
+import datetime
 from enum import Enum
 from sqlalchemy import (
     Column,
@@ -64,9 +64,24 @@ class User(Base):
     
     hashed_password = Column(String)
     is_active = Column(Boolean, default=True)
+    date_added = Column(DateTime, default=datetime.datetime.utcnow, nullable=False)
 
     # todos = relationship("Todo", back_populates="owner")
 
+class Relapse(Base):
+    __tablename__ = "relapses"
+    id = Column(Integer, primary_key=True, index=True)
+    day = Column(Integer, nullable=False)
+    month = Column(Integer, nullable=False)
+    year = Column(Integer, nullable=False)
+    user = Column(ForeignKey('users.id'), index=True)
+
+# class Streak(Base):
+#     __tablename__ = "streaks"
+#     id = Column(Integer, primary_key=True, index=True)
+#     start_date = Column(DateTime, nullable=False, default=datetime.utcnow)
+#     current_date = Column(DateTime, nullable=False, default=datetime.utcnow)
+#     user = Column(ForeignKey('users.id'), index=True)
 
 class MessageState(int, Enum):
     """
