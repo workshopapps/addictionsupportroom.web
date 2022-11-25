@@ -30,8 +30,8 @@ async def token(form_data: OAuth2PasswordRequestForm = Depends(),
     Returns:
         UserOut: return a UserOut schema with a token object.
     """
-
-    return await login(form_data, db)
+    val = await login(form_data, db)
+    return {"access_token": val['token'], "token_type": "bearer"}
 
 
 api_router.include_router(auth_router, prefix="/auth", tags=["Auth"])

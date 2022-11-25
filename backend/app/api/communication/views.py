@@ -6,7 +6,6 @@ from .schemas import GetAllContactsResults, RoomCreate, MessageCreateRoom
 
 from fastapi import APIRouter, Depends
 
-
 from api import deps
 from typing import List
 from .crud import (
@@ -18,8 +17,7 @@ from .crud import (
     get_room_conversations,
     get_rooms_user,
     send_new_room_message,
-    get_user_contacts
-)
+    get_user_contacts)
 
 from .schemas import (
     DeleteChatMessages,
@@ -28,21 +26,20 @@ from .schemas import (
 )
 
 from api.auth.schemas import (
-    UserBase,
-)
+    UserBase, )
 from api.web_sockets.router import router as web_socket_router
 
 router = APIRouter()
 
 router.include_router(web_socket_router, tags=["WebSocket"])
 
-
 from fastapi import FastAPI, WebSocket, WebSocketDisconnect
 from fastapi.responses import HTMLResponse
 
+
 @router.get(
     "/contacts",
-    response_model= GetAllContactsResults | ResponseSchema,
+    response_model=GetAllContactsResults | ResponseSchema,
     status_code=200,
     name="contacts:get-all-user-contacts",
     responses={
@@ -57,8 +54,8 @@ from fastapi.responses import HTMLResponse
     },
 )
 async def get_contacts_user(
-    currentUser: UserBase = Depends(deps.get_current_user),
-    session: Session = Depends(deps.get_db),
+        currentUser: UserBase = Depends(deps.get_current_user),
+        session: Session = Depends(deps.get_db),
 ):
     """
     Get all contacts for an authenticated user.
@@ -84,11 +81,10 @@ async def get_contacts_user(
     },
 )
 async def send_message(
-    request: MessageCreate,
-    currentUser: UserBase = Depends(deps.get_current_user),  # pylint: disable=C0103
-    session: Session = Depends(deps.get_db),
+        request: MessageCreate,
+        currentUser: UserBase = Depends(deps.get_current_user),  # pylint: disable=C0103
+        session: Session = Depends(deps.get_db),
 ):
-
     """
     The send_message endpoint.
 
@@ -107,7 +103,8 @@ async def send_message(
     #     "data": currentUser,
     # }
     # return results
-    results = await send_new_message(currentUser.id, request, None, None, session)
+    results = await send_new_message(currentUser.id, request, None, None,
+                                     session)
     return results
 
 
@@ -124,9 +121,9 @@ async def send_message(
     },
 )
 async def get_conversation(
-    receiver: str,
-    currentUser: UserBase = Depends(deps.get_current_user),  # pylint: disable=C0103
-    session: Session = Depends(deps.get_db),
+        receiver: str,
+        currentUser: UserBase = Depends(deps.get_current_user),  # pylint: disable=C0103
+        session: Session = Depends(deps.get_db),
 ):
     """
     The get_conversation endpoint.
@@ -146,7 +143,8 @@ async def get_conversation(
     #     "data": currentUser,
     # }
     # return results
-    results = await get_sender_receiver_messages(currentUser, receiver, session)
+    results = await get_sender_receiver_messages(currentUser, receiver,
+                                                 session)
     return results
 
 
@@ -177,22 +175,26 @@ async def get_conversation(
     name="room:create-join",
     responses={
         200: {
-            "model": ResponseSchema,
-            "description": "Return a message that indicates a user has"
+            "model":
+            ResponseSchema,
+            "description":
+            "Return a message that indicates a user has"
             " joined the room.",
         },
         400: {
-            "model": ResponseSchema,
-            "description": "Return a message that indicates if a user"
+            "model":
+            ResponseSchema,
+            "description":
+            "Return a message that indicates if a user"
             " has already"
             " joined a room ",
         },
     },
 )
 async def create_room(
-    room: RoomCreate,
-    currentUser: UserBase = Depends(deps.get_current_user),
-    session: Session = Depends(deps.get_db),
+        room: RoomCreate,
+        currentUser: UserBase = Depends(deps.get_current_user),
+        session: Session = Depends(deps.get_db),
 ):
     """
     Create or join a room.
@@ -203,9 +205,9 @@ async def create_room(
 
 @router.get("/room/conversation", name="room:get-conversations")
 async def get_room_users_conversation(
-    room: str,
-    currentUser: UserBase = Depends(deps.get_current_user),
-    session: Session = Depends(deps.get_db),
+        room: str,
+        currentUser: UserBase = Depends(deps.get_current_user),
+        session: Session = Depends(deps.get_db),
 ):
     """
     Get Room by room name
@@ -216,21 +218,22 @@ async def get_room_users_conversation(
 
 @router.post("/room/message", name="room:send-text-message")
 async def send_room_message(
-    request: MessageCreateRoom,
-    currentUser: UserBase = Depends(deps.get_current_user),
-    session: Session = Depends(deps.get_db),
+        request: MessageCreateRoom,
+        currentUser: UserBase = Depends(deps.get_current_user),
+        session: Session = Depends(deps.get_db),
 ):
     """
     Send a new message.
     """
-    results = await send_new_room_message(currentUser.id, request, None, session)
+    results = await send_new_room_message(currentUser.id, request, None,
+                                          session)
     return results
 
 
 @router.get("/rooms", status_code=200, name="rooms:get-rooms-for-user")
 async def get_rooms_for_user(
-    currentUser: UserBase = Depends(deps.get_current_user),
-    session: Session = Depends(deps.get_db),
+        currentUser: UserBase = Depends(deps.get_current_user),
+        session: Session = Depends(deps.get_db),
 ):
     """
     Fetch all the joined room for an authenticated user.

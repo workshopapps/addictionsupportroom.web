@@ -56,8 +56,7 @@ async def login(form_data: OAuth2PasswordRequestForm = Depends(),
     # Create token to authorize user to make further API
     access_token = deps.create_access_token(data={"sub": str(db_user.id)})
     user_out = schemas.UserOut(**db_user.__dict__, access_token=access_token)
-
-    return user_out
+    return access_token
 
 
 # @router.post("/login")

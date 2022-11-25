@@ -76,10 +76,12 @@ async def find_existed_user_by_username(username: str,
         models.User).filter(models.User.username == username).first()
     if user:
         return UserBase(**user.__dict__)
+
+
 def get_user(db, username: str):
-    user: models.User = db.query(models.User).filter(
-        models.User.username == username).first()
-  
+    user: models.User = db.query(
+        models.User).filter(models.User.username == username).first()
+
     return user
 
 
@@ -107,6 +109,7 @@ def create_access_token(data: dict):
 
 async def get_current_user(db: Session = Depends(get_db),
                            token: str = Depends(oauth2_bearer)):
+    print(token)
     try:
         payload = jwt.decode(token, SECRET_KEY, algorithms=[ALGORITHM])
         id: str = payload.get("sub")
