@@ -1,14 +1,28 @@
+from random import random
 from fastapi import APIRouter, Depends
 from . import crud
 from sqlalchemy.orm import Session
 from . import schemas
 from db.db import get_db
+from . import quotes
 
 
 
 router = APIRouter()
 
 
+@router.post("/emotions")
+async def post_emotion(request):
+    if request == "happy":
+        return (quotes.happy[random.randint(0, 2)])
+    elif request == "sober":
+        return (quotes.sober[random.randint(0, 2)])
+    elif request == "defeated":
+        return (quotes.defeated[random.randint(0, 2)])
+    elif request == "angry":
+        return (quotes.angry[random.randint(0, 2)])
+    else:
+        return (quotes.confused[random.randint(0, 2)])
 
 @router.get("/api/notes/")
 def get_all_notes(db: Session=Depends(get_db)):
@@ -49,5 +63,3 @@ def delete_note(note_id: int, db: Session=Depends(get_db)):
 def update_note(note_id: int, note: schemas.Note, db: Session=Depends(get_db)):
     note = crud.update_note(db=db, note_id=note_id, note=note)
     return note
-
-
