@@ -16,7 +16,7 @@ import "./home.css";
 const Home = () => {
   const size = 40;
 
-  return (
+  return ( 
     <div className="soberpal__home">
       <section className="soberpal__home-first__section">
         <h1>The alcohol rehabilitation support you need.</h1>
@@ -73,7 +73,7 @@ const Home = () => {
 
           <div className="cards__padding">
             <div className="cards__flex">
-              <TiFlashOutline size={50} className="icon__padding" />
+              <TiFlashOutline size={45} className="icon__padding" />
               <h3>We provide the support you need</h3>
             </div>
             <p>
@@ -155,7 +155,7 @@ const Home = () => {
         <p className="display_none">Don't find answer to your question?</p>
         <div className="soberpal__home-fifth__section__flexy">
           <div className="soberpal__home-fifth__section__flex2">
-            <p>Ask us anything</p>
+            <input placeholder="Ask us anything"/>
             <button>send</button>
           </div>
         </div>
