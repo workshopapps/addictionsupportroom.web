@@ -23,7 +23,9 @@ const PostInput = ({postFeed}) => {
               icon={Telegram}
             />
           </button>
+          
           {showModal && <Modal setShowModal={setShowModal} />}
+
           <div className='hidden tablet:flex mt-4 justify-between '>
             {postFeed?.map((item) => (
               <div key={item.name} className=" cursor-pointer flex w-full  max-w-[524px] items-center ">
