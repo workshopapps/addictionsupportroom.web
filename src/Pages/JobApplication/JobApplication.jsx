@@ -44,8 +44,8 @@ const JobApp = () => {
             chat room are observed
           </li>
           <li>
-            You will ensure that all rules of engagement amongst users in the
-            chat room are observed
+            You will ensure that user’s complaints are promptly attended to and
+            resolved.
           </li>
         </ul>
         <h1 className="mt-5 text-[16px] md:text-[22px] font-[500] text-[#575757]">
@@ -57,8 +57,8 @@ const JobApp = () => {
             best.
           </li>
           <li>
-            We need someone who shares our values and is ready to put in their
-            best.
+            You will ensure that user’s complaints are promptly attended to and
+            resolved.
           </li>
         </ul>
         <h1 className="mt-5 text-[16px] md:text-[22px] font-[500] text-[#575757]">
