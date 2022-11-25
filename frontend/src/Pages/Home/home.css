@@ -70,6 +70,11 @@
     border: 1px solid var(--primary-500);
 }
 
+.cards__padding:hover {
+    border: 1px solid var(--primary-500);
+    box-shadow: 2px 2px 5px #fff 2px;
+}
+
 .cards__flex {
     display: flex;
     justify-content: flex-start;
@@ -164,6 +169,7 @@
     font-size: 1rem;
     margin-left: auto;
     height: 2.5rem;
+    cursor: pointer;
 
 }
 
@@ -265,6 +271,11 @@
     color: #fff;
     padding: 1px 3rem 1px 3rem;
     margin-left: auto;
+    cursor: pointer;
+}
+
+.soberpal__home-fifth__section__flex2 button:hover {
+    filter: brightness(.9);
 }
 
 .soberpal__home-fifth__section__flex2 button:hover {

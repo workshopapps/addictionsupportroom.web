@@ -1,8 +1,9 @@
 import React, { useState } from 'react'
 import avatart from "../../assets/Ellipse.png"
 import Telegram from "../../assets/telegram.svg"
+import Modal from '../../Modal/Modal'
 import Input from '../../UI/Input'
-import Modal from '../modal/Modal'
+// import Modal from '../../../frontend/src/Modal/Modal'
 
 const PostInput = ({postFeed}) => {
   const [showModal, setShowModal] = useState(false)

@@ -28,7 +28,7 @@ class Day(Base):
     # owner_id = Column(Integer, ForeignKey("users.id"))
 
     # owner = relationship("User", back_populates="todos")
-
+    
 
 class Messages(Base):
     """ Table to store contact messages from users"""
@@ -36,15 +36,19 @@ class Messages(Base):
     __tablename__ = "messages"
 
     id = Column(Integer, autoincrement=True, primary_key=True, index=True)
-    username = Column(String, nullable=False)
+    name = Column(String, nullable=False)
+    email = Column(String, nullable=False)
     message = Column(String, nullable=False)
+    
 
-class Quote(Base):
-    """ Table for storing quotes"""
+class User(Base):
+    __tablename__ = "users"
 
-    __tablename__ = "quotes"
+    id = Column(Integer, primary_key=True, index=True)
+    username = Column(String, unique=True)
+    avatar = Column(String)
+    hashed_password = Column(String)
+    is_active = Column(Boolean, default=True)
 
-    id = Column(Integer, autoincrement=True, primary_key=True, index=True)
-    mood = Column(String, nullable=False)
-    quote = Column(String, nullable=False)
-
+    # todos = relationship("Todo", back_populates="owner")
+   
