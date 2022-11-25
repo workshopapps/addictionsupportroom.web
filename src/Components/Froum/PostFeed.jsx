@@ -40,10 +40,10 @@ const PostFeed = ({posts}) => {
             </div>
           </div>
           <Input
-            type ="text"
-            placeholder="Post something to everyone"
-            id="post"
-            icon={Telegram}
+              type ="text"
+              placeholder="Post something to everyone"
+              id="post"
+              icon={Telegram}
           />
 
           {item.replies?.map((item, index) => (

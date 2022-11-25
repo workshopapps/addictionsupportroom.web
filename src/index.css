@@ -114,10 +114,3 @@ body {
   list-style-type: none;
 
 }
-
-.post-btn:disabled{
-  background-color: white;
-}
-.post-btn:enabled{
-  background-color: blue;
-}
