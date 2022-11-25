@@ -12,7 +12,7 @@ class NewEmergency(BaseModel):
     username: str
 
 
-@router.get("/")
+@router.get("/emergencies")
 def all_emergencies():
     #return a list of all existing emergencies
     emergencies = list(Emergency.query.all())
@@ -20,7 +20,7 @@ def all_emergencies():
     return emergencies
 
 
-@router.post("/")
+@router.post("/emergencies")
 def new_emergency(data: NewEmergency, db: Session = Depends(deps.get_db)):
     # Get the username from data
     try:
