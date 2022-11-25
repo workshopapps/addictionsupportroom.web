@@ -1,5 +1,4 @@
 import { useState } from "react";
-// import { Wrapper, Status } from "@googlemaps/react-wrapper";
 import "./contact.scss";
 import { GrLocation } from "react-icons/gr";
 import { BsTelephone } from "react-icons/bs";
@@ -7,8 +6,6 @@ import { BsInstagram } from "react-icons/bs";
 import { AiOutlineFacebook } from "react-icons/ai";
 import { ImTwitter } from "react-icons/im";
 import mapImg from "../../assets/Map.png";
-// import Map from "../../Components/Map/Map";
-// import { FormApi } from "../../API/FormApi";
 import { ThreeDots } from "react-loading-icons";
 import { useForm } from "react-hook-form";
 
@@ -21,9 +18,7 @@ const Contact = () => {
     getValues,
     handleSubmit,
     reset,
-    clearErrors,
-    formState: { errors, isValid, isDirty },
-    // reset,
+    formState: { errors },
   } = useForm({
     mode: "onSubmit",
     defaultValues: {
@@ -34,7 +29,7 @@ const Contact = () => {
   });
 
   const [spinner, setSpinner] = useState(false);
-  const [disabled, setDisable] = useState(true);
+ 
 
   const fetchData = () => {
     fetch("https://sober-pal.herokuapp.com/api/contact", {
@@ -48,8 +43,7 @@ const Contact = () => {
         res.json();
         setFormData(res);
         setSpinner(false);
-     
-        // alert('Form Submitted Successfully')
+        alert("Form submitted successfully")
       })
       .catch((err) => {
         console.log(err.message);
@@ -60,14 +54,12 @@ const Contact = () => {
   console.log(formData, "working");
   
 
-  const onSubmit = (data) => {
-    console.log(data)
+  const onSubmit = () => {
     fetchData();
     reset()
-    clearErrors('email' && 'message' && 'name')
-    alert("Form Submitted Successfully !!")
-    console.log(getValues());
   };
+
+ 
   
    
 
@@ -98,11 +90,11 @@ const Contact = () => {
                 }})}
                 placeholder="Omowunmi Olawehinmi"
               />
-              {errors.name?.message && (
+              {errors.name?.message ? (
                 <p className="alert" role="alert">
                   {errors.name.message}
                 </p>
-              )}
+              ): ''}
             </div>
 
             {/* email input */}
@@ -152,9 +144,7 @@ const Contact = () => {
             </div>
             <button
               type="submit"
-              onClick={() => {
-                onSubmit();
-              }}>
+              >
               {spinner ? <ThreeDots /> : "Submit"}
             </button>
           </form>
