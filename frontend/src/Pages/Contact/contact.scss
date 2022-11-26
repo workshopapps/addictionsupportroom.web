@@ -97,6 +97,14 @@
             }
           }
         }
+        .btn__disabled{
+          background: #9eb3bc;
+          &:hover{
+            cursor: not-allowed;
+            color: white;
+          }
+
+        }
         button {
           margin-top: 0.8rem;
           width: 100%;

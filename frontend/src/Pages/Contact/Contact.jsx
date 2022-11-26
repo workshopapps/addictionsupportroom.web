@@ -104,7 +104,7 @@ const Contact = () => {
                 name="email"
                 type="text"
                 className={`${
-                  errors.email?.type === "required" || errors.email?.type === "pattern" ? "input__border" : ""
+                  errors.email?.message ? "input__border" : ""
                 }`}
                 {...register("email", {
                   required: "Email is required!!",
@@ -131,7 +131,7 @@ const Contact = () => {
                 name="message"
                 type="text"
                 className={`${
-                  errors.message?.type === "required" ? "input__border" : ""
+                  errors.message?.message ? "input__border" : ""
                 }`}
                 {...register("message", { required: "Message is required!!" })}
                 placeholder="Enter your message here..."
@@ -144,6 +144,8 @@ const Contact = () => {
             </div>
             <button
               type="submit"
+              className={`${errors.message ? 'btn__disabled' : ''}`}
+              disabled={errors.message ? true : false}
               >
               {spinner ? <ThreeDots /> : "Submit"}
             </button>
