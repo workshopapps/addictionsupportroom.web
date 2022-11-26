@@ -54,7 +54,7 @@ const Footer = () => {
           </div>
         </div>
         <hr />
-        <p>© 2022 Soberpal. All rights reserved.</p>
+        <p>© 2022 Soberpal. All rights reserved. && </p>
       </div>
       {openModal && <Newsletter closeHandler={closeHandler} />}
     </>
