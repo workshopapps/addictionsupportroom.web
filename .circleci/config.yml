@@ -76,6 +76,33 @@ jobs:
           command: |
             echo "ERROR building addictionsupportwebbackend:backend"
 
+  deploy_images:
+    docker:
+      - image: circleci/node:16.10.0
+      - image: docker:17.09.1-ce-git
+    steps:
+      - checkout
+      - setup_remote_docker
+      - add_ssh_keys:
+          fingerprints:
+            - "fb:2c:14:98:43:f2:82:29:de:37:03:6e:fb:28:69:93"
+      - run: 
+          when: on_success
+          command: |
+            ssh -o "StrictHostKeyChecking no" ubuntu@ec2-34-195-39-141.compute-1.amazonaws.com "\
+              cd /home/ubuntu
+              sudo docker pull codak77/addictionsupportwebbackend:backend
+              sudo docker pull codak77/addictionsupportwebfrontend:frontend
+              sudo docker run -d -p 3000:3000 codak77/addictionsupportwebfrontend:frontend
+              sudo docker run -d -p 8000:8000 codak77/addictionsupportwebbackend:backend
+              sudo docker system prune -af && exit"
+    
+      - run:
+          name: Deploy Failure
+          when: on_fail
+          command: |
+            echo "ssh into server failed"
+
 workflows:
   default:
     jobs:
@@ -91,3 +118,12 @@ workflows:
               only:
                 - dev
                 - staging
+      - deploy_images:
+          requires:
+            - build-frontend
+            - build-backend
+          filters:
+            branches:
+              only:
+                  - dev
+                  - staging
