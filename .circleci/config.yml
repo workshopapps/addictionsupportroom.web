@@ -91,10 +91,13 @@ jobs:
           command: |
             ssh -o "StrictHostKeyChecking no" ubuntu@ec2-34-195-39-141.compute-1.amazonaws.com "\
               cd /home/ubuntu
+              sudo docker container stop frontend
+              sudo docker container stop backend
+              sudo docker container stop codak77/addictionsupportwebfrontend:frontend
               sudo docker pull codak77/addictionsupportwebbackend:backend
               sudo docker pull codak77/addictionsupportwebfrontend:frontend
-              sudo docker run -d -p 3000:3000 codak77/addictionsupportwebfrontend:frontend
-              sudo docker run -d -p 8000:8000 codak77/addictionsupportwebbackend:backend
+              sudo docker run -d -p 3000:3000 --name frontend codak77/addictionsupportwebfrontend:frontend
+              sudo docker run -d -p 8000:8000 --name backend codak77/addictionsupportwebbackend:backend
               sudo docker system prune -af && exit"
     
       - run:
