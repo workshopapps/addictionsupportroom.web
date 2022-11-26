@@ -93,7 +93,6 @@ jobs:
               cd /home/ubuntu
               sudo docker container stop frontend
               sudo docker container stop backend
-              sudo docker container stop codak77/addictionsupportwebfrontend:frontend
               sudo docker pull codak77/addictionsupportwebbackend:backend
               sudo docker pull codak77/addictionsupportwebfrontend:frontend
               sudo docker run -d -p 3000:3000 --name frontend codak77/addictionsupportwebfrontend:frontend
