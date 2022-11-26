@@ -99,7 +99,9 @@ jobs:
               sudo docker pull codak77/addictionsupportwebfrontend:frontend
               sudo docker run -d -p 3000:3000 --name frontend codak77/addictionsupportwebfrontend:frontend
               sudo docker run -d -p 8000:8000 --name backend codak77/addictionsupportwebbackend:backend
-              sudo docker system prune -af && sudo docker builder prune -af && exit"
+              sudo docker system prune -af 
+              sudo docker builder prune && exit"
+    
       - run:
           name: Deploy Failure
           when: on_fail
