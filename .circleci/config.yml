@@ -87,11 +87,13 @@ jobs:
           fingerprints:
             - "fb:2c:14:98:43:f2:82:29:de:37:03:6e:fb:28:69:93"
       - run: 
+          name: SSH
           when: on_success
           command: |
             ssh -o "StrictHostKeyChecking no" ubuntu@ec2-34-195-39-141.compute-1.amazonaws.com "\
               cd /home/ubuntu
-              sudo docker rm -f frontend backend
+              sudo docker stop frontend backend
+              sudo docker rm frontend backend
               sudo docker pull codak77/addictionsupportwebbackend:backend
               sudo docker pull codak77/addictionsupportwebfrontend:frontend
               sudo docker run -d -p 3000:3000 --name frontend codak77/addictionsupportwebfrontend:frontend
