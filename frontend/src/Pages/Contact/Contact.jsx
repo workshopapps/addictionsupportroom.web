@@ -1,4 +1,5 @@
-import { useState } from "react";
+import React from "react";
+import { useState, useRef } from "react";
 import "./contact.scss";
 import { GrLocation } from "react-icons/gr";
 import { BsTelephone } from "react-icons/bs";
@@ -8,10 +9,36 @@ import { ImTwitter } from "react-icons/im";
 import mapImg from "../../assets/Map.png";
 import { ThreeDots } from "react-loading-icons";
 import { useForm } from "react-hook-form";
-
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import emailjs from "@emailjs/browser";
 
 const Contact = () => {
   const [formData, setFormData] = useState({});
+  const notify = () =>
+    toast.success("Form Submitted Successfully", {
+      position: toast.POSITION.TOP_CENTER,
+    });
+
+  const form = useRef();
+
+  const sendEmail = () => {
+    emailjs
+      .sendForm(
+        "service_i5yysql",
+        "template_usa8sis",
+        form.current,
+        "kWxi_dTDg52yCrF9v"
+      )
+      .then(
+        (result) => {
+          console.log(result.text);
+        },
+        (error) => {
+          console.log(error.text);
+        }
+      );
+  };
 
   const {
     register,
@@ -29,7 +56,6 @@ const Contact = () => {
   });
 
   const [spinner, setSpinner] = useState(false);
- 
 
   const fetchData = () => {
     fetch("https://sober-pal.herokuapp.com/api/contact", {
@@ -39,33 +65,29 @@ const Contact = () => {
         "Content-type": "application/json; charset=UTF-8",
       },
     })
-      .then((res) => { 
+      .then((res) => {
         res.json();
         setFormData(res);
         setSpinner(false);
-        alert("Form submitted successfully")
       })
       .catch((err) => {
         console.log(err.message);
       });
   };
 
-
   console.log(formData, "working");
-  
 
   const onSubmit = () => {
     fetchData();
-    reset()
+    sendEmail();
+    reset();
+    notify();
   };
-
- 
-  
-   
 
   return (
     <div className="contact">
       <header>
+        <ToastContainer autoClose={2000} />
         <h1>Contact Us</h1>
         <p>You can always reach out to us. We wil be glad to hear from you</p>
       </header>
@@ -74,27 +96,30 @@ const Contact = () => {
           <h2>Get in touch with us. How can we help?</h2>
           {/* form container */}
 
-          <form id="form" onSubmit={handleSubmit(onSubmit)}>
+          <form ref={form} id="form" onSubmit={handleSubmit(onSubmit)}>
             {/* full-name input */}
             <div className="input__container">
               <label>Name</label>
               <input
-                className={`${
-                  errors.name?.message ? "input__border" : ""
-                }`}
+                className={`${errors.name?.message ? "input__border" : ""}`}
                 name="name"
                 type="text"
-                {...register("name", { required: "Full name is required !!", minLength: {
-                  value: 6,
-                  message: "Name should be at least 6 characters!!" 
-                }})}
+                {...register("name", {
+                  required: "Full name is required !!",
+                  minLength: {
+                    value: 6,
+                    message: "Name should be at least 6 characters!!",
+                  },
+                })}
                 placeholder="Omowunmi Olawehinmi"
               />
               {errors.name?.message ? (
                 <p className="alert" role="alert">
                   {errors.name.message}
                 </p>
-              ): ''}
+              ) : (
+                ""
+              )}
             </div>
 
             {/* email input */}
@@ -103,14 +128,13 @@ const Contact = () => {
               <input
                 name="email"
                 type="text"
-                className={`${
-                  errors.email?.message ? "input__border" : ""
-                }`}
+                className={`${errors.email?.message ? "input__border" : ""}`}
                 {...register("email", {
                   required: "Email is required!!",
                   pattern: {
-                    value: /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/,
-                    message: 'Email is invalid!!'
+                    value:
+                      /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/,
+                    message: "Email is invalid!!",
                   },
                 })}
                 placeholder="omowunmi2022@gmail.com"
@@ -130,9 +154,7 @@ const Contact = () => {
                 rows="10"
                 name="message"
                 type="text"
-                className={`${
-                  errors.message?.message ? "input__border" : ""
-                }`}
+                className={`${errors.message?.message ? "input__border" : ""}`}
                 {...register("message", { required: "Message is required!!" })}
                 placeholder="Enter your message here..."
               />
@@ -143,10 +165,11 @@ const Contact = () => {
               )}
             </div>
             <button
+              // onClick={notify}
               type="submit"
-              className={`${errors.message ? 'btn__disabled' : ''}`}
+              className={`${errors.message ? "btn__disabled" : ""}`}
               disabled={errors.message ? true : false}
-              >
+            >
               {spinner ? <ThreeDots /> : "Submit"}
             </button>
           </form>
