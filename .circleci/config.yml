@@ -20,7 +20,7 @@ jobs:
           command: |
             cd frontend
             npm install
-          # npm run build
+            CI=false npm run build
       - save_cache:
           key: dependency-cache-{{ checksum "./frontend/package.json" }}
           paths:
@@ -94,11 +94,13 @@ jobs:
               cd /home/ubuntu
               sudo docker stop frontend backend
               sudo docker rm frontend backend
+              sudo docker rmi -f codak77/addictionsupportwebbackend:backend codak77/addictionsupportwebfrontend:frontend
               sudo docker pull codak77/addictionsupportwebbackend:backend
               sudo docker pull codak77/addictionsupportwebfrontend:frontend
               sudo docker run -d -p 3000:3000 --name frontend codak77/addictionsupportwebfrontend:frontend
               sudo docker run -d -p 8000:8000 --name backend codak77/addictionsupportwebbackend:backend
-              sudo docker system prune -af && exit"
+              sudo docker system prune -af
+              sudo docker builder prune -af && exit"
     
       - run:
           name: Deploy Failure
