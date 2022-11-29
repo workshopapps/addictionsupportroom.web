@@ -13,10 +13,10 @@ const NavBar = () => {
           <p className="tablet:text-[32px] text-[24px] text-blue font-[700]">{navbarList.logo}</p>
         </Link>
         <div>
-          <ul className="hidden laptop:flex">
+          <ul className="hidden laptop:flex ">
             {navbarList.navList.map(({ page, link }) => (
               <NavLink className='mx-3 ' key={link}  to={link}>
-                <li className="p-4 pb-2 font-[700] ">{page}</li>
+                <li className="p-4 pb-2 font-[700] navbar">{page}</li>
               </NavLink>
             ))}
           </ul>
