@@ -21,7 +21,7 @@ from api import deps
 api_router = APIRouter()
 
 
-@api_router.post("/docs/token")
+@api_router.post("/docs/token", include_in_schema=False)
 async def token(form_data: OAuth2PasswordRequestForm = Depends(),
                 db: Session = Depends(deps.get_db)):
     """
@@ -30,8 +30,8 @@ async def token(form_data: OAuth2PasswordRequestForm = Depends(),
     Returns:
         UserOut: return a UserOut schema with a token object.
     """
-
-    return await login(form_data, db)
+    val = await login(form_data, db)
+    return {"access_token": val['token'], "token_type": "bearer"}
 
 
 api_router.include_router(auth_router, prefix="/auth", tags=["Auth"])
