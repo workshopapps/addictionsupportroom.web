@@ -1,64 +1,157 @@
 .value {
-    margin-top: 5rem;
+  margin-top: 5rem;
+  padding: 1rem;
+  header {
+    & > p {
+      color: var(--secondary-600);
+      font-weight: 700;
+      font-size: 20px;
+      margin-bottom: 1rem;
+    }
+    & > h2 {
+      font-weight: 700;
+      font-size: 40px;
+      line-height: 32px;
+      color: var(--primary-500);
+      margin-bottom: 0.8rem;
+    }
+    .header__text {
+      color: var(--gray-500);
+      font-weight: 400;
+      word-spacing: 0.3rem;
+    }
+  }
+  section {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 1rem;
+    margin-bottom: 5rem;
+    .value__content {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      width: 30%;
+      margin-top: 3rem;
+      .value__icon {
+        align-self: center;
+        text-align: center;
+        border-radius: 50%;
+        background: var(--primary-50);
+        padding: 10px;
+        .icon {
+          color: var(--primary-500);
+          font-size: 1.5rem;
+        }
+      }
+      .value__icon:hover {
+        filter: brightness(.9);
+      }
+      .value__h1 {
+        color: var(--primary-500);
+        font-weight: 500;
+        font-size: 20px;
+        margin-top: 1rem;
+        margin-bottom: 0.8rem;
+      }
+      .value__p {
+        font-size: 16px;
+        color: var(--gray-500);
+      }
+    }
+  }
+}
+
+$big-tab: 900px;
+$small-tab: 700px;
+$mobile: 500px;
+$small_mobile: 369px;
+
+@media screen and (max-width: $big-tab) {
+  .value {
     header {
       & > p {
-        color: var(--secondary-600);
-        font-weight: 700;
-        font-size: 14px;
-        margin-bottom: 1rem;
+        font-size: 18px;
       }
       & > h2 {
-        font-weight: 700;
-        font-size: 27px;
-        line-height: 32px;
-        color: var(--primary-500);
+        font-size: 34px;
+        margin-bottom: 0.7rem;
       }
       .header__text {
-        color: var(--gray-500);
-        font-weight: 400;
-          word-spacing: .3rem;
+        font-size: 18px;
       }
     }
-    section{
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 4rem;
-   margin-bottom: 5rem;
-      .value__content {
-          display: flex;
-          flex-direction: column;
-          justify-content: center;
-          align-items: center;
-          text-align: center;
-          width: 28rem;
-          margin-top: 3rem;
-          .value__icon {
-            align-self: center;
-            text-align: center;
-            border-radius: 50%;
-            background: var(--primary-50);
-            height: 3rem;
-            width: 3rem;
-            .icon {
-              color: var(--primary-500);
-              font-size: 2rem;
-              position: relative;
-              top: 14%;
-              left: 16%;
-              transform: scale(.9);
-            }
-          }
-          .value__h1 {
-            color: var(--primary-500);
-            font-weight: 500;
-            font-size: 17px;
-            margin-top: 1rem;
-          }
-          .value__p{
-              color: var(--gray-500);
-          }
-        }
-    }
-   
   }
+
+  .value {
+    section {
+      .value__content {
+        .value__h1 {
+          font-size: 18px;
+        }
+        .value__p {
+          font-size: 14px;
+        }
+      }
+    }
+  }
+}
+
+@media screen and (max-width: $small-tab) {
+  .value {
+    & > h2 {
+      font-size: 30px;
+    }
+    section {
+      .value__content {
+        width: 45%;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: $mobile) {
+  .value {
+    header {
+      & > h2 {
+        font-size: 28px;
+        margin-bottom: 0.6rem;
+      }
+      .header__text {
+        font-size: 16px;
+      }
+    }
+  }
+
+  .value {
+    section {
+      flex-direction: column;
+      .value__content {
+        width: 100%;
+        .value__h1 {
+          font-size: 20px;
+        }
+        .value__p {
+          font-size: 14px;
+        } 
+      }
+    }
+  }
+}
+
+@media screen and (max-width: $small_mobile) {
+  .value {
+    header {
+      & > h2 {
+        font-size: 24px;
+        margin-bottom: 0.6rem;
+      }
+      .header__text {
+        font-size: 14px;
+      }
+    }
+  }
+}

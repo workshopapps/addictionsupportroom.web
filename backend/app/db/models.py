@@ -32,10 +32,13 @@ class Example(Base):
 
 class Day(Base):
     __tablename__ = "days"
-
-    day_id = Column(String, primary_key=True, index=True)
-    bottles = Column(Integer, default=0)
-    marked = Column(Boolean, default=True)
+    id = Column(Integer, primary_key=True, index=True, unique=True)
+    date = Column(String, index=True)
+    bottles = Column(Integer, default = 0, index=True)
+    marked = Column(Integer, default=True)
+# for marked database
+# 0 is for False
+# 1 is for True
 
     # owner_id = Column(Integer, ForeignKey("users.id"))
 
@@ -45,12 +48,11 @@ class ContactusMessages(Base):
     """Table to store contact messages from users"""
 
     __tablename__ = "contact_us_messages"
-
     id = Column(Integer, autoincrement=True, primary_key=True, index=True)
     name = Column(String, nullable=False)
     user_id = Column(String, nullable=False)
     message = Column(String, nullable=False)
-    
+
 
 class User(Base):
     __tablename__ = "users"
