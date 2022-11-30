@@ -1,0 +1,13 @@
+.checkdetails{
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    gap: 1rem;
+    font-size: 15px;
+    color: #252525;
+    margin-bottom: 1rem;
+    .icon{
+        color: var(--primary-500);
+        font-size: 1.7rem;
+    }
+}
