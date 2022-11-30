@@ -124,6 +124,9 @@ async def read_streaks(
     start_date = datetime.datetime.strptime(
         user_streak.start_date.strftime("%Y-%m-%d"), "%Y-%m-%d")
     milestone_days = D - start_date
+    user_streak.clean_days = milestone_days.days
+    db.commit()
+    db.refresh(user_streak)
     data = jsonable_encoder(user_streak)
     data["milestone_days"] = milestone_days.days
     return data

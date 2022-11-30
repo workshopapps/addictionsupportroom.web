@@ -31,7 +31,15 @@ class Day(BaseModel):
 
 
 class Ranking(BaseModel):
-    id: int
+    name: str
+    avatar_ofuser: str
+    clean_days: int
+
+    class Config:
+        orm_mode = True
+        
+        
+class TotalCleanDays(BaseModel):
     clean_days: int
 
     class Config:

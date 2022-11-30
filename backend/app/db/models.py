@@ -82,6 +82,9 @@ class Streak(Base):
     last_relapse = Column(ForeignKey('relapses.id'), index=True)
     clean_days = Column(Integer)
     user = Column(ForeignKey('users.id'), index=True)
+    avatar_ofuser = Column(ForeignKey('users.avatar'), index=True)
+    name = Column(ForeignKey('users.username'), index=True)
+    
 
 
 class MessageState(int, Enum):

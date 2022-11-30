@@ -4,12 +4,14 @@ from api.common.schemas import ResponseSchema
 from api.auth.schemas import UserBase
 from . import services
 from sqlalchemy.orm import Session
-from db.models import Month
+from db.models import Month, User, Streak
 from fastapi import APIRouter, Depends
 from . import schemas
 from sqlalchemy.orm import Session
 import datetime
 from .schemas import GetAllHistoryResult
+from typing import Any
+from fastapi.encoders import jsonable_encoder
 
 from api import deps
 
@@ -133,8 +135,14 @@ def get_top_ranking(db: Session = Depends(deps.get_db)):
     return top_ranks
 
 
-@router.get("/leaderboard/total_clean_days/{streak_id}",
-            response_model=schemas.Ranking)
-def get_specific_streak(streak_id: int, db: Session = Depends(deps.get_db)):
-    streak = services.get_auser_total_clean_days(db=db, streak_id=streak_id)
+
+
+
+
+
+@router.get("/leaderboard/total_clean_days", response_model=schemas.TotalCleanDays)
+def get_current_user_streak(*,
+                        db: Session = Depends(deps.get_db),
+                        current_user: User = Depends(deps.get_current_user)) -> Any:
+    streak = services.get_auser_total_clean_days(db=db, current_user_id=current_user.id)
     return streak
