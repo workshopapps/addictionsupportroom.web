@@ -11,8 +11,29 @@ from api.progress.views import router as progress_router
 from api.call.views import router as call_router
 from api.relapse.views import router as relapse_router
 
+from fastapi.security import OAuth2PasswordRequestForm
+from fastapi import Depends, FastAPI, HTTPException, status
+from sqlalchemy.orm import Session
+
+from api.auth.views import login
+from api import deps
 
 api_router = APIRouter()
+
+
+@api_router.post("/docs/token", include_in_schema=False)
+async def token(form_data: OAuth2PasswordRequestForm = Depends(),
+                db: Session = Depends(deps.get_db)):
+    """
+    The an endpoint for quick login from the documentation 
+
+    Returns:
+        UserOut: return a UserOut schema with a token object.
+    """
+    val = await login(form_data, db)
+    return {"access_token": val['token'], "token_type": "bearer"}
+
+
 api_router.include_router(auth_router, prefix="/auth", tags=["Auth"])
 api_router.include_router(home_router, prefix="/home", tags=["Home"])
 api_router.include_router(community_router,
@@ -26,4 +47,4 @@ api_router.include_router(progress_router,
                           prefix="/progress",
                           tags=["Progress"])
 api_router.include_router(contact_router, prefix="/contact", tags=["Contact"])
-api_router.include_router(relapse_router, prefix="/relapse", tags=["relapse"])
+#api_router.include_router(relapse_router, prefix="/relapse", tags=["relapse"])

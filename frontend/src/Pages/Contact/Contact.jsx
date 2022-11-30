@@ -1,59 +1,67 @@
-// import { useState, useEffect } from "react";
+import { useState } from "react";
 import "./contact.scss";
 import { GrLocation } from "react-icons/gr";
 import { BsTelephone } from "react-icons/bs";
 import { BsInstagram } from "react-icons/bs";
 import { AiOutlineFacebook } from "react-icons/ai";
 import { ImTwitter } from "react-icons/im";
-import Map from "../../assets/Map.png";
-import { FormApi } from "../../API/FormApi";
+import mapImg from "../../assets/Map.png";
+import { ThreeDots } from "react-loading-icons";
 import { useForm } from "react-hook-form";
-import { yupResolver } from "@hookform/resolvers/yup";
-import * as Yup from "yup";
 
-const validationSchema = Yup.object().shape({
-  fullName: Yup.string()
-    .required("fullName is required")
-    .min(6, "fullName must be at least 6 characters"),
-  email: Yup.string().required("Email is required").email("Email is invalid"),
-  message: Yup.string()
-    .required("Password is required")
-    .min(6, "Password must be at least 6 characters"),
-});
 
 const Contact = () => {
+  const [formData, setFormData] = useState({});
+
   const {
     register,
     getValues,
     handleSubmit,
-    formState: { errors },
     reset,
+    formState: { errors },
   } = useForm({
-    resolver: yupResolver(validationSchema),
-    mode: "onChange",
+    mode: "onSubmit",
     defaultValues: {
-      fullName: "",
+      name: "",
       email: "",
       message: "",
     },
   });
 
-  const onSubmit = (e) => {
-    // e.preventDefault();
-    if (errors.fullName && errors.email && errors.message === true) {
-      return errors;
-    } else {
-     FormApi(getValues());
-    }
-    // reset();
-    console.log(getValues());
+  const [spinner, setSpinner] = useState(false);
+ 
+
+  const fetchData = () => {
+    fetch("https://sober-pal.herokuapp.com/api/contact", {
+      method: "POST",
+      body: JSON.stringify(getValues()),
+      headers: {
+        "Content-type": "application/json; charset=UTF-8",
+      },
+    })
+      .then((res) => { 
+        res.json();
+        setFormData(res);
+        setSpinner(false);
+        alert("Form submitted successfully")
+      })
+      .catch((err) => {
+        console.log(err.message);
+      });
   };
 
-  async function handleLogin(e) {
-    await handleSubmit(onSubmit)(e);
-}
-handleLogin()
+
+  console.log(formData, "working");
+  
+
+  const onSubmit = () => {
+    fetchData();
+    reset()
+  };
+
  
+  
+   
 
   return (
     <div className="contact">
@@ -72,25 +80,21 @@ handleLogin()
               <label>Name</label>
               <input
                 className={`${
-                  errors.fullName === true
-                    ? `style={{border:1px solid red}}`
-                    : ""
+                  errors.name?.message ? "input__border" : ""
                 }`}
-                name="fullName"
+                name="name"
                 type="text"
-                {...register("fullName", { required: true, minLength: 4 })}
+                {...register("name", { required: "Full name is required !!", minLength: {
+                  value: 6,
+                  message: "Name should be at least 6 characters!!" 
+                }})}
                 placeholder="Omowunmi Olawehinmi"
               />
-              {errors.fullName?.type === "required" && (
+              {errors.name?.message ? (
                 <p className="alert" role="alert">
-                  Full name is required
+                  {errors.name.message}
                 </p>
-              )}
-              {errors.fullName?.type === "min" && (
-                <p className="alert" role="alert">
-                  Full name must be 6 characters at least
-                </p>
-              )}
+              ): ''}
             </div>
 
             {/* email input */}
@@ -99,21 +103,21 @@ handleLogin()
               <input
                 name="email"
                 type="text"
+                className={`${
+                  errors.email?.message ? "input__border" : ""
+                }`}
                 {...register("email", {
-                  required: true,
-                  pattern:
-                    "([!#-'*+/-9=?A-Z^-~-]+(.[!#-'*+/-9=?A-Z^-~-]+)*|\"([]!#-[^-~ \t]|(\\[\t -~]))+\")@([!#-'*+/-9=?A-Z^-~-]+(.[!#-'*+/-9=?A-Z^-~-]+)*|[[\t -Z^-~]*])",
+                  required: "Email is required!!",
+                  pattern: {
+                    value: /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/,
+                    message: 'Email is invalid!!'
+                  },
                 })}
                 placeholder="omowunmi2022@gmail.com"
               />
-              {errors.email?.type === "required" && (
+              {errors.email?.message && (
                 <p className="alert" role="alert">
-                  Email is required
-                </p>
-              )}
-              {errors.email?.type === "pattern" && (
-                <p className="alert" role="alert">
-                  Email is invalid
+                  {errors.email.message}
                 </p>
               )}
             </div>
@@ -126,23 +130,24 @@ handleLogin()
                 rows="10"
                 name="message"
                 type="text"
-                {...register("message", { required: true })}
+                className={`${
+                  errors.message?.message ? "input__border" : ""
+                }`}
+                {...register("message", { required: "Message is required!!" })}
                 placeholder="Enter your message here..."
               />
-              {errors.message?.type === "required" && (
+              {errors.message?.message && (
                 <p className="alert" role="alert">
-                  Message is required
+                  {errors.message.message}
                 </p>
               )}
             </div>
             <button
               type="submit"
-              onClick={() => {
-                onSubmit();
-              }}
-            >
-              {" "}
-              Submit{" "}
+              className={`${errors.message ? 'btn__disabled' : ''}`}
+              disabled={errors.message ? true : false}
+              >
+              {spinner ? <ThreeDots /> : "Submit"}
             </button>
           </form>
         </div>
@@ -176,7 +181,10 @@ handleLogin()
           </div>
           {/* map */}
           <div>
-            <img src={Map} className="map" alt="Map" />
+            <img src={mapImg} className="map" alt="Map" />
+            {/* <Wrapper apiKey={"YOUR_API_KEY"}>
+              <Map />
+            </Wrapper> */}
           </div>
         </div>
       </div>

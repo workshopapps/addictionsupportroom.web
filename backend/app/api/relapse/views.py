@@ -14,6 +14,7 @@ from fastapi.encoders import jsonable_encoder
 router = APIRouter()
 
 auth_scheme = HTTPBearer()
+
 @router.post("/")
 async def create_relapse(
     *, db: Session = Depends(deps.get_db), relapse_in: RelapseCreate,

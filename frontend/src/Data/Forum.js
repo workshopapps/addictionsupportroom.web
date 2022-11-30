@@ -10,8 +10,8 @@ import avatar from "../assets/Ellipse.png"
 import post1 from "../assets/post1.png"
 import post2 from "../assets/post2.png"
 import post3 from "../assets/post3.png"
-// import post4 from "../../post4.png"
-// import post5 from "../../post5.png"
+import post4 from "../assets/post4.png"
+import post5 from "../assets/post5.png"
 
 
 export const ForumHash = {
@@ -127,6 +127,41 @@ export const posts = [
         ]
     },
     {
+        img: c4,
+        community: "Our Wives",
+        avatar: avatar,
+        name: "Dolphin",
+        duration: "10 mins ago",
+        post: "Hi guys, my wife caught me drinking alcohol, I dont know what to do. She hates me drinking it. She moved out the last time she caught me. I want her not to leave me again. I need your advise guys.",
+        hashs: [
+            {
+                hash1: "#Breakthebottle",
+                hash2: "#Breaksomebottle",
+                hash3: "#Fillthebottle"
+            }
+        ],
+        imgPost: [
+            {
+                img1: post4
+            },
+            {
+                img2: post5
+            }
+        ],
+        replies: [
+            {
+                avatar: avatar,
+                name: "Shark",
+                time: "3 mins ago",
+                reply: "This one deep",
+            }
+        ]
+    }
+]
+
+
+export const Beginnerposts = [
+    {
         img: c1,
         community: "Beginners Community",
         avatar: avatar,
@@ -157,6 +192,115 @@ export const posts = [
                 name: "Shark",
                 time: "3 mins ago",
                 reply: "You are welcome dude, you’re in the right place",
+            },
+            {
+                avatar: avatar,
+                name: "Shark",
+                time: "3 mins ago",
+                reply: "You are good to go, you’re in the best place",
+            }
+        ]
+    }
+]
+
+
+export const OurWivesposts = [
+    {
+        img: c4,
+        community: "Our Wives",
+        avatar: avatar,
+        name: "Dolphin",
+        duration: "10 mins ago",
+        post: "Hi guys, my wife caught me drinking alcohol, I dont know what to do. She hates me drinking it. She moved out the last time she caught me. I want her not to leave me again. I need your advise guys.",
+        hashs: [
+            {
+                hash1: "#Breakthebottle",
+                hash2: "#Breaksomebottle",
+                hash3: "#Fillthebottle"
+            }
+        ],
+        imgPost: [
+            {
+                img1: post4
+            },
+            {
+                img2: post5
+            }
+        ],
+        replies: [
+            {
+                avatar: avatar,
+                name: "Shark",
+                time: "3 mins ago",
+                reply: "This one deep",
+            }
+        ]
+    }
+]
+
+export const ImFree = [
+    {
+        img: c4,
+        community: "Our Wives",
+        avatar: avatar,
+        name: "Dolphin",
+        duration: "10 mins ago",
+        post: "Hi guys, my wife caught me drinking alcohol, I dont know what to do. She hates me drinking it. She moved out the last time she caught me. I want her not to leave me again. I need your advise guys.",
+        hashs: [
+            {
+                hash1: "#Breakthebottle",
+                hash2: "#Breaksomebottle",
+                hash3: "#Fillthebottle"
+            }
+        ],
+        imgPost: [
+            {
+                img1: post4
+            },
+            {
+                img2: post5
+            }
+        ],
+        replies: [
+            {
+                avatar: avatar,
+                name: "Shark",
+                time: "3 mins ago",
+                reply: "This one deep",
+            }
+        ]
+    }
+]
+
+export const Thinking = [
+    {
+        img: c4,
+        community: "Our Wives",
+        avatar: avatar,
+        name: "Dolphin",
+        duration: "10 mins ago",
+        post: "Hi guys, my wife caught me drinking alcohol, I dont know what to do. She hates me drinking it. She moved out the last time she caught me. I want her not to leave me again. I need your advise guys.",
+        hashs: [
+            {
+                hash1: "#Breakthebottle",
+                hash2: "#Breaksomebottle",
+                hash3: "#Fillthebottle"
+            }
+        ],
+        imgPost: [
+            {
+                img1: post4
+            },
+            {
+                img2: post5
+            }
+        ],
+        replies: [
+            {
+                avatar: avatar,
+                name: "Shark",
+                time: "3 mins ago",
+                reply: "This one deep",
             }
         ]
     }

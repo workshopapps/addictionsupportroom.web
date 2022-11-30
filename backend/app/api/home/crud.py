@@ -2,6 +2,7 @@ from datetime import datetime
 from sqlalchemy.orm import Session
 from . import schemas
 from . import models
+from datetime import datetime
 from fastapi import HTTPException, status
 
 
@@ -11,8 +12,8 @@ def create_note(db: Session, note: schemas.Note):
     """
     db_note = models.Note(title=note.title,
                           description=note.description,
-                          created_at=note.created_at,
-                          updated_at=note)
+                          created_at=datetime.utcnow(),
+                          updated_at=datetime.utcnow())
     db.add(db_note)
     db.commit()
     db.refresh(db_note)
@@ -25,8 +26,7 @@ def get_all_notes_created_today(db: Session):
     if not Note then it will return empty list like this []
     
     """
-    notes = db.query(models.Note). \
-    filter(models.Note.updated_at >= datetime.date(datetime.today())).all()
+    notes = db.query(models.Note).all()
     return notes
 
 

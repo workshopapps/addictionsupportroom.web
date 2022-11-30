@@ -8,6 +8,7 @@ from sqlalchemy.orm import Session
 from fastapi import APIRouter, Depends, HTTPException, status
 
 from api import deps
+from fastapi.security import OAuth2PasswordBearer, OAuth2PasswordRequestForm
 
 router = APIRouter()
 
@@ -25,7 +26,8 @@ def signup(user: schemas.UserCreate, db: Session = Depends(deps.get_db)):
         db.add(db_user)
         db.commit()
         db.refresh(db_user)
-    except Exception:
+    except Exception as ex:
+        print(ex.args)
         raise HTTPException(
             status_code=status.HTTP_400_BAD_REQUEST,
             detail="Username already exists",
@@ -36,6 +38,25 @@ def signup(user: schemas.UserCreate, db: Session = Depends(deps.get_db)):
     access_token = deps.create_access_token(data={"sub": str(db_user.id)})
     user_out = schemas.UserOut(**db_user.__dict__, access_token=access_token)
     return user_out
+
+
+@router.post("/login")
+async def login(form_data: OAuth2PasswordRequestForm = Depends(),
+                db: Session = Depends(deps.get_db)):
+
+    db_user = await deps.authenticate_user(form_data.username,
+                                           form_data.password, db)
+    if not db_user:
+        raise HTTPException(
+            status_code=status.HTTP_401_UNAUTHORIZED,
+            detail="Incorrect username or password",
+            headers={"WWW-Authenticate": "Bearer"},
+        )
+
+    # Create token to authorize user to make further API
+    access_token = deps.create_access_token(data={"sub": str(db_user.id)})
+    user_out = schemas.UserOut(**db_user.__dict__, access_token=access_token)
+    return access_token
 
 
 # @router.post("/login")
@@ -50,20 +71,3 @@ def signup(user: schemas.UserCreate, db: Session = Depends(deps.get_db)):
 #     access_token = create_access_token(
 #         data={'sub': user.username}, expires_delta=access_token_expires)
 #     return {"access_token": access_token, "token_type": "bearer"}
-
-# @router.get("/signup", response_model=list[ExampleSchema])
-# async def get_examples(
-#     db: Session = Depends(deps.get_db),
-# ) -> list[Example]:
-#     example_service = ExampleService()
-#     return await example_service.get_all_examples(db=db)
-
-
-# @router.post("/", response_model=ExampleSchema)
-# async def create_example(
-#     data: Examples,
-#     db: Session = Depends(deps.get_db),
-# ) -> Example:
-#     example_service = ExampleService()
-#     example = example_service.create_example(db=db, data=data)
-#     return example

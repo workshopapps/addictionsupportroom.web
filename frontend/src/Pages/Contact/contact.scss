@@ -23,8 +23,10 @@
     }
   }
   .contact__content-section {
+    margin-left: -7%;
     background: white;
     height: auto;
+   width: 80rem;
     padding: 4% 3%;
     border-radius: 3px;
     display: flex;
@@ -36,27 +38,35 @@
       h2 {
         font-weight: 500;
         color: var(--gray-700);
-        font-size: 1.3rem;
+        font-size: 1.6rem;
       }
       form {
         .input__container {
           display: grid;
           label {
             font-weight: 400;
-            font-size: 10px;
+            font-size: 14px;
             line-height: 20px;
             color: var(--gray-900);
             margin-bottom: 0.3rem;
             margin-top: 0.8rem;
           }
+          input, .input__border{
+            border:  1px solid red;;
+            &:focus{
+              outline: none;
+            }
+          }
           input {
             padding-left: 0.5rem;
-            height: 3.2rem;
+            height: 3.6rem;
             border: 1px solid var(--primary-50);
             border-radius: 4px;
+            width: 35rem;
             color:black;
+            background: none;
             &:focus {
-              outline: none;
+              outline: 1px solid #9eb3bc;
               color: black;
             }
             &::placeholder {
@@ -71,7 +81,7 @@
           }
           textarea {
             resize: none;
-            // border: 1px solid var(--primary-50);
+            border: 1px solid var(--primary-50);
             font-family: var(--primary-font);
             padding: 0.5rem 0.5rem;
             background: rgba(233, 237, 240, 0.2);
@@ -87,6 +97,14 @@
             }
           }
         }
+        .btn__disabled{
+          background: #9eb3bc;
+          &:hover{
+            cursor: not-allowed;
+            color: white;
+          }
+
+        }
         button {
           margin-top: 0.8rem;
           width: 100%;
@@ -96,13 +114,18 @@
           background: var(--primary-500);
           font-weight: 500;
           font-size: 12px;
+          color: white;
+         &:hover{
+          filter: brightness(.9);
           color: #9eb3bc;
+         } 
          
         }
       }
     }
     .section__two {
-      margin-top: 2rem;
+      margin-top: 6rem;
+      width: 35rem;
       .address__section {
         display: grid;
         .address,
@@ -136,6 +159,10 @@
             height: 3rem;
             margin-top: -1.5rem;
             transform: scale(0.8);
+            &:hover{
+              transform: scale(1.1);
+              transition: all 1s ease-in-out;
+            }
             .icon {
               color: white;
               text-align: center;
@@ -143,7 +170,11 @@
               position: relative;
               top: 0.5rem;
               left: 0.5rem;
-              // font-size: 1rem;
+              &:hover{
+                cursor: pointer;
+                filter: brightness(.8);
+                
+              }
             }
           }
         }
@@ -152,6 +183,11 @@
         margin-top: 3rem;
         width: 25rem;
         height: 20rem;
+        &:hover {
+          cursor: pointer;
+          transform: scale(1.1);
+          transition: all 1s ease-in-out;
+        }
       }
     }
   }
@@ -164,6 +200,9 @@
     padding: 5% 4%;
     margin: auto;
     max-width: 65vw;
+    .contact__content-section{
+      margin-left: -33%;
+    }
   }
 }
 
@@ -173,6 +212,19 @@
     width: 65vw;
     padding: 5% 4%;
     margin: auto;
+    .contact__content-section{
+     width: auto;
+     margin: auto;
+     .section__one{
+      form{
+        .input__container{
+          input{
+            width: auto;
+          }
+        }
+      }
+     }
+    }
   }
 }
 
