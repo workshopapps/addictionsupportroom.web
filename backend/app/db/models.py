@@ -78,12 +78,13 @@ class Relapse(Base):
     user = Column(ForeignKey('users.id'), index=True)
 
 
-# class Streak(Base):
-#     __tablename__ = "streaks"
-#     id = Column(Integer, primary_key=True, index=True)
-#     start_date = Column(DateTime, nullable=False, default=datetime.utcnow)
-#     current_date = Column(DateTime, nullable=False, default=datetime.utcnow)
-#     user = Column(ForeignKey('users.id'), index=True)
+class Streak(Base):
+    __tablename__ = "streaks"
+    id = Column(Integer, primary_key=True, index=True)
+    start_date = Column(DateTime, nullable=False, default=datetime.datetime.utcnow)
+    current_date = Column(DateTime, nullable=False, default=datetime.datetime.utcnow)
+    clean_days = Column(Integer)
+    user = Column(ForeignKey('users.id'), index=True)
 
 
 class MessageState(int, Enum):
@@ -175,16 +176,4 @@ class Emergency(Base):
     created_at = Column(DateTime)
 
 
-class Rank(Base):
-    __tablename__ = "ranks"
-    id = Column(Integer, primary_key=True, index=True)
-    username = Column(String, unique=True)
-    avatar = Column(String)
-    start_date = Column(DateTime,
-                        nullable=False,
-                        default=datetime.datetime.utcnow())
-    current_date = Column(DateTime,
-                          nullable=False,
-                          default=datetime.datetime.utcnow())
-    clean_days = Column(String, default="0")
-    user = Column(ForeignKey('users.id'), index=True)
+
