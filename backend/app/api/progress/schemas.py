@@ -28,3 +28,11 @@ class Day(BaseModel):
 
     class Config:
         orm_mode = True
+
+
+class Ranking(BaseModel):
+    id: int
+    clean_days: int
+    
+    class Config:
+        orm_mode = True
