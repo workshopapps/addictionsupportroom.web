@@ -7,22 +7,23 @@ from .agora import Agora
 
 router = APIRouter()
 
-
 class Call(BaseModel):
-    id: int
+    caller_username: str
+    callee_username: str
 
 
 @router.post("/")
 def joinCall(data: Call, db: Session = Depends(deps.get_db)):
-    #returns an agora token for joining a room
+    #returns an agora token, channel name, caller username, and callee username for joining a call room
     agora = Agora()
 
-    token = agora.generate_token(data.id)
+    channelName = data.caller_username + data.callee_username
 
-    call_user = db.query(User).filter(User.id == id).first()
+    token = agora.generate_token(channelName)
 
     return {
         "token": token,
-        "username": call_user.username,
-        "avatar": call_user.avatar
+        "caller": data.caller_username,
+        "callee": data.callee_username,
+        "channelName": channelName
     }
