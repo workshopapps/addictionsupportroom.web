@@ -12,6 +12,7 @@ import { useForm } from "react-hook-form";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import emailjs from "@emailjs/browser";
+import { motion } from 'framer-motion'
 
 const Contact = () => {
   const [formData, setFormData] = useState({});
@@ -92,7 +93,7 @@ const Contact = () => {
         <p>You can always reach out to us. We wil be glad to hear from you</p>
       </header>
       <div className="contact__content-section">
-        <div className="section__one">
+        <motion.div whileInView={{y: [100, 50], opacity: [0,0,1]}} transition={{ duration: 0.7 }} className="section__one">
           <h2>Get in touch with us. How can we help?</h2>
           {/* form container */}
 
@@ -173,7 +174,7 @@ const Contact = () => {
               {spinner ? <ThreeDots /> : "Submit"}
             </button>
           </form>
-        </div>
+        </motion.div>
         {/* section two of the container */}
         <div className="section__two">
           {/* address section */}

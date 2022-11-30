@@ -36,7 +36,7 @@ const Newsletter = ({ closeHandler }) => {
 
   return (
     <div className="fixed inset-0 backdrop-blur-sm bg-black bg-opacity-25 flex justify-center items-center z-50">
-      <div className="w-[450px] h-[326px]">
+      <div className="w-[350px] md:w-[450px] h-[326px]">
         <div className="bg-black text-white rounded-lg p-7">
           <div className="flex justify-between px-6 pb-4">
             <p className="text-[20px] font-medium">Join Our Mailing List</p>
