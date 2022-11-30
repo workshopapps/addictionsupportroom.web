@@ -68,7 +68,7 @@ class CRUDRelapse(CRUDBase[Relapse, RelapseCreate, RelapseCreate]):
         self, db: Session, *, obj_in: RelapseCreate, user_id: int
     ) -> Relapse:
         obj_in_data = jsonable_encoder(obj_in)
-        db_obj = Relapse(day=obj_in.day, month=obj_in.month, year=obj_in.year, user=user_id)
+        db_obj = Relapse(day=obj_in.day, month=obj_in.month, year=obj_in.year, bottles_drank=obj_in.bottles_drank,user=user_id)
         db.add(db_obj)
         db.commit()
         db.refresh(db_obj)
