@@ -84,6 +84,7 @@ class Streak(Base):
     start_date = Column(Date, nullable=False, default=datetime.date.today)
     current_date = Column(Date, nullable=False, default=datetime.date.today)
     last_relapse = Column(ForeignKey('relapses.id'), index=True)
+    clean_days = Column(Integer)
     user = Column(ForeignKey('users.id'), index=True)
 
 
@@ -176,16 +177,4 @@ class Emergency(Base):
     created_at = Column(DateTime)
 
 
-class Rank(Base):
-    __tablename__ = "ranks"
-    id = Column(Integer, primary_key=True, index=True)
-    username = Column(String, unique=True)
-    avatar = Column(String)
-    start_date = Column(DateTime,
-                        nullable=False,
-                        default=datetime.datetime.utcnow())
-    current_date = Column(DateTime,
-                          nullable=False,
-                          default=datetime.datetime.utcnow())
-    clean_days = Column(String, default="0")
-    user = Column(ForeignKey('users.id'), index=True)
+

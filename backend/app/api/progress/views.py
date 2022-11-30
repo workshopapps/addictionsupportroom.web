@@ -1,63 +1,33 @@
-from sqlalchemy.orm import Session
-#from db.models import Day
-from fastapi import APIRouter, Depends
-from . import schemas
-from db.db import engine, SessionLocal
+from api.example.schemas import Examples, ExampleSchema
+from api.example.services import ExampleService
+from . import services
 from sqlalchemy.orm import Session
 from db.models import Day
-from db import models
+from fastapi import APIRouter, Depends
+from . import schemas
+from sqlalchemy.orm import Session
+import datetime
 
-
+from api import deps
 router = APIRouter()
 
-
-# @router.get("/", response_model=list[ExampleSchema])
-# async def get_examples(
-#     db: Session = Depends(deps.get_db),
-# ) -> list[Example]:
-#     example_service = ExampleService()
-#     return await example_service.get_all_examples(db=db)
-
-
-# @router.post("/", response_model=ExampleSchema)
-# async def create_example(
-#     data: Examples,
-#     db: Session = Depends(deps.get_db),
-# ) -> Example:
-#     example_service = ExampleService()
-#     example = example_service.create_example(db=db, data=data)
-#     return example
-models.Base.metadata.create_all(engine)
-
-def get_db():
-    db = SessionLocal()
-    try:
-        yield db
-    finally:
-        db.close()
-
-
-@router.post("/calender/days/")
-async def how_many_bottles(request: schemas.Day, db: Session = Depends(get_db)):
-    new_day = Day(date=request.date, bottles=request.bottles)
-    payload = {}
-    if new_day.bottles > 0:
-        payload["marked"] = False
-        new_day.marked = False
-
-    else:
-        payload["marked"] = True
-        new_day.marked = True
-
-    db.add(new_day)
+@router.post("/calender/days/", response_model=schemas.Day)
+async def create_example(
+    data: schemas.Day,
+    db: Session = Depends(deps.get_db),
+):
+    example = Day()
+    example.day_id = data.day_id
+    example.bottles = data.bottles
+    example.marked = data.marked
+    db.add(example)
     db.commit()
-    db.refresh(new_day)
-    return(payload)
+    db.refresh(example)
 
-@router.get("/calender/days/") #to get all the dates and their responses
-def all(db:Session = Depends(get_db)):
-	days = db.query(models.Day).all()
-	return days
+    return example
+
+
+
 # @router.post("/calender/days/")  # , response_model=schemas.Day)
 # async def mark_a_day(
 #     day: schemas.Day,
@@ -74,3 +44,22 @@ def all(db:Session = Depends(get_db)):
 # ) -> list[schemas.Day]:
 #     progress_service = ProgressService(session=session)
 #     return await progress_service.get_all_progresss()
+
+
+
+@router.get("/leaderboard", response_model=list[schemas.Ranking])
+def get_all_streaks(db: Session=Depends(deps.get_db)):
+    ranks = services.get_all_users_streak(db=db)
+    return ranks
+
+
+@router.get("/leaderboard/top", response_model=list[schemas.Ranking])
+def get_top_ranking(db: Session=Depends(deps.get_db)):
+    top_ranks = services.get_top_20_users_with_high_streaks(db=db)
+    return top_ranks
+
+
+@router.get("/leaderboard/total_clean_days/{streak_id}", response_model=schemas.Ranking)
+def get_specific_streak(streak_id: int, db: Session=Depends(deps.get_db)):
+    streak = services.get_auser_total_clean_days(db=db, streak_id=streak_id)
+    return streak
