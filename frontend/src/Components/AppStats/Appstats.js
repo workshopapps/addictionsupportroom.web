@@ -1,11 +1,17 @@
 import "./appstats.css";
 import hands from "../../assets/hands.jpg";
 import hand from "../../assets/Rectangle26.png";
+import { motion } from 'framer-motion'
 import AppStat from "../../Data/AppStat";
 
 const AppStats = () => {
   return (
-    <section className="stats">
+    <motion.section 
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ delay: 0.2, duration: 0.5 }}
+      className="stats"
+    >
       <div className="w-[93%] flex justify-between max-w-[1300px]">
       <img src={hands} alt="hands" className="hands" />
       <div className="stats__content">
@@ -48,7 +54,7 @@ const AppStats = () => {
         <img src={hand} alt="hands" className="small__hand" />
       </div>
       </div>
-    </section>
+    </motion.section>
   );
 };
 

@@ -8,12 +8,18 @@ import Download from '../../Components/Download/Download'
 
 import ValueData from '../../Data/ValueData';
 import AppStats from "../../Components/AppStats/Appstats";
+import { motion } from 'framer-motion'
 
 
 const About = () => {
   return (
     <div  className="about__container">
-      <header className="header" >
+      <motion.header 
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 0.2, duration: 0.5 }}
+        className="header" 
+      >
         <p className="about">About us</p>
         <h1>About Soberpal</h1>
         <p className="about__soberpal">
@@ -23,11 +29,16 @@ const About = () => {
           so you don’t have to - the perfect starting point.
         </p>
         <p className="learn__more">Learn more about the team behind soberpal</p>
-      </header>
+      </motion.header>
        {/* app stats section */}
        <AppStats/>
 
-      <div className="team">
+      <motion.div 
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 0.2, duration: 0.5 }}
+        className="team"
+      >
         <h3>Meet our team</h3>
         <p>
           Our philosophy is simple — hire a team of diverse, passionate people
@@ -44,20 +55,30 @@ const About = () => {
             </div>
           ))}
         </div>
-      </div>
+      </motion.div>
 
       {/* ourvalues section */}
-      <section className="center">
+      <motion.section 
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 0.2, duration: 0.5 }}
+        className="center"
+      >
       <OurValues
       prg1='Our values'
       heading='How we work at soberpal'
       prg2='Our shared values keep us connected and guide us as one team'
       value={ValueData}
       />
-      </section>
+      </motion.section>
 
       {/* open postions section */}
-      <section className="position">
+      <motion.section 
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 0.2, duration: 0.5 }}
+        className="position"
+      >
         <p>Open positions</p>
         <h4>We’re looking for talented people</h4>
         <p className="position__text">
@@ -68,7 +89,7 @@ const About = () => {
         </div>
         {/* job container section */}
         <Job />
-      </section>
+      </motion.section>
 
       <div className="w-full mb-16 tablet:w-[70%] max-w-[1000px] mx-auto">
           <Download />
