@@ -6,9 +6,10 @@ import AppStat from "../../Data/AppStat";
 const AppStats = () => {
   return (
     <section className="stats">
+      <div className="w-[93%] flex justify-between max-w-[1300px]">
       <img src={hands} alt="hands" className="hands" />
       <div className="stats__content">
-        <p>We’ve helped a couple of people reduce their inatke of alcohol</p>
+        <div className="font-[700] text-blue ml-[-25px]">We’ve helped a couple of people reduce their inatke of alcohol</div>
         <h3>
           We’re only just getting <br />
           started on our journey
@@ -45,6 +46,7 @@ const AppStats = () => {
         </div>
         <img src={hands} alt="hands" className="hand" />
         <img src={hand} alt="hands" className="small__hand" />
+      </div>
       </div>
     </section>
   );

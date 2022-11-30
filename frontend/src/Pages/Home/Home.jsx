@@ -9,6 +9,7 @@ import peoples from "../../assets/Rectangle27.png";
 import smiley from "../../assets/smileys.png";
 import phones from "../../assets/Frame75.png";
 import phone from "../../assets/Frame76.png";
+import Download from '../../Components/Download/Download'
 import add from "../../assets/add.png";
 // import {people, smiley, phone, phones, add} from "./import";
 import "./home.css";
@@ -23,18 +24,18 @@ const Home = () => {
         <p>
           We are with you on your journey to recovery from alcohol addiction.
         </p>
-        <img src={peoples} alt="people" className="big_device" />
+          <img src={peoples} alt="people" className="big_device" />
         <img src={people} alt="people" className="small_device" />
       </section>
 
-      <section>
+      <section >
         <Appstats />
       </section>
 
       <section className="soberpal__home-third__section">
         <h1>You are not alone in the fight against addiction</h1>
 
-        <div className="soberpal__home-third__section-cards">
+        <div className="soberpal__home-third__section-cards ">
           <div className="cards__padding">
             <div className="cards__flex">
               <AiOutlineHeart size={size} className="icon__round" />
@@ -93,17 +94,15 @@ const Home = () => {
         </p>
         <img src={phones} alt="phones" className="big_device" />
         <img src={phone} alt="phone" className="small_device" />
-        <div className="soberpal__home-fourth__section__flex">
-          <div>
-            <h4>Download the Soberpal app</h4>
-            <p>Join over 200+ people already growing with Soberpal</p>
-          </div>
-          <button>Download App</button>
+        <div className="w-full tablet:w-[70%] max-w-[1000px] mx-auto">
+          <Download />
         </div>
+      <div className="w-full tablet:w-[85%] mx-auto mb-16 bg-blue h-[2px] my-6" />
       </section>
 
+
       <section className="soberpal__home-fifth__section">
-        <hr />
+        {/* <hr /> */}
         <div className="soberpal__home-fifth__section__padding">
           <h1>FAQs</h1>
           <p>
@@ -115,36 +114,36 @@ const Home = () => {
             <br/>
             Here are some of the questions you might have and their responses.
           </p>
-          <div className="soberpal__home-fifth__section__padding2">
+          <div className="">
             <Faq
               question="Getting Started"
               answer="Signing up on Soberpal is easy and anonymous, we don't need any personal details from you. You only have to register with a username that will be unique to you within the app."
             />
-            <hr />
+            <div className="w-full tablet:w-[89%] mx-auto bg-black h-[2px] my-6" />
 
             <Faq
               question="What Is Soberpal?"
               answer="SoberPal is an app that helps you acheive your goal of becoming more conscious and decrease your liit on alcohol consumption. There is an easy and quick onboarding process which requires a nickname and avatar as all users will be anonymous."
             />
-            <hr />
+            <div className="w-full tablet:w-[89%] mx-auto bg-black h-[2px] my-6" />
 
             <Faq
               question="How Do I View My Total Progress"
               answer="You can view your progress by checking your dashboard. All you have to do is click on profile and click on My Dashboard to view your total progress."
             />
-            <hr />
+            <div className="w-full tablet:w-[89%] mx-auto bg-black h-[2px] my-6" />
 
             <Faq
               question="How Do I Change My Username?"
               answer="To change your username click Profile, click on Settings, beside your existing username, click edit. Type in your new username and click save."
             />
-            <hr />
+            <div className="w-full tablet:w-[89%] mx-auto bg-black h-[2px] my-6" />
 
             <Faq
               question="Reporting A Community Member."
               answer="To report a community member, click on Profile, click on Contact Us and send us an email in that regard."
             />
-            <hr />
+            <div className="w-full tablet:w-[89%] mx-auto bg-black h-[2px] my-6" />
 
             <Faq
               question="How Do I View My Private Message"

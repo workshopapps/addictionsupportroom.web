@@ -30,7 +30,7 @@
     font-weight: 500;
     font-size: 1.5rem;
     line-height: 3rem;
-    color: var(--primary-500);
+    color: #0E8ACB;
 }
 
 .soberpal__footer-flex__box1 p {
@@ -45,9 +45,9 @@
 }
 
 .soberpal__footer-flex__box2 a {
-    font-size: .875rem;
+    font-size: .857rem;
     line-height: 3rem;
-    color: var(--primary-500);
+    color: #0E8ACB;
     display: block;
 }
 

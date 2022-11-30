@@ -4,6 +4,8 @@ import OurValues from "../../Components/ourvalues/OurValues";
 import interview from "../../assets/interview.png";
 import Job from "../../Components/jobcontainer/Job";
 import Button from "../../UI/Button";
+import Download from '../../Components/Download/Download'
+
 import ValueData from '../../Data/ValueData';
 import AppStats from "../../Components/AppStats/Appstats";
 
@@ -68,13 +70,9 @@ const About = () => {
         <Job />
       </section>
 
-      <div className="download">
-        <div>
-          <h6>Download the Soberpal app</h6>
-          <p>Join over 200+ people already growing with Soberpal.</p>
+      <div className="w-full mb-16 tablet:w-[70%] max-w-[1000px] mx-auto">
+          <Download />
         </div>
-        <Button text="Download App" />
-      </div>
     </div>
   );
 };
