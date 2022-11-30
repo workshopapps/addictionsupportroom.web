@@ -1,3 +1,4 @@
+#imports
 from fastapi import APIRouter, Depends, WebSocket
 from pydantic import BaseModel
 from sqlalchemy.orm import Session
@@ -5,9 +6,16 @@ from api import deps
 from db.models import User
 from .agora import Agora
 
+
+
+#router instance
 router = APIRouter()
 
-class Call(BaseModel):
+
+
+#expected Base Models
+
+class MakeCall(BaseModel):
     caller_username: str
     callee_username: str
 
@@ -17,8 +25,10 @@ class ReceiveCall(BaseModel):
 
 
 
-@router.post("/")
-def joinCall(data: Call, db: Session = Depends(deps.get_db)):
+#endpoints
+
+@router.post("/makeCall")
+def joinCall(data: MakeCall, db: Session = Depends(deps.get_db)):
     #returns an agora token, channel name, caller username, and callee username for joining a call room
     agora = Agora()
 
@@ -52,22 +62,27 @@ def receiveCall(data: ReceiveCall):
 
 
 
-@router.websocket("/callws")
+#web sockets
+
+@router.websocket("/callNotification")
 async def call_socket_endpoint(websocket: WebSocket):
+    #websocket for waiting for incoming call notifications
     await websocket.accept()
     await websocket.send_json({
-                                    "status": "connected"
-                                })
+                                "status": "connected"
+                            })
     while True:        
-        await websocket.receive_json()
+        data = await websocket.receive_json()
+        await websocket.send_json(data)
 
 
 
 @router.websocket("/callStatus")
 async def call_socket_endpoint(websocket: WebSocket):
+    #websocket for waiting for accepted or rejected call status messages
     await websocket.accept()
     await websocket.send_json({
-        "message": "calling..."
-    })
+                                "message": "calling..."
+                            })
     while True:        
         await websocket.receive_json()
