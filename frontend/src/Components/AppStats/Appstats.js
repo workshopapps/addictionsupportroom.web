@@ -7,9 +7,8 @@ import AppStat from "../../Data/AppStat";
 const AppStats = () => {
   return (
     <motion.section 
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      transition={{ delay: 0.2, duration: 0.5 }}
+      whileInView={{y: [100, 50], opacity: [0,0,1]}} 
+      transition={{ duration: 0.7 }}
       className="stats"
     >
       <div className="w-[93%] flex justify-between max-w-[1300px]">

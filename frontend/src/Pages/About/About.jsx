@@ -15,9 +15,8 @@ const About = () => {
   return (
     <div  className="about__container">
       <motion.header 
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 0.2, duration: 0.5 }}
+        whileInView={{y: [100, 50], opacity: [0,0,1]}} 
+        transition={{ duration: 0.7 }}
         className="header" 
       >
         <p className="about">About us</p>
@@ -34,9 +33,8 @@ const About = () => {
        <AppStats/>
 
       <motion.div 
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 0.2, duration: 0.5 }}
+        whileInView={{y: [100, 50], opacity: [0,0,1]}} 
+        transition={{ duration: 0.7 }}
         className="team"
       >
         <h3>Meet our team</h3>
@@ -59,9 +57,8 @@ const About = () => {
 
       {/* ourvalues section */}
       <motion.section 
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 0.2, duration: 0.5 }}
+        whileInView={{y: [100, 50], opacity: [0,0,1]}} 
+        transition={{ duration: 0.7 }}
         className="center"
       >
       <OurValues
@@ -74,9 +71,8 @@ const About = () => {
 
       {/* open postions section */}
       <motion.section 
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 0.2, duration: 0.5 }}
+        whileInView={{y: [100, 50], opacity: [0,0,1]}} 
+        transition={{ duration: 0.7 }}
         className="position"
       >
         <p>Open positions</p>

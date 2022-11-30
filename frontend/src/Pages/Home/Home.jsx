@@ -19,11 +19,11 @@ const Home = () => {
 
   return ( 
     <div className="soberpal__home">
-      <motion.section
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 0.2, duration: 0.5 }}
-        className="soberpal__home-first__section">
+      <motion.section 
+        whileInView={{y: [100, 50], opacity: [0,0,1]}} 
+        transition={{ duration: 0.7 }}
+        className="soberpal__home-first__section"
+      >
         <h1>The alcohol rehabilitation support you need.</h1>
         <p>
           We are with you on your journey to recovery from alcohol addiction.
@@ -37,9 +37,8 @@ const Home = () => {
       </section>
 
       <motion.section 
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 0.2, duration: 0.5 }}
+        whileInView={{y: [100, 50], opacity: [0,0,1]}} 
+        transition={{ duration: 0.7 }}
         className="soberpal__home-third__section"
       >
         <h1>You are not alone in the fight against addiction</h1>
@@ -95,9 +94,8 @@ const Home = () => {
       </motion.section>
 
       <motion.section 
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 0.2, duration: 0.5 }}
+        whileInView={{y: [100, 50], opacity: [0,0,1]}} 
+        transition={{ duration: 0.7 }}
         className="soberpal__home-fourth__section"
       >
         <h1>Cutting egde features to help track your progress</h1>
@@ -116,9 +114,8 @@ const Home = () => {
 
 
       <motion.section 
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 0.2, duration: 0.5 }}
+        whileInView={{y: [100, 50], opacity: [0,0,1]}} 
+        transition={{ duration: 0.7 }}
         className="soberpal__home-fifth__section"
       >
         {/* <hr /> */}
