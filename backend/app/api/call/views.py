@@ -60,3 +60,14 @@ async def call_socket_endpoint(websocket: WebSocket):
                                 })
     while True:        
         await websocket.receive_json()
+
+
+
+@router.websocket("/callStatus")
+async def call_socket_endpoint(websocket: WebSocket):
+    await websocket.accept()
+    await websocket.send_json({
+        "message": "calling..."
+    })
+    while True:        
+        await websocket.receive_json()
