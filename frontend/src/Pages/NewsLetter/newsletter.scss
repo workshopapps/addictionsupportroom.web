@@ -43,34 +43,47 @@
         align-items: left;
         text-align: left;
       }
+      & > form {
+        width: 100%;
+        & > .alert {
+          color: red;
+          margin-top: -1.7rem;
+        }
+        & > input, .input__border{
+          border: 1px solid red;
+          &:focus {
+            outline: 1px solid red;
+          }
+        }
+        & > input {
+          margin-top: 2rem;
+          margin-bottom: 2rem;
+          height: 4rem;
+          width: 100%;
+          padding: 0 3%;
+          border: 1px solid var(--primary-500);
+          border-radius: 4px;
+          &:focus {
+            outline: 1px solid #9eb3bc;
+            border: none;
+          }
+        }
+        & > .btn__subscribe {
+          height: 3rem;
+          width: 8rem;
+          margin: 4% auto;
+          color: white;
+          background: #0E8ACB;
+          border-radius: 3px;
+          &:hover {
+            filter: brightness(0.9);
+          }
+        }
+      }
       & > p {
         text-align: center;
         span {
           color: var(--primary-500);
-        }
-      }
-      input {
-        margin-top: 2rem;
-        margin-bottom: 2rem;
-        height: 4rem;
-        width: 100%;
-        padding: 0 3%;
-        border: 1px solid var(--primary-500);
-        border-radius: 4px;
-        &:focus {
-          outline: 1px solid #9eb3bc;
-          border: none;
-        }
-      }
-      .btn__subscribe {
-        height: 3rem;
-        width: 8rem;
-        margin: 2.5rem 30%;
-        color: white;
-        background: var(--primary-600);
-        border-radius: 3px;
-        &:hover {
-          filter: brightness(0.9);
         }
       }
     }
@@ -99,7 +112,6 @@
         width: 6rem;
         height: 6rem;
       }
-     
     }
     .author__content {
       text-align: center;
@@ -161,7 +173,7 @@
         border-radius: 50%;
         height: 2.5rem;
         width: 2.5rem;
-        background: var(--primary-500);
+        background: #0E8ACB;
         &:hover {
           transform: scale(1.1);
           transition: all 1s ease-in-out;
@@ -175,31 +187,51 @@
       }
     }
   }
+
   .bottom__section {
     margin: auto;
-    display: grid;
+    display: flex;
     align-items: center;
-    & > input {
-      margin: 2rem auto;
-      height: 4rem;
-      width: 30rem;
-      padding: 0 3%;
-      border: 1px solid var(--primary-500);
-      border-radius: 4px;
-      &:focus {
-        outline: 1px solid #9eb3bc;
-        border: none;
+    justify-content: center;
+    form {
+      display: flex;
+      align-items: left;
+      justify-content: left;
+      flex-direction: column;
+      & > input,
+      .input__border {
+        border: 1px solid red;
+        &:focus {
+          outline: 1px solid red;
+        }
       }
-    }
-    & > .btn__subscribe {
-      height: 3rem;
-      width: 8rem;
-      margin: 1rem auto;
-      color: white;
-      background: var(--primary-600);
-      border-radius: 3px;
-      &:hover {
-        filter: brightness(0.9);
+      & > input {
+        margin: 2rem auto;
+        height: 4rem;
+        width: 30rem;
+        padding: 0 3%;
+        border: 1px solid var(--primary-500);
+        border-radius: 4px;
+        &:focus {
+          outline: 1px solid #9eb3bc;
+          border: none;
+        }
+      }
+      .alert {
+        color: red;
+        text-align: left;
+        margin-top: -1.8rem;
+      }
+      & > .btn__subscribe {
+        height: 3rem;
+        width: 8rem;
+        margin: 1rem auto;
+        color: white;
+        background: #0E8ACB;
+        border-radius: 3px;
+        &:hover {
+          filter: brightness(0.9);
+        }
       }
     }
   }
@@ -212,7 +244,7 @@
     flex-wrap: wrap;
     padding-bottom: 2rem;
     margin-top: 6rem;
-    
+
     & > div {
       width: 50rem;
       text-align: left;
@@ -236,16 +268,15 @@
     margin: 4% auto;
     .newsletter__one {
       flex-wrap: wrap;
-      
     }
     .download {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        & > div {
-          text-align: center;
-        }
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      & > div {
+        text-align: center;
       }
+    }
   }
 }
 @media screen and (max-width: 600px) {
@@ -268,11 +299,14 @@
         }
       }
     }
-    .bottom__section{
-        & > input{
-            margin-left: -2.7rem;
-            width: 21rem;
+
+    .bottom__section {
+      form {
+        & > input {
+          margin-left: -2.7rem;
+          width: 21rem;
         }
+      }
     }
   }
 }

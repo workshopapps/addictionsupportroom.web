@@ -1,3 +1,4 @@
+import { useRef } from "react";
 import { Link } from "react-router-dom";
 import CheckDetails from "./CheckDetails";
 import "./newsletter.scss";
@@ -8,14 +9,43 @@ import { BsInstagram } from "react-icons/bs";
 import { AiOutlineFacebook } from "react-icons/ai";
 import { ImTwitter } from "react-icons/im";
 import Button from "../../UI/Button";
-
-
-
+import { useForm } from "react-hook-form";
+import { toast, ToastContainer } from "react-toastify";
 
 const NewsLetter = () => {
+  const notify = () =>
+    toast.success("Subscribed to Newsletter Successfully", {
+      position: toast.POSITION.TOP_CENTER,
+    });
+
+  const form = useRef();
+
+  const {
+    register,
+    getValues,
+    handleSubmit,
+    reset,
+    formState: { errors },
+  } = useForm({
+    mode: "onSubmit",
+    defaultValues: {
+      message: "",
+    },
+  });
+
+  const onSubmit = () => {
+    reset();
+    notify();
+  };
+  // const onSubmitTop = () => {
+  //   reset();
+  //   notify();
+  // };
+
   return (
     <div className="newsletter">
       <header>
+        {!errors.message && <ToastContainer autoClose={2000} />}
         <h3>NewsLetter</h3>
         <h1>Subscribe to our newsletter</h1>
         <p>
@@ -34,10 +64,29 @@ const NewsLetter = () => {
             <CheckDetails text="Amazing tips on how to stay sober" />
           </div>
 
-          <input placeholder="Enter your email address" />
-          <button type="" className="btn__subscribe">
-            Subscribe
-          </button>
+          <form  ref={form} onSubmit={handleSubmit(onSubmit)} >
+            <input
+              className={`${errors.email?.message ? "input__border" : ""}`}
+              {...register("email", {
+                required: "Email is required!!",
+                pattern: {
+                  value:
+                    /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/,
+                  message: "Email is invalid!!",
+                },
+              })}
+              placeholder="Enter your email address"
+            />
+            {errors.email?.message && (
+              <p className="alert" role="alert">
+                {errors.email.message}
+              </p>
+            )}
+            <button  type="" className="btn__subscribe">
+              Subscribe
+            </button>
+          </form>
+
           <p>
             <span>Join the 10,000</span> users that receive our weekly
             newsletter
@@ -83,7 +132,7 @@ const NewsLetter = () => {
 
       <section className="newsletter__socials">
         <h5>Follow us</h5>
-        <div className="newsletter__icons" >
+        <div className="newsletter__icons">
           <div className="icon__container-newsletter">
             <BsInstagram className="icon__newsletter" />
           </div>
@@ -97,10 +146,28 @@ const NewsLetter = () => {
       </section>
 
       <div className="bottom__section">
-        <input placeholder="Enter your email address" />
-        <button type="" className="btn__subscribe">
-          Subscribe
-        </button>
+        <form ref={form}  onSubmit={handleSubmit(onSubmit)}>
+          <input
+            className={`${errors.email?.message ? "input__border" : ""}`}
+            {...register("email", {
+              required: "Email is required!!",
+              pattern: {
+                value:
+                  /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/,
+                message: "Email is invalid!!",
+              },
+            })}
+            placeholder="Enter your email address"
+          />
+          {errors.email?.message && (
+            <p className="alert" role="alert">
+              {errors.email.message}
+            </p>
+          )}
+          <button type="" className="btn__subscribe">
+            Subscribe
+          </button>
+        </form>
       </div>
 
       <div className="download">

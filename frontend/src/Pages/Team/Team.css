@@ -4,8 +4,8 @@
 .team__container {
     padding: 80px 6.25rem 80px;
 }
-.team__info:hover{
-    transform: scale(1.1);
+.team__img:hover, .team__info:hover{
+    transform: scale(1.3);
     cursor: pointer;
 }
 .team {
