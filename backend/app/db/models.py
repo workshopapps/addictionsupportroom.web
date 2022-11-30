@@ -1,4 +1,4 @@
-from sqlalchemy import Boolean, Column, Integer, String, DateTime
+from sqlalchemy import Boolean, Column, Integer, String, DateTime, Date
 import datetime
 # from db.db import Base
 import datetime
@@ -75,14 +75,15 @@ class Relapse(Base):
     day = Column(Integer, nullable=False)
     month = Column(Integer, nullable=False)
     year = Column(Integer, nullable=False)
+    bottles_drank = Column(Integer, nullable=False)
     user = Column(ForeignKey('users.id'), index=True)
-
 
 class Streak(Base):
     __tablename__ = "streaks"
     id = Column(Integer, primary_key=True, index=True)
-    start_date = Column(DateTime, nullable=False, default=datetime.datetime.utcnow)
-    current_date = Column(DateTime, nullable=False, default=datetime.datetime.utcnow)
+    start_date = Column(Date, nullable=False, default=datetime.date.today)
+    current_date = Column(Date, nullable=False, default=datetime.date.today)
+    last_relapse = Column(ForeignKey('relapses.id'), index=True)
     clean_days = Column(Integer)
     user = Column(ForeignKey('users.id'), index=True)
 
