@@ -1,5 +1,6 @@
 import math
 from datetime import datetime
+import random
 
 # for generating agora token
 from agora_token_builder import RtcTokenBuilder
@@ -22,12 +23,14 @@ class Agora:
 
         return privilegeExpiredTs
 
-    def generate_token(self, uid):
+    def generate_token(self, channelName):
         """
         to generate Agora Token for a channel
         """
+        uid = random.randint(0, 2^30)
+
         token = RtcTokenBuilder.buildTokenWithUid(
-            self.app_id, self.app_certificate, "helpChannel", uid, True, self.get_time()
+            self.app_id, self.app_certificate, channelName, uid, True, self.get_time()
         )
 
         return token
