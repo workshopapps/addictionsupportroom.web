@@ -12,6 +12,11 @@ class Call(BaseModel):
     callee_username: str
 
 
+class ReceiveCall(BaseModel):
+    channelName: str
+
+
+
 @router.post("/")
 def joinCall(data: Call, db: Session = Depends(deps.get_db)):
     #returns an agora token, channel name, caller username, and callee username for joining a call room
@@ -27,6 +32,24 @@ def joinCall(data: Call, db: Session = Depends(deps.get_db)):
         "callee": data.callee_username,
         "channelName": channelName
     }
+
+
+
+@router.post("/receiveCall")
+def receiveCall(data: ReceiveCall):
+    #returns an agora token and the channel name for the receiver to join a particular call room
+
+    agora = Agora()
+
+    channelName = data.channelName
+
+    token = agora.generate_token(channelName)
+
+    return {
+        "token": token,
+        "channelName": channelName
+    }
+
 
 
 @router.websocket("/callws")
