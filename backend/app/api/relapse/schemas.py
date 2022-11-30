@@ -15,6 +15,7 @@ class RelapseInDBBase(RelapseBase):
     year: int
     bottles_drank: int
     user: int
+    month_history_id: int
 
     class config:
         orm_mode = True

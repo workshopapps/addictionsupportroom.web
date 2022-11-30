@@ -3,6 +3,7 @@ import datetime
 # from db.db import Base
 import datetime
 from enum import Enum
+from sqlalchemy.orm import relationship
 from sqlalchemy import (
     Column,
     ForeignKey,
@@ -30,20 +31,6 @@ class Example(Base):
     active = Column(Boolean, default=True)
 
 
-class Day(Base):
-    __tablename__ = "days"
-    id = Column(Integer, primary_key=True, index=True, unique=True)
-    date = Column(String, index=True)
-    bottles = Column(Integer, default = 0, index=True)
-    marked = Column(Integer, default=True)
-# for marked database
-# 0 is for False
-# 1 is for True
-
-    # owner_id = Column(Integer, ForeignKey("users.id"))
-
-    # owner = relationship("User", back_populates="todos")
-
 class ContactusMessages(Base):
     """Table to store contact messages from users"""
 
@@ -66,7 +53,13 @@ class User(Base):
                         default=datetime.datetime.utcnow,
                         nullable=False)
 
-    # todos = relationship("Todo", back_populates="owner")
+
+class Month(Base):
+    __tablename__ = "months"
+    id = Column(Integer, primary_key=True, index=True)
+    user = Column(ForeignKey('users.id'), index=True)
+    title = Column(String)
+    relapses = relationship("Relapse", back_populates="month_history")
 
 
 class Relapse(Base):
@@ -77,6 +70,9 @@ class Relapse(Base):
     year = Column(Integer, nullable=False)
     bottles_drank = Column(Integer, nullable=False)
     user = Column(ForeignKey('users.id'), index=True)
+    month_id = Column(ForeignKey('months.id'))
+    month_history = relationship("Month", back_populates="relapses")
+
 
 class Streak(Base):
     __tablename__ = "streaks"
@@ -175,6 +171,3 @@ class Emergency(Base):
     name = Column(String)
     avatar = Column(String)
     created_at = Column(DateTime)
-
-
-
