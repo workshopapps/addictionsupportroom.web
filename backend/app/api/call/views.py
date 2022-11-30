@@ -5,11 +5,17 @@ from sqlalchemy.orm import Session
 from api import deps
 from db.models import User
 from .agora import Agora
+from typing import List
+import json
+from .notify import NotificationManager
 
 
 
 #router instance
 router = APIRouter()
+
+#notification manager class instance
+notify = NotificationManager()
 
 
 
