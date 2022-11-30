@@ -1,6 +1,7 @@
 import "./job.scss";
 import { BiTimeFive } from "react-icons/bi";
 import { CiDollar } from "react-icons/ci";
+import { motion } from 'framer-motion'
 import JobData from "../../Data/JobData";
 
 const Job = () => {
@@ -8,7 +9,8 @@ const Job = () => {
     <>
       <div className="job">
         <h5>Design</h5>
-        <div className="job__container">
+        <div
+        className="job__container">
           <h6>Product Designer</h6>
           <p>
             We’re looking for a junior-level product designer to join our team.
@@ -25,7 +27,8 @@ const Job = () => {
           </div>
         </div>
 
-        <div className="job__container">
+        <div
+        className="job__container">
           <h6>Product Designer</h6>
           <p>
           We’re looking for a mid-level product designer to join our team.
@@ -45,7 +48,8 @@ const Job = () => {
 
       <div className="job">
         <h5>Software Development</h5>
-        <div className="job__container">
+        <div
+        className="job__container">
           <h6>Frontend developer</h6>
           <p>
           We’re looking for an experienced frontend developer to join our team.
