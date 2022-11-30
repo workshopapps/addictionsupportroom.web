@@ -61,12 +61,14 @@ def update_note(note_id: int, note: schemas.Note, db: Session):
      Then it will raise Exception HTTP_404_NOT_FOUND with a message
      there is no note with id: number
     """
-    note = db.query(models.Note).filter(models.Note.id == note_id).update(note)
-
+    note_in = db.query(models.Note).filter(models.Note.id == note_id).first()
     if not note:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND,
                             detail=f"there is no note with id: {note_id}")
+    note_in.title = note.title
+    note_in.description = note.description
     db.commit()
+    db.refresh(note_in)
     return note
 
 

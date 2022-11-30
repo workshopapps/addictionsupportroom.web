@@ -73,6 +73,11 @@ def delete_note(note_id: int, db: Session = Depends(get_db)):
     note = crud.delete_note(db=db, note_id=note_id)
     return note
 
+@router.put("/note/edit/{note_id}")
+def update_note(note: schemas.Note ,note_id: int, db: Session = Depends(get_db)):
+    note = crud.update_note(db=db, note_id=note_id, note=note)
+    return note
+
 
 # TODO: fix this
 # @router.put("/notes/update/{note_id}")
