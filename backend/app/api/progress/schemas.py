@@ -20,11 +20,12 @@ class ExampleSchema(Examples):
 
 
 class Day(BaseModel):
-    day_id: str | None = Field(
-        title="The date of the day in YYYY-MM-DD format", example='2022-01-31'
-    )
+    # day_id: str | None = Field(
+    #     title="The date of the day in YYYY-MM-DD format", example='2022-01-31'
+    # )
+    date: str
     bottles: int
-    marked: bool | None = True
+
 
     class Config:
         orm_mode = True

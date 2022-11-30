@@ -18,6 +18,11 @@
       margin-bottom: 0.8rem;
       margin-left: 4rem;
       padding: 2% 2%;
+      &:hover{
+        background:var(--primary-50);
+        cursor: pointer;
+        transition: all ease 1s;
+      }
       & > h6 {
         font-weight: 500;
         font-size: 17px;

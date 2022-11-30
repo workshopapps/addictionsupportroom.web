@@ -107,7 +107,8 @@ body {
 }
 
 .hover--effect:hover {
-  filter: brightness(.9);
+  filter: brightness(.8);
+  transition: all 1s ease;
 
 }
 .no-list {
