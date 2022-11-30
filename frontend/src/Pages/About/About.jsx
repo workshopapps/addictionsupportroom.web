@@ -3,13 +3,11 @@ import TeamData from "../../Data/TeamData";
 import OurValues from "../../Components/ourvalues/OurValues";
 import interview from "../../assets/interview.png";
 import Job from "../../Components/jobcontainer/Job";
-import Button from "../../UI/Button";
-import Download from '../../Components/Download/Download'
-
-import ValueData from '../../Data/ValueData';
+import Download from "../../Components/Download/Download";
+import { motion } from "framer-motion";
+import ValueData from "../../Data/ValueData";
 import AppStats from "../../Components/AppStats/Appstats";
 import { motion } from 'framer-motion'
-
 
 const About = () => {
   return (
@@ -19,6 +17,9 @@ const About = () => {
         transition={{ duration: 0.7 }}
         className="header" 
       >
+
+    <div className="about__container">
+      <header className="header">
         <p className="about">About us</p>
         <h1>About Soberpal</h1>
         <p className="about__soberpal">
@@ -31,6 +32,9 @@ const About = () => {
       </motion.header>
        {/* app stats section */}
        <AppStats/>
+      </header>
+      {/* app stats section */}
+      <AppStats />
 
       <motion.div 
         whileInView={{y: [100, 50], opacity: [0,0,1]}} 
@@ -68,6 +72,15 @@ const About = () => {
       value={ValueData}
       />
       </motion.section>
+      <section className="center">
+        <OurValues
+          prg1="Our values"
+          heading="How we work at soberpal"
+          prg2="Our shared values keep us connected and guide us as one team"
+          value={ValueData}
+        />
+      </section>
+
 
       {/* open postions section */}
       <motion.section 
@@ -88,8 +101,8 @@ const About = () => {
       </motion.section>
 
       <div className="w-full mb-16 tablet:w-[70%] max-w-[1000px] mx-auto">
-          <Download />
-        </div>
+        <Download />
+      </div>
     </div>
   );
 };
