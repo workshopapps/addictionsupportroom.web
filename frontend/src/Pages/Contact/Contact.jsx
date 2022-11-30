@@ -22,6 +22,7 @@ const Contact = () => {
 
   const form = useRef();
 
+  // Third Party Email as a service for sending mail to soberpal
   const sendEmail = () => {
     emailjs
       .sendForm(
@@ -40,6 +41,7 @@ const Contact = () => {
       );
   };
 
+  // React Hook Form Handling tools
   const {
     register,
     getValues,
@@ -57,6 +59,7 @@ const Contact = () => {
 
   const [spinner, setSpinner] = useState(false);
 
+  // This function submits data from the form to the backend
   const fetchData = () => {
     fetch("https://sober-pal.herokuapp.com/api/contact", {
       method: "POST",
@@ -77,6 +80,7 @@ const Contact = () => {
 
   console.log(formData, "working");
 
+// This function calls the other functions above
   const onSubmit = () => {
     fetchData();
     sendEmail();
