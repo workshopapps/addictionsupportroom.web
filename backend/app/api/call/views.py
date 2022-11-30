@@ -1,4 +1,4 @@
-from fastapi import APIRouter, Depends
+from fastapi import APIRouter, Depends, WebSocket
 from pydantic import BaseModel
 from sqlalchemy.orm import Session
 from api import deps
@@ -27,3 +27,13 @@ def joinCall(data: Call, db: Session = Depends(deps.get_db)):
         "callee": data.callee_username,
         "channelName": channelName
     }
+
+
+@router.websocket("/callws")
+async def call_socket_endpoint(websocket: WebSocket):
+    await websocket.accept()
+    await websocket.send_json({
+                                    "status": "connected"
+                                })
+    while True:        
+        await websocket.receive_json()
