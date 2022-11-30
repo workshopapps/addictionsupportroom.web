@@ -26,7 +26,6 @@ class Day(BaseModel):
     date: str
     bottles: int
 
-
     class Config:
         orm_mode = True
 
@@ -34,7 +33,7 @@ class Day(BaseModel):
 class Ranking(BaseModel):
     id: int
     clean_days: int
-    
+
     class Config:
         orm_mode = True
 
@@ -75,3 +74,15 @@ class StreakInDBBase(StreakBase):
 
 class StreakInDB(StreakInDBBase):
     pass
+
+class Months(BaseModel):
+    title: str
+    bottle_count: int
+
+    class Config:
+        orm_mode = True
+
+
+class GetAllHistoryResult(BaseModel):
+    status_code: int
+    result: list[Months]
