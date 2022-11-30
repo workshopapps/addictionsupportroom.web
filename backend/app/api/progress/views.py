@@ -2,13 +2,13 @@ from api.example.schemas import Examples, ExampleSchema
 from api.example.services import ExampleService
 from . import services
 from sqlalchemy.orm import Session
-#from db.models import Day
+from db.models import Day
 from fastapi import APIRouter, Depends
 from . import schemas
 from sqlalchemy.orm import Session
 import datetime
 
-
+from api import deps
 router = APIRouter()
 
 @router.post("/calender/days/", response_model=schemas.Day)
@@ -22,8 +22,7 @@ async def create_example(
     example.marked = data.marked
     db.add(example)
     db.commit()
-    db.refresh(new_day)
-    return(payload)
+    db.refresh(example)
 
     return example
 
