@@ -16,7 +16,7 @@ pipeline {
 
                       steps {
                               sh "cd backend"
-                              sh "cd backend && python -m pip install --upgrade pip"
+                              sh "cd backend && python3 -m pip install --upgrade pip"
                               sh "pip install -r requirements.txt"
                 	} 
         }
