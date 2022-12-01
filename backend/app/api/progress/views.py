@@ -151,7 +151,7 @@ def get_top_ranking(db: Session = Depends(deps.get_db)):
 
 
 @router.get("/leaderboard/total_clean_days", response_model=schemas.TotalCleanDays)
-def get_current_user_streak(*,
+def get_current_user_total_number_of_clean_days(*,
                         db: Session = Depends(deps.get_db),
                         current_user: User = Depends(deps.get_current_user)) -> Any:
     streak = services.get_auser_total_clean_days(db=db, current_user_id=current_user.id)
