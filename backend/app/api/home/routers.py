@@ -12,17 +12,24 @@ router = APIRouter()
 
 
 @router.post("/emotions")
-async def post_emotion(request):
-    if request == "happy":
+async def post_emotion(emotion: str):
+    """
+    Post a variety of emotions, and get a Quote as a response
+    Emotions can be either of these:
+    [happy, sober, defeated, angry, confused]
+    """
+    if emotion == "happy":
         return (quotes.happy[random.randint(0, 2)])
-    elif request == "sober":
+    elif emotion == "sober":
         return (quotes.sober[random.randint(0, 2)])
-    elif request == "defeated":
+    elif emotion == "defeated":
         return (quotes.defeated[random.randint(0, 2)])
-    elif request == "angry":
+    elif emotion == "angry":
         return (quotes.angry[random.randint(0, 2)])
-    else:
+    elif emotion == "confused":
         return (quotes.confused[random.randint(0, 2)])
+    else:
+        return {"message": "Invalid emotion"}
 
 
 @router.post("/relapse")
@@ -73,8 +80,11 @@ def delete_note(note_id: int, db: Session = Depends(get_db)):
     note = crud.delete_note(db=db, note_id=note_id)
     return note
 
+
 @router.put("/note/edit/{note_id}")
-def update_note(note: schemas.Note ,note_id: int, db: Session = Depends(get_db)):
+def update_note(note: schemas.Note,
+                note_id: int,
+                db: Session = Depends(get_db)):
     note = crud.update_note(db=db, note_id=note_id, note=note)
     return note
 
