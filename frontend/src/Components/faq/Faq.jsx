@@ -7,15 +7,21 @@ const Faq = ({ question, answer }) => {
   const [click, setClick] = useState(false);
 
   return (
-    <div >
-      <div className="faq">
+    <div className="w-[100%] mx-auto tablet:w-[89%] " >
+      <div 
+        onClick={() => setClick((prevstate) => !prevstate)}
+        className="faq cursor-pointer"
+      >
         <h3>{question}</h3>
         <img 
           src={add}
-          onClick={() => setClick((prevstate) => !prevstate)}
         />
       </div>
-      {click && <p className="ans">{answer}</p>}
+      {click && 
+        // <div className="bg-blue  mx-auto">
+          <p className="ans">{answer}</p>
+        // </div>
+      }
     </div>
   );
 };

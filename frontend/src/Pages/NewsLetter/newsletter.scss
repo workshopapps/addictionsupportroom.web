@@ -1,0 +1,323 @@
+.newsletter {
+  margin: 5% auto;
+  height: auto;
+  width: 60vw;
+  header {
+    margin-top: 2rem;
+    text-align: center;
+    h3 {
+      margin-top: -3rem;
+      margin-bottom: 2rem;
+      font-weight: 700;
+      font-size: 14px;
+      color: var(--secondary-600);
+    }
+    h1 {
+      color: var(--primary-500);
+      font-family: var(--primary-font);
+      font-weight: 700;
+      font-size: 2.5rem;
+      line-height: 30px;
+      margin-bottom: 2rem;
+    }
+    p {
+      font-weight: 400;
+      font-size: 1rem;
+      color: var(--primary-500);
+      margin-bottom: 4rem;
+    }
+  }
+  .newsletter__one {
+    display: flex;
+    width: 60vw;
+    gap: 1rem;
+    margin-bottom: 6rem;
+    .newsletter__one-part {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      flex-direction: column;
+      & > div {
+        margin-bottom: 2rem;
+        justify-content: left;
+        align-items: left;
+        text-align: left;
+      }
+      & > form {
+        width: 100%;
+        & > .alert {
+          color: red;
+          margin-top: -1.7rem;
+        }
+        & > input, .input__border{
+          border: 1px solid red;
+          &:focus {
+            outline: 1px solid red;
+          }
+        }
+        & > input {
+          margin-top: 2rem;
+          margin-bottom: 2rem;
+          height: 4rem;
+          width: 100%;
+          padding: 0 3%;
+          border: 1px solid var(--primary-500);
+          border-radius: 4px;
+          &:focus {
+            outline: 1px solid #9eb3bc;
+            border: none;
+          }
+        }
+        & > .btn__subscribe {
+          height: 3rem;
+          width: 8rem;
+          margin: 4% auto;
+          color: white;
+          background: #0E8ACB;
+          border-radius: 3px;
+          &:hover {
+            filter: brightness(0.9);
+          }
+        }
+      }
+      & > p {
+        text-align: center;
+        span {
+          color: var(--primary-500);
+        }
+      }
+    }
+    .newsletter__two-part {
+      width: 100%;
+      img {
+        height: 100%;
+        width: 100%;
+        border-radius: 4px;
+      }
+    }
+  }
+  .author__newsletter {
+    width: auto;
+    height: auto;
+    border: 1px solid var(--primary-500);
+    border-radius: 15px;
+    padding: 2rem;
+    .author__container {
+      display: flex;
+      gap: 1rem;
+      justify-content: left;
+      align-items: center;
+
+      & > img {
+        width: 6rem;
+        height: 6rem;
+      }
+      & > div{
+        .author__name{
+          color: var(--primary-500);
+          font-weight: 700;
+          font-size: 1.4rem;
+        }
+        & > p{
+          font-weight: 400;
+          color: var(--primary-500);
+        }
+      }
+    }
+    .author__content {
+      text-align: center;
+      margin: 4% auto;
+      & > h2 {
+        font-weight: 700;
+        font-size: 26px;
+        color: var(--primary-500);
+      }
+      & > p {
+        color: #575757;
+        margin-bottom: 7rem;
+        font-size: 12px;
+      }
+    }
+    .li {
+      text-decoration: underline;
+      color: blue;
+      margin-top: 4rem;
+      &:hover {
+        color: var(--primary-500);
+      }
+    }
+  }
+  .recent__news {
+    margin-top: 5rem;
+    text-align: center;
+    & > h1 {
+      font-weight: 700;
+      font-size: 26px;
+      color: var(--primary-500);
+    }
+    & > p {
+      font-weight: 400;
+      font-size: 18px;
+      color: var(--gray-500);
+    }
+    .newscard__container {
+      display: grid;
+      row-gap: 2rem;
+      justify-content: center;
+      margin-top: 5rem;
+    }
+  }
+  .newsletter__socials {
+    display: grid;
+    justify-content: center;
+    text-align: center;
+    margin: 6rem auto;
+    h5 {
+      font-weight: 700;
+      font-size: 22px;
+      margin-bottom: 2rem;
+    }
+    .newsletter__icons {
+      display: flex;
+      gap: 1rem;
+      .icon__container-newsletter {
+        border-radius: 50%;
+        height: 2.5rem;
+        width: 2.5rem;
+        background: #0E8ACB;
+        &:hover {
+          transform: scale(1.1);
+          transition: all 1s ease-in-out;
+          cursor: pointer;
+        }
+        .icon__newsletter {
+          margin: 30% auto;
+          color: white;
+          transform: scale(1.3);
+        }
+      }
+    }
+  }
+
+  .bottom__section {
+    margin: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    form {
+      display: flex;
+      align-items: left;
+      justify-content: left;
+      flex-direction: column;
+      & > input,
+      .input__border {
+        border: 1px solid red;
+        &:focus {
+          outline: 1px solid red;
+        }
+      }
+      & > input {
+        margin: 2rem auto;
+        height: 4rem;
+        width: 30rem;
+        padding: 0 3%;
+        border: 1px solid var(--primary-500);
+        border-radius: 4px;
+        &:focus {
+          outline: 1px solid #9eb3bc;
+          border: none;
+        }
+      }
+      .alert {
+        color: red;
+        text-align: left;
+        margin-top: -1.8rem;
+      }
+      & > .btn__subscribe {
+        height: 3rem;
+        width: 8rem;
+        margin: 1rem auto;
+        color: white;
+        background: #0E8ACB;
+        border-radius: 3px;
+        &:hover {
+          filter: brightness(0.9);
+        }
+      }
+    }
+  }
+  .download {
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 4rem;
+    flex-wrap: wrap;
+    padding-bottom: 2rem;
+    margin-top: 6rem;
+
+    & > div {
+      width: 50rem;
+      text-align: left;
+      & > h6 {
+        color: var(--primary-500);
+        font-weight: 500;
+        font-size: 32px;
+      }
+      & > p {
+        font-weight: 400;
+        font-size: 17px;
+        word-spacing: 0.2rem;
+        color: var(--gray-500);
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 900px) {
+  .newsletter {
+    margin: 4% auto;
+    .newsletter__one {
+      flex-wrap: wrap;
+    }
+    .download {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      & > div {
+        text-align: center;
+      }
+    }
+  }
+}
+@media screen and (max-width: 600px) {
+  .newsletter {
+    margin: 5rem 20%;
+    width: auto;
+    .newsletter__one {
+      flex-wrap: wrap;
+    }
+    .author__newsletter {
+      padding: 1rem 0.7rem;
+      .author__content {
+        & > h2 {
+          margin-top: 2rem;
+          line-height: 2.4rem;
+          margin-bottom: 0.6rem;
+        }
+        & > p {
+          margin-bottom: 3rem;
+        }
+      }
+    }
+
+    .bottom__section {
+      form {
+        & > input {
+          margin-left: -2.7rem;
+          width: 21rem;
+        }
+      }
+    }
+  }
+}
