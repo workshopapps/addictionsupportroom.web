@@ -1,6 +1,6 @@
 import './appstats.scss'
 import hands from "../../assets/hands.jpg";
-import AppStat from "../../Data/AppStat";
+// import AppStat from "../../Data/AppStat";
 
 const AppStats = () => {
   return (
