@@ -56,6 +56,7 @@ class User(Base):
         Date,
         nullable=False,
         default=datetime.date.today(),
+        # default=datetime.date(2008, 11, 25),
     )
 
 

@@ -19,19 +19,12 @@ class ExampleSchema(Examples):
     updated_at: Optional[datetime]
 
 
-class Day(BaseModel):
-    # day_id: str | None = Field(
-    #     title="The date of the day in YYYY-MM-DD format", example='2022-01-31'
-    # )
-    date: str
-    bottles: int
-
-    class Config:
-        orm_mode = True
 
 
 class Ranking(BaseModel):
     id: int
+    username: str
+    avatar: str
     clean_days: int
 
     class Config:
@@ -93,3 +86,8 @@ class Months(BaseModel):
 class GetAllHistoryResult(BaseModel):
     status_code: int
     result: list[Months]
+
+
+class GetAllRanking(BaseModel):
+    status_code: int
+    result: list[Ranking]

@@ -9,11 +9,11 @@ from fastapi import APIRouter, Depends
 from . import schemas
 from sqlalchemy.orm import Session
 import datetime
-from .schemas import GetAllHistoryResult
+from .schemas import GetAllHistoryResult, GetAllRanking, Ranking
 
 from typing import Any
 from .schemas import RelapseBase, RelapseCreate, RelapseInDB
-from fastapi.security import HTTPBearer, OAuth2AuthorizationCodeBearer
+from fastapi.security import HTTPBearer
 from fastapi.encoders import jsonable_encoder
 from db.models import User, Streak, Relapse
 from fastapi.encoders import jsonable_encoder
@@ -184,8 +184,6 @@ async def get_milestone(
     # Check where the milestone for the date lie
     # Returns {clean_days: 1, milestone: 3}
 
-    last_relapse_date = current_user.last_relapse_date
-
     today = datetime.date.today()
     last_relapse_date = current_user.last_relapse_date
 
@@ -209,16 +207,55 @@ async def get_milestone(
     return result
 
 
-@router.get("/leaderboard", response_model=list[schemas.Ranking])
-def get_all_streaks(db: Session = Depends(deps.get_db)):
-    ranks = services.get_all_users_streak(db=db)
-    return ranks
+@router.get("/leaderboard", response_model=GetAllRanking | ResponseSchema)
+async def get_leaderboard(
+    db: Session = Depends(deps.get_db),
+    current_user: User = Depends(deps.get_current_user),
+    responses={
+        200: {
+            "model": GetAllRanking,
+            "description": "A list of leaderboard for all user.",
+        },
+        400: {
+            "model": ResponseSchema,
+            "description": "User not found.",
+        },
+    },
+) -> Any:
+    """
+    Get a list of users toping the board
+    
+    """
+
+    # Check user db & order by last relapse date
+
+    users = db.query(User).order_by(User.last_relapse_date).limit(20).all()
+
+    today = datetime.date.today()
+    result = []
+
+    for user in users:
+        difference = today - user.last_relapse_date
+        clean_days = difference.days
+        result.append(
+            Ranking(
+                id=user.id,
+                username=user.username,
+                avatar=user.avatar,
+                clean_days=clean_days,
+            ))
+
+    return {"status_code": 200, "result": result}
 
 
-@router.get("/leaderboard/top", response_model=list[schemas.Ranking])
-def get_top_ranking(db: Session = Depends(deps.get_db)):
-    top_ranks = services.get_top_20_users_with_high_streaks(db=db)
-    return top_ranks
+# def get_all_streaks(db: Session = Depends(deps.get_db)):
+#     ranks = services.get_all_users_streak(db=db)
+#     return ranks
+
+# @router.get("/leaderboard/top", response_model=list[schemas.Ranking])
+# def get_top_ranking(db: Session = Depends(deps.get_db)):
+#     top_ranks = services.get_top_20_users_with_high_streaks(db=db)
+#     return top_ranks
 
 
 @router.get("/leaderboard/total_clean_days/{streak_id}",
