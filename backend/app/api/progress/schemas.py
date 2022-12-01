@@ -19,33 +19,31 @@ class ExampleSchema(Examples):
     updated_at: Optional[datetime]
 
 
-class Day(BaseModel):
-    # day_id: str | None = Field(
-    #     title="The date of the day in YYYY-MM-DD format", example='2022-01-31'
-    # )
-    date: str
-    bottles: int
-
-    class Config:
-        orm_mode = True
-
-
 class Ranking(BaseModel):
     id: int
+    username: str
+    avatar: str
     clean_days: int
 
     class Config:
         orm_mode = True
 
 
+class SummarySchema(BaseModel):
+    milestone: int
+    clean_days: int
+
+
 class RelapseBase(BaseModel):
-    day: int
-    month: int
-    year: int
-    bottles_drank: int
+    day: int = 1
+    month: int = 12
+    year: int = 2022
+    bottles_drank: int = 1
+
 
 class RelapseCreate(RelapseBase):
     pass
+
 
 class RelapseInDBBase(RelapseBase):
     day: int
@@ -57,11 +55,14 @@ class RelapseInDBBase(RelapseBase):
     class config:
         orm_mode = True
 
+
 class RelapseInDB(RelapseInDBBase):
     pass
 
+
 class StreakBase(BaseModel):
     pass
+
 
 class StreakInDBBase(StreakBase):
     start_date: int
@@ -70,10 +71,12 @@ class StreakInDBBase(StreakBase):
     user: int
 
     class config:
-        orm_mode = True    
+        orm_mode = True
+
 
 class StreakInDB(StreakInDBBase):
     pass
+
 
 class Months(BaseModel):
     title: str
@@ -86,3 +89,8 @@ class Months(BaseModel):
 class GetAllHistoryResult(BaseModel):
     status_code: int
     result: list[Months]
+
+
+class GetAllRanking(BaseModel):
+    status_code: int
+    result: list[Ranking]
