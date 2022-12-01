@@ -19,8 +19,6 @@ class ExampleSchema(Examples):
     updated_at: Optional[datetime]
 
 
-
-
 class Ranking(BaseModel):
     id: int
     username: str
@@ -29,6 +27,11 @@ class Ranking(BaseModel):
 
     class Config:
         orm_mode = True
+
+
+class SummarySchema(BaseModel):
+    milestone: int
+    clean_days: int
 
 
 class RelapseBase(BaseModel):
