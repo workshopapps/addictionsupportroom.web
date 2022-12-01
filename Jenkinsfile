@@ -18,18 +18,18 @@ pipeline {
                               sh "cd backend"
                               sh "cd backend && python -m pip install --upgrade pip"
                               sh "pip install -r requirements.txt"
-                			} 
+                	} 
         }
             stage("deploy") {
 
                     steps {
-                            sh "sudo cp -rf backend /home/sean/certgo/backend"
-                            sh "sudo cp -fr ${WORKSPACE}/frontend/build/* /home/sean/certgo/frontend"
-                            sh "sudo su - sean && whoami"
-            sh "sudo pm2 stop certgo"
-                            sh "sudo pm2 stop index"
-                            sh "sudo pm2 serve /home/sean/frontend/build --port 3077"
-                            sh "sudo pm2 start /home/sean/backend/index.js"
+                            sh "sudo cp -rf backend /home/judgejudy/addictionsupportroom.web/backend"
+                            sh "sudo cp -fr ${WORKSPACE}/frontend/build/* /home/judgejudy/addictionsupportroom.web/frontend"
+                            sh "sudo su - judgejudy && whoami"
+                            sh "sudo pm2 stop soberpal"
+	    		    sh "sudo pm2 stop server"
+                            sh "sudo pm2 serve /home/judgejudy/frontend/build --port 3344"
+                            sh "sudo pm2 start /home/judgejudy/backend/app/server.py --interpreter python3"
                     }
 
         }
