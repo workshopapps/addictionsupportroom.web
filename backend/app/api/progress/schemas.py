@@ -39,13 +39,15 @@ class Ranking(BaseModel):
 
 
 class RelapseBase(BaseModel):
-    day: int
-    month: int
-    year: int
-    bottles_drank: int
+    day: int = 1
+    month: int = 12
+    year: int = 2022
+    bottles_drank: int = 1
+
 
 class RelapseCreate(RelapseBase):
     pass
+
 
 class RelapseInDBBase(RelapseBase):
     day: int
@@ -57,11 +59,14 @@ class RelapseInDBBase(RelapseBase):
     class config:
         orm_mode = True
 
+
 class RelapseInDB(RelapseInDBBase):
     pass
 
+
 class StreakBase(BaseModel):
     pass
+
 
 class StreakInDBBase(StreakBase):
     start_date: int
@@ -70,10 +75,12 @@ class StreakInDBBase(StreakBase):
     user: int
 
     class config:
-        orm_mode = True    
+        orm_mode = True
+
 
 class StreakInDB(StreakInDBBase):
     pass
+
 
 class Months(BaseModel):
     title: str

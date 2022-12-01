@@ -11,7 +11,6 @@ from sqlalchemy.orm import Session
 import datetime
 from .schemas import GetAllHistoryResult
 
-
 from typing import Any
 from .schemas import RelapseBase, RelapseCreate, RelapseInDB
 from fastapi.security import HTTPBearer, OAuth2AuthorizationCodeBearer
@@ -19,6 +18,7 @@ from fastapi.encoders import jsonable_encoder
 from db.models import User, Streak, Relapse
 from fastapi.encoders import jsonable_encoder
 from .crud import relapse, create_relapse_with_user
+
 auth_scheme = HTTPBearer()
 
 from api import deps
@@ -39,6 +39,9 @@ months = {
     '11': 'November',
     '12': 'December'
 }
+
+streak_goals = [7, 30, 90]
+
 
 @router.get(
     "/history/list",
@@ -145,17 +148,16 @@ def get_top_ranking(db: Session = Depends(deps.get_db)):
 @router.get("/leaderboard/total_clean_days/{streak_id}",
             response_model=schemas.Ranking)
 def get_specific_streak(streak_id: int, db: Session = Depends(deps.get_db)):
-    streak = services.get_auser_total_clean_days(db=db, streak_id=streak_id)
+    streak = services.get_user_total_clean_days(db=db, streak_id=streak_id)
     return streak
 
 
 @router.post("/")
-async def create_relapse(
-    *,
-    db: Session = Depends(deps.get_db),
-    relapse_in: RelapseCreate,
-    current_user: User = Depends(deps.get_current_user),
-    token: OAuth2AuthorizationCodeBearer = Depends(auth_scheme)
+async def mark_a_day(
+        *,
+        db: Session = Depends(deps.get_db),
+        relapse_in: RelapseCreate,
+        current_user: User = Depends(deps.get_current_user),
 ) -> Any:
     """
     Create Relapse
@@ -189,10 +191,15 @@ async def create_relapse(
         month_id=month_history.id,
     )
     # new_relapse = create_relapse_with_user(db=db, user_id=current_user.id, relapse=relapse_in)
+    # Save the new relapse
+    db.add(new_relapse)
+    db.commit()
+    db.refresh(new_relapse)
+
     user_streak = db.query(Streak).filter(
         Streak.user == current_user.id).first()
     if user_streak:
-        user_streak.last_relapse = new_relapse
+        user_streak.last_relapse = new_relapse.id
         db.commit()
         db.refresh(user_streak)
     else:
@@ -203,34 +210,50 @@ async def create_relapse(
     data = jsonable_encoder(new_relapse)
     return data
 
-@router.get("/")
-async def read_relapses(*,
-    db: Session = Depends(deps.get_db),  skip: int = 0,
-    limit: int = 100, current_user: User = Depends(deps.get_current_user),
-    token: OAuth2AuthorizationCodeBearer = Depends(auth_scheme))-> Any:
+
+@router.get("/", name='Get Relapses in a Month')
+async def read_relapses(
+        *,
+        db: Session = Depends(deps.get_db),
+        month: int = 1,
+        year: int = 2022,
+        current_user: User = Depends(deps.get_current_user),
+) -> Any:
     """
-    Retrieve Relapse Days
+    Retrieve Relapse Days in a given month
     """
     # relapses = relapse.get_multi_by_user(db=db, user_id=current_user.id, skip=skip, limit=limit)
-    relapses = db.query(Relapse).filter(Relapse.user==current_user.id).all()
-    return relapses 
+    relapses = db.query(Relapse).filter(
+        Relapse.user == current_user.id,
+        Relapse.month == month,
+        Relapse.year == year,
+    ).all()
+
+    return relapses
 
 
 @router.get("/milestone")
-async def read_streaks(*,
-    db: Session = Depends(deps.get_db),  skip: int = 0,
-    limit: int = 100, current_user: User = Depends(deps.get_current_user),
-    token: OAuth2AuthorizationCodeBearer = Depends(auth_scheme)) -> Any:
+async def read_streaks(
+    *,
+    db: Session = Depends(deps.get_db),
+    skip: int = 0,
+    limit: int = 100,
+    current_user: User = Depends(deps.get_current_user),
+    token: OAuth2AuthorizationCodeBearer = Depends(auth_scheme)
+) -> Any:
     """
     Get a user milestone
     """
-    user_streak = db.query(Streak).filter(Streak.user==current_user.id).first()
+    user_streak = db.query(Streak).filter(
+        Streak.user == current_user.id).first()
     user_streak.current_date = datetime.date.today()
     db.commit()
     db.refresh(user_streak)
-    D = datetime.datetime.strptime(user_streak.current_date.strftime("%Y-%m-%d"), "%Y-%m-%d")
-    start_date = datetime.datetime.strptime(user_streak.start_date.strftime("%Y-%m-%d"), "%Y-%m-%d")
-    milestone_days = D-start_date
+    D = datetime.datetime.strptime(
+        user_streak.current_date.strftime("%Y-%m-%d"), "%Y-%m-%d")
+    start_date = datetime.datetime.strptime(
+        user_streak.start_date.strftime("%Y-%m-%d"), "%Y-%m-%d")
+    milestone_days = D - start_date
     data = jsonable_encoder(user_streak)
     data["milestone_days"] = milestone_days.days
     return data
