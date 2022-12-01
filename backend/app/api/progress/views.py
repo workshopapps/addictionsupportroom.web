@@ -40,7 +40,6 @@ months = {
     '12': 'December'
 }
 
-
 @router.get(
     "/history/list",
     response_model=GetAllHistoryResult | ResponseSchema,
