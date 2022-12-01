@@ -12,7 +12,7 @@ const Alcohol = () => {
       <p className="text-[12px] md:text-[16px] font-[700] text-center text-[#387E9C]">
         Alcohol Addiction
       </p>
-      <h1 className="text-[#0E8ACB] md:text-[#204E65] text-[20px] md:text-[48px] font-[700] text-center">
+      <h1 className="text-[#48A1C8] md:text-[#0E8ACB] text-[20px] md:text-[48px] font-[700] text-center">
         Alcohol Addiction and Abuse
       </h1>
       <p className="text-[13px] md:text-[18px] font-[400] text-center text-[#575757] mt-3 md:mt-0 p-3 md:p-0">
@@ -20,11 +20,15 @@ const Alcohol = () => {
         social acceptance of drinking can often lead to denial — and, if left
         untreated, causes severe consequences.
       </p>
+<<<<<<< HEAD
+      <div className="flex justify-center md:gap-10 text-[#1D475C] gap-5 text-[14px] md:text-[20px] font-[700] my-8">
+=======
       <motion.div
         whileInView={{ x: [-100, 0], opacity: [0, 0, 1] }}
         transition={{ duration: 0.7 }}
         className="flex justify-center md:gap-10 text-[#0E8ACB] gap-5 text-[14px] md:text-[20px] font-[700] my-8"
       >
+>>>>>>> 38abc4457a0a7ad9e2c0cc374d9188254cb89ea2
         <a href="#symptoms" className="hover:opacity-80 duration-300">
           Symptoms
         </a>
@@ -39,11 +43,29 @@ const Alcohol = () => {
         </a>
       </motion.div>
 
+<<<<<<< HEAD
+      <div className="flex justify-center md:gap-10 text-[#1D475C] gap-5 text-[14px] md:text-[20px] font-[700] my-8">
+        <a href="#symptoms" className="hover:opacity-80 duration-300">
+          Symptoms
+        </a>
+        <a href="#complications" className="hover:opacity-80 duration-300">
+          Complications
+        </a>
+        <a href="#treatment" className="hover:opacity-80 duration-300">
+          Treatment
+        </a>
+        <a href="#outlook" className="hover:opacity-80 duration-300">
+          Outlook
+        </a>
+      </div>
+      <div className="py-2">
+=======
       <motion.div
         whileInView={{ x: [100, 0], opacity: [0, 0, 1] }}
         transition={{ duration: 0.7 }}
         className="py-2"
       >
+>>>>>>> 38abc4457a0a7ad9e2c0cc374d9188254cb89ea2
         <h3 className="text-[16px] md:text-[20px] font-[700] text-[#204E65] text-center mb-5">
           Overview
         </h3>
@@ -310,4 +332,8 @@ const Alcohol = () => {
   );
 };
 
+<<<<<<< HEAD
+export default Alcohol
+=======
 export default Alcohol;
+>>>>>>> 38abc4457a0a7ad9e2c0cc374d9188254cb89ea2

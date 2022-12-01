@@ -1,0 +1,17 @@
+SQLAlchemy==1.4.44
+sqlmodel==0.0.6
+fastapi==0.79.0
+pydantic==1.10.2
+passlib==1.7.4
+pytest==6.2.5
+httpx==0.23.0
+uvicorn==0.17.6
+alembic==1.8.1
+python-jose[cryptography]==3.3.0
+websockets==10.4
+ujson==5.5.0
+bcrypt==4.0.1
+aioredis==2.0.1
+agora-token-builder==1.0.0
+websocket==0.2.1
+python-multipart==0.0.5

@@ -25,7 +25,11 @@ const JobApp = () => {
             </div>
           </div>
         </div>
+<<<<<<< HEAD
+        <button className="px-[10px] w-[120px] h-[56px] md:w-[190px] bg-[#0E8ACB] rounded-[8px] text-white">
+=======
         <button className="px-[10px] w-[120px] h-[56px] md:w-[190px] bg-[#0E8ACB] rounded-[8px] text-white hover--effect">
+>>>>>>> 6f753996cbde70e43ee313298912282054a7999b
           Apply now
         </button>
       </div>
@@ -40,12 +44,21 @@ const JobApp = () => {
         </h1>
         <ul className="text-[14px] md:text-[20px] text-[#575757] font-[400] list-disc list-inside">
           <li>
+<<<<<<< HEAD
+            You will ensure that all rules of enegagement amongst users in the
+            chat room are observed
+          </li>
+          <li>
+            You will ensure that all rules of enegagement amongst users in the
+            chat room are observed
+=======
             You will ensure that all rules of engagement amongst users in the
             chat room are observed
           </li>
           <li>
             You will ensure that user’s complaints are promptly attended to and
             resolved.
+>>>>>>> 6f753996cbde70e43ee313298912282054a7999b
           </li>
         </ul>
         <h1 className="mt-5 text-[16px] md:text-[22px] font-[500] text-[#575757]">
@@ -57,8 +70,13 @@ const JobApp = () => {
             best.
           </li>
           <li>
+<<<<<<< HEAD
+            We need someone who shares our values and is ready to put in their
+            best.
+=======
             You will ensure that user’s complaints are promptly attended to and
             resolved.
+>>>>>>> 6f753996cbde70e43ee313298912282054a7999b
           </li>
         </ul>
         <h1 className="mt-5 text-[16px] md:text-[22px] font-[500] text-[#575757]">
@@ -80,7 +98,11 @@ const JobApp = () => {
           Please send us your Resume or LinkedIn profile at{" "}
           <a
             href="mailto:join@soberpal.com"
+<<<<<<< HEAD
+            className="underline text-[#204E65]"
+=======
             className="underline text-[#204E65] hover:text-[#204e65ba]"
+>>>>>>> 6f753996cbde70e43ee313298912282054a7999b
           >
             join@soberpal.com
           </a>

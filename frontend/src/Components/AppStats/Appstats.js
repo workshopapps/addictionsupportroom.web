@@ -1,11 +1,32 @@
-import "./appstats.css";
+import './appstats.scss'
 import hands from "../../assets/hands.jpg";
-import hand from "../../assets/Rectangle26.png";
 import AppStat from "../../Data/AppStat";
 
 const AppStats = () => {
   return (
     <section className="stats">
+<<<<<<< HEAD
+        <img src={hands} alt="hands" className="hands" />
+        <div className="stats__content">
+          <p>We’ve helped a couple of people reduce their inatke of alcohol</p>
+          <h3>
+            We’re only just getting <br />
+            started on our journey
+          </h3>
+          {/* Stats data */}
+          <div className="stats__data-container">
+            {AppStat.map((stat) => (
+              <div className="stats__data" key={stat.id}>
+                <p className="count">{stat.count}</p>
+                <p>{stat.text}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+  )
+}
+=======
       <div className="w-[93%] flex justify-between max-w-[1300px]">
       <img src={hands} alt="hands" className="hands" />
       <div className="stats__content">
@@ -51,5 +72,6 @@ const AppStats = () => {
     </section>
   );
 };
+>>>>>>> 38abc4457a0a7ad9e2c0cc374d9188254cb89ea2
 
-export default AppStats;
+export default AppStats
