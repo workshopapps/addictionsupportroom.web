@@ -112,6 +112,17 @@
         width: 6rem;
         height: 6rem;
       }
+      & > div{
+        .author__name{
+          color: var(--primary-500);
+          font-weight: 700;
+          font-size: 1.4rem;
+        }
+        & > p{
+          font-weight: 400;
+          color: var(--primary-500);
+        }
+      }
     }
     .author__content {
       text-align: center;

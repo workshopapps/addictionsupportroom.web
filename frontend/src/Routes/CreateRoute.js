@@ -14,6 +14,7 @@ import TermsServices from '../Pages/TermsServices/TermsServices';
 import Forum from '../Pages/Forum/Forum';
 import Alcohol from '../Pages/Alcohol/Alcohol';
 import JobApplication from '../Pages/JobApplication/JobApplication';
+import NewsLetter from '../Pages/NewsLetter/NewsLetter';
 
 
 const CreateRoute = () => {
@@ -29,6 +30,7 @@ const CreateRoute = () => {
       <Route path='terms_policy' element={<TermsServices />} />
       <Route path='alcohol' element={<Alcohol />} />
       <Route path='careers/job' element={<JobApplication />} />
+      <Route path='newsletter' element={<NewsLetter/>} />
 
       {/* <Route path="*" element={<NotFound />} /> */}
     </Routes>
