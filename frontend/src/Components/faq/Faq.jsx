@@ -14,7 +14,7 @@ const Faq = ({ question, answer }) => {
       >
         <h3>{question}</h3>
         <img 
-          src={add}
+          src={add} alt='addImage'
         />
       </div>
       {click && 
