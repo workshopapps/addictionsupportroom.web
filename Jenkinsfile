@@ -23,7 +23,7 @@ pipeline {
             stage("deploy") {
 
                     steps {
-                            sh "sudo cp -rf backend /home/judgejudy/addictionsupportroom.web/backend"
+			    sh "sudo cp -rf ${workspace}/backend/app/* /home/judgejudy/addictionsupportroom.web/backend"
                             sh "sudo cp -fr ${WORKSPACE}/frontend/build/* /home/judgejudy/addictionsupportroom.web/frontend"
                             sh "sudo su - judgejudy && whoami"
                            // sh "sudo pm2 stop soberpal"
