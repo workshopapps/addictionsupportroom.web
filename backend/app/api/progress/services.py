@@ -7,24 +7,6 @@ from fastapi import HTTPException, status
 import datetime
 
 
-class ExampleService:
-    # def __init__(self, session: AsyncSession = Depends(db_session)):
-    #     self.session = session
-
-    async def get_all_examples(self, db: Session) -> list[schemas.Examples]:
-        examples = db.query(Example).all()
-
-        return examples
-
-    def create_example(self, db: Session, data) -> Example:
-        example = Example(**data.dict())
-        db.add(example)
-        db.commit()
-        db.refresh(example)
-
-        return example
-
-
 def get_all_users_streak(db: Session):
     """ 
     This function return all users with respect to the number of clean days if not return an empty list like this []

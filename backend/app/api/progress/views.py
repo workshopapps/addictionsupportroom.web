@@ -40,116 +40,7 @@ months = {
     '12': 'December'
 }
 
-streak_goals = [7, 30, 90]
-
-
-@router.get(
-    "/history/list",
-    response_model=GetAllHistoryResult | ResponseSchema,
-    status_code=201,
-    name="list of history",
-    responses={
-        200: {
-            "model": GetAllHistoryResult,
-            "description": "A list of history for each user.",
-        },
-        400: {
-            "model": ResponseSchema,
-            "description": "User not found.",
-        },
-    },
-)
-async def history_list(
-        currentUser: UserBase = Depends(deps.get_current_user),
-        session: Session = Depends(deps.get_db),
-):
-    """
-    The fetch history endpoint.
-
-    Returns:
-        GetAllHistoryResult: return a list of montths 
-    """
-
-    # Get all Months
-    results = session.query(Month).all()
-    # Sum up number of bottles taken
-    result = []
-    for month in results:
-        # Number of bottles taken in a month
-        bottle_count = 0
-        for relapses in month.relapses:
-            bottle_count += relapses.bottles_drank
-
-        result.append(
-            schemas.Months(
-                title=month.title,
-                bottle_count=bottle_count,
-            ))
-
-    return {"status_code": 200, "result": result}
-
-
-# @router.post(
-#     "/message",
-#     response_model=ResponseSchema,
-#     status_code=201,
-#     name="chats:send-message",
-#     responses={
-#         201: {
-#             "model": ResponseSchema,
-#             "description": "Message has been delivered successfully!",
-#         },
-#         401: {
-#             "model": ResponseSchema,
-#             "description": "Empty message, non existing receiver!",
-#         },
-#     },
-# )
-# async def send_message(
-#         request: MessageCreate,
-#         currentUser: UserBase = Depends(deps.get_current_user),  # pylint: disable=C0103
-#         session: Session = Depends(deps.get_db),
-# ):
-#     """
-#     The send_message endpoint.
-
-#     Args:
-#         request (MessageCreate) : A `MessageCreate` schema that contains info about the recipient.
-#         currentUser (UserObjectSchema): The authenticated user as the sender of the message.
-#         session (AsyncSession) : An autocommit sqlalchemy session object.
-
-#     Returns:
-#         ResponseSchema: return a response schema object.
-#     """
-
-#     # results = {
-#     #     "status_code": 201,
-#     #     "message": "A new message has been delivered successfully!",
-#     #     "data": currentUser,
-#     # }
-#     # return results
-#     results = await send_new_message(currentUser.id, request, None, None,
-#                                      session)
-#     return results
-
-
-@router.get("/leaderboard", response_model=list[schemas.Ranking])
-def get_all_streaks(db: Session = Depends(deps.get_db)):
-    ranks = services.get_all_users_streak(db=db)
-    return ranks
-
-
-@router.get("/leaderboard/top", response_model=list[schemas.Ranking])
-def get_top_ranking(db: Session = Depends(deps.get_db)):
-    top_ranks = services.get_top_20_users_with_high_streaks(db=db)
-    return top_ranks
-
-
-@router.get("/leaderboard/total_clean_days/{streak_id}",
-            response_model=schemas.Ranking)
-def get_specific_streak(streak_id: int, db: Session = Depends(deps.get_db)):
-    streak = services.get_user_total_clean_days(db=db, streak_id=streak_id)
-    return streak
+milestones = [1, 7, 30, 90]
 
 
 @router.post("/")
@@ -199,16 +90,16 @@ async def mark_a_day(
     user_streak = db.query(Streak).filter(
         Streak.user == current_user.id).first()
     if user_streak:
-        user_streak.last_relapse = new_relapse.id
+        user_streak.last_relapse_date = datetime.date.today
         db.commit()
-        db.refresh(user_streak)
     else:
-        user_streak = Streak(last_relapse=new_relapse.id, user=current_user.id)
+        user_streak = Streak(
+            last_relapse_date=datetime.date.today,
+            user=current_user.id,
+        )
         db.add(user_streak)
         db.commit()
-        db.refresh(user_streak)
-    data = jsonable_encoder(new_relapse)
-    return data
+    return new_relapse
 
 
 @router.get("/", name='Get Relapses in a Month')
@@ -232,28 +123,152 @@ async def read_relapses(
     return relapses
 
 
+# @router.post(
+#     "/message",
+#     response_model=ResponseSchema,
+#     status_code=201,
+#     name="chats:send-message",
+#     responses={
+#         201: {
+#             "model": ResponseSchema,
+#             "description": "Message has been delivered successfully!",
+#         },
+#         401: {
+#             "model": ResponseSchema,
+#             "description": "Empty message, non existing receiver!",
+#         },
+#     },
+# )
+# async def send_message(
+#         request: MessageCreate,
+#         currentUser: UserBase = Depends(deps.get_current_user),  # pylint: disable=C0103
+#         session: Session = Depends(deps.get_db),
+# ):
+#     """
+#     The send_message endpoint.
+
+#     Args:
+#         request (MessageCreate) : A `MessageCreate` schema that contains info about the recipient.
+#         currentUser (UserObjectSchema): The authenticated user as the sender of the message.
+#         session (AsyncSession) : An autocommit sqlalchemy session object.
+
+#     Returns:
+#         ResponseSchema: return a response schema object.
+#     """
+
+#     # results = {
+#     #     "status_code": 201,
+#     #     "message": "A new message has been delivered successfully!",
+#     #     "data": currentUser,
+#     # }
+#     # return results
+#     results = await send_new_message(currentUser.id, request, None, None,
+#                                      session)
+#     return results
+
+
 @router.get("/milestone")
-async def read_streaks(
-    *,
-    db: Session = Depends(deps.get_db),
-    skip: int = 0,
-    limit: int = 100,
-    current_user: User = Depends(deps.get_current_user),
-    token: OAuth2AuthorizationCodeBearer = Depends(auth_scheme)
+async def get_milestone(
+        *,
+        db: Session = Depends(deps.get_db),
+        current_user: User = Depends(deps.get_current_user),
 ) -> Any:
     """
     Get a user milestone
+    Returns {clean_days: 1, milestone: 3}
     """
-    user_streak = db.query(Streak).filter(
-        Streak.user == current_user.id).first()
-    user_streak.current_date = datetime.date.today()
-    db.commit()
-    db.refresh(user_streak)
-    D = datetime.datetime.strptime(
-        user_streak.current_date.strftime("%Y-%m-%d"), "%Y-%m-%d")
-    start_date = datetime.datetime.strptime(
-        user_streak.start_date.strftime("%Y-%m-%d"), "%Y-%m-%d")
-    milestone_days = D - start_date
-    data = jsonable_encoder(user_streak)
-    data["milestone_days"] = milestone_days.days
-    return data
+
+    # Get current user streak
+    # Check for when the last relapse occured
+    # Subtract today's date from last relapse
+    # Check where the milestone for the date lie
+    # Returns {clean_days: 1, milestone: 3}
+
+    last_relapse_date = current_user.last_relapse_date
+
+    today = datetime.date.today()
+    last_relapse_date = current_user.last_relapse_date
+
+    difference = today - last_relapse_date
+
+    clean_days = difference.days
+
+    result = {
+        "clean_days": clean_days,
+        "milestone": 0,
+    }
+
+    for milestone in milestones:
+        if clean_days <= milestone:
+            result = {
+                "clean_days": clean_days,
+                "milestone": milestone,
+            }
+        break
+
+    return result
+
+
+@router.get("/leaderboard", response_model=list[schemas.Ranking])
+def get_all_streaks(db: Session = Depends(deps.get_db)):
+    ranks = services.get_all_users_streak(db=db)
+    return ranks
+
+
+@router.get("/leaderboard/top", response_model=list[schemas.Ranking])
+def get_top_ranking(db: Session = Depends(deps.get_db)):
+    top_ranks = services.get_top_20_users_with_high_streaks(db=db)
+    return top_ranks
+
+
+@router.get("/leaderboard/total_clean_days/{streak_id}",
+            response_model=schemas.Ranking)
+def get_specific_streak(streak_id: int, db: Session = Depends(deps.get_db)):
+    streak = services.get_user_total_clean_days(db=db, streak_id=streak_id)
+    return streak
+
+
+@router.get(
+    "/history/list",
+    response_model=GetAllHistoryResult | ResponseSchema,
+    status_code=201,
+    name="list of history",
+    responses={
+        200: {
+            "model": GetAllHistoryResult,
+            "description": "A list of history for each user.",
+        },
+        400: {
+            "model": ResponseSchema,
+            "description": "User not found.",
+        },
+    },
+)
+async def history_list(
+        currentUser: UserBase = Depends(deps.get_current_user),
+        session: Session = Depends(deps.get_db),
+):
+    """
+    The fetch history endpoint.
+
+    Returns:
+        GetAllHistoryResult: return a list of montths 
+    """
+
+    # Get all Months
+    results = session.query(Month).all()
+    # Sum up number of bottles taken
+    result = []
+    for month in results:
+        # Number of bottles taken in a month
+        bottle_count = 0
+        for relapses in month.relapses:
+            bottle_count += relapses.bottles_drank
+
+        result.append(
+            schemas.Months(
+                title=month.title,
+                bottle_count=bottle_count,
+            ))
+
+    return {"status_code": 200, "result": result}
