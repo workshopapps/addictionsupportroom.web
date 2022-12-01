@@ -161,7 +161,15 @@ async def create_relapse(
     """
     Create Relapse
     """
-
+    relapse_in_db = db.query(Relapse).filter(Relapse.user==current_user.id, 
+        Relapse.day==relapse_in.day, Relapse.month==relapse_in.month, Relapse.year==relapse_in.year).first()
+    if relapse_in_db:
+        relapse_in_db.bottles_drank = relapse_in.bottles_drank
+        db.commit()
+        db.refresh(relapse_in_db)
+        data = jsonable_encoder(relapse_in_db)
+        data["message"] = "num of bottles updated"
+        return data
     # Create Month History, if it doesn't exist
     try:
         month_title = f'{months[str(relapse_in.month)]} {relapse_in.year}'
