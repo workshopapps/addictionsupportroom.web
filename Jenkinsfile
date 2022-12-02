@@ -28,7 +28,7 @@ pipeline {
                             sh "sudo su - judgejudy && whoami"
                             sh "sudo pm2 stop static-page-server-3344"
                             sh "sudo pm2 serve /home/judgejudy/frontend/build --port 3344 --name soberpal"
-                            sh "sudo pm2 start /home/judgejudy/backend/app/server.py --interpreter python3"
+                            sh "sudo pm2 start /home/judgejudy/backend/app.server.py --interpreter python3"
                     }
 
         }
