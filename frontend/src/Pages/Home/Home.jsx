@@ -128,7 +128,7 @@ implication and what needs to be done to reduce your alchol consumption.
             {/* <img src={phone} alt="phone" className="small_device" /> */}
           </div>
           <div className="mt-[150px] mx-auto">
-            <div className="flex gap-4 h-auto items-center">
+            <div className="flex gap-4 h-auto items-center mx-auto">
               <p className="rounded-[100%] text-[white] bg-blue p-2 px-5 mr-[16px]">1</p>
               <p className="text-[16px]">Getting sober</p>
             </div>
