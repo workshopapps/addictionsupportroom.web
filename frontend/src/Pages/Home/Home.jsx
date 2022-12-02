@@ -56,7 +56,6 @@ const size = 40
 
          
         </div>
-        {/* <Appstats /> */}
       </motion.section>
 
       <motion.section 
