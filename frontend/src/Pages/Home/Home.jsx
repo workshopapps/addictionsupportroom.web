@@ -8,7 +8,7 @@ import female from "../../assets/female.png";
 import cell1 from "../../assets/cell1.png";
 import cell2 from "../../assets/cell2.png";
 import smiley from "../../assets/smileys.png";
-import phones from "../../assets/Frame75.png";
+import start from "../../assets/start.png";
 import phone from "../../assets/Frame76.png";
 import Download from '../../Components/Download/Download'
 import { motion } from 'framer-motion'
@@ -150,7 +150,56 @@ implication and what needs to be done to reduce your alchol consumption.
        
       </motion.section>
 
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+      <div className="bg-[#D8F2FF] h-full  mb-[100px] pb-[100px]">
+        <motion.section 
+        whileInView={{y: [100, 50], opacity: [0,0,1]}} 
+        transition={{ duration: 0.7 }}
+        className="w-[90%] laptop:w-[70%] mx-auto"
+        >
+          <main className="text-[38px] text-center font-[700]">What peoople say about us</main>
+          <p className="text-[18px] mt-[20px] mb-[60px] text-center font-[400]">You are not alone in the fight against  addiction</p>
 
+          <div className="flex flex-wrap justify-between ">
+            <div className="bg-blue py-[40px] px-4 rounded-[16px] w-[300px]">
+              <div className="flex gap-1">
+                <img src={start} alt="start" />
+                <img src={start} alt="start" />
+                <img src={start} alt="start" />
+                <img src={start} alt="start" />
+                <img src={start} alt="start" />
+              </div>
+              <div>
+                <p className="mt-[20px] text-[white]">Lion</p>
+                <p className="mt-[20px] text-[white]">When I started using SoberPal, I relapsed two-five times but the community has been a huge support system and three years later I am a better Father. This has me so emotional. Thank you so much!</p>
+              </div>
+            </div>
+
+            <div className="bg-[#F1A66F] py-[40px] px-4 rounded-[16px] w-[300px]">
+              <div className="flex gap-1">
+                <img src={start} alt="start" />
+                <img src={start} alt="start" />
+                <img src={start} alt="start" />
+                <img src={start} alt="start" />
+                <img src={start} alt="start" />
+              </div>
+              <div>
+                <p className="mt-[20px] text-[white]">Lion</p>
+                <p className="mt-[20px] text-[white]">When I started using SoberPal, I relapsed two-five times but the community has been a huge support system and three years later I am a better Father. This has me so emotional. Thank you so much!</p>
+              </div>
+            </div>
+          </div>
+        </motion.section>
+      </div>
       <motion.section 
         whileInView={{y: [100, 50], opacity: [0,0,1]}} 
         transition={{ duration: 0.7 }}
@@ -209,10 +258,9 @@ implication and what needs to be done to reduce your alchol consumption.
           </div>
         </div>
 
-        <div className="w-full mb-[50px] mt-[150px] tablet:w-[70%] max-w-[1000px] mx-auto">
+        <div className="w-full mb-[50px] mt-[150px] tablet:w-[100%] max-w-[1000px] mx-auto">
           <Download />
         </div>
-        <div className="w-full tablet:w-[85%] mx-auto mb-16 bg-blue h-[2px] my-6" />
       </motion.section>
     </div>
   );
