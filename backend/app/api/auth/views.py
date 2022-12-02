@@ -1,8 +1,10 @@
 from datetime import timedelta
+import datetime
 from sqlite3 import IntegrityError
 from api.example.schemas import Examples, ExampleSchema
 from api.example.services import ExampleService
 from api.auth import schemas
+from db.models import Streak
 from db import models
 from sqlalchemy.orm import Session
 from fastapi import APIRouter, Depends, HTTPException, status
@@ -23,9 +25,11 @@ def signup(user: schemas.UserCreate, db: Session = Depends(deps.get_db)):
     db_user.hashed_password = deps.get_password_hash("general_password")
 
     try:
+        # Create a new user
         db.add(db_user)
         db.commit()
         db.refresh(db_user)
+
     except Exception as ex:
         print(ex.args)
         raise HTTPException(

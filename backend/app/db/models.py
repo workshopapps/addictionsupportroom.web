@@ -52,6 +52,12 @@ class User(Base):
     date_added = Column(DateTime,
                         default=datetime.datetime.utcnow,
                         nullable=False)
+    last_relapse_date = Column(
+        Date,
+        nullable=False,
+        default=datetime.date.today(),
+        # default=datetime.date(2008, 11, 25),
+    )
 
 
 class Month(Base):
@@ -77,10 +83,7 @@ class Relapse(Base):
 class Streak(Base):
     __tablename__ = "streaks"
     id = Column(Integer, primary_key=True, index=True)
-    start_date = Column(Date, nullable=False, default=datetime.date.today)
-    current_date = Column(Date, nullable=False, default=datetime.date.today)
-    last_relapse = Column(ForeignKey('relapses.id'), index=True)
-    clean_days = Column(Integer)
+
     user = Column(ForeignKey('users.id'), index=True)
     avatar_ofuser = Column(ForeignKey('users.avatar'), index=True)
     name = Column(ForeignKey('users.username'), index=True)
