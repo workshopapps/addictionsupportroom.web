@@ -21,8 +21,9 @@ const NavBar = () => {
             ))}
           </ul>
         </div>
+        
         <a className="hidden laptop:block" href="https://drive.google.com/file/d/1NbJ2bkOEBfzsjiOTlHNDdcxBsMeU_Qsk/view?usp=drivesdk" target="_blank" >
-          <Button text={navbarList.app} />
+          <Button className="font-[500]" text="Download App" />
         </a>
 
         <div
@@ -30,6 +31,7 @@ const NavBar = () => {
           onClick={() => setIsOpen(true)}
         >
           <div className="bg-blue h-[3px] w-[24px]" />
+          <div className="bg-blue mt-[3px] h-[3px] w-[24px]" />
           <div className="bg-blue mt-[3px] h-[3px] w-[24px]" />
         </div>
 
