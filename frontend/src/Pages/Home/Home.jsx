@@ -4,8 +4,9 @@ import Appstats from "../../Components/AppStats/Appstats";
 import { AiOutlineHeart } from "react-icons/ai";
 import { BiLineChart } from "react-icons/bi";
 import { TiFlashOutline } from "react-icons/ti";
-import people from "../../assets/Rectangle25.png";
-import peoples from "../../assets/Rectangle27.png";
+import female from "../../assets/female.png";
+import cell1 from "../../assets/cell1.png";
+import cell2 from "../../assets/cell2.png";
 import smiley from "../../assets/smileys.png";
 import phones from "../../assets/Frame75.png";
 import phone from "../../assets/Frame76.png";
@@ -24,21 +25,38 @@ const size = 40
         whileInView={{y: [100, 50], opacity: [0,0,1]}} 
         transition={{ duration: 0.7 }}
       >
-        <h1>Guiding you from addiction to recovery</h1>
+        <h1 className="text-[black]">Guiding you from addiction to recovery</h1>
         <p>
-          Soberpal is your reliable platform for addiction support. Our mission
-          is to guide you to a healthier life and provide the support you
-          need.
+        We have compiled a comprehensive list of resources to help you or a loved one find a support system or get immediate help for an addiction
         </p>
-          <img src={peoples} alt="people" className="big_device" />
-        <img src={people} alt="people" className="small_device" />
+          <img src={female} alt="people" className="big_device" />
+        <img src={female} alt="people" className="small_device" />
       </motion.section>
 
       <motion.section
          whileInView={{y: [100, 50], opacity: [0,0,1]}} 
          transition={{ duration: 0.7 }}
       >
-        <Appstats />
+        <p className="mt-[70px] mb-[20px] text-[24px] text-[500] text-center">We’ve helped a couple of people reduce their intake of alcohol</p>
+        <div className="flex flex-wrap justify-between mt-[20px] mb-[70px] ">
+          <div className="w-[30opx] mx-auto">
+            <p className="text-[48px] text-center font-[700]">60%</p>
+            <p className="text-[20px] font-[500]  text-center">Rate of recovery of our users</p>
+          </div>
+
+          <div  className="w-[300px] mx-auto">
+            <p className="text-[48px] text-center font-[700]">200+</p>
+            <p className="text-[20px] font-[500]  text-center">5-star reviews</p>
+          </div>
+
+          <div  className="w-[300px] mx-auto">
+            <p className="text-[48px] text-center font-[700]">10K</p>
+            <p className="text-[20px] font-[500] text-center">Global downloads</p>
+          </div>
+
+         
+        </div>
+        {/* <Appstats /> */}
       </motion.section>
 
       <motion.section 
@@ -46,53 +64,51 @@ const size = 40
         transition={{ duration: 0.7 }}
         className="soberpal__home-third__section"
       >
-        <h1>You are not alone in the fight against addiction</h1>
+        <p className="text-[28px] text-center font-[700]">Our services</p>
+        <p className="text-[18px] mt-[20px] mb-[30px] text-center font-[400]">You are not alone in the fight against  addiction</p>
 
         <div className="soberpal__home-third__section-cards ">
           <div className="cards__padding">
             <div className="cards__flex">
               <AiOutlineHeart size={size} className='icon__round'/>
-              <h3>We support each other</h3>
+              <h3>Progress Reports</h3>
             </div>
             <p>
-              Our team of experts, advocates and recovering addicts are
-              committed to helping you find the right recovery plan to rebuild
-              your life
+            We help you identify the different types of alchol addiction, the health
+implication and what needs to be done to reduce your alchol consumption.
             </p>
           </div>
 
           <div className="cards__padding">
             <div className="cards__flex">
               <img src={smiley} alt="smileys" className='icon__round'/>
-              <h3>We care about you</h3>
+              <h3>Chat Room</h3>
             </div>
             <p>
-              Help you to identify the different types of alcohol addiction, how
-              the substances affect the body and what you can do for yourself to
-              reduce or stop it once and for all
+            We help you identify the different types of alchol addiction, the health
+implication and what needs to be done to reduce your alchol consumption.
             </p>
           </div>
 
           <div className="cards__padding">
             <div className="cards__flex">
               <BiLineChart size={size}  className='icon__round'/>
-              <h3>We care about your progress</h3>
+              <h3>Daily Notes</h3>
             </div>
             <p>
-              We have compiled a comprehensive list of resources to help you or
-              a loved one find a support system or get immediate help for an
-              addiction
+            We help you identify the different types of alchol addiction, the health
+implication and what needs to be done to reduce your alchol consumption.
             </p>
           </div>
 
           <div className="cards__padding">
             <div className="cards__flex">
               <TiFlashOutline size={50}  className='icon__padding'/>
-              <h3>We provide the support you need</h3>
+              <h3>Support Team</h3>
             </div>
             <p>
-              find the support among our experts, advocates and recovering
-              addicts that will work best for you and power your recovery
+            We help you identify the different types of alchol addiction, the health
+implication and what needs to be done to reduce your alchol consumption.
             </p>
           </div>
         </div>
@@ -103,14 +119,34 @@ const size = 40
         transition={{ duration: 0.7 }}
         className="soberpal__home-fourth__section"
       >
-        <h1>Cutting egde features to help track your progress</h1>
-        <p>
-          Powerful, self-serve product help you track your alcohol intake, track
-          your progress, <br/>and live a more healtheir lifestyle with support from
-          the community
-        </p>
-        <img src={phones} alt="phones" className="big_device" />
-        <img src={phone} alt="phone" className="small_device" />
+         <main className="text-[28px] text-center font-[700]">Our services</main>
+        <p className="text-[18px] mt-[20px] mb-[30px] text-center font-[400]">You are not alone in the fight against  addiction</p>
+        <div className="h-full w-[90%] flex flex-wrap ">
+          <div className="relative w-[95%] laptop:w-[600px] mt-[20px] h-[450px] ">
+            <img src={cell1} alt="phones" className=" absolute z-10" />
+            <img src={cell2} alt="phones" className="absolute left-[180px] top-[50px]" />
+            {/* <img src={phone} alt="phone" className="small_device" /> */}
+          </div>
+          <div className="mt-[150px] mx-auto">
+            <div className="flex gap-4 h-auto items-center">
+              <p className="rounded-[100%] text-[white] bg-blue p-2 px-5 mr-[16px]">1</p>
+              <p className="text-[16px]">Getting sober</p>
+            </div>
+            <div className="flex gap-4 h-auto items-center">
+              <p className="rounded-[100%] text-[white] bg-blue p-2 px-5 mr-[16px]">2</p>
+              <p className="text-[16px]">Daily motivation and progress tracker</p>
+            </div>
+            <div className="flex gap-4 h-auto items-center">
+              <p className="rounded-[100%] text-[white] bg-blue p-2 px-5 mr-[16px]">3</p>
+              <p className="text-[16px]">Community support</p>
+            </div>
+            <div className="flex gap-4 h-auto items-center">
+              <p className="rounded-[100%] text-[white] bg-blue p-2 px-5 mr-[16px]">4</p>
+              <p className="text-[16px]">Get help anytime</p>
+            </div>
+          </div>
+        </div>
+
         <div className="w-full mb-[50px] mt-[90px] tablet:w-[70%] max-w-[1000px] mx-auto">
           <Download />
         </div>
