@@ -1,6 +1,6 @@
 from fastapi import APIRouter, Depends, status, HTTPException
 from sqlalchemy.orm import Session
-from app.db.db import get_db
+from db.db import get_db
 from .crud import get_all_blogs, get_detail_blog
 
 router = APIRouter()

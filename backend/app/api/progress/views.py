@@ -2,7 +2,6 @@ from api.example.schemas import Examples, ExampleSchema
 from api.example.services import ExampleService
 from api.common.schemas import ResponseSchema
 from api.auth.schemas import UserBase
-from . import services
 from fastapi import APIRouter, Depends
 from . import schemas
 from sqlalchemy.orm import Session
@@ -12,7 +11,7 @@ from typing import Any
 
 from .schemas import RelapseBase, RelapseCreate, RelapseInDB
 from fastapi.security import HTTPBearer
-from db.models import User, Streak, Relapse, Month
+from db.models import User, Relapse, Month
 from fastapi.encoders import jsonable_encoder
 from .crud import relapse, create_relapse_with_user
 
