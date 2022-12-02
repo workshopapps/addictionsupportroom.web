@@ -28,5 +28,5 @@ def get_auser_total_clean_days(current_user_id: int, db: Session):
     
     if not streak:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND,
-                            detail=f"There's no streak with id: {streak_id}")
+                            detail=f"There's no streak with id: {current_user_id}")
     return streak
