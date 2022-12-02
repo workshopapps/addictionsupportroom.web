@@ -6,7 +6,7 @@ import { navbarList } from '../../Data/navbar'
 
 const MobileNav = ({setIsOpen}) => {
   return (
-    <div className='fixed bg-blue w-[100%] h-[100rem] right-0 top-0 '>
+    <div className='fixed bg-blue z-50 w-[100%] h-[100rem] right-0 top-0 '>
         <button
             className='absolute right-[6%] top-[1.5%] text-white text-[24px]'
             onClick={() => setIsOpen(false)}
