@@ -25,7 +25,7 @@ docker-compose up -d web
 docker-compose logs -f --tail=100 web
 ```
 
-Go to: http://localhost:4455/api/docs/
+Go to: http://localhost:8000/api/docs/
 
 #### Migrations
 
@@ -67,7 +67,7 @@ cd app/
 python app/server.py
 ```
 
-Go to: http://localhost:4455/api/docs/
+Go to: http://localhost:8000/api/docs/
 
 #### Migrations
 
@@ -95,7 +95,7 @@ pytest .
 
 To run this project, you will need to add the following environment variables to your app/core/.env file
 
-`BASE_URL` - default: http://localhost:4455
+`BASE_URL` - default: http://localhost:8000
 
 `RELOAD` - default: false
 
