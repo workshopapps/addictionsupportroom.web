@@ -27,6 +27,7 @@ pipeline {
                             sh "sudo cp -fr ${WORKSPACE}/frontend/* /home/judgejudy/addictionsupportroom/frontend"
                             sh "sudo su - judgejudy && whoami"
                             sh "sudo pm2 stop soberpal"
+			    sh "sudo pm2 stop server"
                             sh "sudo pm2 serve /home/judgejudy/addictionsupportroom/frontend/build --port 3344 --name soberpal"
                             sh "sudo pm2 start /home/judgejudy/addictionsupportroom/backend/server.py --interpreter python3"
                     }
