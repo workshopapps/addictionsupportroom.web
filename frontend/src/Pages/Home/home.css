@@ -68,11 +68,16 @@
     border-radius: 16px;
 }
 
-.cards__padding:hover {
+/* .cards__padding:hover {
     border: 1px solid var(--primary-500);
     box-shadow: 2px 2px 5px #fff 2px;
     background-color: #d0d0d0;
   transition: all .5s ease;
+} */
+.cards__padding:hover {
+    background: var(--primary-50);
+    cursor: pointer;
+    transition: all ease 1s;
 }
 
 .cards__flex {
