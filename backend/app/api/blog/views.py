@@ -3,6 +3,7 @@ from sqlalchemy.orm import Session
 from db.db import get_db
 from .crud import get_all_blogs, get_detail_blog
 
+
 router = APIRouter()
 
 
