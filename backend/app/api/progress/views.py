@@ -242,3 +242,11 @@ async def read_streaks(*,
     data = jsonable_encoder(user_streak)
     data["milestone_days"] = milestone_days.days
     return data
+
+@router.get("/month")
+async def get_month_progress(*, month: int, db: Session = Depends(deps.get_db),  skip: int = 0,
+    limit: int = 100, current_user: User = Depends(deps.get_current_user),
+    token: OAuth2AuthorizationCodeBearer = Depends(auth_scheme)):
+    month_relapses = db.query(Relapse).filter(Relapse.user == current_user.id, Relapse.month == month).all()
+    data = jsonable_encoder(month_relapses)
+    return data
