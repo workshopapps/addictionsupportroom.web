@@ -31,11 +31,7 @@ class Ranking(BaseModel):
 
 class TotalCleanDays(BaseModel):
     clean_days: int
-    percentage: str
-    
-    class Config:
-        orm_mode = True
-        
+      
 
 class SummarySchema(BaseModel):
     milestone: int

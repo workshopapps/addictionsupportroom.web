@@ -80,16 +80,6 @@ class Relapse(Base):
     month_history = relationship("Month", back_populates="relapses")
 
 
-class Streak(Base):
-    __tablename__ = "streaks"
-    id = Column(Integer, primary_key=True, index=True)
-
-    user = Column(ForeignKey('users.id'), index=True)
-    avatar_ofuser = Column(ForeignKey('users.avatar'), index=True)
-    name = Column(ForeignKey('users.username'), index=True)
-    
-
-
 class MessageState(int, Enum):
     """
     Enum class to define a message state.
