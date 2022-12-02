@@ -147,10 +147,7 @@ implication and what needs to be done to reduce your alchol consumption.
           </div>
         </div>
 
-        <div className="w-full mb-[50px] mt-[90px] tablet:w-[70%] max-w-[1000px] mx-auto">
-          <Download />
-        </div>
-        <div className="w-full tablet:w-[85%] mx-auto mb-16 bg-blue h-[2px] my-6" />
+       
       </motion.section>
 
 
@@ -211,6 +208,11 @@ implication and what needs to be done to reduce your alchol consumption.
             <button>send</button>
           </div>
         </div>
+
+        <div className="w-full mb-[50px] mt-[150px] tablet:w-[70%] max-w-[1000px] mx-auto">
+          <Download />
+        </div>
+        <div className="w-full tablet:w-[85%] mx-auto mb-16 bg-blue h-[2px] my-6" />
       </motion.section>
     </div>
   );
