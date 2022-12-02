@@ -4,7 +4,6 @@ from sqlite3 import IntegrityError
 from api.example.schemas import Examples, ExampleSchema
 from api.example.services import ExampleService
 from api.auth import schemas
-from db.models import Streak
 from db import models
 from sqlalchemy.orm import Session
 from fastapi import APIRouter, Depends, HTTPException, status
