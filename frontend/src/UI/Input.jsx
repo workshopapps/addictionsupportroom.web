@@ -1,6 +1,6 @@
 import React from 'react'
 
-const Input = ({type, placeholder, id, icon}) => {
+const Input = ({type, placeholder, id, icon, disabled, handleChange, value}) => {
   return (
     <div className='flex w-full'>
       <input 

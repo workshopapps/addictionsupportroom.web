@@ -14,7 +14,7 @@ class Settings(BaseSettings):
 
     ENV: str = "dev"
     HOST: str = "0.0.0.0"
-    PORT: int = 8000
+    PORT: int = 4455
     BASE_URL_: str = f"https://{HOST}:{PORT}"
     # quantity of workers for uvicorn
     WORKERS_COUNT: int = 1
