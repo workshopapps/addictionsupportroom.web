@@ -27,6 +27,10 @@ class Ranking(BaseModel):
 
     class Config:
         orm_mode = True
+        
+
+class TotalCleanDays(BaseModel):
+    clean_days: int
 
 
 class SummarySchema(BaseModel):
