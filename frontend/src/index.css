@@ -103,7 +103,7 @@ body {
 }
 
 .active{
-  border-bottom: 3px solid #0E8ACB;
+  color: #0E8ACB;
 }
 
 .hover--effect:hover {

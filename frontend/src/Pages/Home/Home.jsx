@@ -248,7 +248,7 @@ implication and what needs to be done to reduce your alchol consumption.
             />
           </div>
         </div>
-        <p className='display_none'>Don't find answer to your question?</p>
+        <p className='display_none'>Further questions ?</p>
         <div className="soberpal__home-fifth__section__flexy">
           <div className="soberpal__home-fifth__section__flex2">
             <p>Ask us anything</p>
