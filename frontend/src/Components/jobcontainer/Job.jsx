@@ -1,14 +1,17 @@
 import "./job.scss";
 import { BiTimeFive } from "react-icons/bi";
 import { CiDollar } from "react-icons/ci";
-import JobData from "../../Data/JobData";
+// import JobData from "../../Data/JobData";
+import { motion } from "framer-motion";
 
 const Job = () => {
   return (
     <>
-      <div className="job">
+      <motion.div   whileInView={{ y: [100, 50], opacity: [0, 0, 1] }}
+        transition={{ duration: 0.7 }} className="job">
         <h5>Design</h5>
-        <div className="job__container">
+        <motion.div   whileInView={{ y: [100, 10], opacity: [0, 0, 1] }}
+        transition={{ duration: 0.7 }} className="job__container">
           <h6>Product Designer</h6>
           <p>
             We’re looking for a junior-level product designer to join our team.
@@ -23,9 +26,10 @@ const Job = () => {
               <p>40k - 60k</p>
             </div>
           </div>
-        </div>
+        </motion.div>
 
-        <div className="job__container">
+        <motion.div    whileInView={{ y: [100, 50], opacity: [0, 0, 1] }}
+        transition={{ duration: 0.7 }} className="job__container">
           <h6>Product Designer</h6>
           <p>
           We’re looking for a mid-level product designer to join our team.
@@ -40,10 +44,11 @@ const Job = () => {
               <p>40k - 60k</p>
             </div>
           </div>
-        </div>
-      </div>
+        </motion.div>
+      </motion.div>
 
-      <div className="job">
+      <motion.div   whileInView={{ y: [100, 50], opacity: [0, 0, 1] }}
+        transition={{ duration: 0.7 }} className="job">
         <h5>Software Development</h5>
         <div className="job__container">
           <h6>Frontend developer</h6>
@@ -61,7 +66,7 @@ const Job = () => {
             </div>
           </div>
         </div>
-      </div>
+      </motion.div>
     </>
   );
 };
