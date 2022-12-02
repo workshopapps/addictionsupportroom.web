@@ -1,7 +1,0 @@
-{
-  "dependencies": {
-    "framer-motion": "^7.6.12",
-    "react-hot-toast": "^2.4.0",
-    "react-toastify": "^9.1.1"
-  }
-}

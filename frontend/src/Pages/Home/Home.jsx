@@ -10,8 +10,8 @@ import smiley from "../../assets/smileys.png";
 import phones from "../../assets/Frame75.png";
 import phone from "../../assets/Frame76.png";
 import Download from '../../Components/Download/Download'
+import { motion } from 'framer-motion'
 import add from "../../assets/add.png";
-// import {people, smiley, phone, phones, add} from "./import";
 import "./home.css";
 
 const Home = () => {
@@ -19,7 +19,11 @@ const size = 40
 
   return (
     <div className="soberpal__home">
-      <section className="soberpal__home-first__section">
+      <motion.section 
+        className="soberpal__home-first__section"
+        whileInView={{y: [100, 50], opacity: [0,0,1]}} 
+        transition={{ duration: 0.7 }}
+      >
         <h1>Guiding you from addiction to recovery</h1>
         <p>
           Soberpal is your reliable platform for addiction support. Our mission
@@ -28,13 +32,20 @@ const size = 40
         </p>
           <img src={peoples} alt="people" className="big_device" />
         <img src={people} alt="people" className="small_device" />
-      </section>
+      </motion.section>
 
-      <section >
+      <motion.section
+         whileInView={{y: [100, 50], opacity: [0,0,1]}} 
+         transition={{ duration: 0.7 }}
+      >
         <Appstats />
-      </section>
+      </motion.section>
 
-      <section className="soberpal__home-third__section">
+      <motion.section 
+        whileInView={{y: [100, 50], opacity: [0,0,1]}} 
+        transition={{ duration: 0.7 }}
+        className="soberpal__home-third__section"
+      >
         <h1>You are not alone in the fight against addiction</h1>
 
         <div className="soberpal__home-third__section-cards ">
@@ -85,9 +96,13 @@ const size = 40
             </p>
           </div>
         </div>
-      </section>
+      </motion.section>
 
-      <section className="soberpal__home-fourth__section">
+      <motion.section 
+        whileInView={{y: [100, 50], opacity: [0,0,1]}} 
+        transition={{ duration: 0.7 }}
+        className="soberpal__home-fourth__section"
+      >
         <h1>Cutting egde features to help track your progress</h1>
         <p>
           Powerful, self-serve product help you track your alcohol intake, track
@@ -96,14 +111,18 @@ const size = 40
         </p>
         <img src={phones} alt="phones" className="big_device" />
         <img src={phone} alt="phone" className="small_device" />
-        <div className="w-full tablet:w-[70%] max-w-[1000px] mx-auto">
+        <div className="w-full mb-[50px] mt-[90px] tablet:w-[70%] max-w-[1000px] mx-auto">
           <Download />
         </div>
-      <div className="w-full tablet:w-[85%] mx-auto mb-16 bg-blue h-[2px] my-6" />
-      </section>
+        <div className="w-full tablet:w-[85%] mx-auto mb-16 bg-blue h-[2px] my-6" />
+      </motion.section>
 
 
-      <section className="soberpal__home-fifth__section">
+      <motion.section 
+        whileInView={{y: [100, 50], opacity: [0,0,1]}} 
+        transition={{ duration: 0.7 }}
+        className="soberpal__home-fifth__section"
+      >
         {/* <hr /> */}
         <div className="soberpal__home-fifth__section__padding">
           <h1>FAQs</h1>
@@ -156,7 +175,7 @@ const size = 40
             <button>send</button>
           </div>
         </div>
-      </section>
+      </motion.section>
     </div>
   );
 };
