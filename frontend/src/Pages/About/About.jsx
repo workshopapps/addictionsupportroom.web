@@ -4,12 +4,11 @@ import OurValues from "../../Components/ourvalues/OurValues";
 import interview from "../../assets/interview.png";
 import Job from "../../Components/jobcontainer/Job";
 import Button from "../../UI/Button";
-import Download from '../../Components/Download/Download'
+import Download from "../../Components/Download/Download";
 
-import ValueData from '../../Data/ValueData';
+import ValueData from "../../Data/ValueData";
 import AppStats from "../../Components/AppStats/Appstats";
 import { motion } from 'framer-motion'
-
 
 const About = () => {
   return (
@@ -30,19 +29,16 @@ const About = () => {
         <p className="learn__more">Learn more about the team behind soberpal</p>
       </motion.header>
        {/* app stats section */}
-       <AppStats/>
-
-      <motion.div 
+       <motion.div
+         whileInView={{y: [100, 50], opacity: [0,0,1]}} 
+         transition={{ duration: 0.7 }}
+      >
+        <AppStats />
+      </motion.div>
+       <motion.div
         whileInView={{y: [100, 50], opacity: [0,0,1]}} 
         transition={{ duration: 0.7 }}
-        className="team"
-      >
-        <h3>Meet our team</h3>
-        <p>
-          Our philosophy is simple — hire a team of diverse, passionate people
-          and foster a culture <br />
-          that empowers you to do you best work.
-        </p>
+       >
         <div className="team__members">
           {/* Team Data */}
           {TeamData.map((data) => (
@@ -87,7 +83,7 @@ const About = () => {
         <Job />
       </motion.section>
 
-      <div className="w-full mb-16 tablet:w-[70%] max-w-[1000px] mx-auto">
+      <div className="w-full mb-[50px] mt-[90px] tablet:w-[70%] max-w-[1000px] mx-auto">
           <Download />
         </div>
     </div>

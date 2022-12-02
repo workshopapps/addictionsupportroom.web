@@ -38,7 +38,7 @@ const Footer = () => {
             <div>
               <p>Resources</p>
               <Link to="/forum">Forum</Link>
-              <Link onClick={openHandler}>Newsletter</Link>
+              <Link to="/newsletter">Newsletter</Link>
               <Link to="/alcohol"> Alcohol Addiction</Link>
             </div>
             <div>
@@ -54,7 +54,7 @@ const Footer = () => {
           </div>
         </div>
         <hr />
-        <p>© 2022 Soberpal. All rights reserved.</p>
+        <p>© 2022 Soberpal. All rights reserved. && </p>
       </div>
       {openModal && <Newsletter closeHandler={closeHandler} />}
     </>
