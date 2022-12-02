@@ -10,26 +10,26 @@
       width: 30rem;
     }
     .stats__content {
-      text-align: center;
-      margin: 0 auto;
+      // text-align: center;
+      // margin: 0 auto;
       & > p {
         color: var(--secondary-600);
         font-weight: 700;
       }
       & > h3 {
-        color: var(--primary-500);
+        color: black;
         font-weight: 700;
         font-size: 30px;
         width: auto;
         margin-bottom: 20px;
       }
       .stats__data-container {
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
+        // display: grid;
+        // grid-template-columns: repeat(2, 1fr);
 
         div {
           // text-align: left;
-          justify-content: center;
+          // justify-content: center;
 
           & > p {
             margin-bottom: 2rem;
@@ -51,7 +51,7 @@
   /* On tablet screens 900px or less */
   @media screen and (max-width: 1020px) {
     .stats {
-      flex-direction: row;
+      // flex-direction: row;
       .hands{
         margin-top: -3rem;
         width: 100%;

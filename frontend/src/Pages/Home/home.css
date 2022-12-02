@@ -92,7 +92,7 @@
     font-weight: 500;
     font-size: 1.25rem;
     line-height: 1.875rem;
-    color: var(--primary-500);
+    color: black;
 }
 
 .icon__round {
@@ -199,9 +199,10 @@
 .soberpal__home-fifth__section p {
     font-weight: 500;
     font-size: 1.2rem;
+    padding: 10px;
     line-height: 1rem;
     text-align: center;
-    color: var(--primary-500);
+    color: rgba(0, 0, 0, 0.24);
 }
 
 .soberpal__home-fifth__section__padding {
