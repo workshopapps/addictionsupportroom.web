@@ -160,13 +160,14 @@ implication and what needs to be done to reduce your alchol consumption.
         <br/>
         <br/>
         <br/>
-        <main className="text-[28px] text-center font-[700]">What peoople say about us</main>
-        <p className="text-[18px] mt-[20px] mb-[30px] text-center font-[400]">You are not alone in the fight against  addiction</p>
+      <div className="bg-[#D8F2FF] h-full  mb-[100px] pb-[100px]">
         <motion.section 
         whileInView={{y: [100, 50], opacity: [0,0,1]}} 
         transition={{ duration: 0.7 }}
-        className="w-[90%] laptop:w-[70%] mx-auto mb-[100px]"
+        className="w-[90%] laptop:w-[70%] mx-auto"
         >
+          <main className="text-[38px] text-center font-[700]">What peoople say about us</main>
+          <p className="text-[18px] mt-[20px] mb-[60px] text-center font-[400]">You are not alone in the fight against  addiction</p>
 
           <div className="flex flex-wrap justify-between ">
             <div className="bg-blue py-[40px] px-4 rounded-[16px] w-[300px]">
@@ -198,6 +199,7 @@ implication and what needs to be done to reduce your alchol consumption.
             </div>
           </div>
         </motion.section>
+      </div>
       <motion.section 
         whileInView={{y: [100, 50], opacity: [0,0,1]}} 
         transition={{ duration: 0.7 }}
@@ -256,10 +258,9 @@ implication and what needs to be done to reduce your alchol consumption.
           </div>
         </div>
 
-        <div className="w-full mb-[50px] mt-[150px] tablet:w-[70%] max-w-[1000px] mx-auto">
+        <div className="w-full mb-[50px] mt-[150px] tablet:w-[100%] max-w-[1000px] mx-auto">
           <Download />
         </div>
-        <div className="w-full tablet:w-[85%] mx-auto mb-16 bg-blue h-[2px] my-6" />
       </motion.section>
     </div>
   );
