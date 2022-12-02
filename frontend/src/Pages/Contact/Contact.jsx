@@ -100,7 +100,7 @@ const Contact = () => {
         <motion.div whileInView={{y: [100, 50], opacity: [0,0,1]}} transition={{ duration: 0.7 }} className="section__one">
           <h2>Get in touch with us. How can we help?</h2>
           {/* form container */}
-
+          
           <form ref={form} id="form" onSubmit={handleSubmit(onSubmit)}>
             {/* full-name input */}
             <div className="input__container">
@@ -180,41 +180,45 @@ const Contact = () => {
           </form>
         </motion.div>
         {/* section two of the container */}
-        <div className="section__two">
-          {/* address section */}
-          <div className="address__section">
-            <div className="address">
-              <GrLocation />
-              <p>256, Newyork City, United States</p>
-            </div>
-            <div className="contact__details">
-              <BsTelephone />
-              <p>01 3456789</p>
-            </div>
-          </div>
-          {/* social icons */}
-          <div className="socials">
-            <h3>Follow Us</h3>
-            <div className="icons">
-              <div className="icon__container">
-                <BsInstagram className="icon" />
+        <motion.div whileInView={{y: [100, 50], opacity: [0,0,1]}} transition={{ duration: 0.7 }} className="section__one">
+
+          <div className="section__two">
+            {/* address section */}
+            <div className="address__section">
+              <div className="address">
+                <GrLocation />
+                <p>256, Newyork City, United States</p>
               </div>
-              <div className="icon__container">
-                <AiOutlineFacebook className="icon" />
-              </div>
-              <div className="icon__container">
-                <ImTwitter className="icon" />
+              <div className="contact__details">
+                <BsTelephone />
+                <p>01 3456789</p>
               </div>
             </div>
+            {/* social icons */}
+            <div className="socials">
+              <h3>Follow Us</h3>
+              <div className="icons">
+                <div className="icon__container">
+                  <BsInstagram className="icon" />
+                </div>
+                <div className="icon__container">
+                  <AiOutlineFacebook className="icon" />
+                </div>
+                <div className="icon__container">
+                  <ImTwitter className="icon" />
+                </div>
+              </div>
+            </div>
+            {/* map */}
+            <div>
+              <img src={mapImg} className="map" alt="Map" />
+              {/* <Wrapper apiKey={"YOUR_API_KEY"}>
+                <Map />
+              </Wrapper> */}
+            </div>
           </div>
-          {/* map */}
-          <div>
-            <img src={mapImg} className="map" alt="Map" />
-            {/* <Wrapper apiKey={"YOUR_API_KEY"}>
-              <Map />
-            </Wrapper> */}
-          </div>
-        </div>
+        </motion.div>
+
       </div>
     </div>
   );
