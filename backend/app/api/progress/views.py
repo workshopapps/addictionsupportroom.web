@@ -84,7 +84,6 @@ async def mark_a_day(
     db.commit()
     db.refresh(new_relapse)
     
-    # Todo: Update the last_relapse_date in User
     current_user_id = current_user.id
 
     currentuser = db.query(User).get(current_user_id)
