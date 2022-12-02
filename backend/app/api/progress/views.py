@@ -281,7 +281,7 @@ async def get_current_user_total_clean_days(
         current_user: User = Depends(deps.get_current_user),
 ) -> Any:
     """
-    Get the current user's total number of clean days.
+    Get the current user's total number of clean days and the percentage: (clean_days/milestone days)* 100.
     
     """
 
@@ -293,8 +293,23 @@ async def get_current_user_total_clean_days(
     today = datetime.date.today()
     difference = today - users.last_relapse_date
     clean_days = difference.days
-    result = []
-    return {"status_code": 200, "clean_days": clean_days}
+    result = {
+        "clean_days": clean_days,
+        "milestone": 0,
+    }
+
+    for milestone in milestones:
+        if clean_days <= milestone:
+            result = {
+                "clean_days": clean_days,
+                "milestone": milestone,
+            }
+        break
+    percent = int((clean_days/milestones[result["milestone"]]) * 100)
+    
+    return {"status_code": 200, "clean_days": clean_days, "percentage": f'{percent}%'}
+    
+    # return {"status_code": 200, "clean_days": clean_days}
 
 
 @router.get(
