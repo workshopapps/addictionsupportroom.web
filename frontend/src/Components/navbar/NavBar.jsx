@@ -21,9 +21,9 @@ const NavBar = () => {
             ))}
           </ul>
         </div>
-        <Link className="hidden laptop:block" to={navbarList.appLink}>
+        <a className="hidden laptop:block" href="https://drive.google.com/file/d/1NbJ2bkOEBfzsjiOTlHNDdcxBsMeU_Qsk/view?usp=drivesdk" target="_blank" >
           <Button text={navbarList.app} />
-        </Link>
+        </a>
 
         <div
           className="flex flex-col justify-center laptop:hidden"
