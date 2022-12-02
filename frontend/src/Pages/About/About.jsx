@@ -20,7 +20,7 @@ const About = () => {
       >
         <p className="about">About us</p>
         <h1>About Soberpal</h1>
-        <p className="about__soberpal">
+        <p className="text-[black] text-[18px] tablet:text-[20px]">
           Everything you need to go through the journey of reducing your alcohol
           intake. We’ve done the heavy lifting
           <br />
@@ -95,7 +95,7 @@ const About = () => {
         <Job />
       </motion.section>
 
-      <div className="w-full mb-[50px] mt-[90px] tablet:w-[70%] max-w-[1000px] mx-auto">
+      <div className="w-full mb-[50px] mt-[120px] tablet:w-[70%] max-w-[1000px] mx-auto">
         <Download />
       </div>
     </div>

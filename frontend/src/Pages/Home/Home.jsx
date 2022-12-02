@@ -4,12 +4,12 @@ import Appstats from "../../Components/AppStats/Appstats";
 import { AiOutlineHeart } from "react-icons/ai";
 import { BiLineChart } from "react-icons/bi";
 import { TiFlashOutline } from "react-icons/ti";
-import female from "../../assets/female.png";
-import cell1 from "../../assets/cell1.png";
+import HomeBg from "../../assets/bg-home.png";
+import phone from "../../assets/phone.png";
 import cell2 from "../../assets/cell2.png";
 import smiley from "../../assets/smileys.png";
 import start from "../../assets/start.png";
-import phone from "../../assets/Frame76.png";
+// import phone from "../../assets/Frame76.png";
 import Download from '../../Components/Download/Download'
 import { motion } from 'framer-motion'
 import add from "../../assets/add.png";
@@ -29,8 +29,8 @@ const size = 40
         <p>
         We have compiled a comprehensive list of resources to help you or a loved one find a support system or get immediate help for an addiction
         </p>
-          <img src={female} alt="people" className="big_device" />
-        <img src={female} alt="people" className="small_device" />
+          <img src={HomeBg} alt="people" className="big_device" />
+        <img src={HomeBg} alt="people" className="small_device" />
       </motion.section>
 
       <motion.section
@@ -40,17 +40,17 @@ const size = 40
         <p className="mt-[70px] mb-[40px] text-[28px] font-[600] text-center">We’ve helped a couple of people reduce their intake of alcohol</p>
         <div className="flex flex-wrap justify-between mt-[20px] mb-[70px] ">
           <div className="w-[30opx] mx-auto">
-            <p className="text-[48px] text-center font-[700]">60%</p>
+            <p className="text-[48px] text-blue text-center font-[700]">60%</p>
             <p className="text-[20px] font-[500]  text-center">Rate of recovery of our users</p>
           </div>
 
           <div  className="w-[300px] mx-auto">
-            <p className="text-[48px] text-center font-[700]">200+</p>
+            <p className="text-[48px] text-blue text-center font-[700]">200+</p>
             <p className="text-[20px] font-[500]  text-center">5-star reviews</p>
           </div>
 
           <div  className="w-[300px] mx-auto">
-            <p className="text-[48px] text-center font-[700]">10K</p>
+            <p className="text-[48px] text-blue text-center font-[700]">10K</p>
             <p className="text-[20px] font-[500] text-center">Global downloads</p>
           </div>
 
@@ -63,8 +63,8 @@ const size = 40
         transition={{ duration: 0.7 }}
         className="soberpal__home-third__section"
       >
-        <p className="text-[28px] text-center font-[700]">Our services</p>
-        <p className="text-[18px] mt-[20px] mb-[30px] text-center font-[400]">You are not alone in the fight against  addiction</p>
+        <p className="text-[32px] text-center font-[700]">Our services</p>
+        <p className="text-[18px] mt-[20px] mb-[50px] text-center font-[400]">You are not alone in the fight against  addiction</p>
 
         <div className="soberpal__home-third__section-cards ">
           <div className="cards__padding">
@@ -118,14 +118,13 @@ implication and what needs to be done to reduce your alchol consumption.
         transition={{ duration: 0.7 }}
         className="soberpal__home-fourth__section"
       >
-         <main className="text-[28px] text-center font-[700]">Our services</main>
+         <main className="text-[32px] text-center font-[700]">How we can help You</main>
         <p className="text-[18px] mt-[20px] mb-[30px] text-center font-[400]">You are not alone in the fight against  addiction</p>
-        <div className="h-full w-[90%] flex flex-wrap ">
-          <div className="relative left-[-30px] mx-auto w-[80%] laptop:w-[600px] mt-[20px] h-[450px] ">
-            <img src={cell1} alt="phones" className=" absolute z-10 w-auto" />
-            <img src={cell2} alt="phones" className="absolute left-[180px] top-[50px] w-auto" />
+        <div className="h-full w-[90%] max-w-[900px] flex flex-wrap ">
+          <div className="mx-auto mt-[20px]">
+            <img src={phone} alt="phones" className="h-[400px] w-auto " />
           </div>
-          <div className="mt-[150px] mx-auto">
+          <div className="mt-[100px] tablet:mt-[50px] mx-auto">
             <div className="flex gap-4 h-auto items-center mx-auto">
               <p className="rounded-[100%] text-[white] bg-blue p-2 px-5 mr-[16px]">1</p>
               <p className="text-[16px]">Getting sober</p>
@@ -167,7 +166,7 @@ implication and what needs to be done to reduce your alchol consumption.
           <main className="text-[38px] text-center font-[700]">What peoople say about us</main>
           <p className="text-[18px] mt-[20px] mb-[60px] text-center font-[400]">You are not alone in the fight against  addiction</p>
 
-          <div className="flex  flex-wrap justify-between ">
+          <div className="flex max-w-[1000px] mx-auto flex-wrap justify-between ">
             <div className="bg-blue mt-[30px] mx-auto py-[40px] px-4 rounded-[16px] w-[300px]">
               <div className="flex gap-1">
                 <img src={start} alt="start" />
@@ -178,7 +177,7 @@ implication and what needs to be done to reduce your alchol consumption.
               </div>
               <div>
                 <p className="mt-[20px] text-[white]">Lion</p>
-                <p className="mt-[20px] text-[white]">When I started using SoberPal, I relapsed two-five times but the community has been a huge support system and three years later I am a better Father. This has me so emotional. Thank you so much!</p>
+                <p className="mt-[20px] text-[white]">Soberpal has been an amazing support, I've made a lot of friends for life and there has been a major reduction in my alcohol intake.</p>
               </div>
             </div>
 
@@ -191,8 +190,8 @@ implication and what needs to be done to reduce your alchol consumption.
                 <img src={start} alt="start" />
               </div>
               <div>
-                <p className="mt-[20px] text-[white]">Lion</p>
-                <p className="mt-[20px] text-[white]">When I started using SoberPal, I relapsed two-five times but the community has been a huge support system and three years later I am a better Father. This has me so emotional. Thank you so much!</p>
+                <p className="mt-[20px] text-[white]">Dolphin</p>
+                <p className="mt-[20px] text-[white]">It's been fun hanging out on the SoberPal app, I get to keep track of my progress and avoid relapses. It's a great app and you should definitely try it out.</p>
               </div>
             </div>
           </div>
@@ -201,7 +200,7 @@ implication and what needs to be done to reduce your alchol consumption.
       <motion.section 
         whileInView={{y: [100, 50], opacity: [0,0,1]}} 
         transition={{ duration: 0.7 }}
-        className="soberpal__home-fifth__section"
+        className="soberpal__home-fifth__section max-w-[1300px] mx-auto"
       >
         {/* <hr /> */}
         <div className="soberpal__home-fifth__section__padding">
@@ -248,10 +247,10 @@ implication and what needs to be done to reduce your alchol consumption.
             />
           </div>
         </div>
-        <p className='display_none'>Further questions ?</p>
+        <h3 className='text-center font-[500] text-[28px]'>Further questions ?</h3>
         <div className="soberpal__home-fifth__section__flexy">
           <div className="soberpal__home-fifth__section__flex2">
-            <p>Ask us anything</p>
+            <p >Ask us anything</p>
             <button>send</button>
           </div>
         </div>

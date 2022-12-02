@@ -12,7 +12,7 @@
       font-size: 2rem;
       font-weight: 700;
       font-size: 48px;
-      color: var(--primary-600);
+      color: black;
     }
     .about__soberpal {
       color: var(--gray-500);
@@ -32,12 +32,12 @@
       font-weight: 700;
     }
     & > h3 {
-      color: var(--gray-600);
+      color: black;
       font-size: 2.2rem;
       font-weight: 700;
     }
     & > p {
-      color: var(--gray-700);
+      color: black;
       font-weight: 500;
       font-size: 1.2rem;
     }
@@ -93,13 +93,13 @@
     font-weight: 700;
     font-size: 36px;
     line-height: 32px;
-    color: var(--primary-500);
+    color: black;
   }
   .position__text {
     color: var(--gray-500);
     font-weight: 400;
     word-spacing: 0.3rem;
-    margin: 20px auto;
+    margin: 20px auto 50px;
   }
   .interview {
     margin: 3% 10%;

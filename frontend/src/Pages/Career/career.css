@@ -12,15 +12,12 @@
 }
 
 .soberpal__career-first__section-box h1 {
-  font-weight: 500;
+  font-weight: 600;
   font-size: 4rem;
-  line-height: 6rem;
-  color: var(--gray-500);
+  /* line-height: 6rem; */
+  color: black;
 }
 
-.soberpal__career-first__section-box h1 span {
-  color: #0e8acb;
-}
 
 .soberpal__career-first__section-box p {
   font-weight: 400;
@@ -59,9 +56,8 @@
 .soberpal__career-second__section h1 {
   font-weight: 500;
   font-size: 3.5rem;
-  line-height: 5rem;
-  color: var(--gray-600);
-  margin-bottom: 1rem;
+  line-height: 4rem;
+  color: black;
 }
 
 .soberpal__career-second__section-box {
@@ -102,14 +98,14 @@
   font-weight: 700;
   font-size: 2rem;
   line-height: 3rem;
-  color: var(--primary-500);
+  color: black;
 }
 
 .soberpal__career-third__section p {
   font-weight: 400;
   font-size: 1.25rem;
   line-height: 2rem;
-  color: var(--primary-500);
+  color: black;
   margin: 0.5rem 0 3rem 0;
 }
 

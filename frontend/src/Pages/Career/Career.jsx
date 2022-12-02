@@ -18,9 +18,9 @@ const Career = () => {
           transition={{ delay: 0.2, duration: 0.5 }}
           className="soberpal__career-first__section-box"
         >
-          <h1>
-            <span>Grow</span> your Career with us at SoberPal
-          </h1>
+          <div className="text-[40px] font-[600]">
+            Grow your Career with us at SoberPal
+          </div>
           <p>
             We are abunch of bold, creative and imaginative individuals
             collectively driving the effort of encouraging reduction in alcohol
@@ -41,7 +41,10 @@ const Career = () => {
 
       <section className="soberpal__career-second__section">
         <h1>
-          Join our mission to help 2 billion people <br /> break free from
+          Join our mission to help 2 billion people 
+          </h1>
+          <h1>
+          break free from
           alcohol addiction
         </h1>
         <motion.div
