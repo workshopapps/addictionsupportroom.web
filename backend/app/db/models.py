@@ -85,9 +85,6 @@ class Streak(Base):
     id = Column(Integer, primary_key=True, index=True)
 
     user = Column(ForeignKey('users.id'), index=True)
-    avatar_ofuser = Column(ForeignKey('users.avatar'), index=True)
-    name = Column(ForeignKey('users.username'), index=True)
-    
 
 
 class MessageState(int, Enum):

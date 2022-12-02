@@ -20,13 +20,12 @@ def get_top_20_users_with_high_streaks(db: Session):
     top_ranks = db.query(Streak).order_by(desc(
         Streak.clean_days)).limit(20).all()
     return top_ranks
-    
-    
 
-def get_auser_total_clean_days(current_user_id: int, db: Session):
-    streak = db.query(Streak).filter(Streak.user == current_user_id).first()
-    
+
+def get_user_total_clean_days(streak_id: int, db: Session):
+    streak = db.query(Streak).filter(Streak.id == streak_id).first()
+
     if not streak:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND,
-                            detail=f"There's no streak with id: {current_user_id}")
+                            detail=f"There's no streak with id: {streak_id}")
     return streak
