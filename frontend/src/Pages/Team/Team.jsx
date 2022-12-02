@@ -7,6 +7,7 @@ import TeamImgmobile from '../../assets/team-mobile.png'
 import { AiOutlineClockCircle } from 'react-icons/ai';
 import { AiOutlineDollar } from 'react-icons/ai';
 import { motion } from 'framer-motion'
+import Download from '../../Components/Download/Download';
 
 
 const Team = () => {
@@ -95,14 +96,8 @@ const Team = () => {
 
         {/* download app section */}
       <motion.div whileInView={{y: [100, 10], opacity: [0,0,1]}} transition={{ duration: 1.3 }} className="team__download-app">
-        <div className="team__download-app-text">
-          <h3>Download the Soberpal app</h3>
-          <p className='team__p download__p'>Join over 200+ people already growing with Soberpal.</p>
-        </div>
-
-        {/* download button to download soberpal */}
-        <div className="team__download-app-btn">
-        <Button text={download} id='btn'/>
+        <div className="w-full mb-[50px] mt-[150px] tablet:w-[100%] max-w-[1000px] mx-auto">
+          <Download />
         </div>
       </motion.div>
     </div>

@@ -12,6 +12,7 @@ import Button from "../../UI/Button";
 import { useForm } from "react-hook-form";
 import { toast, ToastContainer } from "react-toastify";
 import { motion } from "framer-motion";
+import Download from "../../Components/Download/Download";
 
 const NewsLetter = () => {
   const notify = () =>
@@ -248,11 +249,10 @@ const NewsLetter = () => {
         transition={{ duration: 1.2 }}
         className="download"
       >
-        <div>
-          <h6>Download the Soberpal app</h6>
-          <p>Join over 200+ people already growing with Soberpal.</p>
+        <div className="w-full mb-[50px] mt-[150px] tablet:w-[100%] max-w-[1000px] mx-auto">
+          <Download />
+          
         </div>
-        <Button text="Download App" />
       </motion.div>
     </div>
   );

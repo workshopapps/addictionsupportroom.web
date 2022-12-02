@@ -37,7 +37,7 @@ const size = 40
          whileInView={{y: [100, 50], opacity: [0,0,1]}} 
          transition={{ duration: 0.7 }}
       >
-        <p className="mt-[70px] mb-[20px] text-[24px] text-[500] text-center">We’ve helped a couple of people reduce their intake of alcohol</p>
+        <p className="mt-[70px] mb-[40px] text-[28px] font-[600] text-center">We’ve helped a couple of people reduce their intake of alcohol</p>
         <div className="flex flex-wrap justify-between mt-[20px] mb-[70px] ">
           <div className="w-[30opx] mx-auto">
             <p className="text-[48px] text-center font-[700]">60%</p>
@@ -122,10 +122,9 @@ implication and what needs to be done to reduce your alchol consumption.
          <main className="text-[28px] text-center font-[700]">Our services</main>
         <p className="text-[18px] mt-[20px] mb-[30px] text-center font-[400]">You are not alone in the fight against  addiction</p>
         <div className="h-full w-[90%] flex flex-wrap ">
-          <div className="relative w-[95%] laptop:w-[600px] mt-[20px] h-[450px] ">
-            <img src={cell1} alt="phones" className=" absolute z-10" />
-            <img src={cell2} alt="phones" className="absolute left-[180px] top-[50px]" />
-            {/* <img src={phone} alt="phone" className="small_device" /> */}
+          <div className="relative left-[-30px] mx-auto w-[80%] laptop:w-[600px] mt-[20px] h-[450px] ">
+            <img src={cell1} alt="phones" className=" absolute z-10 w-auto" />
+            <img src={cell2} alt="phones" className="absolute left-[180px] top-[50px] w-auto" />
           </div>
           <div className="mt-[150px] mx-auto">
             <div className="flex gap-4 h-auto items-center mx-auto">
@@ -169,8 +168,8 @@ implication and what needs to be done to reduce your alchol consumption.
           <main className="text-[38px] text-center font-[700]">What peoople say about us</main>
           <p className="text-[18px] mt-[20px] mb-[60px] text-center font-[400]">You are not alone in the fight against  addiction</p>
 
-          <div className="flex flex-wrap justify-between ">
-            <div className="bg-blue py-[40px] px-4 rounded-[16px] w-[300px]">
+          <div className="flex  flex-wrap justify-between ">
+            <div className="bg-blue mt-[30px] mx-auto py-[40px] px-4 rounded-[16px] w-[300px]">
               <div className="flex gap-1">
                 <img src={start} alt="start" />
                 <img src={start} alt="start" />
@@ -184,7 +183,7 @@ implication and what needs to be done to reduce your alchol consumption.
               </div>
             </div>
 
-            <div className="bg-[#F1A66F] py-[40px] px-4 rounded-[16px] w-[300px]">
+            <div className="bg-[#F1A66F] mx-auto mt-[30px] py-[40px] px-4 rounded-[16px] w-[300px]">
               <div className="flex gap-1">
                 <img src={start} alt="start" />
                 <img src={start} alt="start" />
