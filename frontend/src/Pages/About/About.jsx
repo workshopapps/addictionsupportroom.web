@@ -4,16 +4,15 @@ import OurValues from "../../Components/ourvalues/OurValues";
 import interview from "../../assets/interview.png";
 import Job from "../../Components/jobcontainer/Job";
 import Button from "../../UI/Button";
-import Download from '../../Components/Download/Download'
+import Download from "../../Components/Download/Download";
 
-import ValueData from '../../Data/ValueData';
+import ValueData from "../../Data/ValueData";
 import AppStats from "../../Components/AppStats/Appstats";
-
 
 const About = () => {
   return (
-    <div  className="about__container">
-      <header className="header" >
+    <div className="about__container">
+      <header className="header">
         <p className="about">About us</p>
         <h1>About Soberpal</h1>
         <p className="about__soberpal">
@@ -24,8 +23,8 @@ const About = () => {
         </p>
         <p className="learn__more">Learn more about the team behind soberpal</p>
       </header>
-       {/* app stats section */}
-       <AppStats/>
+      {/* app stats section */}
+      <AppStats />
 
       <div className="team">
         <h3>Meet our team</h3>
@@ -48,12 +47,12 @@ const About = () => {
 
       {/* ourvalues section */}
       <section className="center">
-      <OurValues
-      prg1='Our values'
-      heading='How we work at soberpal'
-      prg2='Our shared values keep us connected and guide us as one team'
-      value={ValueData}
-      />
+        <OurValues
+          prg1="Our values"
+          heading="How we work at soberpal"
+          prg2="Our shared values keep us connected and guide us as one team"
+          value={ValueData}
+        />
       </section>
 
       {/* open postions section */}
@@ -71,8 +70,8 @@ const About = () => {
       </section>
 
       <div className="w-full mb-16 tablet:w-[70%] max-w-[1000px] mx-auto">
-          <Download />
-        </div>
+        <Download />
+      </div>
     </div>
   );
 };

@@ -15,14 +15,16 @@ import add from "../../assets/add.png";
 import "./home.css";
 
 const Home = () => {
-  const size = 40;
+const size = 40
 
-  return ( 
+  return (
     <div className="soberpal__home">
       <section className="soberpal__home-first__section">
-        <h1>The alcohol rehabilitation support you need.</h1>
+        <h1>Guiding you from addiction to recovery</h1>
         <p>
-          We are with you on your journey to recovery from alcohol addiction.
+          Soberpal is your reliable platform for addiction support. Our mission
+          is to guide you to a healthier life and provide the support you
+          need.
         </p>
           <img src={peoples} alt="people" className="big_device" />
         <img src={people} alt="people" className="small_device" />
@@ -38,7 +40,7 @@ const Home = () => {
         <div className="soberpal__home-third__section-cards ">
           <div className="cards__padding">
             <div className="cards__flex">
-              <AiOutlineHeart size={size} className="icon__round" />
+              <AiOutlineHeart size={size} className='icon__round'/>
               <h3>We support each other</h3>
             </div>
             <p>
@@ -50,7 +52,7 @@ const Home = () => {
 
           <div className="cards__padding">
             <div className="cards__flex">
-              <img src={smiley} alt="smileys" className="icon__round" />
+              <img src={smiley} alt="smileys" className='icon__round'/>
               <h3>We care about you</h3>
             </div>
             <p>
@@ -62,7 +64,7 @@ const Home = () => {
 
           <div className="cards__padding">
             <div className="cards__flex">
-              <BiLineChart size={size} className="icon__round" />
+              <BiLineChart size={size}  className='icon__round'/>
               <h3>We care about your progress</h3>
             </div>
             <p>
@@ -74,7 +76,7 @@ const Home = () => {
 
           <div className="cards__padding">
             <div className="cards__flex">
-              <TiFlashOutline size={45} className="icon__padding" />
+              <TiFlashOutline size={50}  className='icon__padding'/>
               <h3>We provide the support you need</h3>
             </div>
             <p>
@@ -89,8 +91,8 @@ const Home = () => {
         <h1>Cutting egde features to help track your progress</h1>
         <p>
           Powerful, self-serve product help you track your alcohol intake, track
-          your progress, <br />
-          and live a more healtheir lifestyle with support from the community
+          your progress, <br/>and live a more healtheir lifestyle with support from
+          the community
         </p>
         <img src={phones} alt="phones" className="big_device" />
         <img src={phone} alt="phone" className="small_device" />
@@ -106,13 +108,9 @@ const Home = () => {
         <div className="soberpal__home-fifth__section__padding">
           <h1>FAQs</h1>
           <p>
-            At SoberPal, We know how daunting it can be to admit and be willing to seek help in matters such as alcohol addiction.
-            <br/>
-            <br/>
-            We, also know that the more knowledge you have about the app its fuunctions, the easier it will be for you to stay committed to acheiving your sobriety goals.
-            <br/>
-            <br/>
-            Here are some of the questions you might have and their responses.
+            Everything you need to go through the journey of reducing youur
+            alcohol intake. These are frequently asked questions about the
+            product. Dont find answer to your question?? send us a message.
           </p>
           <div className="">
             <Faq
@@ -151,10 +149,10 @@ const Home = () => {
             />
           </div>
         </div>
-        <p className="display_none">Don't find answer to your question?</p>
+        <p className='display_none'>Don't find answer to your question?</p>
         <div className="soberpal__home-fifth__section__flexy">
           <div className="soberpal__home-fifth__section__flex2">
-            <input placeholder="Ask us anything"/>
+            <p>Ask us anything</p>
             <button>send</button>
           </div>
         </div>

@@ -1,17 +1,6 @@
-import React,{useState} from 'react'
+import React from 'react'
 
-
-const Input = ({type, placeholder, id, icon, value, onChange, }) => {
-  const [disabled, setDisable] = useState(true)
-
-  const handleChange = (e) => {
-    if (e.target.value.length >= 1) {
-      setDisable(false)
-    } else {
-      setDisable(true)
-    }
-  }
-  
+const Input = ({type, placeholder, id, icon, disabled, handleChange, value}) => {
   return (
     <div className='flex w-full'>
       <input 

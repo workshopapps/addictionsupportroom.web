@@ -1,14 +1,18 @@
-import React from 'react'
-import Download from '../../Components/Download/Download';
-
+import React from "react";
+import Download from "../../Components/Download/Download";
+import { motion } from 'framer-motion'
 
 const Alcohol = () => {
   return (
-    <div className="min-w-[343px] md:max-w-[1100px] mx-auto px-4 md:px-8 py-10">
+    <motion.div
+      whileInView={{ y: [100, 0], opacity: [0, 0, 1] }}
+      transition={{ duration: 1 }}
+      className="min-w-[343px] md:max-w-[1100px] mx-auto px-4 md:px-8 py-10"
+    >
       <p className="text-[12px] md:text-[16px] font-[700] text-center text-[#387E9C]">
         Alcohol Addiction
       </p>
-      <h1 className="text-[#0E8ACB] md:text-[#204E65] text-[20px] md:text-[48px] font-[700] text-center">
+      <h1 className="text-[#48A1C8] md:text-[#0E8ACB] text-[20px] md:text-[48px] font-[700] text-center">
         Alcohol Addiction and Abuse
       </h1>
       <p className="text-[13px] md:text-[18px] font-[400] text-center text-[#575757] mt-3 md:mt-0 p-3 md:p-0">
@@ -16,7 +20,11 @@ const Alcohol = () => {
         social acceptance of drinking can often lead to denial — and, if left
         untreated, causes severe consequences.
       </p>
-      <div className="flex justify-center md:gap-10 text-[#0E8ACB] gap-5 text-[14px] md:text-[20px] font-[700] my-8">
+      <motion.div
+        whileInView={{ x: [-100, 0], opacity: [0, 0, 1] }}
+        transition={{ duration: 0.7 }}
+        className="flex justify-center md:gap-10 text-[#0E8ACB] gap-5 text-[14px] md:text-[20px] font-[700] my-8"
+      >
         <a href="#symptoms" className="hover:opacity-80 duration-300">
           Symptoms
         </a>
@@ -29,9 +37,13 @@ const Alcohol = () => {
         <a href="#outlook" className="hover:opacity-80 duration-300">
           Outlook
         </a>
-      </div>
+      </motion.div>
 
-      <div className="py-2">
+      <motion.div
+        whileInView={{ x: [100, 0], opacity: [0, 0, 1] }}
+        transition={{ duration: 0.7 }}
+        className="py-2"
+      >
         <h3 className="text-[16px] md:text-[20px] font-[700] text-[#204E65] text-center mb-5">
           Overview
         </h3>
@@ -52,16 +64,22 @@ const Alcohol = () => {
           There are many ways in which alcohol addiction can manifest itself.
           Each person has a unique level of disease severity, frequency of
           alcohol use, and alcohol consumption. Some individuals binge drink
-          continuously, while others binge drink, then abstain from alcohol for a
-          period.
+          continuously, while others binge drink, then abstain from alcohol for
+          a period.
         </p>
         <p className="text-[14px] md:text-[18px] font-[400] text-[#575757] mb-5">
           Regardless of how the addiction manifests, if a person relies
           excessively on alcohol and finds it difficult to maintain sobriety for
           an extended period of time, they likely have an alcohol addiction.
         </p>
-      </div>
-      <div id="symptoms" className="py-3">
+      </motion.div>
+
+      <motion.div
+        whileInView={{ x: [100, 0], opacity: [0, 0, 1] }}
+        transition={{ duration: 0.7 }}
+        id="symptoms"
+        className="py-3"
+      >
         <h3 className="text-[16px] md:text-[20px] font-[700] text-[#204E65] text-center mb-5">
           Symptoms of Alcohol Addiction
         </h3>
@@ -114,8 +132,14 @@ const Alcohol = () => {
           them feel guilty or shamed. This can turn people off and make them
           less receptive to your assistance.
         </p>
-      </div>
-      <div id="complications" className="py-3">
+      </motion.div>
+
+      <motion.div
+        whileInView={{ x: [100, 0], opacity: [0, 0, 1] }}
+        transition={{ duration: 0.7 }}
+        id="complications"
+        className="py-3"
+      >
         <h3 className="text-[16px] md:text-[20px] font-[700] text-[#204E65] text-center mb-5">
           Health Complications
         </h3>
@@ -146,8 +170,14 @@ const Alcohol = () => {
           nearly all dangers associated with alcohol addiction may be avoided or
           treated.
         </p>
-      </div>
-      <div id="treatment" className="py-3">
+      </motion.div>
+
+      <motion.div
+        whileInView={{ x: [100, 0], opacity: [0, 0, 1] }}
+        transition={{ duration: 0.7 }}
+        id="treatment"
+        className="py-3"
+      >
         <h3 className="text-[16px] md:text-[20px] font-[700] text-[#204E65] text-center">
           Treatment
         </h3>
@@ -178,10 +208,10 @@ const Alcohol = () => {
         </h5>
         <p className="text-[14px] md:text-[18px] font-[400] text-[#575757] mb-5">
           Many people addicted to alcohol also turn to apps like{" "}
-          <span className="text-[#204E65] font-medium">Soberpal</span> to help and 12-step
-          programs like Alcoholics Anonymous (AA). There are also other support
-          groups that don’t follow the 12-step model, such as SMART Recovery and
-          Sober Recovery.
+          <span className="text-[#204E65] font-medium">Soberpal</span> to help
+          and 12-step programs like Alcoholics Anonymous (AA). There are also
+          other support groups that don’t follow the 12-step model, such as
+          SMART Recovery and Sober Recovery.
         </p>
         <p className="text-[14px] md:text-[18px] font-[400] text-[#575757] mb-5">
           Regardless of the type of support system, it’s helpful to get involved
@@ -223,9 +253,21 @@ const Alcohol = () => {
           therapy for someone who is depressed, or inpatient treatment for
           someone with severe withdrawal symptoms.
         </p>
-      </div>
-      <Download />
-      <div id="outlook" className="py-3 mt-6">
+      </motion.div>
+
+      <motion.div
+        whileInView={{ y: [100, 0], opacity: [0, 0, 1] }}
+        transition={{ duration: 0.7 }}
+      >
+        <Download />
+      </motion.div>
+
+      <motion.div
+        whileInView={{ x: [100, 0], opacity: [0, 0, 1] }}
+        transition={{ duration: 0.7 }}
+        id="outlook"
+        className="py-3 mt-6"
+      >
         <h3 className="text-[16px] md:text-[20px] font-[700] text-[#204E65] text-center mb-5">
           Outlook
         </h3>
@@ -253,13 +295,19 @@ const Alcohol = () => {
           assistance or making it difficult for them to fulfill the addiction.
         </p>
         <p className="text-[14px] md:text-[18px] font-[400] text-[#575757] mb-5">
-          As a loved one of someone with an alcohol addiction, try to
-          encourage and provide emotional support.
+          As a loved one of someone with an alcohol addiction, try to encourage
+          and provide emotional support.
         </p>
-      </div>
-      <Download />
-    </div>
-  );
-}
+      </motion.div>
 
-export default Alcohol
+      <motion.div
+        whileInView={{ y: [100, 0], opacity: [0, 0, 1] }}
+        transition={{ duration: 0.7 }}
+      >
+        <Download />
+      </motion.div>
+    </motion.div>
+  );
+};
+
+export default Alcohol;

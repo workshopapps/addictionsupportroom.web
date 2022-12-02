@@ -6,6 +6,7 @@ import TeamImg from '../../assets/team.png'
 import TeamImgmobile from '../../assets/team-mobile.png'
 import { AiOutlineClockCircle } from 'react-icons/ai';
 import { AiOutlineDollar } from 'react-icons/ai';
+import { motion } from 'framer-motion'
 
 
 const Team = () => {
@@ -16,16 +17,16 @@ const Team = () => {
     <div className="team__container">
 
         {/* team---text---contents */}
-      <div className="team">
-        <div className="team__text">
+      <div   className="team">
+        <motion.div whileInView={{y: [100, 30], opacity: [0,0,1]}} transition={{ duration: 1.2 }} className="team__text">
             <span>The team</span>
             <h1>Meet the team behind Soberpal</h1>
             <p>We’re a small team that loves to create great experiences and make meaningful 
                 connections between builders and customers. Join our remote ream!</p>
-        </div>
+        </motion.div>
 
         {/* different team images */}
-        <div className="team__img">
+        <motion.div whileInView={{y: [100, 30], opacity: [0,0,1]}} transition={{ duration: 1.2 }} className="team__img">
             {/* mapped through my data file to access the images and informations */}
             {TeamData.map((data) => (
                 <div className="team-info">
@@ -36,19 +37,19 @@ const Team = () => {
             ))}
 
             
-        </div>
+        </motion.div>
       </div>
 
       {/* team positions being looked for */}
       <div className="Team__position">
-            <span>Open positions</span>
-            <h2>We’re looking for talented people</h2>
-            <p>We’re a 100% remote team spread all across the world. Join us!</p>
-            <img src={TeamImg} alt="" id='teamImg'/>
+            <motion.span whileInView={{y: [100, 30], opacity: [0,0,1]}} transition={{ duration: 1.1 }} >Open positions</motion.span>
+            <motion.h2 whileInView={{y: [100, 10], opacity: [0,0,1]}} transition={{ duration: 1.3 }} >We’re looking for talented people</motion.h2>
+            <motion.p whileInView={{y: [100, 10], opacity: [0,0,1]}} transition={{ duration: 1.3 }} >We’re a 100% remote team spread all across the world. Join us!</motion.p>
+            <motion.img whileInView={{y: [100, 30], opacity: [0,0,1]}} transition={{ duration: 1.3 }} src={TeamImg} alt="" id='teamImg'/>
             <img src={TeamImgmobile} alt="" id='teamImgmobile'/>
 
                 {/* roles for team-positions */}
-            <div className="team__position__roles">
+            <motion.div whileInView={{y: [100, 10], opacity: [0,0,1]}} transition={{ duration: 1.3 }} className="team__position__roles">
 
                 {/* the design roles */}
                 <div className="design">
@@ -89,11 +90,11 @@ const Team = () => {
                         
                     </div>
                 </div>
-            </div>
+            </motion.div>
       </div>
 
         {/* download app section */}
-      <div className="team__download-app">
+      <motion.div whileInView={{y: [100, 10], opacity: [0,0,1]}} transition={{ duration: 1.3 }} className="team__download-app">
         <div className="team__download-app-text">
           <h3>Download the Soberpal app</h3>
           <p className='team__p download__p'>Join over 200+ people already growing with Soberpal.</p>
@@ -103,7 +104,7 @@ const Team = () => {
         <div className="team__download-app-btn">
         <Button text={download} id='btn'/>
         </div>
-      </div>
+      </motion.div>
     </div>
   )
 }

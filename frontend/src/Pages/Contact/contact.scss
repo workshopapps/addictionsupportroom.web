@@ -26,7 +26,7 @@
     margin-left: -7%;
     background: white;
     height: auto;
-   width: 80rem;
+   width: auto;
     padding: 4% 3%;
     border-radius: 3px;
     display: flex;
@@ -125,7 +125,7 @@
     }
     .section__two {
       margin-top: 6rem;
-      width: 35rem;
+      width: auto;
       .address__section {
         display: grid;
         .address,
@@ -179,14 +179,17 @@
           }
         }
       }
-      .map {
-        margin-top: 3rem;
+      & > div{
         width: 25rem;
-        height: 20rem;
-        &:hover {
-          cursor: pointer;
-          transform: scale(1.1);
-          transition: all 1s ease-in-out;
+        .map {
+          margin-top: 3rem;
+          width: fit-content;
+          height: 20rem;
+          &:hover {
+            cursor: pointer;
+            transform: scale(1.1);
+            transition: all 1s ease-in-out;
+          }
         }
       }
     }
@@ -202,6 +205,14 @@
     max-width: 65vw;
     .contact__content-section{
       margin-left: -33%;
+    }
+  }
+  .section__two{
+    & > div{
+      width: 25rem;
+      .map{
+width: fit-content;
+      }
     }
   }
 }
@@ -223,6 +234,14 @@
           }
         }
       }
+     }
+     .section__two{
+      & > div{
+        .map{
+          margin: 0rem;
+        }
+      }
+      
      }
     }
   }

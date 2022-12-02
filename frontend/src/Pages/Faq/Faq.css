@@ -80,7 +80,7 @@
 
 .faq__section2 {
     text-align: left;
-    padding: 0 10.3rem 0 9.3rem;
+    padding: 0 5rem 0 5rem;
     margin: 0 0 100px;
 }
 .faq__section2 h2{
@@ -93,6 +93,9 @@
 .faq__section2 p{
     width: 85%;
     margin: 0 0 79px;
+}
+.faq__hr {
+    margin-bottom: 40px;
 }
 .faq__questions-answer-section {
     padding: 0 1rem;
@@ -117,6 +120,7 @@
     max-width: 94%;
     border-top: 1px solid rgb(163, 163, 163);
     margin-bottom: 20px;
+    margin-top: 10px;
 }
 .faq__download-app {
     margin: 163px 0 0;
@@ -143,7 +147,7 @@
     }
     .faq__section2 {
         text-align: left;
-        padding: 0 8.3rem 0 7.3rem;
+        padding: 0 5rem 0 5rem;
         margin: 0 0 100px;
     }
 
@@ -160,7 +164,7 @@
     }
     .faq__section2 {
         text-align: left;
-        padding: 0 6.3rem 0 5.3rem;
+        padding: 0 6rem 0 5rem;
         margin: 0 0 100px;
     }
 
@@ -173,7 +177,7 @@
 
     .faq__section2 {
         text-align: left;
-        padding: 0 5.3rem 0 4.3rem;
+        padding: 0 4.5rem 0 4.5rem;
         margin: 0 0 100px;
     }
 

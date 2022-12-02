@@ -1,7 +1,6 @@
-import "./appstats.css";
+import './appstats.scss'
 import hands from "../../assets/hands.jpg";
-import hand from "../../assets/Rectangle26.png";
-import AppStat from "../../Data/AppStat";
+// import AppStat from "../../Data/AppStat";
 
 const AppStats = () => {
   return (
@@ -45,11 +44,11 @@ const AppStats = () => {
           </div>
         </div>
         <img src={hands} alt="hands" className="hand" />
-        <img src={hand} alt="hands" className="small__hand" />
+        <img src={hands} alt="hands" className="small__hand" />
       </div>
       </div>
     </section>
   );
 };
 
-export default AppStats;
+export default AppStats
