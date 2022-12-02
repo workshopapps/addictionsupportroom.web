@@ -45,6 +45,15 @@
     width: 100%;
     padding: 50px 0 0;
 }
+.team-info {
+    scale: 0.8;
+}
+
+.team-info:hover {
+    transform: scale(1.1);
+    transition: all 1s ease;
+    cursor: pointer;
+}
 .team__img .team-info {
     flex-basis: 25%;
     text-align: center;
@@ -121,6 +130,12 @@
     border-radius: 16px;
     padding: 24px;
     margin: 0 0 16px;
+}
+.product__designer:hover,
+.frontend__developer:hover {
+    background: var(--primary-50);
+    cursor: pointer;
+    transition: all ease 1s;
 }
 .product__designer .role, .role{
     font-weight: 500;
