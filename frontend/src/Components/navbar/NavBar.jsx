@@ -21,6 +21,7 @@ const NavBar = () => {
             ))}
           </ul>
         </div>
+        
         <a className="hidden laptop:block" href="https://drive.google.com/file/d/1NbJ2bkOEBfzsjiOTlHNDdcxBsMeU_Qsk/view?usp=drivesdk" target="_blank" >
           <Button className="font-[500]" text="Download App" />
         </a>
