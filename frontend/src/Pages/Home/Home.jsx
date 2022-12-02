@@ -165,7 +165,7 @@ implication and what needs to be done to reduce your alchol consumption.
         <motion.section 
         whileInView={{y: [100, 50], opacity: [0,0,1]}} 
         transition={{ duration: 0.7 }}
-        className="w-[90%] laptop:w-[70%] mx-auto"
+        className="w-[90%] laptop:w-[70%] mx-auto mb-[100px]"
         >
 
           <div className="flex flex-wrap justify-between ">
