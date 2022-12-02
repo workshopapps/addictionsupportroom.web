@@ -78,24 +78,27 @@ async def mark_a_day(
         user_id=current_user.id,
         month_id=month_history.id,
     )
+    
     # new_relapse = create_relapse_with_user(db=db, user_id=current_user.id, relapse=relapse_in)
     # Save the new relapse
     db.add(new_relapse)
     db.commit()
     db.refresh(new_relapse)
+    
+    # Todo: Update the last_relapse_date in User
 
-    user_streak = db.query(Streak).filter(
-        Streak.user == current_user.id).first()
-    if user_streak:
-        user_streak.last_relapse_date = datetime.date.today
-        db.commit()
-    else:
-        user_streak = Streak(
-            last_relapse_date=datetime.date.today,
-            user=current_user.id,
-        )
-        db.add(user_streak)
-        db.commit()
+    # user_streak = db.query(Streak).filter(
+    #     Streak.user == current_user.id).first()
+    # if user_streak:
+    #     user_streak.last_relapse_date = datetime.date.today
+    #     db.commit()
+    # else:
+    #     user_streak = Streak(
+    #         last_relapse_date=datetime.date.today,
+    #         user=current_user.id,
+    #     )
+    #     db.add(user_streak)
+    #     db.commit()
     return new_relapse
 
 
