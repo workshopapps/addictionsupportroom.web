@@ -26,7 +26,7 @@ pipeline {
 			    sh "sudo cp -rf ${workspace}/backend/app/* /home/judgejudy/addictionsupportroom/backend"
                             sh "sudo cp -fr ${WORKSPACE}/frontend/* /home/judgejudy/addictionsupportroom/frontend"
                             sh "sudo su - judgejudy && whoami"
-                            sh "sudo pm2 stop soberpal"
+                           // sh "sudo pm2 stop soberpal"
 			    //
 			    sh "sudo pm2 stop server"
                             sh "sudo pm2 serve /home/judgejudy/addictionsupportroom/frontend/build --port 3390 --name soberpal"
