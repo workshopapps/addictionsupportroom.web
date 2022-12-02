@@ -85,20 +85,20 @@ async def mark_a_day(
     db.refresh(new_relapse)
     
     # Todo: Update the last_relapse_date in User
+    current_user_id = current_user.id
 
-    # user_streak = db.query(Streak).filter(
-    #     Streak.user == current_user.id).first()
-    # if user_streak:
-    #     user_streak.last_relapse_date = datetime.date.today
-    #     db.commit()
-    # else:
-    #     user_streak = Streak(
-    #         last_relapse_date=datetime.date.today,
-    #         user=current_user.id,
-    #     )
-    #     db.add(user_streak)
-    #     db.commit()
-    return new_relapse
+    currentuser = db.query(User).get(current_user_id)
+    if currentuser:
+        currentuser.last_relapse_date = datetime.date.today()
+        db.commit()
+    else:
+        currentuser = User(
+            last_relapse_date=datetime.date.today(),
+            id=current_user_id,
+        )
+        db.add(currentuser)
+        db.commit()
+    return {"new_relapse_date": datetime.date.today()}
 
 
 @router.get("/", name='Get Relapses in a Month')
