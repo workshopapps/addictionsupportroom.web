@@ -1,5 +1,5 @@
 from api.example import schemas
-from db.models import Example, Streak, User
+from db.models import Example, User
 from sqlalchemy import select
 from sqlalchemy import desc
 from sqlalchemy.orm import Session
