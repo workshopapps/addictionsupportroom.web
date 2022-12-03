@@ -1,6 +1,11 @@
 import requests
 
 
+def clean_data(data):
+    cleaned_data = data.replace("\r\n", '').replace('<ul><li>', '').replace('\r', '').replace('\n', '').replace('<ul>', '').replace('<li>', '')
+    return cleaned_data
+
+
 def get_all_blogs():
     response = requests.get('https://saurav.tech/NewsAPI/top-headlines/category/health/in.json')
     res_obj = {**response.json()}
@@ -28,7 +33,7 @@ def get_all_blogs():
             result.append({
                 'id': key.get('id'),
                 'title': container.get('title'),
-                'body': container.get('content'),
+                'body': clean_data(container.get('content')),
                 'imageURL': container.get('urlToImage'),
                 'origin_blog': container.get('url')
             })
@@ -55,9 +60,9 @@ def get_detail_blog(blog_id: int):
             try:
                 new_id = id[0]
                 new_title = title[0]
-                new_body = body[0]
+                new_body = clean_data(body[0])
                 new_imageURL = imageURL[0]
-                new_origin_blog = origin_blog[0]
+                new_origin_blog = origin_blog
             except:
                 return None
 
