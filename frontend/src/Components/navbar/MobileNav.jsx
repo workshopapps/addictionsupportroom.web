@@ -15,6 +15,7 @@ const MobileNav = ({setIsOpen}) => {
         </button>
           <ul className='mt-[60px]'>
             {navbarList.navList.map(({ page, link}) => 
+              <>
               <Link 
                 key={page} 
                 to={link}
@@ -22,7 +23,11 @@ const MobileNav = ({setIsOpen}) => {
               >
                 <li className='p-4 font-[700] mx-3 text-white'>{page}</li>
               </Link>
+              </>
             )}
+              <Link className="ml-5 w-full mx-auto" rel="noreferrer" href="https://appetize.io/app/qj3cgmogy6ek4dt7jvrkfuc3c4" target="_blank" >
+                <button className="font-[500] p-4 bg-[white] text-blue mt-[30px] rounded-[16px] " >Download App</button>
+              </Link>
           </ul>
     </div>
   )

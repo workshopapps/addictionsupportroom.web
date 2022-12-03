@@ -95,7 +95,7 @@ const About = () => {
         <Job />
       </motion.section>
 
-      <div className="w-full mb-[50px] mt-[120px] tablet:w-[70%] max-w-[1000px] mx-auto">
+      <div className="w-full mb-[50px] mt-[120px] tablet:w-[90%] max-w-[1000px] mx-auto">
         <Download />
       </div>
     </div>

@@ -20,17 +20,17 @@ import NewsLetter from '../Pages/NewsLetter/NewsLetter';
 const CreateRoute = () => {
   return (
     <Routes>
-      <Route path='/' element={<Home/>} />
-      <Route path='careers' element={<Career/>} />
-      <Route path='about' element={<About/>} />
-      <Route path='contact' element={<Contact/>} />
-      <Route path='faq' element={<Faqs/>} />
-      <Route path='team' element={<Team/>} />
-      <Route path='blog' element={<Blog />} />
-      <Route path='terms_policy' element={<TermsServices />} />
-      <Route path='alcohol' element={<Alcohol />} />
-      <Route path='careers/job' element={<JobApplication />} />
-      <Route path='newsletter' element={<NewsLetter/>} />
+      <Route index element={<Home/>} />
+      <Route path='/careers' element={<Career/>} />
+      <Route path='/about' element={<About/>} />
+      <Route path='/contact' element={<Contact/>} />
+      <Route path='/faq' element={<Faqs/>} />
+      <Route path='/team' element={<Team/>} />
+      <Route path='/blog' element={<Blog />} />
+      <Route path='/terms_policy' element={<TermsServices />} />
+      <Route path='/alcohol' element={<Alcohol />} />
+      <Route path='/careers/job' element={<JobApplication />} />
+      <Route path='/newsletter' element={<NewsLetter/>} />
 
       {/* <Route path="*" element={<NotFound />} /> */}
     </Routes>
