@@ -11,12 +11,12 @@ const AppStats = () => {
       transition={{ duration: 0.7 }}
       className="stats "
     >
-      <div className="w-[100%] flex justify-between gap-24 flex-wrap desktop:flex-nowrap max-w-[1300px]">
+      <div className="w-[100%] flex justify-between gap-16 flex-wrap desktop:flex-nowrap max-w-[1300px]">
       <img src={hands} alt="hands mx-auto w-full " className="hands" />
 
-      <div className="mt-[30px] ">
+      <div className="mt-[20px] mx-auto">
         <div 
-          className="font-[700]  text-left text-blue text-[16px] "
+          className="font-[700] text-left text-blue text-[16px] "
         >
           We’ve helped a couple of people reduce their intake of alcohol
         </div>
@@ -25,24 +25,24 @@ const AppStats = () => {
           started on our journey
         </p>
         
-        <div className="flex flex-wrap justify-between w-[480px] mt-[20px]">
+        <div className="flex flex-wrap justify-between w-[90%] laptop:w-[480px] mt-[20px]">
 
-          <div className='mt-4 laptop:w-[230px] '>
+          <div className='w-[95%] mobile:w-[230px] '>
             <h3 className="text-[38px] laptop:text-[48px] text-start text-blue font-[600]">200+</h3>
             <p className="text-[18px] font-[500] text-start">People reached</p>
           </div>
 
-          <div className='mt-4 laptop:w-[230px]'>
+          <div className='w-[95%] mobile:w-[230px]'>
             <h3 className="text-[38px] text-start laptop:text-[48px] text-blue font-[600]">60%</h3>
             <p className="text-[18px] text-start font-[500]">Rate of recovery of our users</p>
           </div>
 
-          <div className='mt-4 laptop:w-[230px]'>
+          <div className='w-[95%] mobile:w-[230px]'>
             <h3 className="text-[38px] text-start laptop:text-[48px] text-blue font-[600]">10K</h3>
             <p className="text-[18px] text-start font-[500]">Global downloads</p>
           </div>
 
-          <div className='mt-4 laptop:w-[230px]'>
+          <div className='w-[95%] mobile:w-[230px]'>
             <h3 className="text-[38px] text-start laptop:text-[48px] text-blue font-[600]">100+</h3>
             <p className="text-[18px] text-start font-[500]">5-star reviews</p>
           </div>
