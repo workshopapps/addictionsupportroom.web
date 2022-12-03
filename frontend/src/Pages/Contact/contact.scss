@@ -23,10 +23,10 @@
     }
   }
   .contact__content-section {
-    margin-left: -7%;
+    margin-left: -15%;
     background: white;
     height: auto;
-   width: auto;
+   width: 80vw;
     padding: 4% 3%;
     border-radius: 3px;
     display: flex;
@@ -62,7 +62,7 @@
             height: 3.6rem;
             border: 1px solid var(--primary-50);
             border-radius: 4px;
-            width: 35rem;
+            width: 30rem;
             color:black;
             background: none;
             &:focus {
@@ -203,6 +203,7 @@
     padding: 5% 4%;
     margin: auto;
     max-width: 65vw;
+  
     .contact__content-section{
       margin-left: -33%;
     }
