@@ -1,5 +1,3 @@
-from sqlalchemy.orm import Session
-from . import models
 import requests
 
 
@@ -46,23 +44,28 @@ def get_detail_blog(blog_id: int):
     result = get_all_blogs()
     for i, j in enumerate(result):
         container = result[i]
-        key = container['source']
-        if key['id'] == blog_id:
-
-            id = key.get('id'),
+        x = container.get('id')
+        if x == blog_id:
+            id = container.get('id'),
             title = container.get('title'),
-            body = container.get('content'),
-            imageURL = container.get('urlToImage'),
-            origin_blog = container.get('url')
+            body = container.get('body'),
+            imageURL = container.get('imageURL'),
+            origin_blog = container.get('origin_blog')
 
-            if (id == None) or (title == None) or (body == None) or (imageURL == None) or (origin_blog == None):
+            try:
+                new_id = id[0]
+                new_title = title[0]
+                new_body = body[0]
+                new_imageURL = imageURL[0]
+                new_origin_blog = origin_blog[0]
+            except:
                 return None
-            else:
-                return {
-                    'id': id,
-                    'title': title,
-                    'body': body,
-                    'imageURL': imageURL,
-                    'origin_blog': origin_blog
-                }
+
+            return {
+                'id': new_id,
+                'title': new_title,
+                'body': new_body,
+                'imageURL': new_imageURL,
+                'origin_blog': new_origin_blog
+            }
     return None
