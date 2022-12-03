@@ -51,32 +51,39 @@ def about_to_relapse(currentUser: User = Depends(deps.get_current_user),
 
 
 @router.get("/notes/")
-def get_all_notes(db: Session = Depends(get_db)):
+def get_all_notes(db: Session = Depends(get_db),
+                  current_user: User = Depends(deps.get_current_user)):
     notes = crud.get_all_notes(db=db)
     return notes
 
 
 @router.post("/notes/create")
-def create_note(note: schemas.Note, db: Session = Depends(get_db)):
+def create_note(note: schemas.Note,
+                db: Session = Depends(get_db),
+                current_user: User = Depends(deps.get_current_user)):
     db_note = crud.create_note(db=db, note=note)
     return db_note
 
 
 @router.get("/notes/today")  #  response_model=list[schemas.ShowNote]
-def get_all_notes_created_today(db: Session = Depends(get_db)):
+def get_all_notes_created_today(db: Session = Depends(get_db),
+                                current_user: User = Depends(
+                                    deps.get_current_user)):
     notes = crud.get_all_notes_created_today(db=db)
     return notes
 
 
 @router.get(
     "/notes/{note_id}", )  #  response_model=schemas.ShowNote
-def get_specific_note(note_id: int, db: Session = Depends(get_db)):
+def get_specific_note(note_id: int,
+                      db: Session = Depends(get_db),
+                      current_user: User = Depends(deps.get_current_user)):
     note = crud.get_specific_note(db=db, note_id=note_id)
     return note
 
 
 @router.delete("/notes/delete/{note_id}")
-def delete_note(note_id: int, db: Session = Depends(get_db)):
+def delete_note(note_id: int, db: Session = Depends(get_db), current_user: User = Depends(deps.get_current_user)):
     note = crud.delete_note(db=db, note_id=note_id)
     return note
 
