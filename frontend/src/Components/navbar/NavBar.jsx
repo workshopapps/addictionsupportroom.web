@@ -22,7 +22,7 @@ const NavBar = () => {
           </ul>
         </div>
         
-        <a className="hidden laptop:block"  rel="noreferrer" href="https://appetize.io/app/qj3cgmogy6ek4dt7jvrkfuc3c4" target="_blank" >
+        <a className="hidden laptop:block"  rel="noreferrer" href="https://appetize.io/app/3tqubo6rf6nodzau3rez6v2r5u?device=pixel4&osVersion=11.0&scale=75" target="_blank" >
           <Button className="font-[500]" text="Download App" />
         </a>
 
