@@ -2,10 +2,11 @@ from .scrape import scrape
 
 def get_all_blogs():
     data = scrape()
+    articles = data.get('response')
     if data.get('status') == 200:
         result = []
-        for index, item in enumerate(data.get('articles')):
-            container = data.get('articles')[index]
+        for index, item in enumerate(articles):
+            container = articles[index]
             key = container['source']
             if index == 0: 
                 key['id'] = 1
