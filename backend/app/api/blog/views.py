@@ -16,6 +16,6 @@ def all_blogs():
     if result:
         return result
     else:
-        raise HTTPException(status_code=404,)
+        raise HTTPException(status_code=404, detail='Couldn\'t reach the site endpoint')
 
 
