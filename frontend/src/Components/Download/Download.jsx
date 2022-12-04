@@ -11,7 +11,7 @@ const Download = () => {
           Join over 200+ people already growing with Soberpal.
         </div>
       </div>
-      <a href="https://appetize.io/app/qj3cgmogy6ek4dt7jvrkfuc3c4" rel="noreferrer" target="_blank" >
+      <a href="https://appetize.io/app/3tqubo6rf6nodzau3rez6v2r5u?device=pixel4&osVersion=11.0&scale=75" rel="noreferrer" target="_blank" >
         <button className="h-[44px] w-[131px] bg-white rounded-[8px] text-blue mt-4 hover--effect">
           Download App
         </button>
