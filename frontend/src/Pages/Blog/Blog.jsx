@@ -1,39 +1,56 @@
 import React, {useState, useEffect} from "react";
-// import axios from "axios";
-import { post } from "../../Data/BlogPost";
+import axios from "axios";
+// import { post } from "../../Data/BlogPost";
+// import useFetch from "../../../APIData/userFetch";
 
 import BlogPost from "../../Components/BLog/BlogPost";
 import Download from "../../Components/Download/Download";
 import { motion } from "framer-motion";
+import BlogPaignation from "../../Components/BLog/BlogPaignation";
 
 
 const Forum = () => {
-  const [posts, setPosts] = useState(post)
-  // const [blogs, setBlogs] = useState([post]);
-  // const [loading, setLoading] = useState(false)
-  // const [currentPage, setCurrentPage] = useState(1)
-  // const [postsPerPage] = useState(4);
+  // const { data: blogs, isLoading, error } = useFetch("http://localhost:7000/hashs")
 
-  // title, body, id, URl, urlLink 
-  // console.log(post)
 
-  // useEffect (() => {
-  //   const fetchPosts = async () => {
-  //     setLoading(true);
-  //     const res = await axios.get(posts);
-  //     setPosts(res.data);
-  //     setLoading(false);
-  //   }
+  // useEffect(() => {
+  //   fetch("https://sober-pal.herokuapp.com/api/blog/")
+  //     .then(res => {
+  //       return res.json()
+  //     })
+  //     .then(data => {
+  //       console.log(data)
+  //     }) 
+  //   // console.log('hh')
+  // },[])
+  // const [posts, setPosts] = useState(null)
+  const [blogs, setBlogs] = useState([]);
+  const [loading, setLoading] = useState(false)
+  const [currentPage, setCurrentPage] = useState(1)
+  const [postsPerPage] = useState(6);
 
-  //   fetchPosts();
-  // }, [])
+
+  useEffect (() => {
+    const fetchPosts = async () => {
+      setLoading(true);
+      const res = await axios.get('https://soberpal.hng.tech/api/blog/');
+      setBlogs(res.data);
+      setLoading(false);
+    }
+
+    fetchPosts();
+  }, [])
 
   // get current post 
 
-  // const indexOfLastPost = currentPage * postsPerPage;
-  // const indexOfFirstPost = indexOfLastPost - postsPerPage;
-  // const currentPosts = posts.slice(indexOfFirstPost, indexOfLastPost);
+  const indexOfLastPost = currentPage * postsPerPage;
+  const indexOfFirstPost = indexOfLastPost - postsPerPage;
+  const currentPosts = blogs.slice(indexOfFirstPost, indexOfLastPost);
 
+  //change page
+  const paginate = (pageNumber) => setCurrentPage(pageNumber);
+  const paginateFront = () => setCurrentPage(currentPage + 1);
+  const paginateBack = () => setCurrentPage(currentPage - 1);
 
   return (
     <div>
@@ -55,9 +72,9 @@ const Forum = () => {
 
         {/* Blogs  */}
 
-      <div>
-        <BlogPost posts={posts} />
-        {/* <BlogPost loading={loading}  posts={currentPosts}/> */}
+      <div className="mt-20">
+        <BlogPost loading={loading}  blogs={currentPosts}/>
+        <BlogPaignation postsPerPage={postsPerPage} currentPage={currentPage} totalPosts={blogs.length} paginate={paginate} />
       </div>
 
       <section className="block laptop:flex laptop:flex-rol justify-between mx-auto w-[90%]"></section>
