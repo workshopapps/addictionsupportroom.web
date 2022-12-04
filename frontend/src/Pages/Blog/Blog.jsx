@@ -27,7 +27,7 @@ const Forum = () => {
   const [blogs, setBlogs] = useState([]);
   const [loading, setLoading] = useState(false)
   const [currentPage, setCurrentPage] = useState(1)
-  const [postsPerPage] = useState(6);
+  const [postsPerPage] = useState(8);
 
 
   useEffect (() => {
