@@ -1,4 +1,7 @@
 import requests
+from fastapi import HTTPException
+from .scrape import scrape
+
 
 
 def clean_data(data):
@@ -7,37 +10,41 @@ def clean_data(data):
 
 
 def get_all_blogs():
-    response = requests.get('https://saurav.tech/NewsAPI/top-headlines/category/health/in.json')
-    res_obj = {**response.json()}
-    articles = res_obj['articles']
-    result = []
-    for index, item in enumerate(articles):
-        container = articles[index]
-        key = container['source']
-        if index == 0: 
-            key['id'] = 1
-        else:
-            key['id'] = index + 1
-        
-        if not (type(key.get('id')) == int):
-            pass
-        elif not (type(container.get('title')) == str):
-            pass
-        elif not (type(container.get('content')) == str):
-            pass
-        elif not (type(container.get('urlToImage')) == str):
-            pass
-        elif not (type(container.get('url')) == str):
-            pass
-        else: 
-            result.append({
-                'id': key.get('id'),
-                'title': container.get('title'),
-                'body': clean_data(container.get('content')),
-                'imageURL': container.get('urlToImage'),
-                'origin_blog': container.get('url')
-            })
-    return result
+    scrape_res = scrape()
+
+    if scrape_res.get('status') == 200:
+        articles = scrape_res.get('response')
+        result = []
+        for index, item in enumerate(articles):
+            container = articles[index]
+            key = container['source']
+            if index == 0: 
+                key['id'] = 1
+            else:
+                key['id'] = index + 1
+            
+            if not (type(key.get('id')) == int):
+                pass
+            elif not (type(container.get('title')) == str):
+                pass
+            elif not (type(container.get('content')) == str):
+                pass
+            elif not (type(container.get('urlToImage')) == str):
+                pass
+            elif not (type(container.get('url')) == str):
+                pass
+            else: 
+                result.append({
+                    'id': key.get('id'),
+                    'title': container.get('title'),
+                    'body': clean_data(container.get('content')),
+                    'imageURL': container.get('urlToImage'),
+                    'origin_blog': container.get('url')
+                })
+        return result
+    else:
+        response = scrape_res.get('response')
+        raise HTTPException(status_code=scrape_res.get('status'), detail=f'Page not found at the api requested endpoint - {response}')
 
 
 def get_detail_blog(blog_id: int):
