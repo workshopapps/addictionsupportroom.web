@@ -1,11 +1,38 @@
-from sqlalchemy.orm import Session
-from db.models import Blog
+from .scrape import scrape
 
+def get_all_blogs():
+    data = scrape()
+    articles = data.get('response')
+    if data.get('status') == 200:
+        result = []
+        for index, item in enumerate(articles):
+            container = articles[index]
+            key = container['source']
+            if index == 0: 
+                key['id'] = 1
+            else:
+                key['id'] = index + 1
+            
+            if not (type(key.get('id')) == int):
+                pass
+            elif not (type(container.get('title')) == str):
+                pass
+            elif not (type(container.get('content')) == str):
+                pass
+            elif not (type(container.get('urlToImage')) == str):
+                pass
+            elif not (type(container.get('url')) == str):
+                pass
+            else: 
+                result.append({
+                    'id': key.get('id'),
+                    'title': container.get('title'),
+                    'body': container.get('content'),
+                    'imageURL': container.get('urlToImage'),
+                    'origin_blog': container.get('url')
+                })
+        return result
+        
+    elif data.get('status') == 404:
+        return None
 
-def get_all_blogs(db: Session):
-    all_blogs = db.query(Blog).all()
-    return all_blogs
-
-def get_detail_blog(db: Session, blog_id: int):
-    blog = db.query(Blog).filter(Blog.id == blog_id).first()
-    return blog
