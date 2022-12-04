@@ -74,7 +74,7 @@ const Forum = () => {
 
       <div className="mt-20">
         <BlogPost loading={loading}  blogs={currentPosts}/>
-        <BlogPaignation postsPerPage={postsPerPage} currentPage={currentPage} totalPosts={blogs.length} paginate={paginate} />
+        <BlogPaignation postsPerPage={postsPerPage} loading={loading} currentPage={currentPage} totalPosts={blogs.length} paginate={paginate} />
       </div>
 
       <section className="block laptop:flex laptop:flex-rol justify-between mx-auto w-[90%]"></section>

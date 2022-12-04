@@ -3,7 +3,7 @@ import React, {useState, useEffect} from "react";
 const BlogPost = ({blogs, loading}) => {
 
   if (loading) {
-    return <h2>Loading...</h2>
+    return <h2 className="text-[20px] font-[600] text-center  ">Loading...</h2>
   }
 
 
@@ -15,14 +15,15 @@ const BlogPost = ({blogs, loading}) => {
       {blogs?.map(({imageURL, title, body, origin_blog, id }) => (
         <div
           key={id} 
-          className="flex mt-12 gap-5 mx-auto w-[90%] desktop:w-[45%] "
+          className="block tablet:flex mt-12 gap-2 tablet:gap-5 mx-auto w-[95%] tablet:w-[90%] desktop:w-[45%] "
         >
-          <img className="h-[180px] w-[180px]" src={imageURL} alt="c1" />
+          <img className="h-[150px] w-[100%] tablet:h-[140px] tablet:w-[150px] laptop:h-[150px] laptop:w-[160px] desktop:h-[150px] desktop:w-[150px] xl:h-[180px] xl:w-[180px]" src={imageURL} alt="c1" />
           <div>
-            <p className="text-[20px] text-[black] font-[600] leading-8">
+            <p className="text-[16px] tablet:text-[19px] laptop:text-[20px] text-[black] font-[600] leading-5 tablet:leading-6 laptop:leading-8">
               {title}
             </p>
-            <p className="text-[16px] tablet:text-[16px] ">{body}</p>
+            <p className="hidden tablet:block text-[16px] tablet:text-[16px] ">{body.slice(0, 80)}...</p>
+            <p className="tablet:hidden text-[14px] tablet:text-[16px] ">{body.slice(0, 50)}...</p>
             <a href={origin_blog}  rel="noreferrer" target="_blank" className="text-[16px] text-blue">Read more ...</a>
           </div>
         </div>
