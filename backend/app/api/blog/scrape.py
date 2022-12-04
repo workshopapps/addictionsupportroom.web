@@ -15,5 +15,6 @@ def scrape():
     except:
         return {
             'message': 'Page not found',
-            'status': 404
+            'status': 404,
+            'response': response
         }

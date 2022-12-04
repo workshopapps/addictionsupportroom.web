@@ -1,9 +1,19 @@
+import requests
+from fastapi import HTTPException
 from .scrape import scrape
 
+
+
+def clean_data(data):
+    cleaned_data = data.replace("\r\n", '').replace('<ul><li>', '').replace('\r', '').replace('\n', '').replace('<ul>', '').replace('<li>', '')
+    return cleaned_data
+
+
 def get_all_blogs():
-    data = scrape()
-    articles = data.get('response')
-    if data.get('status') == 200:
+    scrape_res = scrape()
+
+    if scrape_res.get('status') == 200:
+        articles = scrape_res.get('response')
         result = []
         for index, item in enumerate(articles):
             container = articles[index]
@@ -27,12 +37,47 @@ def get_all_blogs():
                 result.append({
                     'id': key.get('id'),
                     'title': container.get('title'),
-                    'body': container.get('content'),
+                    'body': clean_data(container.get('content')),
                     'imageURL': container.get('urlToImage'),
                     'origin_blog': container.get('url')
                 })
         return result
-        
-    elif data.get('status') == 404:
-        return None
+    else:
+        response = scrape_res.get('response')
+        raise HTTPException(status_code=scrape_res.get('status'), detail=f'Page not found at the api requested endpoint - {response}')
 
+
+def get_detail_blog(blog_id: int):
+    '''
+    This endpoint is for the details of the blog and since the blog is using an api to get it data the endpoint will lea to the origin of a particular data
+
+    **id** - this field is required
+    '''
+    result = get_all_blogs()
+    for i, j in enumerate(result):
+        container = result[i]
+        x = container.get('id')
+        if x == blog_id:
+            id = container.get('id'),
+            title = container.get('title'),
+            body = container.get('body'),
+            imageURL = container.get('imageURL'),
+            origin_blog = container.get('origin_blog')
+
+            try:
+                new_id = id[0]
+                new_title = title[0]
+                new_body = clean_data(body[0])
+                new_imageURL = imageURL[0]
+                new_origin_blog = origin_blog
+            except:
+                return None
+
+            return {
+                'id': new_id,
+                'title': new_title,
+                'body': new_body,
+                'imageURL': new_imageURL,
+                'origin_blog': new_origin_blog
+            }
+    return None
