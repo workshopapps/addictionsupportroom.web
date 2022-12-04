@@ -1,7 +1,5 @@
 import React, {useState, useEffect} from "react";
 import axios from "axios";
-// import { post } from "../../Data/BlogPost";
-// import useFetch from "../../../APIData/userFetch";
 
 import BlogPost from "../../Components/BLog/BlogPost";
 import Download from "../../Components/Download/Download";
@@ -10,20 +8,6 @@ import BlogPaignation from "../../Components/BLog/BlogPaignation";
 
 
 const Forum = () => {
-  // const { data: blogs, isLoading, error } = useFetch("http://localhost:7000/hashs")
-
-
-  // useEffect(() => {
-  //   fetch("https://sober-pal.herokuapp.com/api/blog/")
-  //     .then(res => {
-  //       return res.json()
-  //     })
-  //     .then(data => {
-  //       console.log(data)
-  //     }) 
-  //   // console.log('hh')
-  // },[])
-  // const [posts, setPosts] = useState(null)
   const [blogs, setBlogs] = useState([]);
   const [loading, setLoading] = useState(false)
   const [currentPage, setCurrentPage] = useState(1)
@@ -41,16 +25,13 @@ const Forum = () => {
     fetchPosts();
   }, [])
 
-  // get current post 
-
+  // Get current post 
   const indexOfLastPost = currentPage * postsPerPage;
   const indexOfFirstPost = indexOfLastPost - postsPerPage;
   const currentPosts = blogs.slice(indexOfFirstPost, indexOfLastPost);
 
   //change page
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
-  const paginateFront = () => setCurrentPage(currentPage + 1);
-  const paginateBack = () => setCurrentPage(currentPage - 1);
 
   return (
     <div>
@@ -71,8 +52,7 @@ const Forum = () => {
       </motion.div>
 
         {/* Blogs  */}
-
-      <div className="mt-20">
+      <div className="my-20 ">
         <BlogPost loading={loading}  blogs={currentPosts}/>
         <BlogPaignation postsPerPage={postsPerPage} loading={loading} currentPage={currentPage} totalPosts={blogs.length} paginate={paginate} />
       </div>
