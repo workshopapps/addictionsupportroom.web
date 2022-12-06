@@ -27,6 +27,7 @@ class UserBase(BaseModel):
     #     example="{'preview': 'http://www.example.com/image', 'metaData': 'size, type...'}",
     # )
 
+
 class UserObjectSchema(UserBase):
     pass
 
@@ -42,6 +43,15 @@ class UserCreate(BaseModel):
 
 class UserOut(UserBase):
     access_token: dict
+
+
+class UserLogin(BaseModel):
+    username: str = Field(..., example="name123")
+
+
+class AccessToken(BaseModel):
+    token: str
+    token_type: str
 
 
 class ChatStatus(str, Enum):

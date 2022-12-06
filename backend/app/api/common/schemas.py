@@ -1,7 +1,6 @@
 from pydantic import BaseModel, Field
 from typing import (
-    Any,
-)
+    Any, )
 
 
 class ResponseSchema(BaseModel):
@@ -25,6 +24,4 @@ class ResponseSchema(BaseModel):
         ...,
         example="A message to indicate that the request was not successful!",
     )
-    data: Any | None = Field(
-        example="Data !",
-    )
+    data: Any | None

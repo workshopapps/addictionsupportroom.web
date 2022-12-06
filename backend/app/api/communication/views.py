@@ -40,7 +40,7 @@ from fastapi.responses import HTMLResponse
 @router.get(
     "/contacts",
     response_model=GetAllContactsResults | ResponseSchema,
-    status_code=200,
+    status_code=201,
     name="contacts:get-all-user-contacts",
     responses={
         200: {
