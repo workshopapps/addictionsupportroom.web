@@ -57,7 +57,7 @@
 .team__img .team-info {
     flex-basis: 25%;
     text-align: center;
-    margin: 0 0 94px;
+    margin: 0 0 50px;
 }
 .team__img .team-info img{
     margin: auto;
@@ -223,9 +223,9 @@
     .team__container {
         padding: 40px 16px 81px;
     }
-    .team__text {
-        margin: 0 0 72px;
-    }
+    /* .team__text {
+        margin: 0 0 50px;
+    } */
     .team__text span {
         font-size: 14px;
     }
@@ -242,15 +242,22 @@
     .team__img {
         flex-direction: column;
         flex-basis: 100%;
+        padding: 0;
     }
     .team__img .team-info{
-        padding: 47px 0 78px;
+        padding: 47px 0 20px;
+        margin: 0;
     }
     .team__img .team-info img{
         margin: auto;
-        width: 80px;
+        width: 100px;
         margin-bottom: 39px;
     }
+    /* .team__img .team-info img{
+        margin: auto;
+        width: 80px;
+        margin-bottom: 39px;
+    } */
     .team__img .team-info h4{
         font-weight: 700;
         font-size: 20px;
