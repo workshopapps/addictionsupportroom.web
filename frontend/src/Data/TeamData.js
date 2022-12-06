@@ -50,20 +50,20 @@ const TeamData = [
     twitter: "https://twitter.com/muhaj_dev?t=gVq4i7U3D2nHdY9o1nMf9w&s=09",
   },
   {
-    id: 7,
-    name: "Abdullah",
-    designation: "Frontend Developer",
-    avatar: Taiwo,
-    linkedIn: "https://www.linkedin.com/in/abdullah-oyewale-8a1041189/",
-    twitter: "https://twitter.com/4biol4",
-  },
-  {
     id: 6,
     name: "Uchechukwu",
     designation: "Backend Developer",
     avatar: Joe,
     linkedIn: "https://www.linkedin.com/in/uchechukwu-anachuna/",
     twitter: "https://twitter.com/henry96900698",
+  },
+  {
+    id: 7,
+    name: "Abdullah",
+    designation: "Frontend Developer",
+    avatar: Taiwo,
+    linkedIn: "https://www.linkedin.com/in/abdullah-oyewale-8a1041189/",
+    twitter: "https://twitter.com/4biol4",
   },
   {
     id: 8,
