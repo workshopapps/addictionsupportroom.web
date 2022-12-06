@@ -9,16 +9,16 @@ from fastapi import APIRouter, Depends
 from . import schemas
 from sqlalchemy.orm import Session
 import datetime
-from .schemas import GetAllHistoryResult
-
+from .schemas import GetAllHistoryResult, GetAllRanking, Ranking, SummarySchema
 
 from typing import Any
 from .schemas import RelapseBase, RelapseCreate, RelapseInDB
-from fastapi.security import HTTPBearer, OAuth2AuthorizationCodeBearer
+from fastapi.security import HTTPBearer
 from fastapi.encoders import jsonable_encoder
 from db.models import User, Streak, Relapse
 from fastapi.encoders import jsonable_encoder
 from .crud import relapse, create_relapse_with_user
+
 auth_scheme = HTTPBearer()
 
 from api import deps
@@ -39,6 +39,243 @@ months = {
     '11': 'November',
     '12': 'December'
 }
+
+milestones = [1, 7, 30, 90]
+
+
+@router.post("/")
+async def mark_a_day(
+        *,
+        db: Session = Depends(deps.get_db),
+        relapse_in: RelapseCreate,
+        current_user: User = Depends(deps.get_current_user),
+) -> Any:
+    """
+    Create Relapse
+    """
+    relapse_in_db = db.query(Relapse).filter(Relapse.user==current_user.id, 
+        Relapse.day==relapse_in.day, Relapse.month==relapse_in.month, Relapse.year==relapse_in.year).first()
+    if relapse_in_db:
+        relapse_in_db.bottles_drank = relapse_in.bottles_drank
+        db.commit()
+        db.refresh(relapse_in_db)
+        data = jsonable_encoder(relapse_in_db)
+        data["message"] = "num of bottles updated"
+        return data
+    # Create Month History, if it doesn't exist
+    try:
+        month_title = f'{months[str(relapse_in.month)]} {relapse_in.year}'
+    except:
+        return {
+            "status_code": 400,
+            "message": "Invalid month value",
+        }
+    month_history = db.query(Month).filter(
+        Month.user == current_user.id,
+        Month.title == month_title,
+    ).first()
+
+    if month_history is None:
+        month_history = Month()
+        month_history.user = current_user.id
+        month_history.title = month_title
+        db.add(month_history)
+        db.commit()
+        db.refresh(month_history)
+
+    new_relapse = relapse.create_with_user(
+        db=db,
+        obj_in=relapse_in,
+        user_id=current_user.id,
+        month_id=month_history.id,
+    )
+    # new_relapse = create_relapse_with_user(db=db, user_id=current_user.id, relapse=relapse_in)
+    # Save the new relapse
+    db.add(new_relapse)
+    db.commit()
+    db.refresh(new_relapse)
+
+    user_streak = db.query(Streak).filter(
+        Streak.user == current_user.id).first()
+    if user_streak:
+        user_streak.last_relapse_date = datetime.date.today
+        db.commit()
+    else:
+        user_streak = Streak(
+            last_relapse_date=datetime.date.today,
+            user=current_user.id,
+        )
+        db.add(user_streak)
+        db.commit()
+    return new_relapse
+
+
+@router.get("/", name='Get Relapses in a Month')
+async def read_relapses(
+        *,
+        db: Session = Depends(deps.get_db),
+        month: int = 1,
+        year: int = 2022,
+        current_user: User = Depends(deps.get_current_user),
+) -> Any:
+    """
+    Retrieve Relapse Days in a given month
+    """
+    # relapses = relapse.get_multi_by_user(db=db, user_id=current_user.id, skip=skip, limit=limit)
+    relapses = db.query(Relapse).filter(
+        Relapse.user == current_user.id,
+        Relapse.month == month,
+        Relapse.year == year,
+    ).all()
+
+    return relapses
+
+
+@router.get(
+    "/milestone",
+    response_model=SummarySchema | ResponseSchema,
+    responses={
+        200: {
+            "model": SummarySchema,
+            "description": "A summary for user progress",
+        },
+        400: {
+            "model": ResponseSchema,
+            "description": "User not found.",
+        },
+    },
+)
+async def get_milestone(
+        *,
+        current_user: User = Depends(deps.get_current_user),
+) -> Any:
+    """
+    Get a user milestone
+    Returns {clean_days: 1, milestone: 3}
+    """
+
+    # Get current user streak
+    # Check for when the last relapse occured
+    # Subtract today's date from last relapse
+    # Check where the milestone for the date lie
+    # Returns {clean_days: 1, milestone: 3}
+
+    today = datetime.date.today()
+    last_relapse_date = current_user.last_relapse_date
+
+    difference = today - last_relapse_date
+
+    clean_days = difference.days
+
+    result = {
+        "clean_days": clean_days,
+        "milestone": 0,
+    }
+
+    for milestone in milestones:
+        if clean_days <= milestone:
+            result = {
+                "clean_days": clean_days,
+                "milestone": milestone,
+            }
+        break
+
+    return result
+
+
+@router.get(
+    "/leaderboard",
+    response_model=GetAllRanking | ResponseSchema,
+    responses={
+        200: {
+            "model": GetAllRanking,
+            "description": "A list of leaderboard for all user.",
+        },
+        400: {
+            "model": ResponseSchema,
+            "description": "User not found.",
+        },
+    },
+)
+async def get_leaderboard(
+        db: Session = Depends(deps.get_db),
+        current_user: User = Depends(deps.get_current_user),
+) -> Any:
+    """
+    Get a list of users toping the board
+    
+    """
+
+    # Check user db & order by last relapse date
+
+    users = db.query(User).order_by(User.last_relapse_date).limit(20).all()
+
+    today = datetime.date.today()
+    result = []
+
+    for user in users:
+        difference = today - user.last_relapse_date
+        clean_days = difference.days
+        result.append(
+            Ranking(
+                id=user.id,
+                username=user.username,
+                avatar=user.avatar,
+                clean_days=clean_days,
+            ))
+
+    return {"status_code": 200, "result": result}
+
+
+@router.get(
+    "/summary",
+    response_model=SummarySchema | ResponseSchema,
+    responses={
+        200: {
+            "model": SummarySchema,
+            "description": "A summary for user progress",
+        },
+        400: {
+            "model": ResponseSchema,
+            "description": "User not found.",
+        },
+    },
+)
+async def get_summary(
+        current_user: User = Depends(deps.get_current_user), ) -> Any:
+    """
+    Get a user milestone
+    Returns {clean_days: 1, milestone: 3}
+    """
+
+    # Get current user streak
+    # Check for when the last relapse occured
+    # Subtract today's date from last relapse
+    # Check where the milestone for the date lie
+    # Returns {clean_days: 1, milestone: 3}
+
+    today = datetime.date.today()
+    last_relapse_date = current_user.last_relapse_date
+
+    difference = today - last_relapse_date
+
+    clean_days = difference.days
+
+    result = {
+        "clean_days": clean_days,
+        "milestone": 0,
+    }
+
+    for milestone in milestones:
+        if clean_days <= milestone:
+            result = {
+                "clean_days": clean_days,
+                "milestone": milestone,
+            }
+        break
+
+    return result
+
 
 @router.get(
     "/history/list",
@@ -84,169 +321,3 @@ async def history_list(
             ))
 
     return {"status_code": 200, "result": result}
-
-
-# @router.post(
-#     "/message",
-#     response_model=ResponseSchema,
-#     status_code=201,
-#     name="chats:send-message",
-#     responses={
-#         201: {
-#             "model": ResponseSchema,
-#             "description": "Message has been delivered successfully!",
-#         },
-#         401: {
-#             "model": ResponseSchema,
-#             "description": "Empty message, non existing receiver!",
-#         },
-#     },
-# )
-# async def send_message(
-#         request: MessageCreate,
-#         currentUser: UserBase = Depends(deps.get_current_user),  # pylint: disable=C0103
-#         session: Session = Depends(deps.get_db),
-# ):
-#     """
-#     The send_message endpoint.
-
-#     Args:
-#         request (MessageCreate) : A `MessageCreate` schema that contains info about the recipient.
-#         currentUser (UserObjectSchema): The authenticated user as the sender of the message.
-#         session (AsyncSession) : An autocommit sqlalchemy session object.
-
-#     Returns:
-#         ResponseSchema: return a response schema object.
-#     """
-
-#     # results = {
-#     #     "status_code": 201,
-#     #     "message": "A new message has been delivered successfully!",
-#     #     "data": currentUser,
-#     # }
-#     # return results
-#     results = await send_new_message(currentUser.id, request, None, None,
-#                                      session)
-#     return results
-
-
-@router.get("/leaderboard", response_model=list[schemas.Ranking])
-def get_all_streaks(db: Session = Depends(deps.get_db)):
-    ranks = services.get_all_users_streak(db=db)
-    return ranks
-
-
-@router.get("/leaderboard/top", response_model=list[schemas.Ranking])
-def get_top_ranking(db: Session = Depends(deps.get_db)):
-    top_ranks = services.get_top_20_users_with_high_streaks(db=db)
-    return top_ranks
-
-
-@router.get("/leaderboard/total_clean_days/{streak_id}",
-            response_model=schemas.Ranking)
-def get_specific_streak(streak_id: int, db: Session = Depends(deps.get_db)):
-    streak = services.get_auser_total_clean_days(db=db, streak_id=streak_id)
-    return streak
-
-
-@router.post("/")
-async def create_relapse(
-    *,
-    db: Session = Depends(deps.get_db),
-    relapse_in: RelapseCreate,
-    current_user: User = Depends(deps.get_current_user),
-    token: OAuth2AuthorizationCodeBearer = Depends(auth_scheme)
-) -> Any:
-    """
-    Create Relapse
-    """
-    relapse_in_db = db.query(Relapse).filter(Relapse.user==current_user.id, 
-        Relapse.day==relapse_in.day, Relapse.month==relapse_in.month, Relapse.year==relapse_in.year).first()
-    if relapse_in_db:
-        relapse_in_db.bottles_drank = relapse_in.bottles_drank
-        db.commit()
-        db.refresh(relapse_in_db)
-        data = jsonable_encoder(relapse_in_db)
-        data["message"] = "num of bottles updated"
-        return data
-    # Create Month History, if it doesn't exist
-    try:
-        month_title = f'{months[str(relapse_in.month)]} {relapse_in.year}'
-    except:
-        return {
-            "status_code": 400,
-            "message": "Invalid month value",
-        }
-    month_history = db.query(Month).filter(
-        Month.user == current_user.id,
-        Month.title == month_title,
-    ).first()
-
-    if month_history is None:
-        month_history = Month()
-        month_history.user = current_user.id
-        month_history.title = month_title
-        db.add(month_history)
-        db.commit()
-        db.refresh(month_history)
-
-    new_relapse = relapse.create_with_user(
-        db=db,
-        obj_in=relapse_in,
-        user_id=current_user.id,
-        month_id=month_history.id,
-    )
-    # new_relapse = create_relapse_with_user(db=db, user_id=current_user.id, relapse=relapse_in)
-    user_streak = db.query(Streak).filter(
-        Streak.user == current_user.id).first()
-    if user_streak:
-        user_streak.last_relapse = new_relapse
-        db.commit()
-        db.refresh(user_streak)
-    else:
-        user_streak = Streak(last_relapse=new_relapse.id, user=current_user.id)
-        db.add(user_streak)
-        db.commit()
-        db.refresh(user_streak)
-    data = jsonable_encoder(new_relapse)
-    return data
-
-@router.get("/")
-async def read_relapses(*,
-    db: Session = Depends(deps.get_db),  skip: int = 0,
-    limit: int = 100, current_user: User = Depends(deps.get_current_user),
-    token: OAuth2AuthorizationCodeBearer = Depends(auth_scheme))-> Any:
-    """
-    Retrieve Relapse Days
-    """
-    # relapses = relapse.get_multi_by_user(db=db, user_id=current_user.id, skip=skip, limit=limit)
-    relapses = db.query(Relapse).filter(Relapse.user==current_user.id).all()
-    return relapses 
-
-
-@router.get("/milestone")
-async def read_streaks(*,
-    db: Session = Depends(deps.get_db),  skip: int = 0,
-    limit: int = 100, current_user: User = Depends(deps.get_current_user),
-    token: OAuth2AuthorizationCodeBearer = Depends(auth_scheme)) -> Any:
-    """
-    Get a user milestone
-    """
-    user_streak = db.query(Streak).filter(Streak.user==current_user.id).first()
-    user_streak.current_date = datetime.date.today()
-    db.commit()
-    db.refresh(user_streak)
-    D = datetime.datetime.strptime(user_streak.current_date.strftime("%Y-%m-%d"), "%Y-%m-%d")
-    start_date = datetime.datetime.strptime(user_streak.start_date.strftime("%Y-%m-%d"), "%Y-%m-%d")
-    milestone_days = D-start_date
-    data = jsonable_encoder(user_streak)
-    data["milestone_days"] = milestone_days.days
-    return data
-
-@router.get("/month")
-async def get_month_progress(*, month: int, db: Session = Depends(deps.get_db),  skip: int = 0,
-    limit: int = 100, current_user: User = Depends(deps.get_current_user),
-    token: OAuth2AuthorizationCodeBearer = Depends(auth_scheme)):
-    month_relapses = db.query(Relapse).filter(Relapse.user == current_user.id, Relapse.month == month).all()
-    data = jsonable_encoder(month_relapses)
-    return data

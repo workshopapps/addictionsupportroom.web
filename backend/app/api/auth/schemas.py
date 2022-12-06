@@ -1,4 +1,4 @@
-from datetime import datetime
+from datetime import date, datetime
 from typing import Optional
 from enum import Enum
 
@@ -12,6 +12,8 @@ class UserBase(BaseModel):
         ...,
         example="http://www.example.com/image",
     )
+    last_relapse_date: date | None
+
     # chat_status: Optional[str] = Field(..., example=ChatStatus.online)
     # first_name: str = Field(..., example="First name.")
     # last_name: str = Field(..., example="Last Name.")
