@@ -6,6 +6,7 @@ from api.example.services import ExampleService
 from api.auth import schemas
 from api.auth.schemas import UserLogin
 from api.common.schemas import ResponseSchema
+from api.auth.schemas import AccessToken
 from db.models import Streak
 from db import models
 from sqlalchemy.orm import Session
@@ -48,16 +49,15 @@ def signup(user: schemas.UserCreate, db: Session = Depends(deps.get_db)):
 
 @router.post(
     "/login",
+    description=
+    'Login with only a unique username, no password is needed for now',
     responses={
-        200: {
-            "model": ResponseSchema,
-            "description": "Sucessful Login.",
-        },
         400: {
             "model": ResponseSchema,
             "description": "Invalid Username.",
         },
     },
+    response_model=AccessToken,
 )
 async def login(request: UserLogin, db: Session = Depends(deps.get_db)):
 
