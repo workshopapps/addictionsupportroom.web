@@ -1,4 +1,4 @@
-from fastapi import APIRouter, Depends, HTTPException, status
+from fastapi import APIRouter, Body, Depends, HTTPException, status
 from pydantic import BaseModel, Field
 from sqlalchemy.orm import Session
 from api import deps
@@ -18,24 +18,51 @@ class Contact(BaseModel):
     name: str
     email: str | None = Field(
         default="contactUs@app.soberpal.com",
-        example="This an optional email address used to identify the user from the web",
+        example=
+        "This an optional email address used to identify the user from the web",
     )
     message: str
     user_id: str | None = Field(
-        example="This an optional user_id used to identify the user from the mobile app"
+        example=
+        "This an optional user_id used to identify the user from the mobile app"
     )
 
 
-@router.post("/", status_code=201)
-def contact(data: Contact, db: Session = Depends(deps.get_db)):
+examples = {
+    "Web Site": {
+        "summary": "Web Site",
+        "description": "Example Request from Web Site.",
+        "value": {
+            'name': 'Ipaye Seyi',
+            'email': 'seyi@app.com',
+            'message': 'I am about to relapse'
+        },
+    },
+    "Mobile App": {
+        "summary": "Mobile App",
+        "description": "Example Request from Mobile App",
+        "value": {
+            'name': 'Ipaye Seyi',
+            'user_id': 30,
+            'message': 'I am about to relapse'
+        },
+    },
+}
+
+
+@router.post("/", status_code=200, description='Send a message to the admin.')
+def contact(
+        data: Contact = Body(examples=examples),
+        db: Session = Depends(deps.get_db),
+):
     if not data.user_id:
         data.user_id = data.email
 
     # Add contact message to database
     try:
-        message = ContactusMessages(
-            name=data.name, user_id=data.user_id, message=data.message
-        )
+        message = ContactusMessages(name=data.name,
+                                    user_id=data.user_id,
+                                    message=data.message)
         db.add(message)
         db.commit()
     except Exception as ex:
