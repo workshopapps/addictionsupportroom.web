@@ -44,6 +44,10 @@ class UserOut(UserBase):
     access_token: dict
 
 
+class UserLogin(BaseModel):
+    username: str = Field(..., example="name123")
+
+
 class ChatStatus(str, Enum):
     online = "online"
     offline = "offline"

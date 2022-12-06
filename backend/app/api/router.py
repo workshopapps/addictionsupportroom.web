@@ -18,6 +18,7 @@ from sqlalchemy.orm import Session
 
 from api.auth.views import login
 from api import deps
+from api.auth.schemas import UserLogin
 
 api_router = APIRouter()
 
@@ -31,7 +32,9 @@ async def token(form_data: OAuth2PasswordRequestForm = Depends(),
     Returns:
         UserOut: return a UserOut schema with a token object.
     """
-    val = await login(form_data, db)
+
+    val = await login(UserLogin(username=form_data.username), db=db)
+
     return {"access_token": val['token'], "token_type": "bearer"}
 
 
