@@ -43,23 +43,22 @@ class ContactusMessages(Base):
 class ForumPost(Base):
     __tablename__ = 'forum_post'
     id = Column(Integer, primary_key=True, index=True)
-    title = Column(String)
     message = Column(String)
     date_posted = Column(DateTime,
                         default=datetime.datetime.utcnow,
                         nullable=False)
-    user_id = Column(Integer, ForeignKey('users.id'))
+    user_username = Column(String, ForeignKey('users.username'))
     user = relationship('User', back_populates='forum_posts')
     forum_post_comments = relationship('ForumPostComment', back_populates='origin_post')
 
 class ForumPostComment(Base):
     __tablename__ = 'forum_post_comments'
     id = Column(Integer, primary_key=True, index=True)
-    owner_id = Column(Integer, ForeignKey('users.id'))
+    owner_username = Column(String, ForeignKey('users.username'))
     owner = relationship('User', back_populates='forum_comments')
     origin_post_id = Column(Integer, ForeignKey('forum_post.id'))
     origin_post = relationship('ForumPost', back_populates='forum_post_comments')
-    message = Column(String)
+    comment = Column(String)
     date_posted = Column(DateTime,
                         default=datetime.datetime.utcnow,
                         nullable=False)

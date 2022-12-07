@@ -1,11 +1,11 @@
-from pydantic import BaseModel
+from pydantic import BaseModel, Field
 from datetime import datetime
 from typing import List
+from fastapi import Query
 
 
 class Post(BaseModel):
     id: int
-    title: str
     message: str
     date_posted: datetime
 
@@ -15,14 +15,15 @@ class Post(BaseModel):
 class UserModel(BaseModel): #### NOTE change the name of the class
     id: int
     username: str
+    avatar: str
 
     class Config():
         orm_mode = True
 
 class PostComment(BaseModel):
-    owner_id: int
-    origin_post_id: int
-    message: str
+    owner: UserModel
+    origin_post: Post
+    comment: str
     date_posted: datetime
 
     class Config():
@@ -31,22 +32,22 @@ class PostComment(BaseModel):
 
 # BASE
 class PostBase(BaseModel):
-    title: str
     message: str
-    owner_id: int
+    # user_username: str
 
 class PostCommentBase(BaseModel):
-    owner_id: int
-    origin_post_id: int
-    message: str
+    origin_post_id: int = 1
+    comment: str
 
 
 # RESPONSE MODEL
 class PostResponseModel(BaseModel):
+    '''
+    A Pydantic class that defines the message response schema for fetching posts
+    '''
     id: int
-    title: str
     message: str
-    user: UserModel
+    user: UserModel 
     post_comments: List[PostComment] = []
     date_posted: datetime
 
@@ -64,7 +65,7 @@ class UserResponseModel(BaseModel):
 class PostCommentResponseModel(BaseModel):
     owner: UserModel
     origin_post: Post
-    message: str
+    comment: str
     date_posted: datetime
 
     class Config():
