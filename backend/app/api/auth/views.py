@@ -35,12 +35,12 @@ async def signup(user: schemas.UserCreate, db: Session = Depends(deps.get_db)):
         # Add user to General chatroom
         await create_assign_new_room_member(
             db_user.id,
+            session=db,
             room_obj=RoomCreate(
                 join=1,
                 room_name='general',
                 description='A General Chat room for all',
-            ),
-            session=db)
+            ))
 
     except Exception as ex:
         print(ex.args)
