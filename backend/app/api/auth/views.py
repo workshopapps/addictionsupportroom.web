@@ -56,8 +56,11 @@ async def signup(user: schemas.UserCreate, db: Session = Depends(deps.get_db)):
     return user_out
 
 
-async def create_assign_new_room_member(user_id: int, room_obj,
-                                        session: Session):
+async def create_assign_new_room_member(
+    user_id: int,
+    room_obj,
+    session: Session,
+):
     # Create a new room if it doesn't exist as a member
 
     room_obj.room_name = room_obj.room_name.lower()

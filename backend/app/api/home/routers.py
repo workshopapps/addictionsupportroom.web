@@ -9,22 +9,26 @@ from . import quotes
 from api import deps
 from starlette.responses import JSONResponse
 from fastapi.encoders import jsonable_encoder
-from.schemas import Emotion, ResponseModel
+from .schemas import Emotion, ResponseModel
 from fastapi.requests import Request
 
 router = APIRouter()
 
 
-@router.post(
-    "/emotions",
-    status_code=status.HTTP_200_OK,
-    responses={
-        424: {"description": "Feedback not added"},
-        405: {"description": "Method not allowed"},
-        400: {"description": "Bad request"}
-    }
-    )
-def post_emotion(emotion:Emotion, request:Request):
+@router.post("/emotions",
+             status_code=status.HTTP_200_OK,
+             responses={
+                 424: {
+                     "description": "Feedback not added"
+                 },
+                 405: {
+                     "description": "Method not allowed"
+                 },
+                 400: {
+                     "description": "Bad request"
+                 }
+             })
+def post_emotion(emotion: Emotion, request: Request):
     """
     Post a variety of emotions, and get a Quote as a response
     Emotions can be either of these:
@@ -63,14 +67,16 @@ def post_emotion(emotion:Emotion, request:Request):
 
             elif emotion.emotion == "angry":
                 quote = quotes.angry[random.randint(0, 2)]
-    
+
             elif emotion.emotion == "confused":
                 quote = quotes.confused[random.randint(0, 2)]
             else:
                 quote = None
-            
+
             if quote != None:
-                return ResponseModel(status=status.HTTP_200_OK, message="Quote", data=quote)
+                return ResponseModel(status=status.HTTP_200_OK,
+                                     message="Quote",
+                                     data=quote)
 
             elif quote == None:
                 print("here")
@@ -78,18 +84,14 @@ def post_emotion(emotion:Emotion, request:Request):
                     "status_code": status.HTTP_200_OK,
                     "message": "Emotion not registered"
                 }
-    
+
         except:
-            raise HTTPException(
-                status_code=status.HTTP_400_BAD_REQUEST,
-                detail="Bad Request"
-            )
-    
+            raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST,
+                                detail="Bad Request")
+
     else:
-        raise HTTPException(
-            status_code=status.HTTP_405_METHOD_NOT_ALLOWED,
-            detail="Method not allowed"
-        )
+        raise HTTPException(status_code=status.HTTP_405_METHOD_NOT_ALLOWED,
+                            detail="Method not allowed")
 
 
 @router.post("/relapse")
@@ -160,11 +162,12 @@ def get_all_notes(db: Session = Depends(get_db),
     return notes
 
 
-@router.post("/notes/create", response_model=schemas.Note, 
-    status_code=status.HTTP_201_CREATED, 
-    responses={
-        404: {"description": "not authenticated"}
-    })
+@router.post("/notes/create",
+             response_model=schemas.Note,
+             status_code=status.HTTP_201_CREATED,
+             responses={404: {
+                 "description": "not authenticated"
+             }})
 def create_note(note: schemas.NoteCreate,
                 db: Session = Depends(get_db),
                 current_user: User = Depends(deps.get_current_user)):
@@ -190,9 +193,10 @@ def create_note(note: schemas.NoteCreate,
     db_note = crud.create_note(db=db, note=note)
     if not db_note:
         raise HTTPException(status_code=status.HTTP_424_FAILED_DEPENDENCY,
-            detail={"message": "Note not created"})
+                            detail={"message": "Note not created"})
 
-    response = JSONResponse(content=jsonable_encoder(db_note), status_code=status.HTTP_201_CREATED)
+    response = JSONResponse(content=jsonable_encoder(db_note),
+                            status_code=status.HTTP_201_CREATED)
     return response
 
 
@@ -204,25 +208,31 @@ def get_all_notes_created_today(db: Session = Depends(get_db),
     return notes
 
 
-@router.get(
+@router.get("/notes/{note_id}",
     status_code=status.HTTP_200_OK,
-    responses={
-        200: {"description": "Successful Response"},
-        404: {"description": "Note Not Found"},
-        422: {"description": "Validation Error"}
-        })  #  response_model=schemas.ShowNote
+            responses={
+                200: {
+                    "description": "Successful Response"
+                },
+                404: {
+                    "description": "Note Not Found"
+                },
+                422: {
+                    "description": "Validation Error"
+                }
+            })  #  response_model=schemas.ShowNote
 def get_specific_note(note_id: int, db: Session = Depends(get_db)):
     """
     Fetches a specific note using the given note id.
-    
+
     Args:
-    
+
         note_id (int): note id
-        
+
         db (Session, optional): Database. Defaults to Depends(get_db).
-        
+
     Returns:
-    
+
         {
             "id": note_id(int),
             "title": title of the note (str),
@@ -230,11 +240,11 @@ def get_specific_note(note_id: int, db: Session = Depends(get_db)):
             "created_at": date the  note was created (datetime),
             "updated_at": date the note was updated (datetime)
         }
-        
+
     Raises:
-    
+
         HTTPException [404]: There's no note with id: {note_id}
-    
+
         HTTPException [422]: Validation Error
 
     """
