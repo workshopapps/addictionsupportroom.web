@@ -1,7 +1,10 @@
 from pydantic import BaseModel
 import datetime
 
-
+class NoteCreate(BaseModel):
+    title: str
+    description: str
+    
 class Note(BaseModel):
     title: str
     description: str

@@ -1,12 +1,13 @@
 import datetime
 import random
-from fastapi import APIRouter, Depends
+from fastapi import APIRouter, Depends, status, HTTPException
 from sqlalchemy.orm import Session
 from api.home import schemas, crud
 from db.models import Emergency, User
 from db.db import get_db
 from . import quotes
 from api import deps
+from starlette.responses import JSONResponse
 
 router = APIRouter()
 
@@ -57,11 +58,26 @@ def get_all_notes(db: Session = Depends(get_db),
     return notes
 
 
-@router.post("/notes/create")
-def create_note(note: schemas.Note,
+@router.post("/notes/create", response_model=schemas.Note, 
+    status_code=status.HTTP_201_CREATED, 
+    responses={
+        404: {"description": "not authenticated"}
+    })
+def create_note(note: schemas.NoteCreate,
                 db: Session = Depends(get_db),
                 current_user: User = Depends(deps.get_current_user)):
+    """
+    Creates a Note by a user.
+    
+    Args: 
+        note: Pydantic schema to define note parameters.
+
+    Returns:
+
+    """
+
     db_note = crud.create_note(db=db, note=note)
+    response = JSONResponse(content=db_note, status_code=status.HTTP_201_CREATED)
     return db_note
 
 
