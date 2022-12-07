@@ -8,19 +8,17 @@ from sqlalchemy.orm import Session
 logger = logging.getLogger(__name__)
 
 from typing import (
-    Any,
-)
+    Any, )
 
 from .schemas import (
     MessageCreate,
     MessageCreateRoom,
+    RoomMessageOut,
 )
 from sqlalchemy.sql import (
-    text,
-)
+    text, )
 from api.auth.schemas import (
-    UserBase,
-)
+    UserBase, )
 import uuid
 from api import deps
 
@@ -157,11 +155,13 @@ async def send_new_message(  # pylint: disable=R0911
                 "status_code": 400,
                 "message": "You can't send an empty message!",
             }
-        receiver = await deps.find_existed_user(id=request.receiver, session=session)
+        receiver = await deps.find_existed_user(id=request.receiver,
+                                                session=session)
         if not receiver:
             return {
                 "status_code": 400,
-                "message": "You can't send a message to a non existing" " user!",
+                "message": "You can't send a message to a non existing"
+                " user!",
             }
         if receiver.id == sender_id:
             return {
@@ -194,12 +194,8 @@ async def send_new_message(  # pylint: disable=R0911
     return results
 
 
-async def get_sender_receiver_messages(
-    sender: UserBase, receiver: str, session: Session
-):
-    print(receiver)
-    print(sender.id)
-
+async def get_sender_receiver_messages(sender: UserBase, receiver: str,
+                                       session: Session):
     """
     A method to fetch messages between a sender and a receiver.
 
@@ -277,6 +273,16 @@ async def get_sender_receiver_messages(
 # Rooms
 # ----------------------------------------------------------------
 async def create_assign_new_room(user_id: int, room_obj, session: Session):
+    '''
+    This method allows you to create or join a room
+    
+    The first part focus on creating a new room
+    The second part focus on joining a new room
+    
+    join = 0 : Joining as an admin
+    join = 1 : Joining as a member
+
+    '''
     room_obj.room_name = room_obj.room_name.lower()
     if not room_obj.room_name:
         results = {
@@ -289,28 +295,39 @@ async def create_assign_new_room(user_id: int, room_obj, session: Session):
     if not room:
         # Room doesn't exist: do this
         if room_obj.join == 0:
-            # User wants to join a room, so create a new one
-            await create_room(room_obj.room_name, room_obj.description, session)
+            # User wants to join a room that hasn't existed yet, so a new one has to be created
+            await create_room(room_obj.room_name, room_obj.description,
+                              session)
         else:
-            # User doesn't want to join whatever room
+            # User doesn't want to join whatever room, & room doesn't exist
+            # Stop runing function
             return {
                 "status_code": 400,
                 "message": "Room not found!",
             }
         logger.info(f"Creating room `{room_obj.room_name}`.")
+        # User wants to join a room as an admin
+        # If program got here, the room already exists & user wants to join
+        # Get the newly created room for the ID
+
         room = await find_existed_room(room_obj.room_name, session)
+        # Cross check if user has already been in room
         user = await find_existed_user_in_room(user_id, room.id, session)
-        # Check if user is in newly created room
         if user:
             logger.info(f"`{user_id}` has already joined this room!")
             results = {
-                "status_code": 400,
-                "message": "You have already joined room" f"{room_obj.room_name}!",
+                "status_code":
+                400,
+                "message":
+                "You have already joined room "
+                f"{room_obj.room_name}!",
             }
         else:
             # Join the room
             await join_room(user_id, room.id, session, True)
-            logger.info(f"Adding {user_id} to room `{room_obj.room_name}` as a member.")
+            logger.info(
+                f"Adding {user_id} to room `{room_obj.room_name}` as an admin."
+            )
             results = {
                 "status_code": 200,
                 "message": f"You have joined room {room_obj.room_name}!",
@@ -318,11 +335,14 @@ async def create_assign_new_room(user_id: int, room_obj, session: Session):
         return results
 
     else:
-        # Room already exists: Check if User is in room
+        # Room already exists: User must be trying to join a pre-existing room
+
+        # Check if User have existed in room
         user = await find_existed_user_in_room(user_id, room.id, session)
         print(user)
+        # Check if user have existed
         if user and room_obj.join == 1:
-            # If user was already in the room
+            # Check if user is playing smart, and has already been banned
             if user.banned == 1:
                 logger.info(f"`{user_id}` can't join this room!")
                 results = {
@@ -332,13 +352,18 @@ async def create_assign_new_room(user_id: int, room_obj, session: Session):
             else:
                 logger.info(f"`{user_id}` has already joined this room!")
                 results = {
-                    "status_code": 400,
-                    "message": "You have already joined room" f"{room_obj.room_name}!",
+                    "status_code":
+                    400,
+                    "message":
+                    "You have already joined room "
+                    f"{room_obj.room_name}!",
                 }
             # If user was never in the room
         elif not user and room_obj.join == 1:
             await join_room(user_id, room.id, session)
-            logger.info(f"Adding {user_id} to room `{room_obj.room_name}` as a member.")
+            logger.info(
+                f"Adding {user_id} to room `{room_obj.room_name}` as a member."
+            )
             results = {
                 "status_code": 200,
                 "message": f"You have joined room {room_obj.room_name}!",
@@ -367,7 +392,8 @@ async def find_existed_room(room_name: str, session: Session):
     return result.fetchone()
 
 
-async def find_existed_user_in_room(user_id: int, room_id: int, session: Session):
+async def find_existed_user_in_room(user_id: int, room_id: int,
+                                    session: Session):
     query = """
         SELECT
           *
@@ -404,29 +430,12 @@ async def find_admin_in_room(user_id: int, room_id: int, session: Session):
 
 
 async def create_room(room_name: int, description: str, session: Session):
-    query = """
-        INSERT INTO rooms (
-          room_name,
-          description,
-          creation_date
-        )
-        VALUES (
-          :room_name,
-          :description,
-          :creation_date
-        )
-    """
-    values = {
-        "room_name": room_name,
-        "description": description,
-        "creation_date": datetime.datetime.utcnow(),
-    }
-
-    print(room_name, description)
 
     room = Rooms()
     room.room_name = room_name
     room.description = description
+    room.creation_date = datetime.datetime.utcnow()
+    room.modified_date = datetime.datetime.utcnow()
 
     session.add(room)
     session.commit()
@@ -434,7 +443,10 @@ async def create_room(room_name: int, description: str, session: Session):
     return room
 
 
-async def join_room(user_id: int, room_id: int, session: Session, is_admin=False):
+async def join_room(user_id: int,
+                    room_id: int,
+                    session: Session,
+                    is_admin=False):
     if is_admin:
         query = """
             INSERT INTO room_members (
@@ -491,7 +503,8 @@ async def join_room(user_id: int, room_id: int, session: Session, is_admin=False
     return roommembers
 
 
-async def get_room_conversations(room_name: str, sender_id: int, session: Session):
+async def get_room_conversations(room_name: str, sender_id: int,
+                                 session: Session):
     room = await find_existed_room(room_name, session)
     if not room:
         return {
@@ -560,9 +573,22 @@ async def get_room_conversations(room_name: str, sender_id: int, session: Sessio
     values = {"room_id": room.id, "sender_id": sender_id}
     result = session.execute(text(query), values)
     messages_sent_received = result.fetchall()
+    result = []
+    for item in messages_sent_received:
+        print(item)
+        result.append(
+            RoomMessageOut(
+                **item,
+                user={
+                    'id': item.id,
+                    'username': item.username,
+                    'avatar': item.avatar
+                },
+            ), )
+
     results = {
         "status_code": 200,
-        "result": messages_sent_received,
+        "result": result,
     }
     return results
 
@@ -589,17 +615,20 @@ async def send_new_room_message(
     if not user:
         logger.info("Can't send a message to this room!")
         results = {
-            "status_code": 400,
-            "message": "You can't send a message to a room you" " have not joined yet.",
+            "status_code":
+            400,
+            "message":
+            "You can't send a message to a room you"
+            " have not joined yet.",
         }
     else:
         # create a new message
         if not request.message_type == "text":
-            results = await send_new_message(
-                sender_id, request, bin_photo, room.id, session
-            )
+            results = await send_new_message(sender_id, request, bin_photo,
+                                             room.id, session)
         else:
-            results = await send_new_message(sender_id, request, None, room.id, session)
+            results = await send_new_message(sender_id, request, None, room.id,
+                                             session)
     return results
 
 
