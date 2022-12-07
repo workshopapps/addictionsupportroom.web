@@ -1,7 +1,6 @@
 {
   "dependencies": {
-    "framer-motion": "^7.6.12",
-    "react-hot-toast": "^2.4.0",
-    "react-toastify": "^9.1.1"
+    "@sentry/react": "^7.23.0",
+    "@sentry/tracing": "^7.23.0"
   }
 }

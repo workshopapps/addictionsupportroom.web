@@ -1,139 +1,246 @@
 import React from "react";
-<<<<<<< HEAD
-import Appstats from '../../Components/AppStats/Appstats'
-import {AiOutlineHeart} from 'react-icons/ai'
-import {BiLineChart} from 'react-icons/bi'
-import {TiFlashOutline} from 'react-icons/ti'
-import people from '../../assets/Rectangle27.png';
-import smiley from '../../assets/smileys.png';
-import phones from '../../assets/Frame75.png';
-import phone from '../../assets/Frame76.png';
-import add from '../../assets/add.png';
-=======
 import Faq from "../../Components/faq/Faq";
 import Appstats from "../../Components/AppStats/Appstats";
 import { AiOutlineHeart } from "react-icons/ai";
 import { BiLineChart } from "react-icons/bi";
 import { TiFlashOutline } from "react-icons/ti";
-import people from "../../assets/Rectangle25.png";
-import peoples from "../../assets/Rectangle27.png";
+import HomeBg from "../../assets/bg-home.png";
+import phone from "../../assets/phone.png";
+import cell2 from "../../assets/cell2.png";
 import smiley from "../../assets/smileys.png";
-import phones from "../../assets/Frame75.png";
-import phone from "../../assets/Frame76.png";
-import Download from '../../Components/Download/Download'
+import start from "../../assets/start.png";
+// import phone from "../../assets/Frame76.png";
+import Download from "../../Components/Download/Download";
+import { motion } from "framer-motion";
 import add from "../../assets/add.png";
->>>>>>> 38abc4457a0a7ad9e2c0cc374d9188254cb89ea2
-// import {people, smiley, phone, phones, add} from "./import";
 import "./home.css";
 
 const Home = () => {
-const size = 40
+  const size = 40;
 
   return (
     <div className="soberpal__home">
-      <section className="soberpal__home-first__section">
-        <h1>Guiding you from addiction to recovery</h1>
+      <motion.section
+        className="soberpal__home-first__section"
+        whileInView={{ y: [100, 50], opacity: [0, 0, 1] }}
+        transition={{ duration: 0.7 }}
+      >
+        <h1 className="text-[black]">Guiding you from alcohol addiction to recovery</h1>
         <p>
-          Soberpal is your reliable platform for addiction support. Our mission
-          is to guide you to a healthier life and provide the support you
-          need.
+          Looking for a way to cut back on your alcohol intake and live a sober
+          lifestyle? Soberpal is the perfect app for you! With one click you
+          have access to a community willing to motivate and guide you. Track
+          your progress and see results over time.
         </p>
-<<<<<<< HEAD
-        <img src={people} alt="people" />
-      </section>
+        <img src={HomeBg} alt="people" className="big_device" />
+        <img src={HomeBg} alt="people" className="small_device" />
+      </motion.section>
 
-      <section><Appstats/></section>
-=======
-          <img src={peoples} alt="people" className="big_device" />
-        <img src={people} alt="people" className="small_device" />
-      </section>
+      <motion.section
+        whileInView={{ y: [100, 50], opacity: [0, 0, 1] }}
+        transition={{ duration: 0.7 }}
+      >
+        <p className="mt-[70px] mb-[40px] text-[28px] font-[600] text-center">
+          We’ve helped a couple of people reduce their intake of alcohol
+        </p>
+        <div className="flex flex-wrap justify-between mt-[20px] mb-[70px] ">
+          <div className="w-[30opx] mx-auto">
+            <p className="text-[48px] text-blue text-center font-[700]">60%</p>
+            <p className="text-[20px] font-[500]  text-center">
+              Rate of recovery of our users
+            </p>
+          </div>
 
-      <section >
-        <Appstats />
-      </section>
->>>>>>> 38abc4457a0a7ad9e2c0cc374d9188254cb89ea2
+          <div className="w-[300px] mx-auto">
+            <p className="text-[48px] text-blue text-center font-[700]">200+</p>
+            <p className="text-[20px] font-[500]  text-center">
+              5-star reviews
+            </p>
+          </div>
 
-      <section className="soberpal__home-third__section">
-        <h1>You are not alone in the fight against addiction</h1>
+          <div className="w-[300px] mx-auto">
+            <p className="text-[48px] text-blue text-center font-[700]">10K</p>
+            <p className="text-[20px] font-[500] text-center">
+              Global downloads
+            </p>
+          </div>
+        </div>
+      </motion.section>
+
+      <motion.section
+        whileInView={{ y: [100, 50], opacity: [0, 0, 1] }}
+        transition={{ duration: 0.7 }}
+        className="soberpal__home-third__section"
+      >
+        <p className="text-[32px] text-center font-[700]">Our services</p>
+        <p className="text-[18px] mt-[20px] mb-[50px] text-center font-[400]">
+          You are not alone in the fight against addiction
+        </p>
 
         <div className="soberpal__home-third__section-cards ">
           <div className="cards__padding">
             <div className="cards__flex">
-              <AiOutlineHeart size={size} className='icon__round'/>
-              <h3>We support each other</h3>
+              <AiOutlineHeart size={size} className="icon__round" />
+              <h3>Progress Reports</h3>
             </div>
             <p>
-              Our team of experts, advocates and recovering addicts are
-              committed to helping you find the right recovery plan to rebuild
-              your life
+              We help you identify the different types of alchol addiction, the
+              health implication and what needs to be done to reduce your alchol
+              consumption.
             </p>
           </div>
 
           <div className="cards__padding">
             <div className="cards__flex">
-              <img src={smiley} alt="smileys" className='icon__round'/>
-              <h3>We care about you</h3>
+              <img src={smiley} alt="smileys" className="icon__round" />
+              <h3>Chat Room</h3>
             </div>
             <p>
-              Help you to identify the different types of alcohol addiction, how
-              the substances affect the body and what you can do for yourself to
-              reduce or stop it once and for all
+              We help you identify the different types of alchol addiction, the
+              health implication and what needs to be done to reduce your alchol
+              consumption.
             </p>
           </div>
 
           <div className="cards__padding">
             <div className="cards__flex">
-              <BiLineChart size={size}  className='icon__round'/>
-              <h3>We care about your progress</h3>
+              <BiLineChart size={size} className="icon__round" />
+              <h3>Daily Notes</h3>
             </div>
             <p>
-              We have compiled a comprehensive list of resources to help you or
-              a loved one find a support system or get immediate help for an
-              addiction
+              We help you identify the different types of alchol addiction, the
+              health implication and what needs to be done to reduce your alchol
+              consumption.
             </p>
           </div>
 
           <div className="cards__padding">
             <div className="cards__flex">
-              <TiFlashOutline size={50}  className='icon__padding'/>
-              <h3>We provide the support you need</h3>
+              <TiFlashOutline size={50} className="icon__padding" />
+              <h3>Support Team</h3>
             </div>
             <p>
-              find the support among our experts, advocates and recovering
-              addicts that will work best for you and power your recovery
+              We help you identify the different types of alchol addiction, the
+              health implication and what needs to be done to reduce your alchol
+              consumption.
             </p>
           </div>
         </div>
-      </section>
+      </motion.section>
 
-      <section className="soberpal__home-fourth__section">
-        <h1>Cutting egde features to help track your progress</h1>
-        <p>
-          Powerful, self-serve product help you track your alcohol intake, track
-          your progress, <br/>and live a more healtheir lifestyle with support from
-          the community
+      <motion.section
+        whileInView={{ y: [100, 50], opacity: [0, 0, 1] }}
+        transition={{ duration: 0.7 }}
+        className="soberpal__home-fourth__section"
+      >
+        <main className="text-[32px] text-center font-[700]">
+          How we can help You
+        </main>
+        <p className="text-[18px] mt-[20px] mb-[30px] text-center font-[400]">
+          You are not alone in the fight against addiction
         </p>
-<<<<<<< HEAD
-        <img src={phones} alt="phones" className='phones'/>
-        <img src={phone} alt="phone" className='phone' />
-        <div className="soberpal__home-fourth__section__flex">
-          <div>
-            <h4>Download the Soberpal app</h4>
-            <p>Join over 200+ people already growing with Soberpal</p>
+        <div className="h-full w-[90%] max-w-[900px] flex flex-wrap ">
+          <div className="mx-auto mt-[20px]">
+            <img src={phone} alt="phones" className="h-[400px] w-auto " />
           </div>
-          <button>Download App</button>
-=======
-        <img src={phones} alt="phones" className="big_device" />
-        <img src={phone} alt="phone" className="small_device" />
-        <div className="w-full tablet:w-[70%] max-w-[1000px] mx-auto">
-          <Download />
->>>>>>> 38abc4457a0a7ad9e2c0cc374d9188254cb89ea2
+          <div className="mt-[100px] tablet:mt-[50px] mx-auto">
+            <div className="flex gap-4 h-auto items-center mx-auto">
+              <p className="rounded-[100%] text-[white] bg-blue p-2 px-5 mr-[16px]">
+                1
+              </p>
+              <p className="text-[16px]">Getting sober</p>
+            </div>
+            <div className="flex gap-4 h-auto items-center">
+              <p className="rounded-[100%] text-[white] bg-blue p-2 px-5 mr-[16px]">
+                2
+              </p>
+              <p className="text-[16px]">
+                Daily motivation and progress tracker
+              </p>
+            </div>
+            <div className="flex gap-4 h-auto items-center">
+              <p className="rounded-[100%] text-[white] bg-blue p-2 px-5 mr-[16px]">
+                3
+              </p>
+              <p className="text-[16px]">Community support</p>
+            </div>
+            <div className="flex gap-4 h-auto items-center">
+              <p className="rounded-[100%] text-[white] bg-blue p-2 px-5 mr-[16px]">
+                4
+              </p>
+              <p className="text-[16px]">Get help anytime</p>
+            </div>
+          </div>
         </div>
-      <div className="w-full tablet:w-[85%] mx-auto mb-16 bg-blue h-[2px] my-6" />
-      </section>
+      </motion.section>
 
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <div className="bg-[#D8F2FF] h-full  mb-[100px] pb-[100px]">
+        <motion.section
+          whileInView={{ y: [100, 50], opacity: [0, 0, 1] }}
+          transition={{ duration: 0.7 }}
+          className="w-[90%] laptop:w-[70%] mx-auto"
+        >
+          <main className="text-[38px] text-center font-[700]">
+            What peoople say about us
+          </main>
+          <p className="text-[18px] mt-[20px] mb-[60px] text-center font-[400]">
+            You are not alone in the fight against addiction
+          </p>
 
-      <section className="soberpal__home-fifth__section">
+          <div className="flex max-w-[1000px] mx-auto flex-wrap justify-between ">
+            <div className="bg-blue mt-[30px] mx-auto py-[40px] px-4 rounded-[16px] w-[300px]">
+              <div className="flex gap-1">
+                <img src={start} alt="start" />
+                <img src={start} alt="start" />
+                <img src={start} alt="start" />
+                <img src={start} alt="start" />
+                <img src={start} alt="start" />
+              </div>
+              <div>
+                <p className="mt-[20px] text-[white]">Lion</p>
+                <p className="mt-[20px] text-[white]">
+                  Soberpal has been an amazing support, I've made a lot of
+                  friends for life and there has been a major reduction in my
+                  alcohol intake.
+                </p>
+              </div>
+            </div>
+
+            <div className="bg-[#F1A66F] mx-auto mt-[30px] py-[40px] px-4 rounded-[16px] w-[300px]">
+              <div className="flex gap-1">
+                <img src={start} alt="start" />
+                <img src={start} alt="start" />
+                <img src={start} alt="start" />
+                <img src={start} alt="start" />
+                <img src={start} alt="start" />
+              </div>
+              <div>
+                <p className="mt-[20px] text-[white]">Dolphin</p>
+                <p className="mt-[20px] text-[white]">
+                  It's been fun hanging out on the SoberPal app, I get to keep
+                  track of my progress and avoid relapses. It's a great app and
+                  you should definitely try it out.
+                </p>
+              </div>
+            </div>
+          </div>
+        </motion.section>
+      </div>
+      <motion.section
+        whileInView={{ y: [100, 50], opacity: [0, 0, 1] }}
+        transition={{ duration: 0.7 }}
+        className="soberpal__home-fifth__section max-w-[1300px] mx-auto"
+      >
         {/* <hr /> */}
         <div className="soberpal__home-fifth__section__padding">
           <h1>FAQs</h1>
@@ -142,31 +249,6 @@ const size = 40
             alcohol intake. These are frequently asked questions about the
             product. Dont find answer to your question?? send us a message.
           </p>
-<<<<<<< HEAD
-          <div className="soberpal__home-fifth__section__flex1">
-            <h3>What is Soberpal?</h3>
-            <img src={add} alt="add" />
-          </div>
-          <hr />
-          <div className="soberpal__home-fifth__section__flex1">
-            <h3>Can I be anonymous?</h3>
-            <img src={add} alt="add" />
-          </div>
-          <hr />
-          <div className="soberpal__home-fifth__section__flex1">
-            <h3>Do I get a personal sponsor?</h3>
-            <img src={add} alt="add" />
-          </div>
-          <hr />
-          <div className="soberpal__home-fifth__section__flex1">
-            <h3>How does billing wor+k</h3>
-            <img src={add} alt="add" />
-          </div>
-          <hr />
-          <div className="soberpal__home-fifth__section__flex1">
-            <h3>How do I change my account email</h3>
-            <img src={add} alt="add" />
-=======
           <div className="">
             <Faq
               question="Getting Started"
@@ -202,17 +284,22 @@ const size = 40
               question="How Do I View My Private Message"
               answer="Your Private Messages can be view by going to your Profile and clicking on Private Messages, you'll be asked to input your unique security code, once it's confirmed your Private Meassages will be accessible. "
             />
->>>>>>> 38abc4457a0a7ad9e2c0cc374d9188254cb89ea2
           </div>
         </div>
-        <p className='display_none'>Don't find answer to your question?</p>
+        <h3 className="text-center font-[500] text-[28px]">
+          Further questions ?
+        </h3>
         <div className="soberpal__home-fifth__section__flexy">
           <div className="soberpal__home-fifth__section__flex2">
             <p>Ask us anything</p>
             <button>send</button>
           </div>
         </div>
-      </section>
+
+        <div className="w-full mb-[50px] mt-[150px] tablet:w-[100%] max-w-[1000px] mx-auto">
+          <Download />
+        </div>
+      </motion.section>
     </div>
   );
 };

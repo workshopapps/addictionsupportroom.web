@@ -22,14 +22,15 @@
     "react-toastify": "^9.1.1",
     "sass": "^1.56.1",
     "serve": "^14.1.2",
-    "web-vitals": "^2.1.4"
+    "web-vitals": "^2.1.4",
+    "@sentry/react": "^7.23.0",
+    "@sentry/tracing": "^7.23.0"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject",
-    "serve": "serve -s build"
+    "eject": "react-scripts eject"
   },
   "eslintConfig": {
     "extends": [

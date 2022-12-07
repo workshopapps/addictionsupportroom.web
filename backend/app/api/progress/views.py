@@ -9,13 +9,12 @@ from fastapi import APIRouter, Depends
 from . import schemas
 from sqlalchemy.orm import Session
 import datetime
-from .schemas import GetAllHistoryResult, GetAllRanking, Ranking, SummarySchema
-
+from .schemas import GetAllHistoryResult, GetAllRanking, Ranking, SummarySchema, TotalCleanDays
 from typing import Any
+
 from .schemas import RelapseBase, RelapseCreate, RelapseInDB
 from fastapi.security import HTTPBearer
-from fastapi.encoders import jsonable_encoder
-from db.models import User, Streak, Relapse
+from db.models import User, Streak, Relapse, Month
 from fastapi.encoders import jsonable_encoder
 from .crud import relapse, create_relapse_with_user
 
@@ -89,25 +88,27 @@ async def mark_a_day(
         user_id=current_user.id,
         month_id=month_history.id,
     )
+    
     # new_relapse = create_relapse_with_user(db=db, user_id=current_user.id, relapse=relapse_in)
     # Save the new relapse
     db.add(new_relapse)
     db.commit()
     db.refresh(new_relapse)
+    
+    current_user_id = current_user.id
 
-    user_streak = db.query(Streak).filter(
-        Streak.user == current_user.id).first()
-    if user_streak:
-        user_streak.last_relapse_date = datetime.date.today
+    currentuser = db.query(User).get(current_user_id)
+    if currentuser:
+        currentuser.last_relapse_date = datetime.date.today()
         db.commit()
     else:
-        user_streak = Streak(
-            last_relapse_date=datetime.date.today,
-            user=current_user.id,
+        currentuser = User(
+            last_relapse_date=datetime.date.today(),
+            id=current_user_id,
         )
-        db.add(user_streak)
+        db.add(currentuser)
         db.commit()
-    return new_relapse
+    return {"new_relapse_date": datetime.date.today()}
 
 
 @router.get("/", name='Get Relapses in a Month')
@@ -225,6 +226,84 @@ async def get_leaderboard(
             ))
 
     return {"status_code": 200, "result": result}
+
+
+@router.get(
+    "/leaderboard/all",
+    response_model=GetAllRanking | ResponseSchema,
+    responses={
+        200: {
+            "model": GetAllRanking,
+            "description": "A list of leaderboard for all user.",
+        },
+        400: {
+            "model": ResponseSchema,
+            "description": "User not found.",
+        },
+    },
+)
+async def get_leaderboard_all_rankings(
+        db: Session = Depends(deps.get_db),
+        current_user: User = Depends(deps.get_current_user),
+) -> Any:
+    """
+    Get a list of all users and their rankings on the board.
+    
+    """
+
+    # Check user db & order by last relapse date
+
+    users = db.query(User).order_by(User.last_relapse_date).all()
+    today = datetime.date.today()
+    result = []
+
+    for user in users:
+        difference = today - user.last_relapse_date
+        clean_days = difference.days
+        result.append(
+            Ranking(
+                id=user.id,
+                username=user.username,
+                avatar=user.avatar,
+                clean_days=clean_days,
+            ))
+
+    return {"status_code": 200, "result": result}
+
+
+@router.get(
+    "/leaderboard/user/total",
+    response_model=TotalCleanDays | ResponseSchema,
+    responses={
+        200: {
+            "model": TotalCleanDays,
+            "description": "current user's total number of clean days.",
+        },
+        400: {
+            "model": ResponseSchema,
+            "description": "User not found.",
+        },
+    },
+)
+async def get_current_user_total_clean_days(
+        db: Session = Depends(deps.get_db),
+        current_user: User = Depends(deps.get_current_user),
+) -> Any:
+    """
+    Get the current user's total number of clean days.
+    
+    """
+
+    # Check user db & order by last relapse date
+    id = current_user.id
+
+    users = db.query(User).get(id) 
+
+    today = datetime.date.today()
+    difference = today - users.last_relapse_date
+    clean_days = difference.days
+    result = []
+    return {"status_code": 200, "clean_days": clean_days}
 
 
 @router.get(

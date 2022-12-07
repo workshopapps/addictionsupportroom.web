@@ -1,4 +1,4 @@
-import React from "react";
+
 
 const TermsServices = () => {
   return (
@@ -29,7 +29,8 @@ const TermsServices = () => {
         journey.
       </p>
       <li className="ml-[20px] my-5 font-[600] text-[20px] text-[#4F4F4F]">
-Responses</li>
+        Responses
+      </li>
 
       <p className="mb-4">
         This data submitted by you may be used to help others have a better
@@ -37,7 +38,8 @@ Responses</li>
       </p>
 
       <li className="ml-[20px] my-5 font-[600] text-[20px] text-[#4F4F4F]">
-Crash Data</li>
+        Crash Data
+      </li>
       <p className="mb-4">
         When the app crashes, data is automatically sent to us, which can help
         in debugging issues and improving the quality of the app.
@@ -56,7 +58,9 @@ Crash Data</li>
       <li className="ml-[20px] my-5">
         Survey questions about reaching your milestone.
       </li>
-      <p className="text-[26px] text-[#4f4f4f] mt-10 font-[500]">Account Data</p>
+      <p className="text-[26px] text-[#4f4f4f] mt-10 font-[500]">
+        Account Data
+      </p>
       <p className="mt-4">
         When you subscribe to SoberPal, we provide cloud data backups as a
         service. This means that any information you provide will be backed up
@@ -71,7 +75,9 @@ Crash Data</li>
         the app. This may include technical information, such as your IP address
         based on your location, app version, or device platform.
       </p>
-      <p className="text-[26px] mt-10 text-[#4f4f4f] font-[500]">Community Data</p>
+      <p className="text-[26px] mt-10 text-[#4f4f4f] font-[500]">
+        Community Data
+      </p>
       <p
         className="tablet:text-[30px] text-[#4F4F4F] text-[26px] mt-10 
       font-[500]"
@@ -88,19 +94,25 @@ Crash Data</li>
       >
         What Do We Do With This Data?
       </p>
-      <li className="ml-[20px] my-5 text-[#4F4F4F
-] ">
+      <li
+        className="ml-[20px] my-5 text-[#4F4F4F
+] "
+      >
         The app usage and account data help us improve the user experience of
         our App.
       </li>
-      <li className="ml-[20px] my-5 text-[#4F4F4F
-] ">
+      <li
+        className="ml-[20px] my-5 text-[#4F4F4F
+] "
+      >
         We use anonymized addiction names, start dates, and survey questions to
         display interesting statistics to our app users to provide motivation
         for reaching their next milestone.
       </li>
-      <li className="ml-[20px] my-5 text-[#4F4F4F
-] ">
+      <li
+        className="ml-[20px] my-5 text-[#4F4F4F
+] "
+      >
         Community data is displayed on our community pages. We are not a
         subsidiary of a larger corporation that can access your information.
       </li>
@@ -164,25 +176,33 @@ Crash Data</li>
         transmission we follow HIPAA-compliant practices to prevent unauthorized
         access.
       </p>
-      <li className="ml-[20px] my-5 text-[#4F4F4F
-] ">
+      <li
+        className="ml-[20px] my-5 text-[#4F4F4F
+] "
+      >
         All user data is secured in transit using TLS.
       </li>
-      <li className="ml-[20px] my-5 text-[#4F4F4F
-] ">
+      <li
+        className="ml-[20px] my-5 text-[#4F4F4F
+] "
+      >
         Sober Pal uses Amazon Web Services (“AWS”) as our cloud computing
         provider. This includes, but is not limited to, application servers,
         databases, and persistent storage. User data is encrypted in transit and
         at rest as it flows through our AWS infrastructure.
       </li>
-      <li className="ml-[20px] my-5 text-[#4F4F4F
-] ">
+      <li
+        className="ml-[20px] my-5 text-[#4F4F4F
+] "
+      >
         Sober Pal strictly reviews modifications to our application code, as
         well as to our AWS infrastructure. This involves automated and manual
         efforts.
       </li>
-      <li className="ml-[20px] my-5 text-[#4F4F4F
-] ">
+      <li
+        className="ml-[20px] my-5 text-[#4F4F4F
+] "
+      >
         Sober Pal monitors our AWS infrastructure in an effort to detect any
         potential attempt of unauthorized access.
       </li>
@@ -231,31 +251,43 @@ Crash Data</li>
         transmission we follow HIPAA-compliant practices to prevent unauthorized
         access.
       </p>
-      <li className="ml-[20px] my-5 text-[#4F4F4F
-] ">
+      <li
+        className="ml-[20px] my-5 text-[#4F4F4F
+] "
+      >
         You have the right under certain circumstances:
       </li>
-      <li className="ml-[20px] my-5 text-[#4F4F4F
-] ">
+      <li
+        className="ml-[20px] my-5 text-[#4F4F4F
+] "
+      >
         To be provided with a copy of your personal data held by us.
       </li>
-      <li className="ml-[20px] my-5 text-[#4F4F4F
-] ">
+      <li
+        className="ml-[20px] my-5 text-[#4F4F4F
+] "
+      >
         To request the deletion of your personal data held by us.
       </li>
-      <li className="ml-[20px] my-5 text-[#4F4F4F
-] ">
+      <li
+        className="ml-[20px] my-5 text-[#4F4F4F
+] "
+      >
         To request that we restrict the processing of your personal data (while
         we verify or investigate your concerns with this information, for
         example).
       </li>
-      <li className="ml-[20px] my-5 text-[#4F4F4F
-] ">
+      <li
+        className="ml-[20px] my-5 text-[#4F4F4F
+] "
+      >
         To object to the further processing of your personal data, including the
         right to object to marketing.
       </li>
-      <li className="ml-[20px] my-5 text-[#4F4F4F
-] ">
+      <li
+        className="ml-[20px] my-5 text-[#4F4F4F
+] "
+      >
         To request that your provided personal data be moved to a third party.
       </li>
       <p className="mt-4">
@@ -282,9 +314,9 @@ Crash Data</li>
         us at soberpal001@gmail.com.
       </p>
       <p className="text-blue text-center text-[36px] mt-10 tablet:text-[40px] font-[700]">
-      Terms Of Use
+        Terms Of Use
       </p>
-      
+
       <p className="mt-4">
         This Terms of Use Agreement and our Privacy Statement (together, these
         "Terms") describes the terms and conditions on which Sober Pal offers
@@ -417,17 +449,19 @@ Crash Data</li>
         Use Of The Services
       </p>
       <p className="mt-4">
-        <span className="font-[600] text-[#4f4f4f]">Eligibility:</span> You must be the age of
-        legal majority or older in your place of residence to use the services.
-        By using the services, you represent to Sober Pal that you are at least
-        the age of majority in your place of residence.
+        <span className="font-[600] text-[#4f4f4f]">Eligibility:</span> You must
+        be the age of legal majority or older in your place of residence to use
+        the services. By using the services, you represent to Sober Pal that you
+        are at least the age of majority in your place of residence.
       </p>
       <p className="mt-4">
-        <span className="font-[600] text-[#4f4f4f]">Your Responsibilities:</span> You may use
-        the services for lawful purposes only. You may not use the services in
-        any manner that could damage, disable, overburden or impair Sober Pal
-        servers or networks or interfere with any other party's use and
-        enjoyment of the services.
+        <span className="font-[600] text-[#4f4f4f]">
+          Your Responsibilities:
+        </span>{" "}
+        You may use the services for lawful purposes only. You may not use the
+        services in any manner that could damage, disable, overburden or impair
+        Sober Pal servers or networks or interfere with any other party's use
+        and enjoyment of the services.
       </p>
       <p className="mt-4">
         You may not attempt to gain unauthorized access to the services, other
@@ -567,7 +601,9 @@ Crash Data</li>
         Electronic Contracting
       </p>
       <p className="mt-4">
-      Your affirmative act of using and/or registering for the services constitutes your consent to enter into agreements with Sober Pal electronically.
+        Your affirmative act of using and/or registering for the services
+        constitutes your consent to enter into agreements with Sober Pal
+        electronically.
       </p>
 
       <p
@@ -577,8 +613,15 @@ Crash Data</li>
         Geographic Restrictions
       </p>
       <p className="mt-4">
-      The services are based in the shores of Nigeria for the moment. You acknowledge that you may not be able to access the services outside of Nigeria and that access thereto may not be legal by certain persons or in certain countries. If you access the services from outside Nigeria, you are responsible for compliance with local laws.
-Please note: By agreeing to these terms, you explicitly agree that any claims or actions that you may otherwise have against Sober Pal under the laws of any jurisdiction outside Nigeria are hereby waived and that your sole location and applicable law for any dispute is in Nigeria.
+        The services are based in the shores of Nigeria for the moment. You
+        acknowledge that you may not be able to access the services outside of
+        Nigeria and that access thereto may not be legal by certain persons or
+        in certain countries. If you access the services from outside Nigeria,
+        you are responsible for compliance with local laws. Please note: By
+        agreeing to these terms, you explicitly agree that any claims or actions
+        that you may otherwise have against Sober Pal under the laws of any
+        jurisdiction outside Nigeria are hereby waived and that your sole
+        location and applicable law for any dispute is in Nigeria.
       </p>
 
       <p
@@ -587,10 +630,20 @@ Please note: By agreeing to these terms, you explicitly agree that any claims or
       >
         Apple, Inc.
       </p>
-      <p className="mt-4">   
-        This provision only applies in respect of the version of the Sober Pal App (“App”) used on devices of Apple, Inc. This Agreement is an agreement between you and Sober Pal. Apple has no responsibility for the App or the content of the App, including in respect of claims of intellectual property infringement, product liability or that the App does not conform with applicable law. To the maximum extent permitted by applicable law, Apple provides no warranty in respect of the App and has no obligation to provide support in respect of the App. All claims in respect of the App must be directed to us and not to Apple. Your use of the App must be in compliance with the App Store terms of service, and you may only use the App on an iPhone or iPod that you own or control as permitted by such terms.
+      <p className="mt-4">
+        This provision only applies in respect of the version of the Sober Pal
+        App (“App”) used on devices of Apple, Inc. This Agreement is an
+        agreement between you and Sober Pal. Apple has no responsibility for the
+        App or the content of the App, including in respect of claims of
+        intellectual property infringement, product liability or that the App
+        does not conform with applicable law. To the maximum extent permitted by
+        applicable law, Apple provides no warranty in respect of the App and has
+        no obligation to provide support in respect of the App. All claims in
+        respect of the App must be directed to us and not to Apple. Your use of
+        the App must be in compliance with the App Store terms of service, and
+        you may only use the App on an iPhone or iPod that you own or control as
+        permitted by such terms.
       </p>
-
 
       <p
         className="tablet:text-[30px] text-[#4F4F4F] text-[26px] mt-10 
@@ -598,8 +651,15 @@ Please note: By agreeing to these terms, you explicitly agree that any claims or
       >
         Governing Law
       </p>
-      <p className="mt-4">   
-      This Agreement shall be governed in all respects under the laws of the Federal Republic of Nigeria, exclusive of its choice of law or conflict of law provisions. In any claim or action by you directly or indirectly arising under this Agreement or related to the Application, you irrevocably agree to submit to the exclusive jurisdiction of the courts located in Lagos, Nigeria. You waive any jurisdictional, venue or inconvenient forum objections to any of these courts that may have jurisdiction.
+      <p className="mt-4">
+        This Agreement shall be governed in all respects under the laws of the
+        Federal Republic of Nigeria, exclusive of its choice of law or conflict
+        of law provisions. In any claim or action by you directly or indirectly
+        arising under this Agreement or related to the Application, you
+        irrevocably agree to submit to the exclusive jurisdiction of the courts
+        located in Lagos, Nigeria. You waive any jurisdictional, venue or
+        inconvenient forum objections to any of these courts that may have
+        jurisdiction.
       </p>
 
       <p
@@ -608,9 +668,21 @@ Please note: By agreeing to these terms, you explicitly agree that any claims or
       >
         Data Privacy and Protection
       </p>
-      <p className="mt-4">   
-      Please make sure that you carefully read our Privacy Statement to learn about the information that Sober Pal collects through the services and how we process it.
-        Without limiting the terms of Sober Pal’s Privacy Statement, you understand that Sober Pal does not and can not guarantee that your use of the services and/or the information provided by you through the services will be private or secure. Except as expressly required by law, Sober Pal is not responsible or liable to you for any lack of privacy or security you may experience. You are responsible for using the precautions and security measures best suited for your situation and intended use of the services. Sober Pal reserves the right at all times to disclose any information as Sober Pal deems necessary to satisfy any applicable law, regulation, legal process or governmental request or protect the security of personal information and the services.
+      <p className="mt-4">
+        Please make sure that you carefully read our Privacy Statement to learn
+        about the information that Sober Pal collects through the services and
+        how we process it. Without limiting the terms of Sober Pal’s Privacy
+        Statement, you understand that Sober Pal does not and can not guarantee
+        that your use of the services and/or the information provided by you
+        through the services will be private or secure. Except as expressly
+        required by law, Sober Pal is not responsible or liable to you for any
+        lack of privacy or security you may experience. You are responsible for
+        using the precautions and security measures best suited for your
+        situation and intended use of the services. Sober Pal reserves the right
+        at all times to disclose any information as Sober Pal deems necessary to
+        satisfy any applicable law, regulation, legal process or governmental
+        request or protect the security of personal information and the
+        services.
       </p>
 
       <p
@@ -619,40 +691,58 @@ Please note: By agreeing to these terms, you explicitly agree that any claims or
       >
         Content Rights
       </p>
-      <p className="mt-4">   
-      You retain your rights to any content you submit, post or display on or through the services. What’s yours is yours — you own your content.
-      By submitting, posting or displaying content on or through the services, you grant us a worldwide, non-exclusive, royalty-free license (with the right to sublicense) to use, copy, reproduce, process, adapt, modify, publish, transmit, display and distribute such content in any and all media or distribution methods now known or later developed (for clarity, these rights include, for example, curating, transforming, and translating). This license authorizes us to make your content available to the rest of the world and to let others do the same.
-      You represent and warrant that you have, or have obtained, all rights, licenses, consents, permissions, power and/or authority necessary to grant the rights granted herein for any content that you submit, post or display on or through the services. You agree that such content will not contain material subject to copyright or other proprietary rights, unless you have necessary permission or are otherwise legally entitled to post the material and to grant Sober Pal the license described above.
+      <p className="mt-4">
+        You retain your rights to any content you submit, post or display on or
+        through the services. What’s yours is yours — you own your content. By
+        submitting, posting or displaying content on or through the services,
+        you grant us a worldwide, non-exclusive, royalty-free license (with the
+        right to sublicense) to use, copy, reproduce, process, adapt, modify,
+        publish, transmit, display and distribute such content in any and all
+        media or distribution methods now known or later developed (for clarity,
+        these rights include, for example, curating, transforming, and
+        translating). This license authorizes us to make your content available
+        to the rest of the world and to let others do the same. You represent
+        and warrant that you have, or have obtained, all rights, licenses,
+        consents, permissions, power and/or authority necessary to grant the
+        rights granted herein for any content that you submit, post or display
+        on or through the services. You agree that such content will not contain
+        material subject to copyright or other proprietary rights, unless you
+        have necessary permission or are otherwise legally entitled to post the
+        material and to grant Sober Pal the license described above.
       </p>
 
       <p
         className="tablet:text-[30px] text-[#4F4F4F] text-[26px] mt-10 
       font-[500]"
       >
-       Personalized Ads:
+        Personalized Ads:
       </p>
-      <p className="mt-4">   
-      Use data to improve the relevance of ads on this device. (Toggle on/off)
-      </p>
-
-      <p
-        className="tablet:text-[30px] text-[#4F4F4F] text-[26px] mt-10 
-      font-[500]"
-      >
-       Anonymous Usage Data:
-      </p>
-      <p className="mt-4">   
-      Collect anonymous usage data on this device to help improve SoberPal. (Toggle on/off)
+      <p className="mt-4">
+        Use data to improve the relevance of ads on this device. (Toggle on/off)
       </p>
 
       <p
         className="tablet:text-[30px] text-[#4F4F4F] text-[26px] mt-10 
       font-[500]"
       >
-       Data Removal:
+        Anonymous Usage Data:
       </p>
-      <p className="mt-4 mb-28">   
-      To remove all of your data from our systems: Disable anonymous usage data and disable personalized ads. You can delete your personalized account by deleting all your posts and then deleting your account. Send us an email via soberpal001@gmail.comif you need any assistance.
+      <p className="mt-4">
+        Collect anonymous usage data on this device to help improve SoberPal.
+        (Toggle on/off)
+      </p>
+
+      <p
+        className="tablet:text-[30px] text-[#4F4F4F] text-[26px] mt-10 
+      font-[500]"
+      >
+        Data Removal:
+      </p>
+      <p className="mt-4 mb-28">
+        To remove all of your data from our systems: Disable anonymous usage
+        data and disable personalized ads. You can delete your personalized
+        account by deleting all your posts and then deleting your account. Send
+        us an email via soberpal001@gmail.comif you need any assistance.
       </p>
     </div>
   );

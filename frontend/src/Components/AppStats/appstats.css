@@ -40,9 +40,9 @@
 .stats__content h3 {
     font-size: 3rem;
     line-height: 4rem;
-    font-weight: 700;
+    /* font-weight: 700; */
     color: var(--primary-500);
-    letter-spacing: -0.02rem;
+    /* letter-spacing: -0.02rem; */
     margin-bottom: 2.5rem;
 }
 

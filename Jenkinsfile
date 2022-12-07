@@ -10,7 +10,7 @@ pipeline {
                       steps {
                               sh "cd frontend"
                               sh "cd frontend && npm i --force && CI=false npm run build"
-                			} 
+                	    } 
         }
         stage("build backend"){
 
@@ -23,13 +23,10 @@ pipeline {
             stage("deploy") {
 
                     steps {
-                            sh "sudo cp -rf backend /home/judgejudy/addictionsupportroom.web/backend"
-                            sh "sudo cp -fr ${WORKSPACE}/frontend/build/* /home/judgejudy/addictionsupportroom.web/frontend"
+			    sh "sudo cp -rf ${workspace}/backend/app/* /home/judgejudy/addictionsupportroom/backend"
+                            sh "sudo cp -fr ${WORKSPACE}/frontend/build/* /var/www/soberpal.hng.tech/html"
                             sh "sudo su - judgejudy && whoami"
-                            sh "sudo pm2 stop soberpal"
-	    		    sh "sudo pm2 stop server"
-                            sh "sudo pm2 serve /home/judgejudy/frontend/build --port 3344"
-                            sh "sudo pm2 start /home/judgejudy/backend/app/server.py --interpreter python3"
+                            sh "sudo systemctl restart addictionsupportroom.service"
                     }
 
         }
