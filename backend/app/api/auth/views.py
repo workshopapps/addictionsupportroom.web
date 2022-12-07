@@ -4,6 +4,9 @@ from sqlite3 import IntegrityError
 from api.example.schemas import Examples, ExampleSchema
 from api.example.services import ExampleService
 from api.auth import schemas
+from api.auth.schemas import UserLogin
+from api.common.schemas import ResponseSchema
+from api.auth.schemas import AccessToken
 from db.models import Streak
 from db import models
 from sqlalchemy.orm import Session
@@ -44,12 +47,23 @@ def signup(user: schemas.UserCreate, db: Session = Depends(deps.get_db)):
     return user_out
 
 
-@router.post("/login")
-async def login(form_data: OAuth2PasswordRequestForm = Depends(),
-                db: Session = Depends(deps.get_db)):
+@router.post(
+    "/login",
+    description=
+    'Login with only a unique username, no password is needed for now',
+    responses={
+        400: {
+            "model": ResponseSchema,
+            "description": "Invalid Username.",
+        },
+    },
+    response_model=AccessToken,
+)
+async def login(request: UserLogin, db: Session = Depends(deps.get_db)):
 
-    db_user = await deps.authenticate_user(form_data.username,
-                                           form_data.password, db)
+    print(request)
+    db_user = await deps.authenticate_user(request.username,
+                                           'general-password', db)
     if not db_user:
         raise HTTPException(
             status_code=status.HTTP_401_UNAUTHORIZED,

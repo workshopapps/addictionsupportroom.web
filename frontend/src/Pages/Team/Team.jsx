@@ -28,7 +28,7 @@ const Team = () => {
           <p>
             We’re a small team that loves to create great experiences and make
             meaningful connections between builders and customers. Join our
-            remote ream!
+            remote team!
           </p>
         </motion.div>
 
