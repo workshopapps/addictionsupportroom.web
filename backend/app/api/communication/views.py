@@ -212,7 +212,7 @@ async def send_room_message(
 ):
     """
     Send a new message.
-    Let it be room=`general` for the general chat room
+    Room equals `general` for the general chat room
 
     """
     results = await send_new_room_message(currentUser.id, request, None,
@@ -229,7 +229,7 @@ async def get_room_users_conversation(
     """
     Get Conversations in room by name 
     
-    Let it be room=`general` for the general chat room
+    Room equals `general` for the general chat room
     
     """
     results = await get_room_conversations(room, currentUser.id, session)
