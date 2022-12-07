@@ -13,6 +13,7 @@ from typing import (
 from .schemas import (
     MessageCreate,
     MessageCreateRoom,
+    RoomMessageOut,
 )
 from sqlalchemy.sql import (
     text, )
@@ -315,8 +316,10 @@ async def create_assign_new_room(user_id: int, room_obj, session: Session):
         if user:
             logger.info(f"`{user_id}` has already joined this room!")
             results = {
-                "status_code": 400,
-                "message": "You have already joined room "
+                "status_code":
+                400,
+                "message":
+                "You have already joined room "
                 f"{room_obj.room_name}!",
             }
         else:
@@ -570,9 +573,22 @@ async def get_room_conversations(room_name: str, sender_id: int,
     values = {"room_id": room.id, "sender_id": sender_id}
     result = session.execute(text(query), values)
     messages_sent_received = result.fetchall()
+    result = []
+    for item in messages_sent_received:
+        print(item)
+        result.append(
+            RoomMessageOut(
+                **item,
+                user={
+                    'id': item.id,
+                    'username': item.username,
+                    'avatar': item.avatar
+                },
+            ), )
+
     results = {
         "status_code": 200,
-        "result": messages_sent_received,
+        "result": result,
     }
     return results
 
