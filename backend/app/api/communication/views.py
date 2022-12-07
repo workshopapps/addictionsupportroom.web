@@ -204,22 +204,6 @@ async def create_room(
     return results
 
 
-@router.get("/room/conversation", name="room:get-conversations")
-async def get_room_users_conversation(
-        room: str,
-        currentUser: UserBase = Depends(deps.get_current_user),
-        session: Session = Depends(deps.get_db),
-):
-    """
-    Get Conversations in room by name 
-    
-    Let it be room=`general` for the general chat room
-    
-    """
-    results = await get_room_conversations(room, currentUser.id, session)
-    return results
-
-
 @router.post("/room/message", name="room:send-text-message")
 async def send_room_message(
         request: MessageCreateRoom,
@@ -233,6 +217,22 @@ async def send_room_message(
     """
     results = await send_new_room_message(currentUser.id, request, None,
                                           session)
+    return results
+
+
+@router.get("/room/conversation", name="room:get-conversations")
+async def get_room_users_conversation(
+        room: str,
+        currentUser: UserBase = Depends(deps.get_current_user),
+        session: Session = Depends(deps.get_db),
+):
+    """
+    Get Conversations in room by name 
+    
+    Let it be room=`general` for the general chat room
+    
+    """
+    results = await get_room_conversations(room, currentUser.id, session)
     return results
 
 
