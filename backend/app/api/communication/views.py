@@ -171,6 +171,7 @@ async def get_conversation(
 
 @router.post(
     "/room",
+    include_in_schema=False,
     status_code=200,
     name="room:create-join",
     responses={
