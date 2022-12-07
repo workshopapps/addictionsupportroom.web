@@ -5,7 +5,8 @@ from api.auth.schemas import UserBase
 from . import services
 from sqlalchemy.orm import Session
 from db.models import Month
-from fastapi import APIRouter, Depends
+
+from fastapi import APIRouter, Depends, HTTPException, status
 from . import schemas
 from sqlalchemy.orm import Session
 import datetime
@@ -42,7 +43,7 @@ months = {
 milestones = [1, 7, 30, 90]
 
 
-@router.post("/")
+@router.post("/", response_model=RelapseCreate)
 async def mark_a_day(
         *,
         db: Session = Depends(deps.get_db),
@@ -51,7 +52,37 @@ async def mark_a_day(
 ) -> Any:
     """
     Create Relapse
+
+    Returns:
+        {
+            "new_relapse_date": "2022-12-07"
+        }
+
+        or 
+
+        {
+            "id": 1,
+            "year": 2022,
+            "user": 1,
+            "month": 12,
+            "day": 1,
+            "bottles_drank": 1,
+            "month_id": 1,
+            "message": "num of bottles updated"
+        }
+
+        {
+            "status_code": 400,
+            "message": "Invalid month value",
+        }
+
     """
+    if relapse_in.day > 31 or relapse_in.month > 12 or len(str(relapse_in.year)) > 4:
+        raise HTTPException(status_code=status.HTTP_424_FAILED_DEPENDENCY,
+            detail={
+                "message": "out of bounds"
+                }
+            )
     relapse_in_db = db.query(Relapse).filter(Relapse.user==current_user.id, 
         Relapse.day==relapse_in.day, Relapse.month==relapse_in.month, Relapse.year==relapse_in.year).first()
     if relapse_in_db:
@@ -121,6 +152,24 @@ async def read_relapses(
 ) -> Any:
     """
     Retrieve Relapse Days in a given month
+
+    Returns:
+        [
+            {
+                "id": 1,
+                "year": 2022,
+                "user": 1,
+                "month": 12,
+                "day": 1,
+                "bottles_drank": 1,
+                "month_id": 1
+            }
+        ]
+
+    Raises:
+        HTTPException [424]: "message": "There are no relapse dates for this month and year"
+        HTTPException [401]: Unauthorised
+
     """
     # relapses = relapse.get_multi_by_user(db=db, user_id=current_user.id, skip=skip, limit=limit)
     relapses = db.query(Relapse).filter(
@@ -128,6 +177,13 @@ async def read_relapses(
         Relapse.month == month,
         Relapse.year == year,
     ).all()
+
+    if relapses.count(relapses) == 0:
+        raise HTTPException(status_code=status.HTTP_424_FAILED_DEPENDENCY,
+            detail={
+                "message": "There are no relapse dates for this month and year"
+                }
+            )
 
     return relapses
 
