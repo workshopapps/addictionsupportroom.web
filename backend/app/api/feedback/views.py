@@ -3,12 +3,20 @@ from fastapi.responses import JSONResponse
 from fastapi.requests import Request
 from api import deps
 from sqlalchemy.orm import Session
-from .schema import Feedback
+from .schema import Feedback, ResponseModel
 from db.models import Feedbacks
 
 router = APIRouter()
 
-@router.post("/add")
+@router.post(
+    "/add",
+    status_code=status.HTTP_201_CREATED,
+    response_model=ResponseModel,
+    responses={
+        424: {"description": "Feedback not added"},
+        405: {"description": "Method not allowed"},
+        400: {"description": "Bad request"}
+    })
 def add_feedback(data:Feedback, request:Request, db:Session=Depends(deps.get_db)):
     """Adds a new feedback to the Feedback table.
 
@@ -64,15 +72,15 @@ def add_feedback(data:Feedback, request:Request, db:Session=Depends(deps.get_db)
             )
 
 
-        #to delete, since we are still testing
-        db.delete(new_feedback)
-        db.commit()
+        # #to delete, since we are still testing
+        # db.delete(new_feedback)
+        # db.commit()
 
-
-        return {
-            "success": "True"
-        }
-    
+        return ResponseModel(
+            status=status.HTTP_201_CREATED, 
+            message="New Feedback added", 
+            data=new_feedback.__dict__
+        )
     
     else:
         raise HTTPException(
