@@ -1,35 +1,98 @@
 import datetime
 import random
-from fastapi import APIRouter, Depends
+from fastapi import APIRouter, Depends, HTTPException, status
 from sqlalchemy.orm import Session
 from api.home import schemas, crud
 from db.models import Emergency, User
 from db.db import get_db
 from . import quotes
 from api import deps
+from.schemas import Emotion, ResponseModel
+from fastapi.requests import Request
 
 router = APIRouter()
 
 
-@router.post("/emotions")
-async def post_emotion(emotion: str):
+@router.post(
+    "/emotions",
+    status_code=status.HTTP_200_OK,
+    responses={
+        424: {"description": "Feedback not added"},
+        405: {"description": "Method not allowed"},
+        400: {"description": "Bad request"}
+    }
+    )
+def post_emotion(emotion:Emotion, request:Request):
     """
     Post a variety of emotions, and get a Quote as a response
     Emotions can be either of these:
     [happy, sober, defeated, angry, confused]
     """
-    if emotion == "happy":
-        return (quotes.happy[random.randint(0, 2)])
-    elif emotion == "sober":
-        return (quotes.sober[random.randint(0, 2)])
-    elif emotion == "defeated":
-        return (quotes.defeated[random.randint(0, 2)])
-    elif emotion == "angry":
-        return (quotes.angry[random.randint(0, 2)])
-    elif emotion == "confused":
-        return (quotes.confused[random.randint(0, 2)])
+    """ Returns a quote to the user
+
+		Collects the user's emotion from the request and returns a JSON response
+
+		Args:
+				emotion: A string about the user's mood
+				
+		Returns:
+				A JSON response containing the status code, message, and data
+                {
+                    "status": 201,
+                    "event": "add_new_feedback",
+                    "success": true,
+                    "data": {
+                        "rating": Integer,
+                        "description": Description,
+                        "created_at": Datetime
+                    }
+                    }   
+	    Raises:
+				HTTPException [424]: Quote not found
+                HTTPException [405]: Method not allowed
+                HTTPException [400]: Bad request
+	"""
+    if request.method == "POST":
+
+        try:
+            if emotion.emotion == "happy":
+                quote = quotes.happy[random.randint(0, 2)]
+
+            elif emotion.emotion == "sober":
+                quote = quotes.sober[random.randint(0, 2)]
+
+            elif emotion.emotion == "defeated":
+                quote = quotes.defeated[random.randint(0, 2)]
+
+            elif emotion.emotion == "angry":
+                quote = quotes.angry[random.randint(0, 2)]
+    
+            elif emotion.emotion == "confused":
+                quote = quotes.confused[random.randint(0, 2)]
+            else:
+                quote = None
+            
+            if quote != None:
+                return ResponseModel(status=status.HTTP_200_OK, message="Quote", data=quote)
+
+            elif quote == None:
+                print("here")
+                return {
+                    "status_code": status.HTTP_200_OK,
+                    "message": "Emotion not registered"
+                }
+    
+        except:
+            raise HTTPException(
+                status_code=status.HTTP_400_BAD_REQUEST,
+                detail="Bad Request"
+            )
+    
     else:
-        return {"message": "Invalid emotion"}
+        raise HTTPException(
+            status_code=status.HTTP_405_METHOD_NOT_ALLOWED,
+            detail="Method not allowed"
+        )
 
 
 @router.post("/relapse")
