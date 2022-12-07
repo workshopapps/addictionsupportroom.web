@@ -1,6 +1,6 @@
 import datetime
 import random
-from fastapi import APIRouter, Depends
+from fastapi import APIRouter, Depends, status
 from sqlalchemy.orm import Session
 from api.home import schemas, crud
 from db.models import Emergency, User
@@ -69,14 +69,70 @@ def get_all_notes_created_today(db: Session = Depends(get_db)):
 
 
 @router.get(
-    "/notes/{note_id}", )  #  response_model=schemas.ShowNote
+    "/notes/{note_id}", 
+    status_code=status.HTTP_200_OK,
+    responses={
+        200: {"description": "Successful Response"},
+        404: {"description": "Note Not Found"},
+        422: {"description": "Validation Error"}
+        })  #  response_model=schemas.ShowNote
 def get_specific_note(note_id: int, db: Session = Depends(get_db)):
+    """
+    Fetches a specific note using the given note id.
+    
+    Args:
+    
+        note_id (int): note id
+        
+        db (Session, optional): Database. Defaults to Depends(get_db).
+        
+    Returns:
+    
+        {
+            "id": note_id(int),
+            "title": title of the note (str),
+            "description": content of the note (str),
+            "created_at": date the  note was created (datetime),
+            "updated_at": date the note was updated (datetime)
+        }
+        
+    Raises:
+    
+        HTTPException [404]: There's no note with id: {note_id}
+    
+        HTTPException [422]: Validation Error
+
+    """
     note = crud.get_specific_note(db=db, note_id=note_id)
     return note
 
 
 @router.delete("/notes/delete/{note_id}")
 def delete_note(note_id: int, db: Session = Depends(get_db)):
+    """
+    Deletes a specific note given the note id
+
+    Args:
+    
+        note_id (int): note id
+        
+        db (Session, optional): Database. Defaults to Depends(get_db).
+
+    Returns:
+
+        {
+            "id": note_id(int),
+            "title": title of the note (str),
+            "description": content of the note (str),
+            "created_at": date the  note was created (datetime),
+            "updated_at": date the note was updated (datetime)
+        }
+        
+    Raises:
+    
+        HTTPException [404]: There's no note with id: {note_id}
+        
+    """
     note = crud.delete_note(db=db, note_id=note_id)
     return note
 
@@ -85,6 +141,31 @@ def delete_note(note_id: int, db: Session = Depends(get_db)):
 def update_note(note: schemas.Note,
                 note_id: int,
                 db: Session = Depends(get_db)):
+    """
+    Updates a note given the note's id. The note's description gets updated with the new note.
+
+    Args:
+    
+        note (schemas.Note): New note.
+        
+        note_id (int): Note id.
+        
+        db (Session, optional): Database. Defaults to Depends(get_db).
+
+    Returns:
+    
+        {
+            "id": note_id(int),
+            "title": title of the note (str),
+            "description": content of the note (str),
+            "created_at": date the  note was created (datetime),
+            "updated_at": date the note was updated (datetime)
+        }
+        
+    Raises:
+    
+        HTTPException [404]: There's no note with id: {note_id}
+    """
     note = crud.update_note(db=db, note_id=note_id, note=note)
     return note
 

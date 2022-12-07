@@ -4,7 +4,8 @@ from typing import AsyncGenerator, Generator
 import pytest
 import pytest_asyncio
 from core.app import get_app
-from db.db import async_engine
+# from db.db import async_engine
+from db.db import engine
 from fastapi import FastAPI
 from httpx import AsyncClient
 from sqlalchemy.orm import sessionmaker
@@ -32,14 +33,14 @@ def app() -> FastAPI:
 
 @pytest_asyncio.fixture(scope="function")
 async def db_session() -> AsyncGenerator:
-    session = sessionmaker(async_engine, class_=AsyncSession, expire_on_commit=False)
+    session = sessionmaker(engine, class_=AsyncSession, expire_on_commit=False)
     async with session() as s:
-        async with async_engine.begin() as conn:
+        async with engine.begin() as conn:
             await conn.run_sync(SQLModel.metadata.create_all)
 
         yield s
 
-    async with async_engine.begin() as conn:
+    async with engine.begin() as conn:
         await conn.run_sync(SQLModel.metadata.drop_all)
 
-    await async_engine.dispose()
+    await engine.dispose()
