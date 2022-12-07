@@ -35,7 +35,7 @@ def get_specific_note(note_id: int, db: Session):
 
     if not note:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND,
-                            detail=f"there is no note with id: {note_id}")
+                            detail=f"There is no note with id: {note_id}")
     return note
 
 
@@ -49,7 +49,7 @@ def delete_note(note_id: int, db: Session):
 
     if not note:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND,
-                            detail=f"there is no note with id: {note_id}")
+                            detail=f"There is no note with id: {note_id}")
     db.delete(note)
     db.commit()
     return note
@@ -57,7 +57,7 @@ def delete_note(note_id: int, db: Session):
 
 def update_note(note_id: int, note: schemas.Note, db: Session):
     """ 
-     This function update the not based on id if there is no Note with that id.
+     This function update the note based on id if there is no Note with that id.
      Then it will raise Exception HTTP_404_NOT_FOUND with a message
      there is no note with id: number
     """
