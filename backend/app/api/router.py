@@ -37,7 +37,9 @@ async def token(form_data: OAuth2PasswordRequestForm = Depends(),
 
     val = await login(UserLogin(username=form_data.username), db=db)
 
-    return {"access_token": val['token'], "token_type": "bearer"}
+    access_token = val['data']['access_token']
+
+    return {"access_token": access_token['token'], "token_type": "bearer"}
 
 
 api_router.include_router(auth_router, prefix="/auth", tags=["Auth"])
@@ -55,5 +57,7 @@ api_router.include_router(progress_router,
 api_router.include_router(contact_router, prefix="/contact", tags=["Contact"])
 # api_router.include_router(relapse_router, prefix="/relapse", tags=["relapse"])
 api_router.include_router(blog_router, prefix="/blog", tags=["Blog"])
-api_router.include_router(emergency_router, prefix="/emergency", tags=["Emergency"])
+api_router.include_router(emergency_router,
+                          prefix="/emergency",
+                          tags=["Emergency"])
 api_router.include_router(forum_router, prefix="/forum", tags=["Forum"])

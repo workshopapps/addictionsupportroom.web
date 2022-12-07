@@ -41,18 +41,16 @@ class UserCreate(BaseModel):
     # password: str
 
 
+class AccessToken(BaseModel):
+    token: str
+    token_type: str
+    
 class UserOut(UserBase):
-    access_token: dict
+    access_token: AccessToken
 
 
 class UserLogin(BaseModel):
     username: str = Field(..., example="name123")
-
-
-class AccessToken(BaseModel):
-    token: str
-    token_type: str
-
 
 class ChatStatus(str, Enum):
     online = "online"
