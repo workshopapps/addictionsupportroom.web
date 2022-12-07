@@ -52,7 +52,7 @@ examples = {
 
 @router.post("/", status_code=200, description='Send a message to the admin.')
 def contact(
-        data: Contact = Body(examples=examples),
+        data: Contact = Body(default=None, examples=examples),
         db: Session = Depends(deps.get_db),
 ):
     if not data.user_id:

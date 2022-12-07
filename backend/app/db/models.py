@@ -40,6 +40,29 @@ class ContactusMessages(Base):
     user_id = Column(String, nullable=False)
     message = Column(String, nullable=False)
 
+class ForumPost(Base):
+    __tablename__ = 'forum_post'
+    id = Column(Integer, primary_key=True, index=True)
+    title = Column(String)
+    message = Column(String)
+    date_posted = Column(DateTime,
+                        default=datetime.datetime.utcnow,
+                        nullable=False)
+    user_id = Column(Integer, ForeignKey('users.id'))
+    user = relationship('User', back_populates='forum_posts')
+    forum_post_comments = relationship('ForumPostComment', back_populates='origin_post')
+
+class ForumPostComment(Base):
+    __tablename__ = 'forum_post_comments'
+    id = Column(Integer, primary_key=True, index=True)
+    owner_id = Column(Integer, ForeignKey('users.id'))
+    owner = relationship('User', back_populates='forum_comments')
+    origin_post_id = Column(Integer, ForeignKey('forum_post.id'))
+    origin_post = relationship('ForumPost', back_populates='forum_post_comments')
+    message = Column(String)
+    date_posted = Column(DateTime,
+                        default=datetime.datetime.utcnow,
+                        nullable=False)
 
 class User(Base):
     __tablename__ = "users"
@@ -49,6 +72,8 @@ class User(Base):
     avatar = Column(String)
     hashed_password = Column(String)
     is_active = Column(Boolean, default=True)
+    forum_posts = relationship('ForumPost', back_populates='user')
+    forum_comments = relationship('ForumPostComment', back_populates='owner')
     date_added = Column(DateTime,
                         default=datetime.datetime.utcnow,
                         nullable=False)
