@@ -174,3 +174,27 @@ class Emergency(Base):
     name = Column(String)
     avatar = Column(String)
     created_at = Column(DateTime)
+
+
+class Blog(Base):
+    __tablename__ = 'blogs'
+
+    id = Column(Integer, primary_key=True, index=True)
+    title = Column(String)
+    body = Column(String)
+    sober_tip = Column(Boolean)
+    story = Column(Boolean)
+    family = Column(Boolean)
+    article = Column(Boolean)
+    created_at = Column(DateTime, nullable=False, default=datetime.datetime.utcnow())
+    updated_at = Column(DateTime, nullable=False, default=datetime.datetime.utcnow())
+
+
+class Feedbacks(Base):
+    __tablename__ = "feedback"
+
+    id = Column(Integer, primary_key=True, index=True)
+    rating = Column(Integer)
+    description = Column(String)
+    created_at = Column(DateTime, nullable=False, default=datetime.datetime.utcnow())
+    updated_at = Column(DateTime, nullable=True)
