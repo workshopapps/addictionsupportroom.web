@@ -29,13 +29,8 @@ def all_emergencies(request: Request, db: Session = Depends(deps.get_db)):
 				A JSON response containing the status code, event, and success status.
                 {
                     "status": 201,
-                    "event": "add_new_feedback",
-                    "success": true,
-                    "data": {
-                        "rating": Integer,
-                        "description": Description,
-                        "created_at": Datetime
-                    }
+                    "message": detail,
+                    "data": emergencies list
                     }   
 	    Raises:
 				HTTPException [424]: Feedback not added
