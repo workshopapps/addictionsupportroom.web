@@ -57,7 +57,9 @@ class User(Base):
         nullable=False,
         default=datetime.date.today(),
         # default=datetime.date(2008, 11, 25),
-    )
+    ) 
+    emergency = Column(Boolean, default=False) 
+
 
 
 class Month(Base):
