@@ -47,15 +47,14 @@ def all_emergencies(request: Request, db: Session = Depends(deps.get_db)):
         try:
             # # to test (add mock data)
             # user1 = User(username="lion", avatar="lion", hashed_password="lion")
-            # user2 = User(username="lion2", avatar="lion", hashed_password="lion")
-            # user3 = User(username="lion3", avatar="lion", hashed_password="lion")
+            # user2 = User(username="lion2", avatar="lion", hashed_password="lion", emergency=True)
+            # user3 = User(username="lion3", avatar="lion", hashed_password="lion", emergency=True)
             # db.add(user1)
             # db.add(user2)
             # db.add(user3)
             # db.commit()
-    
 
-            emergencies = db.query(User).all()
+            emergencies = db.query(User).filter(User.emergency==True).all()
 
             # #to delete mock data
             # db.delete(user1)
