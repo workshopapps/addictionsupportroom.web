@@ -1,12 +1,14 @@
 import datetime
 import random
-from fastapi import APIRouter, Depends, HTTPException, status
+from fastapi import APIRouter, Depends, status, HTTPException
 from sqlalchemy.orm import Session
 from api.home import schemas, crud
 from db.models import Emergency, User
 from db.db import get_db
 from . import quotes
 from api import deps
+from starlette.responses import JSONResponse
+from fastapi.encoders import jsonable_encoder
 from.schemas import Emotion, ResponseModel
 from fastapi.requests import Request
 
@@ -38,14 +40,9 @@ def post_emotion(emotion:Emotion, request:Request):
 		Returns:
 				A JSON response containing the status code, message, and data
                 {
-                    "status": 201,
-                    "event": "add_new_feedback",
-                    "success": true,
-                    "data": {
-                        "rating": Integer,
-                        "description": Description,
-                        "created_at": Datetime
-                    }
+                    "status_code": 200,
+                    "message": "Quote.",
+                    "data": Quote
                     }   
 	    Raises:
 				HTTPException [424]: Quote not found
@@ -116,16 +113,87 @@ def about_to_relapse(currentUser: User = Depends(deps.get_current_user),
 @router.get("/notes/")
 def get_all_notes(db: Session = Depends(get_db),
                   current_user: User = Depends(deps.get_current_user)):
+    """
+    Gets all notes
+    Returns:
+        [
+            {
+                "created_at": "2022-12-07T07:57:30.651773",
+                "id": 1,
+                "updated_at": "2022-12-07T07:57:30.651773",
+                "title": "Sample title.",
+                "description": "This is an example."
+            },
+            {
+                "created_at": "2022-12-07T07:59:32.271965",
+                "id": 2,
+                "updated_at": "2022-12-07T07:59:32.271965",
+                "title": "Sample title.",
+                "description": "This is an example."
+            },
+            {
+                "created_at": "2022-12-07T08:01:40.388906",
+                "id": 3,
+                "updated_at": "2022-12-07T08:01:40.388906",
+                "title": "Sample title.",
+                "description": "This is an example."
+            },
+            {
+                "created_at": "2022-12-07T08:05:20.022338",
+                "id": 4,
+                "updated_at": "2022-12-07T08:05:20.022338",
+                "title": "Sample title.",
+                "description": "This is an example."
+            },
+            {
+                "created_at": "2022-12-07T08:06:17.262372",
+                "id": 5,
+                "updated_at": "2022-12-07T08:06:17.262372",
+                "title": "Sample title.",
+                "description": "This is an example."
+            }
+        ]
+    Raises:
+            HTTPException [401]: Unauthorised
+    """
     notes = crud.get_all_notes(db=db)
     return notes
 
 
-@router.post("/notes/create")
-def create_note(note: schemas.Note,
+@router.post("/notes/create", response_model=schemas.Note, 
+    status_code=status.HTTP_201_CREATED, 
+    responses={
+        404: {"description": "not authenticated"}
+    })
+def create_note(note: schemas.NoteCreate,
                 db: Session = Depends(get_db),
                 current_user: User = Depends(deps.get_current_user)):
+    """
+    Creates a Note by a user.
+    
+    Args: 
+        note: Pydantic schema to define note parameters.
+
+    Returns:
+        {
+            "created_at": "2022-12-07T08:06:17.262372",
+            "id": 5,
+            "updated_at": "2022-12-07T08:06:17.262372",
+            "title": "Sample title.",
+            "description": "This is an example."
+        }
+    Raises:
+        HTTPException [401]: Unauthorised
+        HTTPException [424]: message
+    """
+
     db_note = crud.create_note(db=db, note=note)
-    return db_note
+    if not db_note:
+        raise HTTPException(status_code=status.HTTP_424_FAILED_DEPENDENCY,
+            detail={"message": "Note not created"})
+
+    response = JSONResponse(content=jsonable_encoder(db_note), status_code=status.HTTP_201_CREATED)
+    return response
 
 
 @router.get("/notes/today")  #  response_model=list[schemas.ShowNote]
