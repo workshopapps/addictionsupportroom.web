@@ -212,3 +212,13 @@ class Blog(Base):
     article = Column(Boolean)
     created_at = Column(DateTime, nullable=False, default=datetime.datetime.utcnow())
     updated_at = Column(DateTime, nullable=False, default=datetime.datetime.utcnow())
+
+
+class Feedbacks(Base):
+    __tablename__ = "feedback"
+
+    id = Column(Integer, primary_key=True, index=True)
+    rating = Column(Integer)
+    description = Column(String)
+    created_at = Column(DateTime, nullable=False, default=datetime.datetime.utcnow())
+    updated_at = Column(DateTime, nullable=True)
