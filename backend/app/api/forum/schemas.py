@@ -1,7 +1,6 @@
-from pydantic import BaseModel, Field
+from pydantic import BaseModel
 from datetime import datetime
-from typing import List
-from fastapi import Query
+from typing import List, Optional
 
 
 class Post(BaseModel):
@@ -33,7 +32,6 @@ class PostComment(BaseModel):
 # BASE
 class PostBase(BaseModel):
     message: str
-    # user_username: str
 
 class PostCommentBase(BaseModel):
     origin_post_id: int = 1
@@ -49,6 +47,7 @@ class PostResponseModel(BaseModel):
     message: str
     user: UserModel 
     post_comments: List[PostComment] = []
+    num_of_comments: Optional[str] = '0 comments'
     date_posted: datetime
 
     class Config():

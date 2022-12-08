@@ -1,4 +1,3 @@
-from db.db import get_db
 from sqlalchemy.orm.session import Session
 from .schemas import PostBase, PostCommentBase
 from db.models import ForumPost, ForumPostComment, User
@@ -53,22 +52,9 @@ class PostClass():
                                     },
                                     "comment": "string",
                                     "date_posted": "2022-12-07T13:18:03.435170"
-                                },
-                                {
-                                    "owner": {
-                                        "id": 1,
-                                        "username": "henzyd",
-                                        "avatar": "http://www.example.com/image"
-                                    },
-                                    "origin_post": {
-                                        "id": 1,
-                                        "message": "string",
-                                        "date_posted": "2022-12-07T13:16:04.325737"
-                                    },
-                                    "comment": "string",
-                                    "date_posted": "2022-12-07T13:18:34.120460"
                                 }
                             ],
+                            "num_of_comments": 1,
                             "date_posted": "2022-12-07T13:16:04.325737"
                         }
                     ]
@@ -77,24 +63,61 @@ class PostClass():
         for post in posts:
             comment = db.query(ForumPostComment).filter(ForumPostComment.origin_post_id == post.id).all()
             post.post_comments = comment
+            post.num_of_comments = f'{len(post.post_comments)} comments'
         return posts
 
     def get_post(self, db: Session, id: int):
-        try:
-            post = db.query(ForumPost).filter(ForumPost.id == id).first()
-        except:
+        '''
+            **Sample Response Data**:
+                {
+                    "id": 1,
+                    "message": "string",
+                    "user": {
+                        "id": 1,
+                        "username": "henzyd",
+                        "avatar": "http://www.example.com/image"
+                    },
+                    "post_comments": [
+                        {
+                            "owner": {
+                                "id": 1,
+                                "username": "henzyd",
+                                "avatar": "http://www.example.com/image"
+                            },
+                            "origin_post": {
+                                "id": 1,
+                                "message": "string",
+                                "date_posted": "2022-12-07T13:16:04.325737"
+                            },
+                            "comment": "string",
+                            "date_posted": "2022-12-07T13:18:03.435170"
+                        }
+                    ],
+                    "num_of_comments": 1,
+                    "date_posted": "2022-12-07T13:16:04.325737"
+                }
+        '''
+
+        post = db.query(ForumPost).filter(ForumPost.id == id).first() #### BUG
+        if post:
+            comment = db.query(ForumPostComment).filter(ForumPostComment.origin_post_id == post.id).all()
+            post.post_comments = comment
+            post.num_of_comments = f'{len(post.post_comments)} comments'
+            return post
+        else:
             return None
-        comment = db.query(ForumPostComment).filter(ForumPostComment.origin_post_id == post.id).all()
-        post.post_comments = comment
-        return post
 
     def create_post_comment(self, db: Session, request: PostCommentBase):
-        new_comment = ForumPostComment(
-            owner_username=self.current_user.username,
-            origin_post_id=request.origin_post_id,
-            comment=request.comment
-        )
-        db.add(new_comment)
-        db.commit()
-        db.refresh(new_comment)
-        return new_comment
+        post = db.query(ForumPost).filter(ForumPost.id == request.origin_post_id).first()
+        if post:
+            new_comment = ForumPostComment(
+                owner_username=self.current_user.username,
+                origin_post_id=request.origin_post_id,
+                comment=request.comment
+            )
+            db.add(new_comment)
+            db.commit()
+            db.refresh(new_comment)
+            return new_comment
+        else:
+            return None
