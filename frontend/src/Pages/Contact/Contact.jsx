@@ -86,7 +86,9 @@ const Contact = () => {
     fetchData();
     sendEmail();
     reset();
-    notify();
+    if(!errors.message){
+      notify();
+    }
   };
 
   return (
@@ -180,18 +182,18 @@ const Contact = () => {
           </form>
         </motion.div>
         {/* section two of the container */}
-        <motion.div whileInView={{y: [100, 50], opacity: [0,0,1]}} transition={{ duration: 0.7 }} className="section__one">
+        <motion.div whileInView={{y: [100, 50], opacity: [0,0,1]}} transition={{ duration: 0.7 }} className="section__two">
 
-          <div className="section__two">
+         
             {/* address section */}
             <div className="address__section">
               <div className="address">
                 <GrLocation />
-                <p>256, Newyork City, United States</p>
+                <p>3 Birrel Avenue, Yaba, Lagos, Nigeria.</p>
               </div>
               <div className="contact__details">
                 <BsTelephone />
-                <p>01 3456789</p>
+                <p>07008808800</p>
               </div>
             </div>
             {/* social icons */}
@@ -199,13 +201,13 @@ const Contact = () => {
               <h3>Follow Us</h3>
               <div className="icons">
                 <div className="icon__container">
-                  <BsInstagram className="icon" />
+                  <a href="https://www.instagram.com/soberpal_ng/" ><BsInstagram  className="icon" /></a>
                 </div>
                 <div className="icon__container">
                   <AiOutlineFacebook className="icon" />
                 </div>
                 <div className="icon__container">
-                  <ImTwitter className="icon" />
+                  <a href="https://twitter.com/SoberPal_NG/" ><ImTwitter className="icon" /></a>
                 </div>
               </div>
             </div>
@@ -216,7 +218,7 @@ const Contact = () => {
                 <Map />
               </Wrapper> */}
             </div>
-          </div>
+              
         </motion.div>
 
       </div>

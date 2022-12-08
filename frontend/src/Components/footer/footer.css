@@ -25,6 +25,10 @@
     align-self: flex-start;
     flex: 1;
 }
+.soberpal__footer-flex__box1 img{
+    width: 5rem;
+    height: 5rem;
+}
 
 .soberpal__footer-flex__box1 h1 {
     font-weight: 500;

@@ -3,14 +3,16 @@ import { NavLink, Link } from "react-router-dom";
 import { navbarList } from "../../Data/navbar";
 import Button from "../../UI/Button";
 import MobileNav from "./MobileNav";
+import logo from '../../assets/soberpal-logo.png'
 
 const NavBar = () => {
   const [isOpen, setIsOpen] = useState(false);
   return (
     <div>
       <div className="py-4 max-w-[1400px] w-[90%] mx-auto flex justify-between">
-        <Link to="/">
-          <p className="tablet:text-[32px] text-[24px] text-blue font-[700]">{navbarList.logo}</p>
+        <Link className="flex items-center " to="/">
+          <img className="h-[4rem] w-[4rem]" src={logo} alt="soberpal logo"/>
+          <p className="tablet:text-[28px]  text-[18px] text-blue font-[700]">{navbarList.logo}</p>
         </Link>
         <div>
           <ul className="hidden laptop:flex ">
