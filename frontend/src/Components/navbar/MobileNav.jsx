@@ -25,7 +25,7 @@ const MobileNav = ({setIsOpen}) => {
               </Link>
               </>
             )}
-              <Link className="ml-5 w-full mx-auto" rel="noreferrer" href="https://appetize.io/app/3tqubo6rf6nodzau3rez6v2r5u?device=pixel4&osVersion=11.0&scale=75" target="_blank" >
+              <Link className="ml-5 w-full mx-auto" rel="noreferrer" href="https://appetize.io/app/7tt554aaixpa2fcvb6hafhhkee?device=pixel4&osVersion=11.0&scale=75" target="_blank" >
                 <button className="font-[500] p-4 bg-[white] text-blue mt-[30px] rounded-[16px] " >Download App</button>
               </Link>
           </ul>
