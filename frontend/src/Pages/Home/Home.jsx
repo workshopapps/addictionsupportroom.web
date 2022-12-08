@@ -14,6 +14,7 @@ import Download from "../../Components/Download/Download";
 import { motion } from "framer-motion";
 import add from "../../assets/add.png";
 import "./home.css";
+import ToCommunity from "../../Components/Community/ToCommunity";
 
 const Home = () => {
   const size = 40;
@@ -191,7 +192,7 @@ const Home = () => {
           className="w-[90%] laptop:w-[70%] mx-auto"
         >
           <main className="text-[38px] text-center font-[700]">
-            What peoople say about us
+            What people say about us
           </main>
           <p className="text-[18px] mt-[20px] mb-[60px] text-center font-[400]">
             You are not alone in the fight against addiction
@@ -236,6 +237,8 @@ const Home = () => {
           </div>
         </motion.section>
       </div>
+
+      <ToCommunity />
       <motion.section
         whileInView={{ y: [100, 50], opacity: [0, 0, 1] }}
         transition={{ duration: 0.7 }}
