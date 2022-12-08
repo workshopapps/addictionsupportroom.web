@@ -9,6 +9,8 @@ from . import quotes
 from api import deps
 from starlette.responses import JSONResponse
 from fastapi.encoders import jsonable_encoder
+from typing import List
+from . import models
 
 router = APIRouter()
 
@@ -129,7 +131,7 @@ def create_note(note: schemas.NoteCreate,
         HTTPException [424]: message
     """
 
-    db_note = crud.create_note(db=db, note=note)
+    db_note = crud.create_note(db=db, note=note, user_id=current_user.id)
     if not db_note:
         raise HTTPException(status_code=status.HTTP_424_FAILED_DEPENDENCY,
             detail={"message": "Note not created"})
@@ -142,7 +144,7 @@ def create_note(note: schemas.NoteCreate,
 def get_all_notes_created_today(db: Session = Depends(get_db),
                                 current_user: User = Depends(
                                     deps.get_current_user)):
-    notes = crud.get_all_notes_created_today(db=db)
+    notes = crud.get_all_notes_created_today(db=db, user_id=current_user.id)
     return notes
 
 
@@ -152,6 +154,9 @@ def get_specific_note(note_id: int,
                       db: Session = Depends(get_db),
                       current_user: User = Depends(deps.get_current_user)):
     note = crud.get_specific_note(db=db, note_id=note_id)
+    if note.user != current_user.id:
+        raise HTTPException(status_code=403,
+        detail="note belongs to another user")
     return note
 
 
