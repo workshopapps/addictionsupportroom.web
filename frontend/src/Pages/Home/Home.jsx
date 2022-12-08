@@ -114,7 +114,7 @@ const Home = () => {
             </div>
             <p>
               You have a personal journal for everyday moods or urges which can
-              serve as a <br /> reference in your sobriety journey.
+              serve as a  reference in your sobriety journey.
             </p>
           </div>
 
