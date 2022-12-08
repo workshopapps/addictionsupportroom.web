@@ -1,5 +1,4 @@
 import { useRef } from "react";
-import { Link } from "react-router-dom";
 import CheckDetails from "./CheckDetails";
 import "./newsletter.scss";
 import newsletterImg from "../../assets/newsletter.png";
@@ -8,11 +7,11 @@ import NewsCard from "./NewsCard";
 import { BsInstagram } from "react-icons/bs";
 import { AiOutlineFacebook } from "react-icons/ai";
 import { ImTwitter } from "react-icons/im";
-import Button from "../../UI/Button";
 import { useForm } from "react-hook-form";
 import { toast, ToastContainer } from "react-toastify";
 import { motion } from "framer-motion";
 import Download from "../../Components/Download/Download";
+import emailjs from "@emailjs/browser";
 
 const NewsLetter = () => {
   const notify = () =>
@@ -31,21 +30,37 @@ const NewsLetter = () => {
     mode: "onSubmit",
     defaultValues: {
       email: "",
-      emailTop: ""
-    },
+    }
   });
 
-  const onSubmit = () => {
-    reset();
-    notify();
-  };
-  const onSubmitTop = () => {
-    reset();
-    notify();
+   // Third Party Email as a service for sending mail to soberpal
+   const sendEmail = () => {
+    emailjs
+      .sendForm(
+        "service_i5yysql",
+        "template_usa8sis",
+        form.current,
+        "kWxi_dTDg52yCrF9v"
+      )
+      .then(
+        (result) => {
+          console.log(result.text);
+        },
+        (error) => {
+          console.log(error.text);
+        }
+      );
   };
 
+  const onSubmit = () => {
+    sendEmail();
+    notify();
+    reset();
+  };
+
+
   return (
-    <div className="newsletter">
+    <div id="newsletter" className="newsletter">
       <header>
         {!errors.message && <ToastContainer autoClose={2000} />}
         <motion.h3
@@ -81,36 +96,6 @@ const NewsLetter = () => {
             <CheckDetails text="Access to our social media community" />
             <CheckDetails text="Amazing tips on how to stay sober" />
           </motion.div>
-
-          <form ref={form} onSubmit={handleSubmit(onSubmitTop)}>
-            <motion.input
-              whileInView={{ y: [100, 30], opacity: [0, 0, 1] }}
-              transition={{ duration: 1.2 }}
-              className={`${errors.emailTop?.message ? "input__border" : ""}`}
-              {...register("emailTop", {
-                required: "Email is required!!",
-                pattern: {
-                  value:
-                    /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/,
-                  message: "Email is invalid!!",
-                },
-              })}
-              placeholder="Enter your email address"
-            />
-            {errors.emailTop?.message && (
-              <p className="alert" role="alert">
-                {errors.emailTop.message}
-              </p>
-            )}
-            <motion.button
-              whileInView={{ y: [100, 30], opacity: [0, 0, 1] }}
-              transition={{ duration: 1.2 }}
-              type=""
-              className="btn__subscribe"
-            >
-              Subscribe
-            </motion.button>
-          </form>
 
           <motion.p
             whileInView={{ y: [100, 30], opacity: [0, 0, 1] }}
@@ -153,13 +138,13 @@ const NewsLetter = () => {
           <h2>About our Newsletter</h2>
           <p>
             Our newsletter provides our users, subscribers, customers and
-            prospects with different information about Soberpal. Subscriers have{" "}
+            prospects with different information about Soberpal. Subscribers have{" "}
             <br />
             the option of choosing to recieve newsletters from us weekly,
             bi-weekly or monthly.
           </p>
         </motion.div>
-        <Link className="li">More about Maradel</Link>
+  
       </motion.section>
 
       <motion.section
@@ -213,7 +198,7 @@ const NewsLetter = () => {
         transition={{ duration: 1.2 }}
         className="bottom__section"
       >
-        <form ref={form} onSubmit={handleSubmit(onSubmit)}>
+        <form ref={form}  onSubmit={handleSubmit(onSubmit)}>
           <motion.input
             whileInView={{ y: [100, 1], opacity: [0, 0, 1] }}
             transition={{ duration: 1.2 }}
@@ -228,11 +213,11 @@ const NewsLetter = () => {
             })}
             placeholder="Enter your email address"
           />
-          {errors.email?.message && (
+          {errors.email?.message ? (
             <p className="alert" role="alert">
-              {errors.email.message}
+              {errors.email?.message}
             </p>
-          )}
+          ): ''}
           <motion.button
             whileInView={{ y: [100, 1], opacity: [0, 0, 1] }}
             transition={{ duration: 1.2 }}

@@ -12,13 +12,13 @@ const ComModal = ({ setShowModal, setToken }) => {
 
     const navigate = useNavigate();
 
-    // const success = () =>
-    // toast.success("Login Successfully", {
-    //   position: toast.POSITION.TOP_CENTER,
-    // });
+    const success = () =>
+    toast.success("Login Successfully", {
+      position: toast.POSITION.TOP_CENTER,
+    });
 
     const faliure = () =>
-    toast.error("Input correct password", {
+    toast.error("Input correct username", {
       position: toast.POSITION.TOP_CENTER,
     });
 
@@ -33,11 +33,14 @@ const ComModal = ({ setShowModal, setToken }) => {
         })
           .then(data => data.json())
           .then(res => {console.log(res)
+            // if(res.ok){
+            //   success()
+            // }
             localStorage.setItem("token", JSON.stringify(res.token));
             localStorage.setItem("username", JSON.stringify(username));
             localStorage.setItem("avatar", JSON.stringify(res.data.avatar));
             console.log(res.message)
-            navigate("/community"); 
+            navigate("/communitypost"); 
             }) 
             
           .catch(err => {console.log(err)
