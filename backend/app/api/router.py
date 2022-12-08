@@ -12,6 +12,8 @@ from api.call.views import router as call_router
 # from api.relapse.views import router as relapse_router
 from api.blog.views import router as blog_router
 from api.emergency.views import router as emergency_router
+from api.forum.views import router as forum_router
+from api.feedback.views import router as feedback_router
 
 from fastapi.security import OAuth2PasswordRequestForm
 from fastapi import Depends, FastAPI, HTTPException, status
@@ -36,7 +38,9 @@ async def token(form_data: OAuth2PasswordRequestForm = Depends(),
 
     val = await login(UserLogin(username=form_data.username), db=db)
 
-    return {"access_token": val['token'], "token_type": "bearer"}
+    access_token = val['data']['access_token']
+
+    return {"access_token": access_token['token'], "token_type": "bearer"}
 
 
 api_router.include_router(auth_router, prefix="/auth", tags=["Auth"])
@@ -54,4 +58,9 @@ api_router.include_router(progress_router,
 api_router.include_router(contact_router, prefix="/contact", tags=["Contact"])
 # api_router.include_router(relapse_router, prefix="/relapse", tags=["relapse"])
 api_router.include_router(blog_router, prefix="/blog", tags=["Blog"])
-api_router.include_router(emergency_router, prefix="/emergency", tags=["Emergency"])
+api_router.include_router(emergency_router,
+                          prefix="/emergency",
+                          tags=["Emergency"])
+api_router.include_router(feedback_router, prefix="/feedback", tags=["Feedback"])
+api_router.include_router(forum_router, prefix="/forum", tags=["Forum"])
+

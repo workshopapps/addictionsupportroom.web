@@ -11,6 +11,7 @@ from starlette.responses import JSONResponse
 from fastapi.encoders import jsonable_encoder
 from typing import List
 from . import models
+from db.schemas import ResponseModel
 
 router = APIRouter()
 
@@ -101,7 +102,7 @@ def get_all_notes(db: Session = Depends(get_db),
             HTTPException [401]: Unauthorised
     """
     notes = crud.get_all_notes(db=db)
-    return notes
+    return JSONResponse(content=ResponseModel.success(data=jsonable_encoder(notes), message="notes retrieved"), status_code=status.HTTP_200_OK)
 
 
 @router.post("/notes/create", response_model=schemas.Note, 
@@ -120,12 +121,18 @@ def create_note(note: schemas.NoteCreate,
 
     Returns:
         {
-            "created_at": "2022-12-07T08:06:17.262372",
-            "id": 5,
-            "updated_at": "2022-12-07T08:06:17.262372",
-            "title": "Sample title.",
-            "description": "This is an example."
+            "status": "success",
+            "message": "note created",
+            "data": {
+                "id": 4,
+                "title": "Sample",
+                "created_at": "2022-12-08T03:25:33.591066",
+                "user": 1,
+                "description": "this is an example.",
+                "updated_at": "2022-12-08T03:25:33.591066"
+            }
         }
+
     Raises:
         HTTPException [401]: Unauthorised
         HTTPException [424]: message
@@ -136,16 +143,53 @@ def create_note(note: schemas.NoteCreate,
         raise HTTPException(status_code=status.HTTP_424_FAILED_DEPENDENCY,
             detail={"message": "Note not created"})
 
-    response = JSONResponse(content=jsonable_encoder(db_note), status_code=status.HTTP_201_CREATED)
-    return response
+    # response = JSONResponse(content=jsonable_encoder(db_note), status_code=status.HTTP_201_CREATED)
+    return JSONResponse(content=ResponseModel.success(data=jsonable_encoder(db_note), message="note created"), status_code=status.HTTP_200_OK)
 
 
 @router.get("/notes/today")  #  response_model=list[schemas.ShowNote]
 def get_all_notes_created_today(db: Session = Depends(get_db),
                                 current_user: User = Depends(
                                     deps.get_current_user)):
+    """
+    Gets all notes by a user
+    Returns:
+        {
+            "status": "success",
+            "message": "notes retrieved",
+            "data": [
+                {
+                "id": 1,
+                "title": "Sample Title",
+                "created_at": "2022-12-08T01:23:35.531037",
+                "user": 1,
+                "description": "this is a sample..",
+                "updated_at": "2022-12-08T01:23:35.531037"
+                },
+                {
+                "id": 2,
+                "title": "another Sample Title",
+                "created_at": "2022-12-08T01:24:05.581884",
+                "user": 1,
+                "description": "this is another sample..",
+                "updated_at": "2022-12-08T01:24:05.581884"
+                },
+                {
+                "id": 3,
+                "title": "Sample",
+                "created_at": "2022-12-08T01:53:33.387006",
+                "user": 1,
+                "description": "this is an example.",
+                "updated_at": "2022-12-08T01:53:33.387006"
+                }
+            ]
+        }
+
+    Raises:
+        HTTPException [401]: Unauthorised
+    """
     notes = crud.get_all_notes_created_today(db=db, user_id=current_user.id)
-    return notes
+    return JSONResponse(content=ResponseModel.success(data=jsonable_encoder(notes), message="notes retrieved"), status_code=status.HTTP_200_OK)
 
 
 @router.get(
@@ -157,11 +201,13 @@ def get_specific_note(note_id: int,
     if note.user != current_user.id:
         raise HTTPException(status_code=403,
         detail="note belongs to another user")
-    return note
+    return JSONResponse(content=ResponseModel.success(data=jsonable_encoder(note), message="note retrieved"), status_code=status.HTTP_200_OK)
 
 
 @router.delete("/notes/delete/{note_id}")
-def delete_note(note_id: int, db: Session = Depends(get_db), current_user: User = Depends(deps.get_current_user)):
+def delete_note(note_id: int,
+                db: Session = Depends(get_db),
+                current_user: User = Depends(deps.get_current_user)):
     note = crud.delete_note(db=db, note_id=note_id)
     return note
 

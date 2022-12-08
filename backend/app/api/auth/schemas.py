@@ -36,23 +36,21 @@ class UserCreate(BaseModel):
     username: str = Field(..., example="name123")
     avatar: str = Field(
         ...,
-        example="http://www.example.com/image",
+        example="https://picsum.photos/200/200",
     )
     # password: str
-
-
-class UserOut(UserBase):
-    access_token: dict
-
-
-class UserLogin(BaseModel):
-    username: str = Field(..., example="name123")
 
 
 class AccessToken(BaseModel):
     token: str
     token_type: str
 
+class UserOut(UserBase):
+    access_token: AccessToken
+
+
+class UserLogin(BaseModel):
+    username: str = Field(..., example="name123")
 
 class ChatStatus(str, Enum):
     online = "online"
