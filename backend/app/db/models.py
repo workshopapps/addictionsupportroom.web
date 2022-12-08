@@ -200,6 +200,12 @@ class Emergency(Base):
     created_at = Column(DateTime)
 
 
+class NewsLetterEmail(Base):
+    __tablename__ = 'news_letter_email'
+
+    id = Column(Integer, primary_key=True, index=True)
+    email = Column(String)
+
 class Blog(Base):
     __tablename__ = 'blogs'
 
@@ -212,3 +218,13 @@ class Blog(Base):
     article = Column(Boolean)
     created_at = Column(DateTime, nullable=False, default=datetime.datetime.utcnow())
     updated_at = Column(DateTime, nullable=False, default=datetime.datetime.utcnow())
+
+
+class Feedbacks(Base):
+    __tablename__ = "feedback"
+
+    id = Column(Integer, primary_key=True, index=True)
+    rating = Column(Integer)
+    description = Column(String)
+    created_at = Column(DateTime, nullable=False, default=datetime.datetime.utcnow())
+    updated_at = Column(DateTime, nullable=True)

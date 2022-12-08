@@ -83,7 +83,9 @@ def get_specific_note(note_id: int,
 
 
 @router.delete("/notes/delete/{note_id}")
-def delete_note(note_id: int, db: Session = Depends(get_db), current_user: User = Depends(deps.get_current_user)):
+def delete_note(note_id: int,
+                db: Session = Depends(get_db),
+                current_user: User = Depends(deps.get_current_user)):
     note = crud.delete_note(db=db, note_id=note_id)
     return note
 

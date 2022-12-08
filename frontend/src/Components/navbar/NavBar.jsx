@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { NavLink, Link } from "react-router-dom";
 import { navbarList } from "../../Data/navbar";
 import Button from "../../UI/Button";
@@ -6,6 +6,27 @@ import MobileNav from "./MobileNav";
 
 const NavBar = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const [changeState, setChangeState] = useState(false)
+  const [username, setUserName] = useState("");
+  const [avatar, setAvatar] = useState("");
+
+  useEffect(() => {
+    const token = localStorage.getItem("token")
+    const user = localStorage.getItem("username")
+    const avatar = localStorage.getItem("avatar")
+
+    if (token) {
+      setChangeState(true)
+    } 
+    
+    if (user) {
+      // window.location.reload();
+      setUserName(JSON.parse(user));
+    }
+    if (avatar) {
+      setAvatar(JSON.parse(avatar));
+    }
+  }, [])
   return (
     <div>
       <div className="py-4 max-w-[1400px] w-[90%] mx-auto flex justify-between">
@@ -21,11 +42,17 @@ const NavBar = () => {
             ))}
           </ul>
         </div>
-        
-        <a className="hidden laptop:block"  rel="noreferrer" href="https://appetize.io/app/3tqubo6rf6nodzau3rez6v2r5u?device=pixel4&osVersion=11.0&scale=75" target="_blank" >
-          <Button className="font-[500]" text="Download App" />
+        {changeState ? (  
+          <div className='bg-white hidden laptop:flex items-center px-3 '>
+            <img className='ml-5 w-[50px] h-[50px]' src={avatar} alt="" />
+            <p className='ml-5 font-[500]'>{username}</p>
+          </div>
+        ) : (
+          <a className="hidden laptop:block"  rel="noreferrer" href="https://appetize.io/app/3tqubo6rf6nodzau3rez6v2r5u?device=pixel4&osVersion=11.0&scale=75" target="_blank" >
+            <Button className="font-[500]" text="Download App" />
         </a>
-
+        )}
+        
         <div
           className="flex flex-col justify-center laptop:hidden"
           onClick={() => setIsOpen(true)}

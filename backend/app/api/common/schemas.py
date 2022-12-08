@@ -58,7 +58,7 @@ class ResponseModel(BaseModel):
                              data=data).dict()
 
     @staticmethod
-    def error(message: str) -> dict[str, Any]:
+    def error(message: str, detail: str | None = None) -> dict[str, Any]:
         """Provides an error response data
 
         Args:
@@ -68,4 +68,31 @@ class ResponseModel(BaseModel):
         Returns:
             dict: key-value pair of status, detail
         """
-        return ResponseModel(status="error", data={"detail": message}).dict()
+
+        return ResponseModel(
+            status="error",
+            message=message,
+            data={
+                "detail": detail
+            },
+        ).dict()
+
+    @staticmethod
+    def sample(description: str, example: dict[str, Any]) -> dict[str, Any]:
+        """Provides an error response data
+
+        Args:
+            data (dict): data to be returned
+            detail (str): Descriptive  message.
+
+        Returns:
+            dict: key-value pair of status, detail
+        """
+        return {
+            "description": description,
+            'content': {
+                'application/json': {
+                    'example': example
+                }
+            }
+        }
