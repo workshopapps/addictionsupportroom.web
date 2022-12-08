@@ -35,9 +35,9 @@ const AddPosts = ({ setShowModal }) => {
     console.log(post);
     fetch("https://soberpal.hng.tech/api/forum", {
       method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
+      headers: { "Content-Type": "application/json",
+            //    'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxIiwiZXhwIjoxNjcwNjc3MTcxfQ.mJynLTBI69V7LM-pr6ZiBUMTiuJmJtUYtpPUDd2-v38'
+        },
       body: JSON.stringify(post),
     }).then((data) => {
         console.log(data)
@@ -45,6 +45,17 @@ const AddPosts = ({ setShowModal }) => {
       setIsPending(false);
     //   navigate("/communitypost");
     });
+
+//     fetch('https://soberpal.hng.tech/api/forum/', {
+//       method: "POST",
+//       headers: { "Content-Type": "application/json",
+//                'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxIiwiZXhwIjoxNjcwNjc3MTcxfQ.mJynLTBI69V7LM-pr6ZiBUMTiuJmJtUYtpPUDd2-v38'},
+//       body: JSON.stringify({message: 'oskjsijsdjisdojisojsisjnfs fn fsifj nmf fij nf fij nfidjf f'})
+//     }).then(res => {
+//     console.log('this --- > ', res)
+//     }).catch(err => {
+//     console.log('that ----> ', err)
+//     })
   };
   return (
     <div>
@@ -75,19 +86,32 @@ const AddPosts = ({ setShowModal }) => {
                   onChange={(e) => setAvatar(e.target.value)}
                 />
               </div>
-
-              <div className="flex gap-3 mt-6 h-[40px] ">
-              <img className='w-[40px] h-[40px]' src={avatar} alt="" />
+                <p className="mt-4 font-[600] text-[20px]">Make a post</p>
+              <div className=" gap-3 mt-6 ">
+              <img className='w-[50px] h-[50px] rounded-full' src={avatar} alt="" />
                 <textarea
-                  className="border-2 w-full rounded-lg border-[black] outline-2 outline-blue"
+                  className="border-[1px] p-2 w-full h-[150px] rounded-lg border-[black] outline-2 outline-blue"
                   required
                   value={message}
                   onChange={(e) => setMessage(e.target.value)}
                 ></textarea>
                 {/* <p>{body}</p> */}
               </div>
-              {!isPending && <button>Share</button>}
-              {isPending && <button disabled>Share...</button>}
+              {!isPending && 
+                <button 
+                    className="bg-blue p-4 text-white mt-4 rounded-lg"
+                >
+                    Share
+                </button>
+                }
+              {isPending && 
+              <button 
+                    className="bg-blue p-4 text-white mt-4 rounded-lg"
+                    onClick={() => setShowModal(false)}
+                >
+                    Share...
+                </button>
+              }
             </form>
           </div>
         </div>
