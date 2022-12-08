@@ -5,7 +5,7 @@ import CreateRoute from "./Routes/CreateRoute";
 
 function App() {
   return (
-    <div className="App">
+    <div className="App relative">
       <NavBar />
       <CreateRoute />
       <Footer />
