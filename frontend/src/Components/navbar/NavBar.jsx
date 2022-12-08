@@ -44,7 +44,7 @@ const NavBar = () => {
         </div>
         {changeState ? (  
           <div className='bg-white hidden laptop:flex items-center px-3 '>
-            <img className='ml-5 w-[50px] h-[50px]' src={avatar} alt="" />
+            <img className='ml-5 w-[50px] h-[50px]' src={avatar} alt="fe" />
             <p className='ml-5 font-[500]'>{username}</p>
           </div>
         ) : (
