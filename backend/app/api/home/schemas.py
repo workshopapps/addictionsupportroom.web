@@ -41,3 +41,9 @@ class ResponseModel(BaseModel):
     status: str
     message: str
     data: Any
+
+class Emergency(BaseModel):
+    """
+    The JSON data required to indicate the intention of a user to relapse
+    """
+    username: str
