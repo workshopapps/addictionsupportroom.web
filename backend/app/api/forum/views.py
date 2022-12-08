@@ -1,4 +1,4 @@
-from fastapi import APIRouter, Depends, HTTPException
+from fastapi import APIRouter, Depends, HTTPException, status, Path
 from sqlalchemy.orm.session import Session
 from db.db import get_db
 from .schemas import PostBase, PostResponseModel, PostCommentBase, PostCommentResponseModel, UserResponseModel
@@ -36,7 +36,11 @@ def get_all_post_EP(db: Session = Depends(get_db), current_user: User = Depends(
 
 
 @router.get('/{id}', response_model=PostResponseModel)
-def get_post_EP(id: int, db: Session = Depends(get_db), current_user: User = Depends(get_current_user)):
+def get_post_EP(
+    id: int, 
+    db: Session = Depends(get_db), 
+    current_user: User = Depends(get_current_user)
+):
     '''
         This endpoint is for retrieving a post\n
 
@@ -47,7 +51,7 @@ def get_post_EP(id: int, db: Session = Depends(get_db), current_user: User = Dep
     if post:
         return post
     else:
-        return HTTPException(status_code=404, detail=f'Post of ID {id} does not exist')
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail=f'Post of ID {id} does not exist')
 
 
 @router.post('/comment/', response_model=PostCommentResponseModel)
@@ -57,5 +61,9 @@ def create_post_comment_EP(request: PostCommentBase, db: Session = Depends(get_d
         **origin_post_id**  :  Required\n
         **message**  :  Required\n
     '''
-    post = PostClass(current_user)
-    return post.create_post_comment(db, request)
+    post_instance = PostClass(current_user)
+    post = post_instance.create_post_comment(db, request)
+    if post:
+        return post
+    else:
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail=f'Post of ID {request.origin_post_id} does not exist and can not have comment')
