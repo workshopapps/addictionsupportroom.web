@@ -260,9 +260,11 @@ const Home = () => {
           advices, experiences in our community section hencemaking each other’s
           journey easier .
         </p>
-//         <Button text="Join The Community" />
-          <Link classname="mx-auto mt-4 py-3 px-4 bg-blue text-white" to="/communitypost">
+
+          <Link classname="mx-auto" to="/communitypost">
+            <p classname="mx-auto mt-4 py-3 px-4 bg-blue text-white">
              Join The Community
+             </p>
           </Link>
          
       </motion.section>
