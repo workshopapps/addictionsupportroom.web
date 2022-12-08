@@ -1,6 +1,6 @@
 from pydantic import BaseModel
 from datetime import datetime
-from typing import List, Optional
+from typing import List, Optional, Any
 
 
 class Post(BaseModel):
@@ -69,3 +69,11 @@ class PostCommentResponseModel(BaseModel):
 
     class Config():
         orm_mode = True
+
+
+# # FRONTEND RESPONSE MODEL
+# class FEPostResponseModel(BaseModel):
+#     status: str
+#     status_code: int
+#     message: str
+#     data: Any
