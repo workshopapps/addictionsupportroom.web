@@ -50,7 +50,7 @@ const NavBar = () => {
             <p className='ml-5 font-[500]'>{username}</p>
           </div>
         ) : (
-          <a className="hidden laptop:block"  rel="noreferrer" href="https://appetize.io/app/7tt554aaixpa2fcvb6hafhhkee?device=pixel4&osVersion=11.0&scale=75" target="_blank" >
+          <a className="hidden laptop:block"  rel="noreferrer" href="https://appetize.io/app/q3qnqdo5ibklola6h5xlimn6rq?device=pixel4&osVersion=11.0&scale=75" target="_blank" >
             <Button className="font-[500]" text="Download App" />
         </a>
         )}
