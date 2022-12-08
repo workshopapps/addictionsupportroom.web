@@ -261,8 +261,8 @@ const Home = () => {
           journey easier .
         </p>
 
-          <Link classname="mx-auto" to="/communitypost">
-            <p classname="mx-auto mt-4 py-3 px-4 bg-blue text-white">
+          <Link classname="mx-auto bg-blue w-fit" to="/communitypost">
+            <p classname="mx-auto mt-4 py-3 w-fit px-4 bg-blue text-white">
              Join The Community
              </p>
           </Link>
