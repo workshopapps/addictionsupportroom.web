@@ -30,8 +30,7 @@ const NewsLetter = () => {
     mode: "onSubmit",
     defaultValues: {
       email: "",
-      emailTop: ""
-    },
+    }
   });
 
    // Third Party Email as a service for sending mail to soberpal
@@ -199,7 +198,7 @@ const NewsLetter = () => {
         transition={{ duration: 1.2 }}
         className="bottom__section"
       >
-        <form  onSubmit={handleSubmit(onSubmit)}>
+        <form ref={form}  onSubmit={handleSubmit(onSubmit)}>
           <motion.input
             whileInView={{ y: [100, 1], opacity: [0, 0, 1] }}
             transition={{ duration: 1.2 }}
