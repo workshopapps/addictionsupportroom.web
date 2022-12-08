@@ -17,7 +17,8 @@ import JobApplication from '../Pages/JobApplication/JobApplication';
 import NewsLetter from '../Pages/NewsLetter/NewsLetter';
 import Community from '../Pages/Community/Community';
 import ComLogin from '../Pages/Community/ComLogin';
-import CommunityLogin from '../Pages/Community/CommunityLogin';
+import PostDetails from '../Pages/Community/PostDetails';
+import AddPosts from '../Pages/Community/AddPosts';
 // import ProtectedRoute from './ProtectedRoute';
 
 
@@ -27,9 +28,6 @@ const CreateRoute = () => {
   // const token = localStorage.getItem('accessToken');
 
 
-  // if(!token) {
-  //   return <ComLogin  setToken={setToken}/>
-  // }
 
   return (
     <Routes>
@@ -41,10 +39,11 @@ const CreateRoute = () => {
       <Route path='/faq' element={<Faqs/>} />
       <Route path='/team' element={<Team/>} />
       <Route path='/blog' element={<Blog />} />
-      <Route path='/community' element={<Community />} />
+      <Route path='/communitypost' element={<Community />} />
+      <Route path='/communitypost/:postId' element={<PostDetails />} />
       <Route path='/community/login' element={<ComLogin />} />
+      <Route path='/community/addPosts' element={<AddPosts />} />
       {/* <Route path='*' element={<ProtectedRoute />} /> */}
-      {/* <Route path='/community/login' element={<Login />} /> */}
       <Route path='/terms_policy' element={<TermsServices />} />
       <Route path='/alcohol' element={<Alcohol />} />
       <Route path='/careers/job' element={<JobApplication />} />

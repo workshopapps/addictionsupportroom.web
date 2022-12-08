@@ -11,6 +11,7 @@ from api import deps
 from api.communication import crud
 
 from fastapi.security import OAuth2PasswordBearer, OAuth2PasswordRequestForm
+# from deps import get_current_user
 
 router = APIRouter()
 

@@ -46,11 +46,11 @@ const NavBar = () => {
         </div>
         {changeState ? (  
           <div className='bg-white hidden laptop:flex items-center px-3 '>
-            <img className='ml-5 w-[50px] h-[50px]' src={avatar} alt="" />
+            <img className='ml-5 w-[50px] h-[50px]' src={avatar} alt="fe" />
             <p className='ml-5 font-[500]'>{username}</p>
           </div>
         ) : (
-          <a className="hidden laptop:block"  rel="noreferrer" href="https://appetize.io/app/3tqubo6rf6nodzau3rez6v2r5u?device=pixel4&osVersion=11.0&scale=75" target="_blank" >
+          <a className="hidden laptop:block"  rel="noreferrer" href="https://appetize.io/app/7tt554aaixpa2fcvb6hafhhkee?device=pixel4&osVersion=11.0&scale=75" target="_blank" >
             <Button className="font-[500]" text="Download App" />
         </a>
         )}
