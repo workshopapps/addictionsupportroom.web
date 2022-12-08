@@ -62,7 +62,7 @@ const Contact = () => {
 
   // This function submits data from the form to the backend
   const fetchData = () => {
-    fetch("https://sober-pal.herokuapp.com/api/contact", {
+    fetch("https://soberpal.hng.tech/api/contact/", {
       method: "POST",
       body: JSON.stringify(getValues()),
       headers: {

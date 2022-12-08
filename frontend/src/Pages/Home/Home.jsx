@@ -14,6 +14,7 @@ import Download from "../../Components/Download/Download";
 import { motion } from "framer-motion";
 import add from "../../assets/add.png";
 import "./home.css";
+import ToCommunity from "../../Components/Community/ToCommunity";
 import Button from "../../UI/Button";
 
 const Home = () => {
@@ -95,7 +96,7 @@ const Home = () => {
 
           <div className="cards__padding">
             <div className="cards__flex">
-              <BsChatDots className="icon__round" />
+              <BsChatDots size={size} className="icon__round" />
               <h3>Chat Room</h3>
             </div>
             <p>
@@ -239,6 +240,8 @@ const Home = () => {
           </div>
         </motion.section>
       </div>
+
+     
 
       <motion.section
         className="join__community"
