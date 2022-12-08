@@ -54,8 +54,8 @@ const NewsLetter = () => {
   };
 
   const onSubmit = () => {
-    notify();
     sendEmail();
+    notify();
     reset();
   };
 
@@ -203,7 +203,7 @@ const NewsLetter = () => {
           <motion.input
             whileInView={{ y: [100, 1], opacity: [0, 0, 1] }}
             transition={{ duration: 1.2 }}
-            className={`${errors.email.message ? "input__border" : ""}`}
+            className={`${errors.email?.message ? "input__border" : ""}`}
             {...register("email", {
               required: "Email is required!!",
               pattern: {
@@ -214,9 +214,9 @@ const NewsLetter = () => {
             })}
             placeholder="Enter your email address"
           />
-          {errors.email.message ? (
+          {errors.email?.message ? (
             <p className="alert" role="alert">
-              {errors.email.message}
+              {errors.email?.message}
             </p>
           ): ''}
           <motion.button
