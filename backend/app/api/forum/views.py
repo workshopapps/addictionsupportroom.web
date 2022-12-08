@@ -23,7 +23,12 @@ def create_post_EP(request: PostBase, db: Session = Depends(get_db), current_use
         **message**  :  Required\n
     '''
     new_post = PostClass(current_user)
-    return new_post.create_post(db, request)
+    return {
+        'status': 201,
+        'message': 'Post has been created',
+        'data': new_post.create_post(db, request)
+    }
+     
 
 
 @router.get('/', response_model=List[PostResponseModel])
@@ -32,7 +37,11 @@ def get_all_post_EP(db: Session = Depends(get_db), current_user: User = Depends(
         This endpoint is for retrieving all posts in the web community
     '''
     all_posts = PostClass(current_user)
-    return all_posts.get_all_post(db)
+    return {
+        'status': 200,
+        'message': 'ok',
+        'data': all_posts.get_all_post(db)
+    }
 
 
 @router.get('/{id}', response_model=PostResponseModel)
@@ -49,7 +58,11 @@ def get_post_EP(
     post_intance = PostClass(current_user)
     post = post_intance.get_post(db, id)
     if post:
-        return post
+        return {
+            'status': 200,
+            'message': 'ok',
+            'data': post
+        }
     else:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail=f'Post of ID {id} does not exist')
 
@@ -64,6 +77,10 @@ def create_post_comment_EP(request: PostCommentBase, db: Session = Depends(get_d
     post_instance = PostClass(current_user)
     post = post_instance.create_post_comment(db, request)
     if post:
-        return post
+        return {
+            'status': 201,
+            'message': 'Comment has been created',
+            'data': post
+        }
     else:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail=f'Post of ID {request.origin_post_id} does not exist and can not have comment')
