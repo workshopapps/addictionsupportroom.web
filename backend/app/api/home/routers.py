@@ -9,8 +9,9 @@ from . import quotes
 from api import deps
 from starlette.responses import JSONResponse
 from fastapi.encoders import jsonable_encoder
-from .schemas import Emotion, ResponseModel
+from .schemas import Emotion, ResponseModel, Emergency
 from fastapi.requests import Request
+from fastapi.responses import JSONResponse
 
 router = APIRouter()
 
@@ -94,22 +95,84 @@ def post_emotion(emotion: Emotion, request: Request):
                             detail="Method not allowed")
 
 
-@router.post("/relapse")
-def about_to_relapse(currentUser: User = Depends(deps.get_current_user),
-                     db: Session = Depends(deps.get_db)):
+@router.post(
+    "/relapse",
+    status_code=status.HTTP_200_OK,
+    responses={
+        424:{
+            "description": "Error. Intention to relapse not recorded."
+            },
+            405:{
+            "description": "Method not allowed"
+            },
+            204:{
+            "description": "User not found"
+            }
+        }
+    )
+def about_to_relapse(
+    user: Emergency,
+    request: Request, 
+    db: Session = Depends(deps.get_db)
+    ):
+    """ Sets the emergency value of a user to True
 
-    #Add the user to the emergency database
-    try:
-        add_emergency = Emergency(name=currentUser.username,
-                                  avatar=currentUser.avatar,
-                                  created_at=datetime.datetime.utcnow())
-        db.add(add_emergency)
-        db.commit()
-    except Exception as e:
-        print(e.args)
-        return {"error": "internal server error. try again later."}
+        Returns a message confirming event
 
-    return {"success": "keep calm. someone will reach out soon."}
+		Args:
+				username: A user's username
+				
+		Returns:
+				A JSON response containing the status code and message
+                {
+                    "status_code": 201,
+                    "message": " ",
+                    }   
+	    Raises:
+				HTTPException [424]: Error. Intention to relapse not recorded
+                HTTPException [405]: Method not allowed
+                HTTPException [204]: User not found
+	"""
+    if request.method == "POST":
+        #to test. add mock data.
+        # user1 = User(username="lion3", avatar="lion", hashed_password="lion")
+        # db.add(user1)
+        # db.commit()
+
+        find_user = db.query(User).filter(User.username==user.username).first()
+
+        if not find_user:
+            raise HTTPException(
+                status_code=status.HTTP_204_NO_CONTENT,
+                detail="User not found"
+            )
+        
+        else:
+            try:
+                find_user.emergency = True
+                db.commit()
+                db.refresh(find_user)
+
+                # #test
+                # db.delete(user1)
+                # db.commit()
+
+                return {
+                    "status": status.HTTP_201_CREATED,
+                    "message": "Keep calm. Someone will reach out soon."
+                }
+            
+            except:
+                raise HTTPException(
+                    status_code=status.HTTP_424_FAILED_DEPENDENCY,
+                    detail="Error. Intention to relapse was not recorded."
+                )
+    
+    else:
+        raise HTTPException(
+            status_code=status.HTTP_405_METHOD_NOT_ALLOWED,
+            detail="Method not allowed"
+        )
 
 
 @router.get("/notes/")
