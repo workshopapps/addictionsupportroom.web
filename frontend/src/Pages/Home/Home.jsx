@@ -1,5 +1,7 @@
 import React from "react";
 import Faq from "../../Components/faq/Faq";
+import { Link } from 'react-router-dom';
+
 // import Appstats from "../../Components/AppStats/Appstats";
 import { AiOutlineHeart } from "react-icons/ai";
 import { BiLineChart } from "react-icons/bi";
@@ -258,7 +260,11 @@ const Home = () => {
           advices, experiences in our community section hencemaking each other’s
           journey easier .
         </p>
-        <Button text="Join The Community" />
+//         <Button text="Join The Community" />
+          <Link classname="mx-auto mt-4 py-3 px-4 bg-blue text-white" to="/communitypost">
+             Join The Community
+          </Link>
+         
       </motion.section>
 
       <motion.section
