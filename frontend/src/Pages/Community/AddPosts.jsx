@@ -98,9 +98,7 @@ const AddPosts = ({ setShowModal }) => {
                 {/* <p>{body}</p> */}
               </div>
               {!isPending && 
-                <button 
-                    className="bg-blue p-4 text-white mt-4 rounded-lg"
-                >
+                <button className="bg-blue p-4 text-white mt-4 rounded-lg">
                     Share
                 </button>
                 }
