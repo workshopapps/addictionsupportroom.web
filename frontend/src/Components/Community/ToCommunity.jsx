@@ -1,10 +1,15 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { motion } from "framer-motion";
 
 
 const ToCommunity = () => {
   return (
-    <div className="flex flex-col items-center pb-14">
+    <motion.div
+      className="flex flex-col items-center pb-14"
+      whileInView={{ y: [100, 0], opacity: [0, 0, 1] }}
+      transition={{ duration: 0.7 }}
+    >
       <div className="text-center px-5 md:px-0 md:w-[80%] font-[700]">
         <p className=" text-[32px] md:text-[57px]">
           Join 200,000+ Anonymous Soberpals,{" "}
@@ -23,12 +28,12 @@ const ToCommunity = () => {
           </span>
         </p>
       </div>
-      <Link to="/community">
+      <Link to="/communitypost">
         <button className="h-[57px] w-[227px] bg-[#0E8ACB] rounded-[8px] text-white mt-4 hover--effect">
           Join The Community
         </button>
       </Link>
-    </div>
+    </motion.div>
   );
 };
 
