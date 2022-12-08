@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 
 import BlogPost from "../../Components/BLog/BlogPost";
@@ -6,26 +6,24 @@ import Download from "../../Components/Download/Download";
 import { motion } from "framer-motion";
 import BlogPaignation from "../../Components/BLog/BlogPaignation";
 
-
 const Forum = () => {
   const [blogs, setBlogs] = useState([]);
-  const [loading, setLoading] = useState(false)
-  const [currentPage, setCurrentPage] = useState(1)
+  const [loading, setLoading] = useState(false);
+  const [currentPage, setCurrentPage] = useState(1);
   const [postsPerPage] = useState(8);
 
-
-  useEffect (() => {
+  useEffect(() => {
     const fetchPosts = async () => {
       setLoading(true);
-      const res = await axios.get('https://soberpal.hng.tech/api/blog/');
+      const res = await axios.get("https://soberpal.hng.tech/api/blog/");
       setBlogs(res.data);
       setLoading(false);
-    }
+    };
 
     fetchPosts();
-  }, [])
+  }, []);
 
-  // Get current post 
+  // Get current post
   const indexOfLastPost = currentPage * postsPerPage;
   const indexOfFirstPost = indexOfLastPost - postsPerPage;
   const currentPosts = blogs.slice(indexOfFirstPost, indexOfLastPost);
@@ -46,15 +44,21 @@ const Forum = () => {
           Addiction Insights
         </p>
         <p className="text-[16px] mx-auto w-[90%] tablet:w-[70%] laptop:w-[600px] tablet:text-[20px] text-center text-[black] mb-[20px] ">
-          Thoughts and advices on addiction and challenges we face and advices
-          from Industry experts
+          We help improve your self awareness by providing various <br />
+          insights on your health.
         </p>
       </motion.div>
 
-        {/* Blogs  */}
+      {/* Blogs  */}
       <div className="my-20 ">
-        <BlogPost loading={loading}  blogs={currentPosts}/>
-        <BlogPaignation postsPerPage={postsPerPage} loading={loading} currentPage={currentPage} totalPosts={blogs.length} paginate={paginate} />
+        <BlogPost loading={loading} blogs={currentPosts} />
+        <BlogPaignation
+          postsPerPage={postsPerPage}
+          loading={loading}
+          currentPage={currentPage}
+          totalPosts={blogs.length}
+          paginate={paginate}
+        />
       </div>
 
       <section className="block laptop:flex laptop:flex-rol justify-between mx-auto w-[90%]"></section>

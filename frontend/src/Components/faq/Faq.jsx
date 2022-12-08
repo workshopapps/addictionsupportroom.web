@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import add from '../../assets/add.png';
 import './faq.css'
-import { AiOutlinePlus } from "react-icons/ai";
+// import { AiOutlinePlus } from "react-icons/ai";
 
 const Faq = ({ question, answer }) => {
   const [click, setClick] = useState(false);
