@@ -38,8 +38,8 @@ export default function Login() {
           Get access to a community of over 200,000+ members sharing their pains, experiences, tips, stories on addiction, family and recovery.
         </p>
       </div>
-      <div className="mt-16 mb-10">
-        <img src={loadingImage} alt="loading" />
+      <div className=" mt-16 mb-10 ">
+        <img className="w-[90%] max-w-[800px] max-h-[400px] mx-auto" src={loadingImage} alt="loading" />
       </div>
       <div className="flex flex-col">
         <p className="text-[30px] tablet:text-[34px] text-center font-[700] leading-10">Only Soberpals members can view community</p>
