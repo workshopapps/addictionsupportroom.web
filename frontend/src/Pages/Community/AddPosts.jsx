@@ -11,6 +11,11 @@ const AddPosts = ({ setShowModal }) => {
 
   const navigate = useNavigate();
 
+  const scrollUp = () => {
+    window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
+  };
+
+
   const token = localStorage.getItem("token");
   useEffect(() => {
       const user = localStorage.getItem("username");
@@ -21,7 +26,6 @@ const AddPosts = ({ setShowModal }) => {
     // }
 
     if (user) {
-      // window.location.reload();
       setUserName(JSON.parse(user));
     }
     if (avatar) {
@@ -49,13 +53,11 @@ const AddPosts = ({ setShowModal }) => {
         'Authorization': `Bearer ${token}`,
         },
       body: JSON.stringify(post),
-    }).then((data) => {
-        console.log(data)
-      console.log("added");
+      }).then((data) => {
       setIsPending(false);
       window.location.reload(false)
     });
-
+    scrollUp();
   };
   return (
     <div>

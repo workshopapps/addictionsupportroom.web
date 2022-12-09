@@ -9,7 +9,6 @@ const useFetch = (url) => {
     
     
     const token = localStorage.getItem("token");
-    console.log(token)
     const myHeaders = new Headers({
       'Authorization': `Bearer ${token} `,
     });

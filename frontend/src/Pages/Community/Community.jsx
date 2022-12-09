@@ -8,12 +8,6 @@ const Community = () => {
   const [username, setUserName] = useState("");
   const [avatar, setAvatar] = useState("");
 
-  // const success = () =>
-  //   toast.success("Login Successfully", {
-  //     position: toast.POSITION.TOP_RIGHT,
-  //   });
-
-
   const navigate = useNavigate();
     
   const handleLogout = () => {
@@ -31,9 +25,6 @@ const Community = () => {
 
     if (!token) {
       navigate("/community/login")
-    } else {
-    // window.location.reload(false)
-
     }
 
     if (user) {
