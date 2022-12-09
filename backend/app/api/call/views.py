@@ -124,6 +124,24 @@ async def call_socket_endpoint(websocket: WebSocket):
                 WebSocketException [1013]: Unable to connect to web socket. Try again later.
                 WebSocketException [1006]: Crosscheck to make sure you are sending the right data format: JSON object.
     """
-    await notify.connect(websocket)
-    while True:        
-        await notify.broadcast(await websocket.receive_json())
+    try:
+        await notify.connect(websocket)
+    
+    except:
+        return HTTPException(
+            status_code=status.WS_1013_TRY_AGAIN_LATER,
+            detail="Unable to connect to web socket. Try again later."
+        )
+    
+
+    while True:
+        try:        
+            await notify.broadcast(await websocket.receive_json())
+        
+        except:
+            websocket.close()
+            return HTTPException(
+                status_code=status.WS_1006_ABNORMAL_CLOSURE,
+                detail="Crosscheck to make sure you are sending the right data format: JSON object."
+            )
+        
