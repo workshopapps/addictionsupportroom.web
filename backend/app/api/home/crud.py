@@ -4,29 +4,31 @@ from . import schemas
 from . import models
 from datetime import datetime
 from fastapi import HTTPException, status
+from typing import List
 
 
-def create_note(db: Session, note: schemas.Note):
+def create_note(db: Session, user_id: int, note: schemas.Note):
     """ 
     This function is used to create new note
     """
     db_note = models.Note(title=note.title,
-                          description=note.description,
-                          created_at=datetime.utcnow(),
-                          updated_at=datetime.utcnow())
+            user = user_id,
+            description=note.description,
+            created_at=datetime.utcnow(),
+            updated_at=datetime.utcnow())
     db.add(db_note)
     db.commit()
     db.refresh(db_note)
     return db_note
 
 
-def get_all_notes_created_today(db: Session):
+def get_all_notes_created_today(db: Session, user_id: int) -> List[models.Note]:
     """
     This function return the all the notes created  daily
     if not Note then it will return empty list like this []
     
     """
-    notes = db.query(models.Note).all()
+    notes = db.query(models.Note).filter(models.Note.user==user_id).all()
     return notes
 
 
