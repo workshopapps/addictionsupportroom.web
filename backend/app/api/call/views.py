@@ -70,18 +70,7 @@ def receiveCall(data: ReceiveCall):
 
 #web sockets
 
-@router.websocket("/callNotification",
-    status_code=status.WS_1015_TLS_HANDSHAKE,
-    responses=
-    {
-        1013:{
-            "description": "Unable to connect to web socket"
-            },
-        1006:{
-            "description": "Crosscheck to make sure you are sending the right data format: JSON object."
-            }
-    }
-)
+@router.websocket("/callNotification")
 async def call_socket_endpoint(websocket: WebSocket):
     """ Websocket for awaiting incoming call notifications
 				
@@ -94,8 +83,8 @@ async def call_socket_endpoint(websocket: WebSocket):
                 } 
 
 	    Raises:
-                HTTPException [405]: Method not allowed
-                HTTPException [424]: Something went wrong. Try again later.
+                WebSocketException [1013]: Unable to connect to web socket. Try again later.
+                WebSocketException [1006]: Crosscheck to make sure you are sending the right data format: JSON object.
     """
     try:
         await notify.connect(websocket)
@@ -103,7 +92,7 @@ async def call_socket_endpoint(websocket: WebSocket):
     except:
         return HTTPException(
             status_code=status.WS_1013_TRY_AGAIN_LATER,
-            detail="Unable to connect to web socket"
+            detail="Unable to connect to web socket. Try again later."
         )
     
     while True:
