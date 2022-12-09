@@ -1,4 +1,4 @@
-from sqlalchemy import Column, String, Integer, DateTime, ForeignKey
+from sqlalchemy import Column, String, Integer, DateTime
 from datetime import datetime
 
 from api.utils.mixins import (
@@ -12,7 +12,6 @@ class Note(Base):
     __tablename__ = "notes"
 
     id = Column(Integer, primary_key=True, index=True)
-    user = Column(ForeignKey('users.id'), index=True)
     title = Column(String)
     description = Column(String)
     created_at = Column(DateTime,
