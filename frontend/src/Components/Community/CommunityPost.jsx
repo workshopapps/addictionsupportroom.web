@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import useFetch from '../../APIData/userFetch';
+import useFetch from '../../API/userFetch';
 import AddPosts from '../../Pages/Community/AddPosts';
 import ComPosts from './Posts';
 
@@ -11,9 +11,7 @@ const CommunityPost = ({ username, avatar}) => {
 
   return (
       <div className='max-w-[1000px] bg-[#F5F5F5] my-16 py-10 mx-auto w-[90%] rounded-[14px]'>
-        {/* <p>{username}</p> */}
         <div className='w-[90%] mx-auto mb-16'>
-            
             <div 
                 to="/community/addPosts"
                 onClick={() => setShowModal(true)}

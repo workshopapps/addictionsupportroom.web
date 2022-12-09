@@ -9,7 +9,6 @@ const useFetch = (url) => {
     
     
     const token = localStorage.getItem("token");
-    console.log(token)
     const myHeaders = new Headers({
       'Authorization': `Bearer ${token} `,
     });
@@ -45,7 +44,6 @@ const useFetch = (url) => {
             })
         //  }, 1000)
             return () => abortCont.abort();
-
         }, [token]);
 
     return { data, isLoading, error} 

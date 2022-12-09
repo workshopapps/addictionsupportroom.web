@@ -1,59 +1,58 @@
-import React, {useState} from "react";
-import {  useNavigate } from 'react-router-dom';
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 import { GrClose } from "react-icons/gr";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-
 const ComModal = ({ setShowModal, setToken }) => {
-    const [username, setUserName] = useState();
-    const [avatar, setAvatar] = useState();
+  const [username, setUserName] = useState();
+  const [avatar, setAvatar] = useState();
 
-    const navigate = useNavigate();
+  const navigate = useNavigate();
 
-    const success = () =>
+  const success = () =>
     toast.success("Login Successfully", {
       position: toast.POSITION.TOP_CENTER,
     });
 
-    const faliure = () =>
+  const faliure = () =>
     toast.error("Input correct username", {
       position: toast.POSITION.TOP_CENTER,
     });
 
-    
-    async function loginUser(credentials) {
-        return fetch('https://soberpal.hng.tech/api/auth/login', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify(credentials)
-        })
-          .then(data => data.json())
-          .then(res => {console.log(res)
-            console.log(res)
-            localStorage.setItem("token", (res.data.access_token.token));
-            localStorage.setItem("username", JSON.stringify(username));
-            localStorage.setItem("avatar", JSON.stringify(res.data.avatar));
-            navigate("/communitypost"); 
-            window.location.reload(false)
-            }) 
-            
-          .catch(err => {console.log(err)
-            faliure();
-        })
-    }
-    
-  
-    const handleSubmit = async e => {
-        e.preventDefault();
-        const token = await loginUser({
-          username,
+  async function loginUser(credentials) {
+    return fetch("https://soberpal.hng.tech/api/auth/login", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(credentials),
+    })
+      .then((data) => data.json())
+      .then((res) => {
+        console.log(res);
+        console.log(res);
+        localStorage.setItem("token", res.data.access_token.token);
+        localStorage.setItem("username", JSON.stringify(username));
+        localStorage.setItem("avatar", JSON.stringify(res.data.avatar));
+        navigate("/communitypost");
+        window.location.reload(false);
+      })
+
+      .catch((err) => {
+        console.log(err);
+        faliure();
+      });
+  }
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const token = await loginUser({
+      username,
     });
     setToken(token);
-    }
+  };
   return (
     <>
       <div className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none">
@@ -73,15 +72,17 @@ const ComModal = ({ setShowModal, setToken }) => {
                 Welcome back! Please enter your details{" "}
               </p>
 
-              <form onSubmit={handleSubmit} className="mx-auto w-[92%] tablet:w-[80%] laptop:w-[400px]">
-              {/* <form className="mx-auto w-[92%] tablet:w-[80%] laptop:w-[400px]"> */}
+              <form
+                onSubmit={handleSubmit}
+                className="mx-auto w-[92%] tablet:w-[80%] laptop:w-[400px]"
+              >
                 <div className="flex flex-col mt-10">
                   <label className="text-[20px] font-[700]">Username</label>
                   <input
                     type="text"
                     name="username"
                     className="border-2 p-3 border-[black] rounded-lg mt-2 mb-5"
-                    onChange={e => setUserName(e.target.value)}
+                    onChange={(e) => setUserName(e.target.value)}
                   />
                 </div>
 

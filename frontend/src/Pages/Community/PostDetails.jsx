@@ -1,6 +1,6 @@
 import React from 'react'
 import { useParams } from 'react-router-dom'
-import useFetch from '../../APIData/userFetch';
+import useFetch from '../../API/userFetch';
 import messageText from "../../assets/message-text.png";
 
 
