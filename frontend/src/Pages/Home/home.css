@@ -270,10 +270,9 @@
     height: 2.5rem;
 }
 
-.soberpal__home-fifth__section__flex2 input::placeholder {
-    padding-left: 8px;
-    color: #000000;
-}
+/* .soberpal__home-fifth__section__flex2 input::placeholder {
+    padding-left: 5px;
+} */
 
 .soberpal__home-fifth__section__flex2 input:focus {
     border: 1px solid white;
