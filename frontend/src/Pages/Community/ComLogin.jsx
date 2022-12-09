@@ -1,31 +1,12 @@
 import React, { useState } from "react";
 import loadingImage from '../../assets/loading.png'
 import 'react-toastify/dist/ReactToastify.css';
-import PropTypes from 'prop-types';
 import ComModal from "../../Components/Community/ComModal";
-
 
 
 export default function Login() {
   const [showModal, setShowModal] = useState(false);
   const [token, setToken] = useState();
-
-
-// 
-// if ('accessToken' in token) {
-//     toast.success("Login successfully", {
-//         position: toast.POSITION.TOP_CENTER,
-//       })
-//     .then((value) => {
-//       localStorage.setItem('accessToken', token['accessToken']);
-//       localStorage.setItem('user', JSON.stringify(token['user']));
-//       window.location.href = "/#/community";
-//     });
-//   } else {
-//     toast.error('You need to have an account on Soberpal App', {
-//         position: toast.POSITION.TOP_CENTER
-//     })
-//   }
 
 
   return (
@@ -73,12 +54,7 @@ export default function Login() {
       </div>
 
       {showModal && <ComModal setShowModal={setShowModal} />}
-        {/* <ToastContainer autoClose={2000} /> */}
       
     </div>
   );
 }
-
-// Login.propTypes = {
-//     setToken: PropTypes.func.isRequired
-//   }

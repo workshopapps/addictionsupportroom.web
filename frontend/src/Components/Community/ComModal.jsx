@@ -33,14 +33,12 @@ const ComModal = ({ setShowModal, setToken }) => {
         })
           .then(data => data.json())
           .then(res => {console.log(res)
-            // if(res.ok){
-            //   success()
-            // }
-            localStorage.setItem("token", JSON.stringify(res.token));
+            console.log(res)
+            localStorage.setItem("token", (res.data.access_token.token));
             localStorage.setItem("username", JSON.stringify(username));
             localStorage.setItem("avatar", JSON.stringify(res.data.avatar));
-            console.log(res.message)
             navigate("/communitypost"); 
+            window.location.reload(false)
             }) 
             
           .catch(err => {console.log(err)

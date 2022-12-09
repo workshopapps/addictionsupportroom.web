@@ -18,16 +18,16 @@ const NavBar = () => {
 
     if (token) {
       setChangeState(true)
+      // window.location.reload(changeState);
     } 
     
     if (user) {
-      // window.location.reload();
       setUserName(JSON.parse(user));
     }
     if (avatar) {
       setAvatar(JSON.parse(avatar));
     }
-  }, [])
+  }, [changeState])
   return (
     <div>
       <div className="py-4 max-w-[1400px] w-[90%] mx-auto flex justify-between">
@@ -48,8 +48,8 @@ const NavBar = () => {
         </div>
         {changeState ? (
           <div className="bg-white hidden laptop:flex items-center px-3 ">
-            <img className="ml-5 w-[50px] h-[50px]" src={avatar} alt="fe" />
-            <p className="ml-5 font-[500]">{username}</p>
+            <img className=" w-[45px] h-[45px] border-2 border-[black] rounded-full " src={avatar} alt="fe" />
+            <p className="ml-3 font-[500]">{username}</p>
           </div>
         ) : (
           <a
