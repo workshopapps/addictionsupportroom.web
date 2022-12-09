@@ -74,9 +74,8 @@ def receiveCall(data: ReceiveCall):
 async def call_socket_endpoint(websocket: WebSocket):
     #websocket for waiting for incoming call notifications
     await notify.connect(websocket)
-    while True:        
-        data = await websocket.receive_json()
-        await notify.broadcast(data)
+    while True:
+        await notify.broadcast(await websocket.receive_json())
 
 
 @router.websocket("/callStatus")
