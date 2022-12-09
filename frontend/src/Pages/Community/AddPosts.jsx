@@ -8,16 +8,17 @@ const AddPosts = ({ setShowModal }) => {
   const [avatar, setAvatar] = useState("");
   const [isPending, setIsPending] = useState(false);
   const [changeState, setChangeState] = useState(false);
+
   const navigate = useNavigate();
 
+  const token = localStorage.getItem("token");
   useEffect(() => {
-    const token = localStorage.getItem("token");
-    const user = localStorage.getItem("username");
-    const avatar = localStorage.getItem("avatar");
+      const user = localStorage.getItem("username");
+      const avatar = localStorage.getItem("avatar");
 
-    if (token) {
-      setChangeState(true);
-    }
+    // if (token) {
+    //   setChangeState(true);
+    // }
 
     if (user) {
       // window.location.reload();
@@ -30,32 +31,31 @@ const AddPosts = ({ setShowModal }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const post = { message };
+    const post = { 
+        message,
+        user: {
+            username,
+            avatar
+        }
+    };
+    setShowModal(false)
+
     setIsPending(true);
     console.log(post);
-    fetch("https://soberpal.hng.tech/api/forum", {
+    fetch("https://soberpal.hng.tech/api/forum/", {
       method: "POST",
-      headers: { "Content-Type": "application/json",
-            //    'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxIiwiZXhwIjoxNjcwNjc3MTcxfQ.mJynLTBI69V7LM-pr6ZiBUMTiuJmJtUYtpPUDd2-v38'
+      headers: { 
+        "Content-Type": "application/json",
+        'Authorization': `Bearer ${token}`,
         },
       body: JSON.stringify(post),
     }).then((data) => {
         console.log(data)
       console.log("added");
       setIsPending(false);
-    //   navigate("/communitypost");
+      window.location.reload(false)
     });
 
-//     fetch('https://soberpal.hng.tech/api/forum/', {
-//       method: "POST",
-//       headers: { "Content-Type": "application/json",
-//                'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxIiwiZXhwIjoxNjcwNjc3MTcxfQ.mJynLTBI69V7LM-pr6ZiBUMTiuJmJtUYtpPUDd2-v38'},
-//       body: JSON.stringify({message: 'oskjsijsdjisdojisojsisjnfs fn fsifj nmf fij nf fij nfidjf f'})
-//     }).then(res => {
-//     console.log('this --- > ', res)
-//     }).catch(err => {
-//     console.log('that ----> ', err)
-//     })
   };
   return (
     <div>
@@ -90,7 +90,7 @@ const AddPosts = ({ setShowModal }) => {
               <div className=" gap-3 mt-6 ">
               <img className='w-[50px] h-[50px] rounded-full' src={avatar} alt="" />
                 <textarea
-                  className="border-[1px] p-2 w-full h-[150px] rounded-lg border-[black] outline-2 outline-blue"
+                  className="border-[1px] p-2 w-full h-[200px] rounded-lg border-[black] outline-2 outline-blue"
                   required
                   value={message}
                   onChange={(e) => setMessage(e.target.value)}
@@ -98,14 +98,15 @@ const AddPosts = ({ setShowModal }) => {
                 {/* <p>{body}</p> */}
               </div>
               {!isPending && 
-                <button className="bg-blue p-4 text-white mt-4 rounded-lg">
+                <button 
+                    className="bg-blue p-4 text-white mt-4 rounded-lg"
+                >
                     Share
                 </button>
                 }
               {isPending && 
               <button 
                     className="bg-blue p-4 text-white mt-4 rounded-lg"
-                    onClick={() => setShowModal(false)}
                 >
                     Share...
                 </button>

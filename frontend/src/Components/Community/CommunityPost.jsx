@@ -1,14 +1,13 @@
-import React, { useState } from 'react'
-import { Link } from 'react-router-dom';
+import React, { useState, useEffect } from 'react'
 import useFetch from '../../APIData/userFetch';
 import AddPosts from '../../Pages/Community/AddPosts';
 import ComPosts from './Posts';
 
 const CommunityPost = ({ username, avatar}) => {
-  const [showModal, setShowModal] = useState(false);
+  const [showModal, setShowModal] = useState(false); 
 
-    const { data: posts, isPending, error } = useFetch("https://soberpal.hng.tech/api/forum")
-    // https://soberpal.hng.tech/api/
+    const { data: posts, isPending, error } = useFetch("https://soberpal.hng.tech/api/forum/")
+    
 
   return (
       <div className='max-w-[1000px] bg-[#F5F5F5] my-16 py-10 mx-auto w-[90%] rounded-[14px]'>
@@ -20,7 +19,7 @@ const CommunityPost = ({ username, avatar}) => {
                 onClick={() => setShowModal(true)}
                 className='flex gap-3 justify-between bg-white p-2 w-full rounded-[14px]'
             >
-                <img className='w-[40px] h-[40px]' src={avatar} alt="" />
+                <img className='w-[40px] h-[40px] ' src={avatar} alt="" />
                 <input
                     type="text"
                     className='w-full text-[14px] p-2 h-[40px] rounded-lg bg-[#F5F5F5]'

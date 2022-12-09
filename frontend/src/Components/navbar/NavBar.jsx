@@ -17,16 +17,16 @@ const NavBar = () => {
 
     if (token) {
       setChangeState(true)
+      // window.location.reload(changeState);
     } 
     
     if (user) {
-      // window.location.reload();
       setUserName(JSON.parse(user));
     }
     if (avatar) {
       setAvatar(JSON.parse(avatar));
     }
-  }, [])
+  }, [changeState])
   return (
     <div>
       <div className="py-4 max-w-[1400px] w-[90%] mx-auto flex justify-between">
@@ -50,7 +50,7 @@ const NavBar = () => {
         ) : (
           <a className="hidden laptop:block"  rel="noreferrer" href="https://appetize.io/app/3tqubo6rf6nodzau3rez6v2r5u?device=pixel4&osVersion=11.0&scale=75" target="_blank" >
             <Button className="font-[500]" text="Download App" />
-        </a>
+          </a>
         )}
         
         <div
