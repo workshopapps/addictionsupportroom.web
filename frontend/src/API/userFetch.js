@@ -44,7 +44,6 @@ const useFetch = (url) => {
             })
         //  }, 1000)
             return () => abortCont.abort();
-
         }, [token]);
 
     return { data, isLoading, error} 
