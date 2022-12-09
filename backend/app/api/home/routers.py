@@ -12,47 +12,170 @@ from fastapi.encoders import jsonable_encoder
 from typing import List
 from . import models
 from db.schemas import ResponseModel
+from .schemas import Emotion, ResponseModel, Emergency
+from fastapi.requests import Request
+from fastapi.responses import JSONResponse
 
 router = APIRouter()
 
 
-@router.post("/emotions")
-async def post_emotion(emotion: str):
+@router.post("/emotions",
+             status_code=status.HTTP_200_OK,
+             responses={
+                 424: {
+                     "description": "Feedback not added"
+                 },
+                 405: {
+                     "description": "Method not allowed"
+                 },
+                 400: {
+                     "description": "Bad request"
+                 }
+             })
+def post_emotion(emotion: Emotion, request: Request):
     """
     Post a variety of emotions, and get a Quote as a response
     Emotions can be either of these:
     [happy, sober, defeated, angry, confused]
     """
-    if emotion == "happy":
-        return (quotes.happy[random.randint(0, 2)])
-    elif emotion == "sober":
-        return (quotes.sober[random.randint(0, 2)])
-    elif emotion == "defeated":
-        return (quotes.defeated[random.randint(0, 2)])
-    elif emotion == "angry":
-        return (quotes.angry[random.randint(0, 2)])
-    elif emotion == "confused":
-        return (quotes.confused[random.randint(0, 2)])
+    """ Returns a quote to the user
+
+		Collects the user's emotion from the request and returns a JSON response
+
+		Args:
+				emotion: A string about the user's mood
+				
+		Returns:
+				A JSON response containing the status code, message, and data
+                {
+                    "status_code": 200,
+                    "message": "Quote.",
+                    "data": Quote
+                    }   
+	    Raises:
+				HTTPException [424]: Quote not found
+                HTTPException [405]: Method not allowed
+                HTTPException [400]: Bad request
+	"""
+    if request.method == "POST":
+
+        try:
+            if emotion.emotion == "happy":
+                quote = quotes.happy[random.randint(0, 2)]
+
+            elif emotion.emotion == "sober":
+                quote = quotes.sober[random.randint(0, 2)]
+
+            elif emotion.emotion == "defeated":
+                quote = quotes.defeated[random.randint(0, 2)]
+
+            elif emotion.emotion == "angry":
+                quote = quotes.angry[random.randint(0, 2)]
+
+            elif emotion.emotion == "confused":
+                quote = quotes.confused[random.randint(0, 2)]
+            else:
+                quote = None
+
+            if quote != None:
+                return ResponseModel(status=status.HTTP_200_OK,
+                                     message="Quote",
+                                     data=quote)
+
+            elif quote == None:
+                print("here")
+                return {
+                    "status_code": status.HTTP_200_OK,
+                    "message": "Emotion not registered"
+                }
+
+        except:
+            raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST,
+                                detail="Bad Request")
+
     else:
-        return {"message": "Invalid emotion"}
+        raise HTTPException(status_code=status.HTTP_405_METHOD_NOT_ALLOWED,
+                            detail="Method not allowed")
 
 
-@router.post("/relapse")
-def about_to_relapse(currentUser: User = Depends(deps.get_current_user),
-                     db: Session = Depends(deps.get_db)):
+@router.post(
+    "/relapse",
+    status_code=status.HTTP_200_OK,
+    responses={
+        424:{
+            "description": "Error. Intention to relapse not recorded."
+            },
+            405:{
+            "description": "Method not allowed"
+            },
+            204:{
+            "description": "User not found"
+            }
+        }
+    )
+def about_to_relapse(
+    user: Emergency,
+    request: Request, 
+    db: Session = Depends(deps.get_db)
+    ):
+    """ Sets the emergency value of a user to True
 
-    #Add the user to the emergency database
-    try:
-        add_emergency = Emergency(name=currentUser.username,
-                                  avatar=currentUser.avatar,
-                                  created_at=datetime.datetime.utcnow())
-        db.add(add_emergency)
-        db.commit()
-    except Exception as e:
-        print(e.args)
-        return {"error": "internal server error. try again later."}
+        Returns a message confirming event
 
-    return {"success": "keep calm. someone will reach out soon."}
+		Args:
+				username: A user's username
+				
+		Returns:
+				A JSON response containing the status code and message
+                {
+                    "status_code": 201,
+                    "message": " ",
+                    }   
+	    Raises:
+				HTTPException [424]: Error. Intention to relapse not recorded
+                HTTPException [405]: Method not allowed
+                HTTPException [204]: User not found
+	"""
+    if request.method == "POST":
+        #to test. add mock data.
+        # user1 = User(username="lion3", avatar="lion", hashed_password="lion")
+        # db.add(user1)
+        # db.commit()
+
+        find_user = db.query(User).filter(User.username==user.username).first()
+
+        if not find_user:
+            raise HTTPException(
+                status_code=status.HTTP_204_NO_CONTENT,
+                detail="User not found"
+            )
+        
+        else:
+            try:
+                find_user.emergency = True
+                db.commit()
+                db.refresh(find_user)
+
+                # #test
+                # db.delete(user1)
+                # db.commit()
+
+                return {
+                    "status": status.HTTP_201_CREATED,
+                    "message": "Keep calm. Someone will reach out soon."
+                }
+            
+            except:
+                raise HTTPException(
+                    status_code=status.HTTP_424_FAILED_DEPENDENCY,
+                    detail="Error. Intention to relapse was not recorded."
+                )
+    
+    else:
+        raise HTTPException(
+            status_code=status.HTTP_405_METHOD_NOT_ALLOWED,
+            detail="Method not allowed"
+        )
 
 
 @router.get("/notes/")
@@ -118,7 +241,6 @@ def create_note(note: schemas.NoteCreate,
     
     Args: 
         note: Pydantic schema to define note parameters.
-
     Returns:
         {
             "status": "success",
@@ -132,7 +254,6 @@ def create_note(note: schemas.NoteCreate,
                 "updated_at": "2022-12-08T03:25:33.591066"
             }
         }
-
     Raises:
         HTTPException [401]: Unauthorised
         HTTPException [424]: message
@@ -184,7 +305,6 @@ def get_all_notes_created_today(db: Session = Depends(get_db),
                 }
             ]
         }
-
     Raises:
         HTTPException [401]: Unauthorised
     """
@@ -192,22 +312,76 @@ def get_all_notes_created_today(db: Session = Depends(get_db),
     return JSONResponse(content=ResponseModel.success(data=jsonable_encoder(notes), message="notes retrieved"), status_code=status.HTTP_200_OK)
 
 
-@router.get(
-    "/notes/{note_id}", )  #  response_model=schemas.ShowNote
-def get_specific_note(note_id: int,
-                      db: Session = Depends(get_db),
-                      current_user: User = Depends(deps.get_current_user)):
+@router.get("/notes/{note_id}",
+    status_code=status.HTTP_200_OK,
+            responses={
+                200: {
+                    "description": "Successful Response"
+                },
+                404: {
+                    "description": "Note Not Found"
+                },
+                422: {
+                    "description": "Validation Error"
+                }
+            })  #  response_model=schemas.ShowNote
+def get_specific_note(note_id: int, db: Session = Depends(get_db)):
+    """
+    Fetches a specific note using the given note id.
+
+    Args:
+
+        note_id (int): note id
+
+        db (Session, optional): Database. Defaults to Depends(get_db).
+
+    Returns:
+
+        {
+            "id": note_id(int),
+            "title": title of the note (str),
+            "description": content of the note (str),
+            "created_at": date the  note was created (datetime),
+            "updated_at": date the note was updated (datetime)
+        }
+
+    Raises:
+
+        HTTPException [404]: There's no note with id: {note_id}
+
+        HTTPException [422]: Validation Error
+
+    """
     note = crud.get_specific_note(db=db, note_id=note_id)
-    if note.user != current_user.id:
-        raise HTTPException(status_code=403,
-        detail="note belongs to another user")
-    return JSONResponse(content=ResponseModel.success(data=jsonable_encoder(note), message="note retrieved"), status_code=status.HTTP_200_OK)
+    return note
 
 
 @router.delete("/notes/delete/{note_id}")
-def delete_note(note_id: int,
-                db: Session = Depends(get_db),
-                current_user: User = Depends(deps.get_current_user)):
+def delete_note(note_id: int, db: Session = Depends(get_db)):
+    """
+    Deletes a specific note given the note id
+
+    Args:
+    
+        note_id (int): note id
+        
+        db (Session, optional): Database. Defaults to Depends(get_db).
+
+    Returns:
+
+        {
+            "id": note_id(int),
+            "title": title of the note (str),
+            "description": content of the note (str),
+            "created_at": date the  note was created (datetime),
+            "updated_at": date the note was updated (datetime)
+        }
+        
+    Raises:
+    
+        HTTPException [404]: There's no note with id: {note_id}
+        
+    """
     note = crud.delete_note(db=db, note_id=note_id)
     return note
 
@@ -216,6 +390,31 @@ def delete_note(note_id: int,
 def update_note(note: schemas.Note,
                 note_id: int,
                 db: Session = Depends(get_db)):
+    """
+    Updates a note given the note's id. The note's description gets updated with the new note.
+
+    Args:
+    
+        note (schemas.Note): New note.
+        
+        note_id (int): Note id.
+        
+        db (Session, optional): Database. Defaults to Depends(get_db).
+
+    Returns:
+    
+        {
+            "id": note_id(int),
+            "title": title of the note (str),
+            "description": content of the note (str),
+            "created_at": date the  note was created (datetime),
+            "updated_at": date the note was updated (datetime)
+        }
+        
+    Raises:
+    
+        HTTPException [404]: There's no note with id: {note_id}
+    """
     note = crud.update_note(db=db, note_id=note_id, note=note)
     return note
 

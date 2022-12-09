@@ -5,12 +5,12 @@ from api.auth.schemas import UserBase
 from . import services
 from sqlalchemy.orm import Session
 from db.models import Month
-
-from fastapi import APIRouter, Depends, HTTPException, status
+from fastapi import APIRouter, Depends, status, HTTPException
 from . import schemas
 from sqlalchemy.orm import Session
 import datetime
 from .schemas import GetAllHistoryResult, GetAllRanking, Ranking, SummarySchema, TotalCleanDays
+from fastapi.responses import JSONResponse
 from typing import Any
 
 from .schemas import RelapseBase, RelapseCreate, RelapseInDB
@@ -54,7 +54,6 @@ async def mark_a_day(
 ) -> Any:
     """
     Create Relapse
-
     Returns:
         {
             "status": "success",
@@ -63,9 +62,7 @@ async def mark_a_day(
                 "new_relapse_date": "2022-12-08"
             }
         }
-
         or 
-
         {
             "status": "success",
             "message": "num of bottles updated",
@@ -79,12 +76,10 @@ async def mark_a_day(
                 "user": 1
             }
         }
-
         {
             "status_code": 400,
             "message": "Invalid month value",
         }
-
     """
     if relapse_in.day > 31 or relapse_in.month > 12 or len(str(relapse_in.year)) > 4:
         raise HTTPException(status_code=status.HTTP_424_FAILED_DEPENDENCY,
@@ -168,7 +163,6 @@ async def read_relapses(
 ) -> Any:
     """
     Retrieve Relapse Days in a given month
-
     Returns:
         {
             "status": "success",
@@ -195,11 +189,9 @@ async def read_relapses(
                 ...
             ]
         }
-
     Raises:
         HTTPException [424]: "message": "There are no relapse dates for this month and year"
         HTTPException [401]: Unauthorised
-
     """
     # relapses = relapse.get_multi_by_user(db=db, user_id=current_user.id, skip=skip, limit=limit)
     relapses = db.query(Relapse).filter(
@@ -284,15 +276,11 @@ async def get_milestone(
 @router.get(
     "/leaderboard",
     response_model=GetAllRanking | ResponseSchema,
+    status_code=status.HTTP_200_OK,
     responses={
-        200: {
-            "model": GetAllRanking,
-            "description": "A list of leaderboard for all user.",
-        },
-        400: {
-            "model": ResponseSchema,
-            "description": "User not found.",
-        },
+        200: {"description": "Success"},
+        401: {"description": "You are not authorized to view the leaderboard."},
+        404: {"description": "No user found."},
     },
 )
 async def get_leaderboard(
@@ -300,7 +288,44 @@ async def get_leaderboard(
         current_user: User = Depends(deps.get_current_user),
 ) -> Any:
     """
-    Get a list of users toping the board
+    Fetches 20 users toping the board.
+    
+    Args:
+
+        db (Session): Database. Defaults to Depends(get_db)        
+        
+        current_user (User): A user's data. Defaults to Depends(get_current_user)
+    
+    Returns:
+        A list containing dictionaries of top 20 users on the board and their rankings.
+        
+        {
+            "status_code": 200,
+            "result": [
+                {
+                    "id": 1,
+                    "username": "Seer",
+                    "avatar": "http://www.example1.com/image",
+                    "clean_days": 60   
+                },
+                {
+                    "id": 8,
+                    "username": "Freeme",
+                    "avatar": "http://www.example2.com/image",
+                    "clean_days": 50
+                },
+                {
+                    ...
+                },
+                ...
+            ]
+        }
+    
+    Raises:
+        
+        HTTPException [401]: You are not authorized to view the leaderboard.
+        
+        HTTPException [404]: No user found.
     
     """
 
@@ -321,22 +346,19 @@ async def get_leaderboard(
                 avatar=user.avatar,
                 clean_days=clean_days,
             ))
-
+        
+    
     return {"status_code": 200, "result": result}
 
 
 @router.get(
     "/leaderboard/all",
     response_model=GetAllRanking | ResponseSchema,
+    status_code=status.HTTP_200_OK,
     responses={
-        200: {
-            "model": GetAllRanking,
-            "description": "A list of leaderboard for all user.",
-        },
-        400: {
-            "model": ResponseSchema,
-            "description": "User not found.",
-        },
+        200: {"description": "Success"},
+        401: {"description": "You are not authorized to view the board."},
+        404: {"description": "No user found."}
     },
 )
 async def get_leaderboard_all_rankings(
@@ -344,7 +366,45 @@ async def get_leaderboard_all_rankings(
         current_user: User = Depends(deps.get_current_user),
 ) -> Any:
     """
-    Get a list of all users and their rankings on the board.
+    Fetches all users and their ranking on the board.
+    
+    Args:
+
+        db (Session): Database. Defaults to Depends(get_db)        
+        
+        current_user (User): A user's data. Defaults to Depends(get_current_user)
+    
+    Returns:
+        A dictionary containing the status code for the request and result as a list containing dictionaries of all users' ranking data.
+        
+        {
+            "status_code": 200,
+            "result": [
+                {
+                    "id": 1,
+                    "username": "Seer",
+                    "avatar": "http://www.example1.com/image",
+                    "clean_days": 60   
+                },
+                {
+                    "id": 8,
+                    "username": "Freeme",
+                    "avatar": "http://www.example2.com/image",
+                    "clean_days": 50
+                },
+                {
+                    ...
+                },
+                ...
+            ]
+        }        
+        
+    Raises:
+    
+        HTTPException [401]: You are not authorized to view the board.
+        
+        HTTPException [404]: No user found.
+
     
     """
 
@@ -371,23 +431,37 @@ async def get_leaderboard_all_rankings(
 @router.get(
     "/leaderboard/user/total",
     response_model=TotalCleanDays | ResponseSchema,
+    status_code=status.HTTP_200_OK,
     responses={
-        200: {
-            "model": TotalCleanDays,
-            "description": "current user's total number of clean days.",
-        },
-        400: {
-            "model": ResponseSchema,
-            "description": "User not found.",
-        },
+        200: {"description": "Success"},
+        401: {"description": "You are not authorized to access this"},
     },
 )
 async def get_current_user_total_clean_days(
         db: Session = Depends(deps.get_db),
         current_user: User = Depends(deps.get_current_user),
 ) -> Any:
+    
     """
-    Get the current user's total number of clean days.
+    Fetches the current user's total number of clean days as a dictionary.
+    
+    Args:
+
+        db (Session): Database. Defaults to Depends(get_db)        
+        
+        current_user (User): A user's data. Defaults to Depends(get_current_user)
+    
+    Returns:
+        A dict containing the latest number of clean days of the current user.
+        
+        {
+            "clean_days": clean_days (int)
+        }
+    
+    Raises:
+        
+        HTTPException [401]: "You are not authorized to access this".
+    
     
     """
 
@@ -406,19 +480,15 @@ async def get_current_user_total_clean_days(
 @router.get(
     "/summary",
     response_model=SummarySchema | ResponseSchema,
+    status_code=status.HTTP_200_OK,
     responses={
-        200: {
-            "model": SummarySchema,
-            "description": "A summary for user progress",
-        },
-        400: {
-            "model": ResponseSchema,
-            "description": "User not found.",
-        },
+        200: {"description": "Success"},
+        401: {"description": "You are not authoried to view the summary"}
     },
 )
 async def get_summary(
         current_user: User = Depends(deps.get_current_user), ) -> Any:
+    
     """
     Get a user milestone
     Returns:
@@ -462,6 +532,7 @@ async def get_summary(
     return JSONResponse(content=ResponseModel.success(data=result, message="summary retrieved"), status_code=status.HTTP_200_OK)
 
 
+    
 @router.get(
     "/history/list",
     response_model=GetAllHistoryResult | ResponseSchema,
@@ -484,7 +555,6 @@ async def history_list(
 ):
     """
     The fetch history endpoint.
-
     Returns:
         {
             "status": "success",
