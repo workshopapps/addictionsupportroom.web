@@ -5,11 +5,22 @@ const useFetch = (url) => {
     const [data, setData] = useState(null);
     const [isLoading, setIsLoading] = useState(true);
     const [error, setError] = useState(null);
+
     
+    
+    const token = localStorage.getItem("token");
+    const myHeaders = new Headers({
+      'Authorization': `Bearer ${token} `,
+    });
     useEffect(() => {
-      const abortCont = new AbortController();
+          const abortCont = new AbortController();
         //  setTimeout (() => {
-          fetch(url, { signal: abortCont.signal})
+          fetch(url, { 
+            method: "GET",
+            headers: myHeaders,
+            signal: abortCont.signal
+          }
+            )
             .then(res => {
               console.log(res)
               if(!res.ok) {
@@ -18,6 +29,7 @@ const useFetch = (url) => {
               return res.json();
             })
             .then(data => {
+              console.log(data)
               setData(data);
               setIsLoading(false);
               setError(null);
@@ -32,8 +44,7 @@ const useFetch = (url) => {
             })
         //  }, 1000)
             return () => abortCont.abort();
-
-        }, [url]);
+        }, [token]);
 
     return { data, isLoading, error} 
 

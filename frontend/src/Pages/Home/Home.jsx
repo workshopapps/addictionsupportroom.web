@@ -1,6 +1,6 @@
 import React from "react";
 import Faq from "../../Components/faq/Faq";
-import { Link } from 'react-router-dom';
+import { Link } from "react-router-dom";
 
 // import Appstats from "../../Components/AppStats/Appstats";
 import { AiOutlineHeart } from "react-icons/ai";
@@ -18,6 +18,7 @@ import { motion } from "framer-motion";
 import "./home.css";
 // import ToCommunity from "../../Components/Community/ToCommunity";
 import Button from "../../UI/Button";
+import ToCommunity from "../../Components/Community/ToCommunity";
 
 const Home = () => {
   const size = 40;
@@ -116,7 +117,7 @@ const Home = () => {
             </div>
             <p>
               You have a personal journal for everyday moods or urges which can
-              serve as a  reference in your sobriety journey.
+              serve as a reference in your sobriety journey.
             </p>
           </div>
 
@@ -243,9 +244,7 @@ const Home = () => {
         </motion.section>
       </div>
 
-     
-
-      <motion.section
+      {/* <motion.section
         className="join__community"
         whileInView={{ y: [100, 50], opacity: [0, 0, 1] }}
         transition={{ duration: 0.7 }}
@@ -267,7 +266,8 @@ const Home = () => {
              </p>
           </Link>
          
-      </motion.section>
+      </motion.section> */}
+      <ToCommunity />
 
       <motion.section
         whileInView={{ y: [100, 50], opacity: [0, 0, 1] }}
@@ -333,7 +333,13 @@ const Home = () => {
           </h3>
           <div className="soberpal__home-fifth__section__flexy">
             <div className="soberpal__home-fifth__section__flex2">
-              <p>Enter your email</p>
+              <input
+                className="placeholder:text-slate-400 pl-2"
+                type="text"
+                name="email"
+                id="email"
+                placeholder="Enter your email"
+              />
               <button>send</button>
             </div>
           </div>
