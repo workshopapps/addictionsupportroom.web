@@ -18,6 +18,8 @@ from fastapi.security import HTTPBearer
 from db.models import User, Streak, Relapse, Month
 from fastapi.encoders import jsonable_encoder
 from .crud import relapse, create_relapse_with_user
+from db.schemas import ResponseModel
+from starlette.responses import JSONResponse
 
 auth_scheme = HTTPBearer()
 
@@ -52,30 +54,32 @@ async def mark_a_day(
 ) -> Any:
     """
     Create Relapse
-
     Returns:
         {
-            "new_relapse_date": "2022-12-07"
+            "status": "success",
+            "message": "relapse date updated",
+            "data": {
+                "new_relapse_date": "2022-12-08"
+            }
         }
-
         or 
-
         {
-            "id": 1,
-            "year": 2022,
-            "user": 1,
-            "month": 12,
-            "day": 1,
-            "bottles_drank": 1,
-            "month_id": 1,
-            "message": "num of bottles updated"
+            "status": "success",
+            "message": "num of bottles updated",
+            "data": {
+                "month": 12,
+                "day": 1,
+                "bottles_drank": 1,
+                "month_id": 1,
+                "id": 1,
+                "year": 2022,
+                "user": 1
+            }
         }
-
         {
             "status_code": 400,
             "message": "Invalid month value",
         }
-
     """
     if relapse_in.day > 31 or relapse_in.month > 12 or len(str(relapse_in.year)) > 4:
         raise HTTPException(status_code=status.HTTP_424_FAILED_DEPENDENCY,
@@ -90,16 +94,22 @@ async def mark_a_day(
         db.commit()
         db.refresh(relapse_in_db)
         data = jsonable_encoder(relapse_in_db)
-        data["message"] = "num of bottles updated"
-        return data
+        # data["message"] = "num of bottles updated"
+        return JSONResponse(
+            content=ResponseModel.success(data=data, message="num of bottles updated"),
+            status_code=status.HTTP_200_OK
+        )
     # Create Month History, if it doesn't exist
     try:
         month_title = f'{months[str(relapse_in.month)]} {relapse_in.year}'
     except:
-        return {
-            "status_code": 400,
-            "message": "Invalid month value",
-        }
+        return JSONResponse(
+            content=ResponseModel.error(message="Invalid month value")
+        )
+        # return {
+        #     "status_code": 400,
+        #     "message": "Invalid month value",
+        # }
     month_history = db.query(Month).filter(
         Month.user == current_user.id,
         Month.title == month_title,
@@ -139,7 +149,8 @@ async def mark_a_day(
         )
         db.add(currentuser)
         db.commit()
-    return {"new_relapse_date": datetime.date.today()}
+    return JSONResponse(content=ResponseModel.success(data={"new_relapse_date": datetime.date.today().strftime("%Y-%m-%d")},
+            message="relapse date updated"), status_code=status.HTTP_200_OK)
 
 
 @router.get("/", name='Get Relapses in a Month')
@@ -152,24 +163,35 @@ async def read_relapses(
 ) -> Any:
     """
     Retrieve Relapse Days in a given month
-
     Returns:
-        [
-            {
+        {
+            "status": "success",
+            "message": "Relapses retrieved.",
+            "data": [
+                {
+                "day": 1,
+                "month": 12,
+                "bottles_drank": 1,
+                "month_id": 1,
                 "id": 1,
                 "year": 2022,
-                "user": 1,
+                "user": 1
+                },
+                {
+                "day": 2,
                 "month": 12,
-                "day": 1,
                 "bottles_drank": 1,
-                "month_id": 1
-            }
-        ]
-
+                "month_id": 1,
+                "id": 2,
+                "year": 2022,
+                "user": 1
+                },
+                ...
+            ]
+        }
     Raises:
         HTTPException [424]: "message": "There are no relapse dates for this month and year"
         HTTPException [401]: Unauthorised
-
     """
     # relapses = relapse.get_multi_by_user(db=db, user_id=current_user.id, skip=skip, limit=limit)
     relapses = db.query(Relapse).filter(
@@ -178,14 +200,14 @@ async def read_relapses(
         Relapse.year == year,
     ).all()
 
-    if relapses.count(relapses) == 0:
+    if len(jsonable_encoder(relapses)) < 1:
         raise HTTPException(status_code=status.HTTP_424_FAILED_DEPENDENCY,
             detail={
                 "message": "There are no relapse dates for this month and year"
                 }
             )
-
-    return relapses
+    return JSONResponse(content=ResponseModel.success(data=jsonable_encoder(relapses), message="Relapses retrieved."), 
+            status_code=status.HTTP_200_OK)
 
 
 @router.get(
@@ -208,7 +230,18 @@ async def get_milestone(
 ) -> Any:
     """
     Get a user milestone
-    Returns {clean_days: 1, milestone: 3}
+    Returns:
+
+            {
+                "status": "success",
+                "message": "milestone retrieved",
+                "data": {
+                    "clean_days": 0,
+                    "milestone": 1
+                }
+            }
+    Raises:
+            HTTPException [401]: Unauthorised
     """
 
     # Get current user streak
@@ -237,7 +270,7 @@ async def get_milestone(
             }
         break
 
-    return result
+    return JSONResponse(content=ResponseModel.success(data=result, message="milestone retrieved"), status_code=status.HTTP_200_OK)
 
 
 @router.get(
@@ -457,27 +490,17 @@ async def get_summary(
         current_user: User = Depends(deps.get_current_user), ) -> Any:
     
     """
-    Fetches the current user's progress summary.
-    
-    Args:        
-        
-        current_user (User): A user's data. Defaults to Depends(get_current_user)
-    
+    Get a user milestone
     Returns:
-        The current user's clean days and milestone.
-        The list of milestones is [1, 7, 30, 90, ...].
-        The user's milestone is updated when the user's number of clean days crosses a milestone.
-    
-        {
-            "clean_days": clean_days (int),
-            "milestone": milestone (int),
-        }
-    
-    Raises:
-    
-        HTTPException [401]: You are not authoried to view the summary.
-    
 
+            {
+                "status": "success",
+                "message": "summary retrieved",
+                "data": {
+                    "clean_days": 0,
+                    "milestone": 1
+                }
+            }
     """
 
     # Get current user streak
@@ -506,7 +529,7 @@ async def get_summary(
             }
         break
 
-    return result
+    return JSONResponse(content=ResponseModel.success(data=result, message="summary retrieved"), status_code=status.HTTP_200_OK)
 
 
     
@@ -532,9 +555,17 @@ async def history_list(
 ):
     """
     The fetch history endpoint.
-
     Returns:
-        GetAllHistoryResult: return a list of montths 
+        {
+            "status": "success",
+            "message": "history list retrieved",
+            "data": [
+                {
+                "title": "December 2022",
+                "bottle_count": 4
+                }
+            ]
+        } 
     """
 
     # Get all Months
@@ -553,4 +584,4 @@ async def history_list(
                 bottle_count=bottle_count,
             ))
 
-    return {"status_code": 200, "result": result}
+    return JSONResponse(content=ResponseModel.success(data=result, message="history list retrieved"), status_code=status.HTTP_200_OK)

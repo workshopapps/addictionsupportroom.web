@@ -9,6 +9,9 @@ from . import quotes
 from api import deps
 from starlette.responses import JSONResponse
 from fastapi.encoders import jsonable_encoder
+from typing import List
+from . import models
+from db.schemas import ResponseModel
 from .schemas import Emotion, ResponseModel, Emergency
 from fastapi.requests import Request
 from fastapi.responses import JSONResponse
@@ -222,15 +225,14 @@ def get_all_notes(db: Session = Depends(get_db),
             HTTPException [401]: Unauthorised
     """
     notes = crud.get_all_notes(db=db)
-    return notes
+    return JSONResponse(content=ResponseModel.success(data=jsonable_encoder(notes), message="notes retrieved"), status_code=status.HTTP_200_OK)
 
 
-@router.post("/notes/create",
-             response_model=schemas.Note,
-             status_code=status.HTTP_201_CREATED,
-             responses={404: {
-                 "description": "not authenticated"
-             }})
+@router.post("/notes/create", response_model=schemas.Note, 
+    status_code=status.HTTP_201_CREATED, 
+    responses={
+        404: {"description": "not authenticated"}
+    })
 def create_note(note: schemas.NoteCreate,
                 db: Session = Depends(get_db),
                 current_user: User = Depends(deps.get_current_user)):
@@ -239,36 +241,75 @@ def create_note(note: schemas.NoteCreate,
     
     Args: 
         note: Pydantic schema to define note parameters.
-
     Returns:
         {
-            "created_at": "2022-12-07T08:06:17.262372",
-            "id": 5,
-            "updated_at": "2022-12-07T08:06:17.262372",
-            "title": "Sample title.",
-            "description": "This is an example."
+            "status": "success",
+            "message": "note created",
+            "data": {
+                "id": 4,
+                "title": "Sample",
+                "created_at": "2022-12-08T03:25:33.591066",
+                "user": 1,
+                "description": "this is an example.",
+                "updated_at": "2022-12-08T03:25:33.591066"
+            }
         }
     Raises:
         HTTPException [401]: Unauthorised
         HTTPException [424]: message
     """
 
-    db_note = crud.create_note(db=db, note=note)
+    db_note = crud.create_note(db=db, note=note, user_id=current_user.id)
     if not db_note:
         raise HTTPException(status_code=status.HTTP_424_FAILED_DEPENDENCY,
-                            detail={"message": "Note not created"})
+            detail={"message": "Note not created"})
 
-    response = JSONResponse(content=jsonable_encoder(db_note),
-                            status_code=status.HTTP_201_CREATED)
-    return response
+    # response = JSONResponse(content=jsonable_encoder(db_note), status_code=status.HTTP_201_CREATED)
+    return JSONResponse(content=ResponseModel.success(data=jsonable_encoder(db_note), message="note created"), status_code=status.HTTP_200_OK)
 
 
 @router.get("/notes/today")  #  response_model=list[schemas.ShowNote]
 def get_all_notes_created_today(db: Session = Depends(get_db),
                                 current_user: User = Depends(
                                     deps.get_current_user)):
-    notes = crud.get_all_notes_created_today(db=db)
-    return notes
+    """
+    Gets all notes by a user
+    Returns:
+        {
+            "status": "success",
+            "message": "notes retrieved",
+            "data": [
+                {
+                "id": 1,
+                "title": "Sample Title",
+                "created_at": "2022-12-08T01:23:35.531037",
+                "user": 1,
+                "description": "this is a sample..",
+                "updated_at": "2022-12-08T01:23:35.531037"
+                },
+                {
+                "id": 2,
+                "title": "another Sample Title",
+                "created_at": "2022-12-08T01:24:05.581884",
+                "user": 1,
+                "description": "this is another sample..",
+                "updated_at": "2022-12-08T01:24:05.581884"
+                },
+                {
+                "id": 3,
+                "title": "Sample",
+                "created_at": "2022-12-08T01:53:33.387006",
+                "user": 1,
+                "description": "this is an example.",
+                "updated_at": "2022-12-08T01:53:33.387006"
+                }
+            ]
+        }
+    Raises:
+        HTTPException [401]: Unauthorised
+    """
+    notes = crud.get_all_notes_created_today(db=db, user_id=current_user.id)
+    return JSONResponse(content=ResponseModel.success(data=jsonable_encoder(notes), message="notes retrieved"), status_code=status.HTTP_200_OK)
 
 
 @router.get("/notes/{note_id}",

@@ -742,7 +742,7 @@ const TermsServices = () => {
         To remove all of your data from our systems: Disable anonymous usage
         data and disable personalized ads. You can delete your personalized
         account by deleting all your posts and then deleting your account. Send
-        us an email via soberpal001@gmail.comif you need any assistance.
+        us an email via soberpal001@gmail.com. if you need any assistance.
       </p>
     </div>
   );
