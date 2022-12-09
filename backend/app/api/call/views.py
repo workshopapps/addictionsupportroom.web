@@ -126,5 +126,4 @@ async def call_socket_endpoint(websocket: WebSocket):
     """
     await notify.connect(websocket)
     while True:        
-        data = await websocket.receive_json()
-        await notify.broadcast(data)
+        await notify.broadcast(await websocket.receive_json())
