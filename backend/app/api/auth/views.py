@@ -1,6 +1,6 @@
 from api.auth import schemas
 from api.auth.schemas import UserLogin, AccessToken
-from api.common.schemas import ResponseSchema
+from api.common.schemas import ResponseSchema, ResponseModel
 from api.communication.schemas import RoomCreate
 from db import models
 import logging
@@ -11,6 +11,7 @@ from api import deps
 from api.communication import crud
 
 from fastapi.security import OAuth2PasswordBearer, OAuth2PasswordRequestForm
+# from deps import get_current_user
 
 router = APIRouter()
 
@@ -88,19 +89,23 @@ async def create_assign_new_room_member(
     "/login",
     description=
     'Login with only a unique username, no password is needed for now',
+    response_model=ResponseModel,
     responses={
-        400: {
-            "model": ResponseSchema,
-            "description": "Invalid Username.",
-        },
+        400:
+        ResponseModel.sample(
+            'Invalid Username.',
+            ResponseModel.error('Invalid Username.'),
+        ),
     },
-    response_model=AccessToken,
 )
 async def login(request: UserLogin, db: Session = Depends(deps.get_db)):
 
     print(request)
-    db_user = await deps.authenticate_user(request.username,
-                                           'general-password', db)
+    db_user = await deps.authenticate_user(
+        request.username,
+        'general-password',
+        db,
+    )
     if not db_user:
         raise HTTPException(
             status_code=status.HTTP_401_UNAUTHORIZED,
@@ -110,8 +115,9 @@ async def login(request: UserLogin, db: Session = Depends(deps.get_db)):
 
     # Create token to authorize user to make further API
     access_token = deps.create_access_token(data={"sub": str(db_user.id)})
+
     user_out = schemas.UserOut(**db_user.__dict__, access_token=access_token)
-    return access_token
+    return ResponseModel.success(user_out, message='Successfully logged in')
 
 
 # @router.post("/login")

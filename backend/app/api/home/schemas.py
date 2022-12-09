@@ -5,9 +5,10 @@ from typing import Any
 class NoteCreate(BaseModel):
     title: str
     description: str
-    
+
 class Note(BaseModel):
     title: str
+    user: int
     description: str
     created_at: datetime.datetime
     updated_at: datetime.datetime
@@ -22,6 +23,10 @@ class ShowNote(Note):
     created_at: datetime.datetime
     updated_at: datetime.datetime
 
+class NoteRetrieve(NoteCreate):
+    created_at: datetime.datetime
+    updated_at: datetime.datetime
+    
 class Emotion(BaseModel):
     emotion: str
 

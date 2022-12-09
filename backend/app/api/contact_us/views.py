@@ -2,7 +2,10 @@ from fastapi import APIRouter, Body, Depends, HTTPException, status
 from pydantic import BaseModel, Field
 from sqlalchemy.orm import Session
 from api import deps
+from api.contact_us.schemas import NewsLetterEmail
+from api.common.schemas import ResponseModel
 from db.models import ContactusMessages
+from db import models
 
 from email.message import EmailMessage
 import ssl
@@ -51,8 +54,8 @@ examples = {
 
 
 @router.post("/", status_code=200, description='Send a message to the admin.')
-def contact(
-        data: Contact = Body(examples=examples),
+def contact_us(
+        data: Contact = Body(default=None, examples=examples),
         db: Session = Depends(deps.get_db),
 ):
     if not data.user_id:
@@ -94,3 +97,21 @@ def contact(
         smtp.sendmail(TEAM_EMAIL, TEAM_EMAIL, em.as_string())
 
     return {"msg": "Message received"}
+
+
+@router.post("/newsletter",
+             status_code=200,
+             description='Join the news letter')
+def newsletter(
+        data: NewsLetterEmail,
+        db: Session = Depends(deps.get_db),
+):
+
+    email = models.NewsLetterEmail(email=data.email)
+    db.add(email)
+    db.commit()
+
+    return ResponseModel.success(
+        email,
+        message='Successfully joined the newsletter',
+    )

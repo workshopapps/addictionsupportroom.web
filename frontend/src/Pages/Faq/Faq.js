@@ -1,10 +1,11 @@
 import React from "react";
 import "./Faq.css";
 import FaqData from "../../Data/FaqData";
-import helpcenter from "../../assets/helpcenter.png";
+import faqImage from '../../assets/faqimage.png'
 import Button from "../../UI/Button";
 import { motion } from "framer-motion";
 import Faq from "../../Components/faq/Faq";
+import Download from "../../Components/Download/Download";
 
 const Faqs = () => {
   return (
@@ -23,19 +24,12 @@ const Faqs = () => {
             Support that is always online.Get all the help you need about the
             product here.
           </p>
-        </div>
-        <div className="faq__help-center__img">
-          <img src={helpcenter} alt="" />
-        </div>
-      </motion.div>
-
-      {/* the form in the faq page containing the input and button */}
+          {/* the form in the faq page containing the input and button */}
       <motion.div
         whileInView={{ x: [100, 0], opacity: [0, 0, 1] }}
         transition={{ duration: 1, delay: 0.5 }}
         className="faq__form-question first__form"
       >
-        <h4 className="faq__form__title">Have a question?</h4>
 
         {/* the form */}
         <form action="">
@@ -49,8 +43,15 @@ const Faqs = () => {
           <Button text={FaqData.send} />
         </form>
       </motion.div>
+        </div>
+        <div className="faq__help-center__img">
+          <img src={faqImage} alt="" />
+        </div>
+      </motion.div>
 
-      <hr className="faq__hr" />
+      
+
+ 
 
       {/* the faq section */}
       <div className="faq__section2">
@@ -120,23 +121,9 @@ const Faqs = () => {
         </form>
       </motion.div>
 
-      {/* download soberpal app */}
-      <motion.div
-        whileInView={{ y: [100, 0], opacity: [0, 0, 1] }}
-        transition={{ duration: 1 }}
-        className="faq__download-app"
-      >
-        <div className="faq__download-app-text">
-          <h3>Download the Soberpal app</h3>
-          <p className="faq__p download__p">
-            Join over 200+ people already growing with Soberpal.
-          </p>
-        </div>
-        <div className="faq__download-app-btn">
-          {/* download button */}
-          <Button text={FaqData.download} id="btn" />
-        </div>
-      </motion.div>
+     <div className="download" >
+      <Download/>
+     </div>
     </div>
   );
 };
