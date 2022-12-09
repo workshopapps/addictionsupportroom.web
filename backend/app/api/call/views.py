@@ -1,5 +1,5 @@
 #imports
-from fastapi import APIRouter, Depends, WebSocket
+from fastapi import APIRouter, Depends, WebSocket, HTTPException, status
 from pydantic import BaseModel
 from sqlalchemy.orm import Session
 from api import deps
@@ -70,12 +70,52 @@ def receiveCall(data: ReceiveCall):
 
 #web sockets
 
-@router.websocket("/callNotification")
+@router.websocket("/callNotification",
+    status_code=status.WS_1015_TLS_HANDSHAKE,
+    responses=
+    {
+        1013:{
+            "description": "Unable to connect to web socket"
+            },
+        1006:{
+            "description": "Crosscheck to make sure you are sending the right data format: JSON object."
+            }
+    }
+)
 async def call_socket_endpoint(websocket: WebSocket):
-    #websocket for waiting for incoming call notifications
-    await notify.connect(websocket)
+    """ Websocket for awaiting incoming call notifications
+				
+		Sends and Receives:
+				A JSON response containing JSON object
+                {
+                    "caller_username": caller_username,
+                    "callee_username": callee_username,
+                    "channelName": channelName
+                } 
+
+	    Raises:
+                HTTPException [405]: Method not allowed
+                HTTPException [424]: Something went wrong. Try again later.
+    """
+    try:
+        await notify.connect(websocket)
+    
+    except:
+        return HTTPException(
+            status_code=status.WS_1013_TRY_AGAIN_LATER,
+            detail="Unable to connect to web socket"
+        )
+    
     while True:
-        await notify.broadcast(await websocket.receive_json())
+        try:
+            await notify.broadcast(await websocket.receive_json())
+        
+        except:
+            websocket.close()
+            return HTTPException(
+                status_code=status.WS_1006_ABNORMAL_CLOSURE,
+                detail="Crosscheck to make sure you are sending the right data format: JSON object."
+            )
 
 
 @router.websocket("/callStatus")
