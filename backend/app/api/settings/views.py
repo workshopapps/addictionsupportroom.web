@@ -28,14 +28,16 @@ def edit_user_profile(request: Request, username : str, db: Session = Depends(de
             "avatar": user.avatar
         }
 
+
         if user_name:
             username_exists = db.query(User).filter(User.username==user_name).first()
 
             if username_exists:
-
+                # to check if the USER selects their current username
                 if username_exists.username == user.username:
                     pass
                 
+                # what to do if USER selects a new username that is already existing on the database
                 else:
                     return HTTPException(
                         status_code=status.HTTP_409_CONFLICT,
@@ -45,25 +47,35 @@ def edit_user_profile(request: Request, username : str, db: Session = Depends(de
 
             user.username = user_name
             db.commit()
-        
+
+
         if avatar:
             user.avatar = avatar
             db.commit()
-            
+
+
         db.refresh(user)
+
 
         new_user_profile = {
             "username": user.username,
             "avatar": user.avatar
         }
 
-        return {
+        user_profile = {
             "old_user_profile": old_user_profile,
             "new_user_profile": new_user_profile
         }
+
+
+        return {
+            "status_code": status.HTTP_201_CREATED,
+            "detail": "Changes made",
+            "user_profile": user_profile
+        }
     
     else:
-        raise HTTPException(
+        return HTTPException(
             status_code=status.HTTP_405_METHOD_NOT_ALLOWED,
             detail="Method not allowed"
         )
