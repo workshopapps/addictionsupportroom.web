@@ -34,9 +34,43 @@ class ReceiveCall(BaseModel):
 
 #endpoints
 
-@router.post("/makeCall")
+@router.post("/makeCall",
+    status_code=status.HTTP_201_CREATED,
+    responses=
+    {
+        424:{
+            "description": "Something went wrong. Try again later."
+            },
+        405:{
+            "description": "Method not allowed"
+            }
+    }
+    )
 def joinCall(request: Request, data: MakeCall, db: Session = Depends(deps.get_db)):
-    #returns an agora token, channel name, caller username, and callee username for joining a call room
+    """ Returns an agora token, channel name, caller username, and callee username for joining a call room
+        
+        Args:
+				caller_username: Username of caller
+                callee_username: Username of person to be called
+				
+		Returns:
+				A JSON response containing the status code and message
+                {
+                    "status_code": 201,
+                    "detail": "Agora token created",
+                    "data": data = {
+                        "token": agoraToken
+                        "caller_username": caller_username,
+                        "callee_username": callee_username,
+                        "channelName": channelName
+                        }
+                    } 
+
+	    Raises:
+                HTTPException [405]: Method not allowed
+                HTTPException [424]: Something went wrong. Try again later.
+
+    """
     if request.method == "POST":
         try:
             agora = Agora()
