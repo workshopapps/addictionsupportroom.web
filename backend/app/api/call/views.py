@@ -51,9 +51,38 @@ def joinCall(data: MakeCall, db: Session = Depends(deps.get_db)):
 
 
 
-@router.post("/receiveCall")
+@router.post("/receiveCall",
+    status_code=status.HTTP_201_CREATED,
+    responses=
+    {
+        424:{
+            "description": "Something went wrong. Try again later."
+            },
+        405:{
+            "description": "Method not allowed"
+            }
+    }
+    )
 def receiveCall(request: Request, data: ReceiveCall):
-    #returns an agora token and the channel name for the receiver to join a particular call room
+    """ Returns an agora token and the channel name for the receiver to join a particular call room
+        
+        Args:
+				channelName: channel name to join
+				
+		Returns:
+				A JSON response containing the status code and message
+                {
+                    "status_code": 201,
+                    "detail": "Agora token created",
+                    "data": data = {
+                        "token": token,
+                        "channelName": channelName
+                        }
+                    } 
+	    Raises:
+                HTTPException [405]: Method not allowed
+                HTTPException [424]: Something went wrong. Try again later.
+    """
 
     if request.method == "POST":
 
