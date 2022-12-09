@@ -1,17 +1,12 @@
 import datetime
 import random
-from fastapi import APIRouter, Depends, status, HTTPException
+from fastapi import APIRouter, Depends
 from sqlalchemy.orm import Session
 from api.home import schemas, crud
 from db.models import Emergency, User
 from db.db import get_db
 from . import quotes
 from api import deps
-from starlette.responses import JSONResponse
-from fastapi.encoders import jsonable_encoder
-from typing import List
-from . import models
-from db.schemas import ResponseModel
 
 router = APIRouter()
 
@@ -58,138 +53,24 @@ def about_to_relapse(currentUser: User = Depends(deps.get_current_user),
 @router.get("/notes/")
 def get_all_notes(db: Session = Depends(get_db),
                   current_user: User = Depends(deps.get_current_user)):
-    """
-    Gets all notes
-    Returns:
-        [
-            {
-                "created_at": "2022-12-07T07:57:30.651773",
-                "id": 1,
-                "updated_at": "2022-12-07T07:57:30.651773",
-                "title": "Sample title.",
-                "description": "This is an example."
-            },
-            {
-                "created_at": "2022-12-07T07:59:32.271965",
-                "id": 2,
-                "updated_at": "2022-12-07T07:59:32.271965",
-                "title": "Sample title.",
-                "description": "This is an example."
-            },
-            {
-                "created_at": "2022-12-07T08:01:40.388906",
-                "id": 3,
-                "updated_at": "2022-12-07T08:01:40.388906",
-                "title": "Sample title.",
-                "description": "This is an example."
-            },
-            {
-                "created_at": "2022-12-07T08:05:20.022338",
-                "id": 4,
-                "updated_at": "2022-12-07T08:05:20.022338",
-                "title": "Sample title.",
-                "description": "This is an example."
-            },
-            {
-                "created_at": "2022-12-07T08:06:17.262372",
-                "id": 5,
-                "updated_at": "2022-12-07T08:06:17.262372",
-                "title": "Sample title.",
-                "description": "This is an example."
-            }
-        ]
-    Raises:
-            HTTPException [401]: Unauthorised
-    """
     notes = crud.get_all_notes(db=db)
-    return JSONResponse(content=ResponseModel.success(data=jsonable_encoder(notes), message="notes retrieved"), status_code=status.HTTP_200_OK)
+    return notes
 
 
-@router.post("/notes/create", response_model=schemas.Note, 
-    status_code=status.HTTP_201_CREATED, 
-    responses={
-        404: {"description": "not authenticated"}
-    })
-def create_note(note: schemas.NoteCreate,
+@router.post("/notes/create")
+def create_note(note: schemas.Note,
                 db: Session = Depends(get_db),
                 current_user: User = Depends(deps.get_current_user)):
-    """
-    Creates a Note by a user.
-    
-    Args: 
-        note: Pydantic schema to define note parameters.
-
-    Returns:
-        {
-            "status": "success",
-            "message": "note created",
-            "data": {
-                "id": 4,
-                "title": "Sample",
-                "created_at": "2022-12-08T03:25:33.591066",
-                "user": 1,
-                "description": "this is an example.",
-                "updated_at": "2022-12-08T03:25:33.591066"
-            }
-        }
-
-    Raises:
-        HTTPException [401]: Unauthorised
-        HTTPException [424]: message
-    """
-
-    db_note = crud.create_note(db=db, note=note, user_id=current_user.id)
-    if not db_note:
-        raise HTTPException(status_code=status.HTTP_424_FAILED_DEPENDENCY,
-            detail={"message": "Note not created"})
-
-    # response = JSONResponse(content=jsonable_encoder(db_note), status_code=status.HTTP_201_CREATED)
-    return JSONResponse(content=ResponseModel.success(data=jsonable_encoder(db_note), message="note created"), status_code=status.HTTP_200_OK)
+    db_note = crud.create_note(db=db, note=note)
+    return db_note
 
 
 @router.get("/notes/today")  #  response_model=list[schemas.ShowNote]
 def get_all_notes_created_today(db: Session = Depends(get_db),
                                 current_user: User = Depends(
                                     deps.get_current_user)):
-    """
-    Gets all notes by a user
-    Returns:
-        {
-            "status": "success",
-            "message": "notes retrieved",
-            "data": [
-                {
-                "id": 1,
-                "title": "Sample Title",
-                "created_at": "2022-12-08T01:23:35.531037",
-                "user": 1,
-                "description": "this is a sample..",
-                "updated_at": "2022-12-08T01:23:35.531037"
-                },
-                {
-                "id": 2,
-                "title": "another Sample Title",
-                "created_at": "2022-12-08T01:24:05.581884",
-                "user": 1,
-                "description": "this is another sample..",
-                "updated_at": "2022-12-08T01:24:05.581884"
-                },
-                {
-                "id": 3,
-                "title": "Sample",
-                "created_at": "2022-12-08T01:53:33.387006",
-                "user": 1,
-                "description": "this is an example.",
-                "updated_at": "2022-12-08T01:53:33.387006"
-                }
-            ]
-        }
-
-    Raises:
-        HTTPException [401]: Unauthorised
-    """
-    notes = crud.get_all_notes_created_today(db=db, user_id=current_user.id)
-    return JSONResponse(content=ResponseModel.success(data=jsonable_encoder(notes), message="notes retrieved"), status_code=status.HTTP_200_OK)
+    notes = crud.get_all_notes_created_today(db=db)
+    return notes
 
 
 @router.get(
@@ -198,10 +79,7 @@ def get_specific_note(note_id: int,
                       db: Session = Depends(get_db),
                       current_user: User = Depends(deps.get_current_user)):
     note = crud.get_specific_note(db=db, note_id=note_id)
-    if note.user != current_user.id:
-        raise HTTPException(status_code=403,
-        detail="note belongs to another user")
-    return JSONResponse(content=ResponseModel.success(data=jsonable_encoder(note), message="note retrieved"), status_code=status.HTTP_200_OK)
+    return note
 
 
 @router.delete("/notes/delete/{note_id}")
