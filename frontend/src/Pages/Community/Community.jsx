@@ -33,7 +33,6 @@ const Community = () => {
       navigate("/community/login")
     } else {
     // window.location.reload(false)
-    // window.location.reload(false)
 
     }
 
@@ -50,8 +49,6 @@ const Community = () => {
   return (
     <div className=''>
         <ToastContainer />
-      <br />
-      <br />
       <button
         onClick={() => handleLogout()}
       >

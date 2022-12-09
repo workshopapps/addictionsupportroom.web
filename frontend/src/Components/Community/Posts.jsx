@@ -13,7 +13,7 @@ const ComPosts = ({ posts }) => {
           <div  className="bg-white w-full my-5 p-5 rounded-lg">
             <div className="flex gap-3">
               <img
-                className="w-[50px] h-[50px]"
+                className="w-[50px] h-[50px] border-2 border-[black] rounded-full"
                 src={post.user.avatar}
                 alt="avatar"
               />

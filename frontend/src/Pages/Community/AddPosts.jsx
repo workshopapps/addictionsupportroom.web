@@ -61,9 +61,9 @@ const AddPosts = ({ setShowModal }) => {
     <div>
       <div className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none">
         <div className="relative w-[92%] tablet:w-[90%] laptop:w-[600px] mx-auto max-w-3xl">
-          <div className="rounded-lg pt-8 px-6 pb-16 shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none">
+          <div className="rounded-lg pt-8 px-10 pb-16 shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none">
             <button
-              className="text-[20px] "
+              className="absolute right-[40px] text-[20px] "
               onClick={() => setShowModal(false)}
             >
               <GrClose />
@@ -86,20 +86,19 @@ const AddPosts = ({ setShowModal }) => {
                   onChange={(e) => setAvatar(e.target.value)}
                 />
               </div>
-                <p className="mt-4 font-[600] text-[20px]">Make a post</p>
+                <p className="mt-8 font-[600] text-[20px]">Make a post</p>
               <div className=" gap-3 mt-6 ">
-              <img className='w-[50px] h-[50px] rounded-full' src={avatar} alt="" />
+                <img className='w-[50px] h-[50px] border-2 border-[black] rounded-full mb-4' src={avatar} alt="" />
                 <textarea
                   className="border-[1px] p-2 w-full h-[200px] rounded-lg border-[black] outline-2 outline-blue"
                   required
                   value={message}
                   onChange={(e) => setMessage(e.target.value)}
-                ></textarea>
-                {/* <p>{body}</p> */}
+                />
               </div>
               {!isPending && 
                 <button 
-                    className="bg-blue p-4 text-white mt-4 rounded-lg"
+                    className="bg-blue py-2 px-3 text-white mt-4 rounded-lg"
                 >
                     Share
                 </button>
