@@ -11,6 +11,14 @@ const NavBar = () => {
   const [username, setUserName] = useState("");
   const [avatar, setAvatar] = useState("");
 
+  const handleLogout = () => {
+    localStorage.removeItem("token");
+    localStorage.removeItem("user");
+    localStorage.removeItem("avatar");
+    window.location.href = "/#/community/login";
+    window.location.reload(false);
+  };
+
   useEffect(() => {
     const token = localStorage.getItem("token")
     const user = localStorage.getItem("username")
@@ -47,9 +55,12 @@ const NavBar = () => {
           </ul>
         </div>
         {changeState ? (
+          <div>
           <div className="bg-white hidden laptop:flex items-center px-3 ">
             <img className=" w-[45px] h-[45px] border-2 border-[#BBBBBB] rounded-full " src={avatar} alt="fe" />
             <p className="ml-3 font-[500]">{username}</p>
+          </div>
+          <button className="font-[500] ml-8 mt-2 text-[18px] " onClick={() => handleLogout()}>Logout</button>
           </div>
         ) : (
           <a

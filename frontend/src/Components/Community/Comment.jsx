@@ -48,11 +48,9 @@ console.log(post)
       },
       comment,
     };
-    //   setShowModal(false)
 
     console.log(comments);
     setIsPending(true);
-    // fetch(`https://soberpal.hng.tech/api/forum/comment/${post.id}`, {
     fetch("https://soberpal.hng.tech/api/forum/comment/", {
       method: "POST",
       headers: {

@@ -17,7 +17,6 @@ const AddPosts = ({ setShowModal }) => {
 
 
   const token = localStorage.getItem("token");
-  // console.log(token)
   useEffect(() => {
       const user = localStorage.getItem("username");
       const avatar = localStorage.getItem("avatar");

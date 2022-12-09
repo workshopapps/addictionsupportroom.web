@@ -15,8 +15,7 @@ const PostDetails = () => {
     isPending,
     error,
   } = useFetch("https://soberpal.hng.tech/api/forum/" + postId);
-  // const { data: comment, isPending, error } = useFetch("https://soberpal.hng.tech/api/forum/comment/")
-  // const postId
+ 
 
   const getIdFomNewFile = (id) => {
     console.log(id + " num");
@@ -38,7 +37,6 @@ const PostDetails = () => {
     if (avatar) {
       setAvatar(JSON.parse(avatar));
     }
-    // window.location.reload(false)
   }, []);
 
   return (
@@ -55,7 +53,6 @@ const PostDetails = () => {
       )}
       {post && (
         <section className="w-[90%] mx-auto mb-16">
-          {/* <p>Post</p> */}
           <div className=" mx-auto">
             <div className="bg-white w-full my-5 p-5 rounded-lg">
               <div className="flex gap-3">
