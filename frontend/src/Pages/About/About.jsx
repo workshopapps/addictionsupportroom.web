@@ -1,11 +1,7 @@
 import "./about.scss";
 import TeamData from "../../Data/TeamData";
 import OurValues from "../../Components/ourvalues/OurValues";
-import interview from "../../assets/interview.png";
-import Job from "../../Components/jobcontainer/Job";
-import Button from "../../UI/Button";
 import Download from "../../Components/Download/Download";
-
 import ValueData from "../../Data/ValueData";
 import AppStats from "../../Components/AppStats/Appstats";
 import { motion } from "framer-motion";
@@ -73,27 +69,6 @@ const About = () => {
         />
       </motion.section>
 
-      {/* open postions section */}
-      <motion.section
-        whileInView={{ y: [100, 20], opacity: [0, 0, 1] }}
-        transition={{ duration: 0.7 }}
-        className="position"
-      >
-        <motion.p    whileInView={{ y: [100, 50], opacity: [0, 0, 1] }}
-        transition={{ duration: 0.7 }}>Open positions</motion.p>
-        <motion.h4   whileInView={{ y: [100, 50], opacity: [0, 0, 1] }}
-        transition={{ duration: 0.7 }}>We’re looking for talented people</motion.h4>
-        <motion.p   whileInView={{ y: [100, 50], opacity: [0, 0, 1] }}
-        transition={{ duration: 0.7 }} className="position__text">
-          We’re a 100% remote team spread all across the world. Join us!
-        </motion.p>
-        <motion.div   whileInView={{ y: [100, 40], opacity: [0, 0, 1] }}
-        transition={{ duration: 0.7 }} className="interview">
-          <img src={interview} alt="Interview" className="interview__img" />
-        </motion.div>
-        {/* job container section */}
-        <Job />
-      </motion.section>
 
       <div className="w-full mb-[50px] mt-[120px] tablet:w-[90%] max-w-[1000px] mx-auto">
         <Download />

@@ -9,55 +9,70 @@ import Amos from '../assets/Amos.png'
 
 
 const TeamData = [
-    {
-        id: 1,
-        name: 'Mark Essien',
-        designation: 'Founder & CEO',
-        avatar: Mark,
-    },
-    {
-        id: 2,
-        name: 'Tomiwa',
-        designation: 'Team Lead',
-        avatar: Tomiwa,
-    },
-    {
-        id: 3,
-        name: 'Doris',
-        designation: 'Product Manager',
-        avatar: Doris,
-    },
-    {
-        id: 4,
-        name: 'David Adebola',
-        designation: 'Product Design Lead',
-        avatar: David,
-    },
-    {
-        id: 5,
-        name: 'Joy',
-        designation: 'Frontend Developer',
-        avatar: Joy,
-    },
-    {
-        id: 6,
-        name: 'Joe',
-        designation: 'Backend Developer',
-        avatar: Joe,
-    },
-    {
-        id: 7,
-        name: 'Taiwo',
-        designation: 'UX Researcher',
-        avatar: Taiwo,
-    },
-    {
-        id: 8,
-        name: 'Amos',
-        designation: 'Customer Success',
-        avatar: Amos,
-    },
-    
-]
+  {
+    id: 1,
+    name: "Mark Essien",
+    designation: "Founder & CEO",
+    avatar: Mark,
+    linkedIn: "https://www.linkedin.com/in/markessien/",
+    twitter: "https://twitter.com/markessien",
+  },
+  {
+    id: 2,
+    name: "Michael",
+    designation: "Team Lead",
+    avatar: Tomiwa,
+    linkedIn: "https://www.linkedin.com/in/akinnike-michael-oluwatobiloba/",
+    twitter: "https://twitter.com/michaelakinnike",
+  },
+  {
+    id: 3,
+    name: "Doris",
+    designation: "Product Manager",
+    avatar: Doris,
+    linkedIn: "https://www.linkedin.com/in/onyinyechukwu-doris-anyaegbu/",
+    twitter: "https://twitter.com/mzz_doris",
+  },
+  {
+    id: 4,
+    name: "Egbeyale",
+    designation: "Product Manager",
+    avatar: David,
+    linkedIn: "https://www.linkedin.com/in/oluwafunmilayo-egbeyale",
+    twitter: "https://twitter.com/funmee001?t=i6E5X2F1MXX4J8UOf6QVqA&s=09",
+  },
+  {
+    id: 5,
+    name: "Muhammed",
+    designation: "Frontend Developer",
+    avatar: Tomiwa,
+    linkedIn: "https://www.linkedin.com/in/ajibade-olawale-6111911b5",
+    twitter: "https://twitter.com/muhaj_dev?t=gVq4i7U3D2nHdY9o1nMf9w&s=09",
+  },
+  {
+    id: 6,
+    name: "Uchechukwu",
+    designation: "Backend Developer",
+    avatar: Joe,
+    linkedIn: "https://www.linkedin.com/in/uchechukwu-anachuna/",
+    twitter: "https://twitter.com/henry96900698",
+  },
+  {
+    id: 7,
+    name: "Abdullah",
+    designation: "Frontend Developer",
+    avatar: David,
+    linkedIn: "https://www.linkedin.com/in/abdullah-oyewale-8a1041189/",
+    twitter: "https://twitter.com/4biol4",
+  },
+  {
+    id: 8,
+    name: "Amos",
+    designation: "Product Manager",
+    avatar: Joe,
+    linkedIn: "https://www.linkedin.com/in/amosadereti",
+    twitter: "http://https//twitter.com/aderetiamos",
+  },
+];
 
 export default TeamData;

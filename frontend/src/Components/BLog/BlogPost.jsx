@@ -22,7 +22,7 @@ const BlogPost = ({blogs, loading}) => {
               {title}
             </p>
             <p className="hidden tablet:block text-[16px] tablet:text-[16px] "> {body.slice(0, 80)}...</p>
-            <p className="tablet:hidden text-[14px] tablet:text-[16px] "> {body.slice(0, 50)}...</p>
+            <p className="tablet:hidden text-[14px] tablet:text-[16px] "> {body.slice(0, 80)}...</p>
             <a href={origin_blog}  rel="noreferrer" target="_blank" className="text-[16px] text-blue">Read more ...</a>
           </div>
         </div>

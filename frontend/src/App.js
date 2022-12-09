@@ -2,6 +2,7 @@ import "./App.css";
 import NavBar from "./Components/navbar/NavBar";
 import Footer from "./Components/footer/Footer";
 import CreateRoute from "./Routes/CreateRoute";
+import * as Sentry from "@sentry/react";
 
 function App() {
   return (
@@ -13,4 +14,5 @@ function App() {
   );
 }
 
-export default App;
+// export default App;
+export default Sentry.withProfiler(App);

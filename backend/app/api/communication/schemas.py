@@ -31,16 +31,13 @@ class MessageCreate(BaseModel):
         >>> media = ""
     """
 
-    receiver: str = Field(..., example="The recipient user_id for this message.")
+    receiver: str = Field(...,
+                          example="The recipient user_id for this message.")
     content: str = Field(
-        ..., example="The message text content or URL to the media file."
-    )
+        ..., example="The message text content or URL to the media file.")
     message_type: str = Field(
-        ..., example="Message type(e.g. 'text' or 'audio' or 'image')."
-    )
-    preview: str | None = Field(
-        example="A relative URL to the Deta drive.",
-    )
+        ..., example="Message type(e.g. 'text' or 'audio' or 'image').")
+    preview: str | None = Field(example="A relative URL to the Deta drive.", )
 
 
 class MessageCreateRoom(BaseModel):
@@ -60,16 +57,26 @@ class MessageCreateRoom(BaseModel):
         >>> media = ""
     """
 
-    room: str = Field(..., example="A unique room name(e.g. 'nerds'). Case Sensitive.")
+    room: str = Field(
+        ..., example="A unique room name(e.g. 'nerds'). Case Sensitive.")
     content: str = Field(
-        ..., example="The message text content or URL to the media file."
-    )
+        ..., example="The message text content or URL to the media file.")
     message_type: str = Field(
-        ..., example="Message type(e.g. 'text' or 'audio' or 'image')."
-    )
-    preview: str | None = Field(
-        example="A relative URL to the Deta drive.",
-    )
+        ..., example="Message type(e.g. 'text' or 'audio' or 'image').")
+    preview: str | None = Field(example="A relative URL to the Deta drive.", )
+
+
+class RoomMessageOut(BaseModel):
+    id: int
+    content: str
+    status: str
+    message_type: str
+    creation_date: datetime.datetime
+    user: dict = Field(example={
+        'id': '4',
+        'username': 'test1234',
+        'avatar': 'https://www.google.com'
+    })
 
 
 class GetAllMessageResults(BaseModel):
