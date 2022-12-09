@@ -48,7 +48,7 @@ const NavBar = () => {
         </div>
         {changeState ? (
           <div className="bg-white hidden laptop:flex items-center px-3 ">
-            <img className=" w-[45px] h-[45px] border-2 border-[black] rounded-full " src={avatar} alt="fe" />
+            <img className=" w-[45px] h-[45px] border-2 border-[#BBBBBB] rounded-full " src={avatar} alt="fe" />
             <p className="ml-3 font-[500]">{username}</p>
           </div>
         ) : (

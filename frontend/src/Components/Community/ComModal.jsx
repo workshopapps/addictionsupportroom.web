@@ -37,7 +37,9 @@ const ComModal = ({ setShowModal, setToken }) => {
         localStorage.setItem("username", JSON.stringify(username));
         localStorage.setItem("avatar", JSON.stringify(res.data.avatar));
         navigate("/communitypost");
+        
         window.location.reload(false);
+        console.log(res.data.access_token.token)
       })
 
       .catch((err) => {
@@ -52,6 +54,8 @@ const ComModal = ({ setShowModal, setToken }) => {
       username,
     });
     setToken(token);
+    console.log(token)
+
   };
   return (
     <>
