@@ -29,6 +29,20 @@ def edit_user_profile(request: Request, username : str, db: Session = Depends(de
         }
 
         if user_name:
+            username_exists = db.query(User).filter(User.username==user_name).first()
+
+            if username_exists:
+
+                if username_exists.username == user.username:
+                    pass
+                
+                else:
+                    return HTTPException(
+                        status_code=status.HTTP_409_CONFLICT,
+                        detail="Username already exists. Please choose another one"
+                    )
+            
+
             user.username = user_name
             db.commit()
         
