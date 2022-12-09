@@ -1,5 +1,5 @@
 #imports
-from fastapi import APIRouter, Depends, WebSocket
+from fastapi import APIRouter, Depends, WebSocket, HTTPException, status
 from pydantic import BaseModel
 from sqlalchemy.orm import Session
 from api import deps
@@ -8,7 +8,7 @@ from .agora import Agora
 from typing import List
 import json
 from .notify import NotificationManager
-
+from fastapi.requests import Request
 
 
 #router instance
@@ -52,19 +52,40 @@ def joinCall(data: MakeCall, db: Session = Depends(deps.get_db)):
 
 
 @router.post("/receiveCall")
-def receiveCall(data: ReceiveCall):
+def receiveCall(request: Request, data: ReceiveCall):
     #returns an agora token and the channel name for the receiver to join a particular call room
 
-    agora = Agora()
+    if request.method == "POST":
 
-    channelName = data.channelName
+        try:
+            agora = Agora()
 
-    token = agora.generate_token(channelName)
+            channelName = data.channelName
 
-    return {
-        "token": token,
-        "channelName": channelName
-    }
+            token = agora.generate_token(channelName)
+        
+        except:
+            return HTTPException(
+                status_code=status.HTTP_424_FAILED_DEPENDENCY,
+                detail="Something went wrong. Try again later."
+            )
+        
+        data = {
+            "token": token,
+            "channelName": channelName
+        }
+
+        return {
+            "status_code": status.HTTP_201_CREATED,
+            "detail": "Agora token created",
+            "data": data
+        }
+    
+    else:
+        return HTTPException(
+            status_code=status.HTTP_405_METHOD_NOT_ALLOWED,
+            detail="Method not allowed"
+        )
 
 
 
