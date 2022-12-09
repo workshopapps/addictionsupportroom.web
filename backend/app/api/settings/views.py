@@ -11,8 +11,43 @@ router = APIRouter()
 
 
 
-@router.put("/edit/{username}")
+@router.put(
+    "/edit/{username}",
+    status_code=status.HTTP_201_CREATED,
+    responses=
+    {
+        409:{
+            "description": "Username already exists. Please choose again."
+            },
+        405:{
+            "description": "Method not allowed"
+            },
+        204:{
+            "description": "User not found"
+            }
+    })
 def edit_user_profile(request: Request, username : str, db: Session = Depends(deps.get_db), user_name : str = None, avatar : str = None):
+    """ Changes the username and avatar of an existing user
+        
+        Args:
+				username: A user's username (Path parameter)
+                user_name: New username (Query parameter) (Optional)
+                avatar: New avatar (Query parameter) (Optional)
+				
+		Returns:
+				A JSON response containing the status code, detail, and user_profile
+                {
+                    "status_code": 201,
+                    "detail": "Changes made",
+                    "user_profile": user_profile
+                }  
+
+	    Raises:
+                HTTPException [405]: Method not allowed
+                HTTPException [204]: User not found
+                HTTPException [409]: Username already exists. Please choose again.
+                
+    """
     if request.method == "PUT":
 
         user = db.query(User).filter(User.username==username).first()
@@ -41,7 +76,7 @@ def edit_user_profile(request: Request, username : str, db: Session = Depends(de
                 else:
                     return HTTPException(
                         status_code=status.HTTP_409_CONFLICT,
-                        detail="Username already exists. Please choose another one"
+                        detail="Username already exists. Please choose again."
                     )
             
 
