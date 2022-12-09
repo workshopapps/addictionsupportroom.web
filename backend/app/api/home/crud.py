@@ -78,3 +78,11 @@ def get_all_notes(db: Session):
     """
     notes = db.query(models.Note).all()
     return notes
+
+
+def create_lead_email(db: Session, request: schemas.LeadCollectedModel):
+    email_inst = models.LeadCollected(email=request.email)
+    db.add(email_inst)
+    db.commit()
+    db.refresh(email_inst)
+    return email_inst
