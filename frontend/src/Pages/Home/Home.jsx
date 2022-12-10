@@ -34,17 +34,19 @@ const Home = () => {
     setEmail(e.target.value)
   }
 
-  useEffect(() => {
-    const fetchData = async () =>{
-      const result = await fetch("https://soberpal.hng.tech/api/home/faq");
-      const jsonResult = await result.json()
+  // Fecthing the lead list
+  // useEffect(() => {
+  //   const fetchData = async () =>{
+  //     const result = await fetch("https://soberpal.hng.tech/api/home/faq");
+  //     const jsonResult = await result.json()
 
-      console.log(jsonResult)
-    }
-    fetchData()
-  },[])
+  //     console.log(jsonResult)
+  //   }
+  //   fetchData()
+  // },[])
 
 
+  // Posting email to the db
   const handleSubmit = async (e) => {
     const myData = {
       "email" : email
