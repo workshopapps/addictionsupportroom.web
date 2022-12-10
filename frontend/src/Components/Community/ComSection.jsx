@@ -7,7 +7,7 @@ const ComSection = ({post}) => {
   return (
     <section className='w-full mx-auto mt-8 mb-8'>
 
-        { post.map((comment) => (
+        { post.post_comments.map((comment) => (
             <div key={comment.owner.id} className="bg-white w-full rounded-lg">
             <hr className="bg-[#BBBBBB] h-[2px] mt-2 mb-3" />
             <div className="flex gap-3">
@@ -18,7 +18,7 @@ const ComSection = ({post}) => {
                 />
                 <div className="flex flex-col justify-between">
                   <p className="font-[500] text-[14px]">{comment.owner.username}</p>
-                  <p className="text-[12px]">{moment(post.post_comments.date_posted).add(1, 'hours').startOf('seconds').fromNow()}</p>
+                  <p className="text-[12px]">{moment(comment.date_posted).add(1, 'hours').startOf('seconds').fromNow()}</p>
                 </div>
             </div>
             <p className="mt-3">{comment.comment}</p>
