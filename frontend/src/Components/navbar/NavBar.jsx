@@ -3,31 +3,40 @@ import { NavLink, Link } from "react-router-dom";
 import { navbarList } from "../../Data/navbar";
 import Button from "../../UI/Button";
 import MobileNav from "./MobileNav";
-import logo from '../../assets/soberpal-logo.png'
+import logo from "../../assets/soberpal-logo.png";
 
 const NavBar = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const [changeState, setChangeState] = useState(false)
+  const [changeState, setChangeState] = useState(false);
   const [username, setUserName] = useState("");
   const [avatar, setAvatar] = useState("");
 
+  const handleLogout = () => {
+    localStorage.removeItem("token");
+    localStorage.removeItem("user");
+    localStorage.removeItem("avatar");
+    window.location.href = "/#/community/login";
+    window.location.reload(false);
+  };
+
   useEffect(() => {
-    const token = localStorage.getItem("token")
-    const user = localStorage.getItem("username")
-    const avatar = localStorage.getItem("avatar")
+    const token = localStorage.getItem("token");
+    const user = localStorage.getItem("username");
+    const avatar = localStorage.getItem("avatar");
 
     if (token) {
-      setChangeState(true)
+      setChangeState(true);
       // window.location.reload(changeState);
-    } 
-    
+    }
+
     if (user) {
+      console.log("user :>> ", user);
       setUserName(JSON.parse(user));
     }
     if (avatar) {
       setAvatar(JSON.parse(avatar));
     }
-  }, [changeState])
+  }, [changeState]);
   return (
     <div>
       <div className="py-4 max-w-[1400px] w-[90%] mx-auto flex justify-between">
@@ -47,9 +56,22 @@ const NavBar = () => {
           </ul>
         </div>
         {changeState ? (
-          <div className="bg-white hidden laptop:flex items-center px-3 ">
-            <img className=" w-[45px] h-[45px] border-2 border-[black] rounded-full " src={avatar} alt="fe" />
-            <p className="ml-3 font-[500]">{username}</p>
+          <div>
+            <div className="bg-white hidden laptop:flex items-center px-3 ">
+              <img
+                className=" w-[45px] h-[45px] border-2 border-[#BBBBBB] rounded-full "
+                src={avatar}
+                alt="fe"
+              />
+              <p className="ml-3 font-[500]">{username}</p>
+            </div>
+            <button
+              className="font-[500] ml-8 mt-2 text-[18px] "
+              onClick={() => handleLogout()}
+            >
+              Logout
+            </button>
+            <p>.</p>
           </div>
         ) : (
           <a

@@ -136,3 +136,13 @@ def ask_question(request: schemas.LeadCollectedModel, db: Session = Depends(get_
         email,
         message='Successfully joined the newsletter',
     )
+
+
+@router.get('/faq', name='get all email')
+def get_all_email(db: Session = Depends(get_db)):
+    emails = crud.get_all_email(db)
+
+    return ResponseModel.success(
+        emails,
+        message='ok',
+    )
