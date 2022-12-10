@@ -19,7 +19,7 @@ const ToCommunity = () => {
         <p className=" text-[32px] md:text-[57px]">
           Join 200,000+ Anonymous Soberpals,{" "}
           <span className="md:inline-block">
-            Share Your Struggles And Accomplishmnets
+            Share Your Struggles And Accomplishments
           </span>
         </p>
       </div>

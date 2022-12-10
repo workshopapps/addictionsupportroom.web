@@ -303,7 +303,7 @@ const Home = () => {
           <p>
             Everything you need to go through the journey of reducing your
             alcohol intake. These are frequently asked questions about the
-            product. Can't find answer to your question? Send us a message.
+            product. can't find answer to your question? Send us a message.
           </p>
 
           <div className="">
@@ -363,13 +363,12 @@ const Home = () => {
                 onChange={handleChange}
                 required
                 id="email"
-                placeholder="Enter your email address..."
+                placeholder="Enter your email address"
               />
               <button>send</button>
             </form>
           </div>
           <div className="absolute left-20">
-              {/* <span className="text-center">Enter a valid email</span> */}
           </div>
         </motion.div>
         <div className="w-full mb-[50px] mt-[150px] tablet:w-[100%] max-w-[1000px] mx-auto">

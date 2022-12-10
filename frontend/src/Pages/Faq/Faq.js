@@ -18,7 +18,7 @@ const Faqs = () => {
         <h2>FAQs</h2>
         <p className="faq__p">
           Everything you need to go through the journey of reducing your alcohol
-          intake. These are frequently asked questions about the product. Dont
+          intake. These are frequently asked questions about the product. Don't
           find answer to your question? Send us a message.
         </p>
 
@@ -83,7 +83,7 @@ const Faqs = () => {
                 type="email"
                 name=""
                 id=""
-                placeholder="Enter your email adress"
+                placeholder="Enter your email address"
               />
               {/* the send button in the form */}
               <Button text={FaqData.send} />
