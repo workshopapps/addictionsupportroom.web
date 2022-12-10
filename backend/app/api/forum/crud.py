@@ -1,6 +1,7 @@
 from sqlalchemy.orm.session import Session
 from .schemas import PostBase, PostCommentBase
 from db.models import ForumPost, ForumPostComment, User
+from fastapi import HTTPException
 
 
 class PostClass():
@@ -107,6 +108,18 @@ class PostClass():
         else:
             return None
 
+    def delete_a_post(self, db: Session, id: int):
+        post_by_user = db.query(ForumPost).filter(ForumPost.id == id).first()
+        if post_by_user:
+            if post_by_user.user.username == self.current_user.username:
+                db.delete(post_by_user)
+                db.commit()
+            else:
+                raise HTTPException(status_code=401, detail=f'This user is not allowed to delete this post')
+        else:
+            raise HTTPException(status_code=404, detail=f'Post of ID {id} does not exist')
+        return post_by_user
+
     def create_post_comment(self, db: Session, request: PostCommentBase):
         post = db.query(ForumPost).filter(ForumPost.id == request.origin_post_id).first()
         if post:
@@ -121,3 +134,5 @@ class PostClass():
             return new_comment
         else:
             return None
+
+    

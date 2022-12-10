@@ -8,7 +8,7 @@ from db.models import User
 from api.deps import get_current_user
 from fastapi.responses import JSONResponse
 from fastapi.encoders import jsonable_encoder
-
+from api.common.schemas import ResponseModel
 
 router = APIRouter()
 
@@ -22,7 +22,8 @@ router = APIRouter()
 def create_post_EP(request: PostBase, db: Session = Depends(get_db), current_user: User = Depends(get_current_user)):
     '''
         This endpoint is for creating a post in the web community\n
-        **message**  :  Required\n
+        
+        \t**message**  :  Required\n
     '''
     new_post = PostClass(current_user)
     return  new_post.create_post(db, request)
@@ -55,7 +56,7 @@ def get_post_EP(
     '''
         This endpoint is for retrieving a post\n
 
-        **id**  :  Required
+        \t**id**  :  Required
     '''
     post_intance = PostClass(current_user)
     post = post_intance.get_post(db, id)
@@ -63,6 +64,24 @@ def get_post_EP(
         return post
     else:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail=f'Post of ID {id} does not exist')
+
+
+@router.delete(
+    '/{id}',
+    status_code=204,
+    name='Delete A Post')
+def get_post_EP(
+    id: int, 
+    db: Session = Depends(get_db), 
+    current_user: User = Depends(get_current_user)
+):
+    '''
+    This endpoint is for deleting a post\n
+
+    \t**id**  :  Required
+    '''
+    post_intance = PostClass(current_user)
+    post = post_intance.delete_a_post(db, id)
 
 
 @router.post(
@@ -73,8 +92,9 @@ def get_post_EP(
 def create_post_comment_EP(request: PostCommentBase, db: Session = Depends(get_db), current_user: User = Depends(get_current_user)):
     '''
         This endpoint is for creating a comment in a post in the web community\n
-        **origin_post_id**  :  Required\n
-        **message**  :  Required\n
+        
+        \t**origin_post_id**  :  Required\n
+        \t**message**  :  Required\n
     '''
     post_instance = PostClass(current_user)
     post = post_instance.create_post_comment(db, request)
