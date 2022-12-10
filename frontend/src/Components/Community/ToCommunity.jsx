@@ -4,6 +4,11 @@ import { motion } from "framer-motion";
 
 
 const ToCommunity = () => {
+
+  const scrollUp = () => {
+    window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
+  };
+
   return (
     <motion.div
       className="flex flex-col items-center pb-14"
@@ -28,8 +33,8 @@ const ToCommunity = () => {
           </span>
         </p>
       </div>
-      <Link to="/communitypost">
-        <button className="h-[57px] w-[227px] bg-[#0E8ACB] rounded-[8px] text-white mt-4 hover--effect">
+      <Link onClick={scrollUp} to="/communitypost">
+        <button  className="h-[57px] w-[227px] bg-[#0E8ACB] rounded-[8px] text-white mt-4 hover--effect">
           Join The Community
         </button>
       </Link>
