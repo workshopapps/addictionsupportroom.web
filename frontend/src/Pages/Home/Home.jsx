@@ -83,7 +83,7 @@ const Home = () => {
           your progress and see results over time.
         </p>
 
-        <a href="https://appetize.io/app/3tqubo6rf6nodzau3rez6v2r5u?device=pixel4&osVersion=11.0&scale=75">
+        <a href="https://appetize.io/app/eeysp57n33smvpijzflyzvhkee?device=pixel4&osVersion=11.0&scale=75">
           <Button text="Start your recovery journey" />
         </a>
         <img src={HomeBg} alt="people" className="big_device" />
