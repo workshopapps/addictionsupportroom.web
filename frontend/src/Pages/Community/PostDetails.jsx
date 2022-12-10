@@ -23,7 +23,7 @@ const PostDetails = () => {
     fetch("https://soberpal.hng.tech/api/forum/" + postId, {
       method: 'DELETE',
     }).then(() => {
-      navigate('/#/communitypost')
+      navigate('/communitypost')
     })
   }
 
