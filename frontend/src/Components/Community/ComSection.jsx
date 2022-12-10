@@ -18,8 +18,8 @@ const ComSection = ({post}) => {
                 alt="avatar"
                 />
                 <div className="flex flex-col justify-between">
-                <p className="font-[500] text-[14px]">{comment.owner.username}</p>
-                <p className="text-[12px]">{moment(comment.date_posted).startOf('seconds').fromNow()}</p>
+                  <p className="font-[500] text-[14px]">{comment.owner.username}</p>
+                  <p className="text-[12px]">{moment(post.date_posted).add(1, 'hours').startOf('seconds').fromNow()}</p>
                 </div>
             </div>
             <p className="mt-3">{comment.comment}</p>
