@@ -69,6 +69,9 @@ const NavBar = () => {
               />
               <p className="ml-3 font-[500]">{username}</p>
             </div>
+            {/* <button onClick={handleLogout}>
+              log out
+            </button> */}
           </div>
         ) : (
           <a

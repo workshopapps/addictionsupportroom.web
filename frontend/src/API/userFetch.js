@@ -51,7 +51,7 @@ const useFetch = (url) => {
             })
         //  }, 1000)
             return () => abortCont.abort();
-        }, [token]);
+        }, [url, token]);
 
     return { data, isLoading, error} 
 
