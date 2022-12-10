@@ -8,8 +8,6 @@ const Comment = ({post}) => {
   const [isPending, setIsPending] = useState(false);
   const [changeState, setChangeState] = useState(false);
 
-// console.log(post)
-
   const token = localStorage.getItem("token");
   useEffect(() => {
     const user = localStorage.getItem("username");
@@ -29,12 +27,12 @@ const Comment = ({post}) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    // console.log("This post ID -----> ", post.id);
     const comments = {
       origin_post_id: post.id,
       comment,
     };
 
-    // console.log(comments);
     setIsPending(true);
     fetch("https://soberpal.hng.tech/api/forum/comment/", {
       method: "POST",
@@ -44,7 +42,6 @@ const Comment = ({post}) => {
       },
       body: JSON.stringify(comments),
     }).then((data) => {
-        // console.log(data)
       setIsPending(false);
       window.location.reload(false);
     });
@@ -53,7 +50,10 @@ const Comment = ({post}) => {
 
   return (
     <div>
-      <form onSubmit={handleSubmit} className="flex border-2 border-[#BBBBBB] gap-3 mt-4 justify-between bg-white p-2 w-full rounded-[14px]">
+      <form
+        onSubmit={handleSubmit}
+        className="flex border-2 border-[#BBBBBB] gap-3 mt-4 justify-between bg-white p-2 w-full rounded-[14px]"
+      >
         <div className="hidden">
           <input
             required
@@ -79,14 +79,12 @@ const Comment = ({post}) => {
           className="w-full text-[14px] p-2 h-[40px] rounded-lg bg-[#F5F5F5]"
           placeholder="Post something to everyone"
           onChange={(e) => setComment(e.target.value)}
-            value={comment}
+          value={comment}
         />
         <button className="py-2 px-4 bg-blue rounded-md text-white">
           Share
         </button>
       </form>
-
-
     </div>
   );
 };

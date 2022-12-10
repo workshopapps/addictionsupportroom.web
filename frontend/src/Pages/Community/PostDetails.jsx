@@ -9,6 +9,7 @@ import ComSection from "../../Components/Community/ComSection";
 const PostDetails = () => {
   const [username, setUserName] = useState("");
   const [avatar, setAvatar] = useState("");
+
   const navigate = useNavigate;
 
   const { postId } = useParams();
@@ -24,6 +25,8 @@ const PostDetails = () => {
       method: 'DELETE',
     }).then(() => {
       navigate('/communitypost')
+      window.location.reload(false);
+
     })
   }
 
