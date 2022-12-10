@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState,useEffect } from "react";
 import Faq from "../../Components/faq/Faq";
 import { Link } from "react-router-dom";
 
@@ -19,12 +19,53 @@ import "./home.css";
 // import ToCommunity from "../../Components/Community/ToCommunity";
 import Button from "../../UI/Button";
 import ToCommunity from "../../Components/Community/ToCommunity";
+import { toast, ToastContainer } from "react-toastify";
 
 const Home = () => {
   const size = 40;
+  const [email, setEmail] = useState("")
+
+  const success = () =>
+    toast.success("Email received! you will be contacted shortly", {
+      position: toast.POSITION.TOP_CENTER,
+    });
+
+  const handleChange = (e) => {
+    setEmail(e.target.value)
+  }
+
+  useEffect(() => {
+    const fetchData = async () =>{
+      const result = await fetch("https://soberpal.hng.tech/api/home/faq");
+      const jsonResult = await result.json()
+
+      console.log(jsonResult)
+    }
+    fetchData()
+  },[])
+
+
+  const handleSubmit = async (e) => {
+    const myData = {
+      "email" : email
+    }
+    e.preventDefault()
+    const result = await fetch("https://soberpal.hng.tech/api/home/faq", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(myData),
+    });
+    const jsonResult = await result.json()
+    console.log(jsonResult)
+    success()
+    setEmail("")
+  }
 
   return (
     <div className="soberpal__home">
+      <ToastContainer autoClose={2000} />
       <motion.section
         className="soberpal__home-first__section"
         whileInView={{ y: [100, 50], opacity: [0, 0, 1] }}
@@ -329,19 +370,28 @@ const Home = () => {
           transition={{ duration: 0.7 }}
         >
           <h3 className="text-center font-[500] text-[28px]">
-            Have a questions ?
+            Have a question?
           </h3>
           <div className="soberpal__home-fifth__section__flexy">
-            <div className="soberpal__home-fifth__section__flex2">
+            <form
+              onSubmit={handleSubmit}
+              className="soberpal__home-fifth__section__flex2"
+            >
               <input
-                className="placeholder:text-slate-400 pl-2"
-                type="text"
+                className="placeholder:text-slate-400 pl-2 relative"
+                type="email"
                 name="email"
+                value={email}
+                onChange={handleChange}
+                required
                 id="email"
                 placeholder="Enter your email"
               />
               <button>send</button>
-            </div>
+            </form>
+          </div>
+          <div className="absolute left-20">
+              {/* <span className="text-center">Enter a valid email</span> */}
           </div>
         </motion.div>
         <div className="w-full mb-[50px] mt-[150px] tablet:w-[100%] max-w-[1000px] mx-auto">
