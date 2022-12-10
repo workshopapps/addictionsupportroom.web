@@ -27,8 +27,6 @@ const CreateRoute = () => {
   const [token, setToken] = useState();
   // const token = localStorage.getItem('accessToken');
 
-
-
   return (
     <Routes>
       <Route index element={<Home/>} />
