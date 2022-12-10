@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import useFetch from "../../API/userFetch";
 // import { useParams } from "react-router-dom";
 
-const Comment = ({post, idHandler}) => {
+const Comment = ({ post, idHandler }) => {
   const [message, setMessage] = useState("");
   const [username, setUserName] = useState("");
   const [avatar, setAvatar] = useState("");
@@ -11,8 +11,8 @@ const Comment = ({post, idHandler}) => {
   const [changeState, setChangeState] = useState(false);
   const [idhand, setIdHand] = useState(0);
 
-//   const { postId } = useParams();
-console.log(post)
+  //   const { postId } = useParams();
+  console.log(post);
 
   // const scrollUp = () => {
   //   window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
@@ -38,14 +38,16 @@ console.log(post)
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    console.log("This post ID -----> ", post.id);
     const comments = {
-      owner: {
-        username,
-        avatar,
-      },
-      origin_post:{
-        id: idHandler,
-      },
+      // owner: {
+      //   username,
+      //   avatar,
+      // },
+      // origin_post: {
+      //   id: post.id,
+      // },
+      origin_post_id: post.id,
       comment,
     };
 
@@ -59,78 +61,80 @@ console.log(post)
       },
       body: JSON.stringify(comments),
     }).then((data) => {
-        console.log(data)
+      console.log(data);
       setIsPending(false);
       window.location.reload(false);
     });
     //   scrollUp();
   };
 
-// const [message, setMessage] = useState("");
-// const [username, setUserName] = useState("");
-//   const [comment, setComment] = useState("");
-// const [avatar, setAvatar] = useState("");
-// const [isPending, setIsPending] = useState(false);
-// const [changeState, setChangeState] = useState(false);
+  // const [message, setMessage] = useState("");
+  // const [username, setUserName] = useState("");
+  //   const [comment, setComment] = useState("");
+  // const [avatar, setAvatar] = useState("");
+  // const [isPending, setIsPending] = useState(false);
+  // const [changeState, setChangeState] = useState(false);
 
-// // const navigate = useNavigate();
+  // // const navigate = useNavigate();
 
-// const scrollUp = () => {
-//   window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
-// };
+  // const scrollUp = () => {
+  //   window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
+  // };
 
+  // const token = localStorage.getItem("token");
+  // // console.log(token)
+  // useEffect(() => {
+  //     const user = localStorage.getItem("username");
+  //     const avatar = localStorage.getItem("avatar");
 
-// const token = localStorage.getItem("token");
-// // console.log(token)
-// useEffect(() => {
-//     const user = localStorage.getItem("username");
-//     const avatar = localStorage.getItem("avatar");
+  //   if (token) {
+  //     setChangeState(true);
+  //     console.log(changeState)
+  //   }
 
-//   if (token) {
-//     setChangeState(true);
-//     console.log(changeState)
-//   }
+  //   if (user) {
+  //     setUserName(JSON.parse(user));
+  //   }
+  //   if (avatar) {
+  //     setAvatar(JSON.parse(avatar));
+  //   }
+  // }, []);
 
-//   if (user) {
-//     setUserName(JSON.parse(user));
-//   }
-//   if (avatar) {
-//     setAvatar(JSON.parse(avatar));
-//   }
-// }, []);
+  // const handleSubmit = (e) => {
+  //   e.preventDefault();
+  //   const comments = {
+  //       post_comments: [{
+  //         owner: {
+  //             username,
+  //             avatar,
+  //         },
+  //         comment,
+  //       }],
+  //   };
+  // //   setShowModal(false)
 
-// const handleSubmit = (e) => {
-//   e.preventDefault();
-//   const comments = { 
-//       post_comments: [{
-//         owner: {
-//             username,
-//             avatar,
-//         },
-//         comment,
-//       }],
-//   };
-// //   setShowModal(false)
-
-//   setIsPending(true);
-//   console.log(comments);
-//   fetch(`https://soberpal.hng.tech/api/forum/${post.id}`, {
-//     method: "POST",
-//     headers: { 
-//       "Content-Type": "application/json",
-//       'Authorization': `Bearer ${token}`,
-//       },
-//     body: JSON.stringify(comments),
-//     }).then((data) => {
-//       console.log(data)
-//     setIsPending(false);
-//     window.location.reload(false)
-//   });
-//   scrollUp();
-// };
+  //   setIsPending(true);
+  //   console.log(comments);
+  //   fetch(`https://soberpal.hng.tech/api/forum/${post.id}`, {
+  //     method: "POST",
+  //     headers: {
+  //       "Content-Type": "application/json",
+  //       'Authorization': `Bearer ${token}`,
+  //       },
+  //     body: JSON.stringify(comments),
+  //     }).then((data) => {
+  //       console.log(data)
+  //     setIsPending(false);
+  //     window.location.reload(false)
+  //   });
+  //   scrollUp();
+  // };
   return (
     <div>
-      <form onSubmit={handleSubmit} className="flex border-2 border-[#BBBBBB] gap-3 mt-4 justify-between bg-white p-2 w-full rounded-[14px]">
+      <form
+        onSubmit={handleSubmit}
+        className="flex border-2 border-[#BBBBBB] gap-3 mt-4 justify-between bg-white p-2 w-full rounded-[14px]"
+      >
         <div className="hidden">
           {/* <label>Post author</label> */}
           <input
@@ -158,14 +162,12 @@ console.log(post)
           className="w-full text-[14px] p-2 h-[40px] rounded-lg bg-[#F5F5F5]"
           placeholder="Post something to everyone"
           onChange={(e) => setComment(e.target.value)}
-            value={comment}
+          value={comment}
         />
         <button className="py-2 px-4 bg-blue rounded-md text-white">
           Share
         </button>
       </form>
-
-
     </div>
   );
 };
