@@ -1,25 +1,22 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import messageText from "../../assets/message-text.png";
 
 const ComPosts = ({ posts }) => {
+  // const [genID, setGenID] = useState(1)
 
   const scrollUp = () => {
     window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
   };
 
   const getId = (id) => {
-    console.log(id)
-  }
+    console.log(id);
+  };
   return (
     <div className="w-[90%] mx-auto">
       {posts.map((post) => (
-        <Link 
-            key={post.id}
-            to={`/communitypost/${post.id}`}
-            onClick={scrollUp}
-        >
-          <div  className="bg-white w-full my-5 p-5 rounded-lg">
+        <Link key={post.id} to={`/communitypost/${post.id}`} onClick={scrollUp}>
+          <div className="bg-white w-full my-5 p-5 rounded-lg">
             <div className="flex gap-3">
               <img
                 className="w-[50px] h-[50px] border-2 border-[#BBBBBB] rounded-full"

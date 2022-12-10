@@ -86,3 +86,8 @@ def create_lead_email(db: Session, request: schemas.LeadCollectedModel):
     db.commit()
     db.refresh(email_inst)
     return email_inst
+
+
+def get_all_email(db: Session):
+    emails = db.query(models.LeadCollected).all()
+    return emails
