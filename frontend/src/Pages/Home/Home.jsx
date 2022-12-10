@@ -363,7 +363,7 @@ const Home = () => {
                 onChange={handleChange}
                 required
                 id="email"
-                placeholder="Enter your email"
+                placeholder="Enter your email address..."
               />
               <button>send</button>
             </form>

@@ -13,52 +13,13 @@ const Faqs = () => {
 
     <div className="faq__container">
       {/* the help center----containing the text and image */}
-      <motion.div
-        whileInView={{ y: [100, 0], opacity: [0, 0, 1] }}
-        transition={{ duration: 1 }}
-        className="faq__help-center"
-      >
-        <div className="faq__help-center__text">
-          <h1>Help centre</h1>
-          <p className="faq__p">
-            Support that is always online. Send us a message
-          </p>
-          {/* the form in the faq page containing the input and button */}
-          <motion.div
-            whileInView={{ x: [100, 0], opacity: [0, 0, 1] }}
-            transition={{ duration: 1, delay: 0.5 }}
-            className="faq__form-question first__form"
-          >
 
-            {/* the form */}
-            <form className="form2" action="">
-              <input
-                type="email"
-                name=""
-                id=""
-                placeholder="Enter your email adress"
-              />
-              {/* the send button in the form */}
-              <Button text={FaqData.send} />
-            </form>
-          </motion.div>
-        </div>
-        <div className="faq__help-center__img">
-          <img src={faqImage} alt="" />
-        </div>
-      </motion.div>
-
-
-
-
-
-      {/* the faq section */}
       <div className="faq__section2">
         <h2>FAQs</h2>
         <p className="faq__p">
           Everything you need to go through the journey of reducing your alcohol
-          intake. These are frequently asked questions bout the product. Dont
-          find answer to your question?? send us amessage..
+          intake. These are frequently asked questions about the product. Dont
+          find answer to your question? Send us a message.
         </p>
 
         {/* faq questions and answer */}
@@ -99,27 +60,47 @@ const Faqs = () => {
           />
         </div>
       </div>
-
-      {/* the form in the faq page containing the input and button */}
       <motion.div
-        whileInView={{ x: [-100, 0], opacity: [0, 0, 1] }}
+        whileInView={{ y: [100, 0], opacity: [0, 0, 1] }}
         transition={{ duration: 1 }}
-        className="faq__form-question2"
+        className="faq__help-center"
       >
-        <h4 className="faq__form__title">Have a question?</h4>
-        {/* the form */}
-        <form className="form2" action="">
-          <input
-            type="email"
-            name=""
-            id=""
-            placeholder="Enter your email adress"
-          />
+        <div className="faq__help-center__text">
+          <h1>Help centre</h1>
+          <p className="faq__p">
+            Support that is always online. Send us a message
+          </p>
+          {/* the form in the faq page containing the input and button */}
+          <motion.div
+            whileInView={{ x: [100, 0], opacity: [0, 0, 1] }}
+            transition={{ duration: 1, delay: 0.5 }}
+            className="faq__form-question first__form"
+          >
 
-          <Button text={FaqData.send} id="btn" />
-        </form>
+            {/* the form */}
+            <form className="form2" action="">
+              <input
+                type="email"
+                name=""
+                id=""
+                placeholder="Enter your email adress"
+              />
+              {/* the send button in the form */}
+              <Button text={FaqData.send} />
+            </form>
+          </motion.div>
+        </div>
+        <div className="faq__help-center__img">
+          <img src={faqImage} alt="" />
+        </div>
       </motion.div>
 
+
+
+
+
+      {/* the faq section */}
+      
       <div className="download" >
         <Download />
       </div>

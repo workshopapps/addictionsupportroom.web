@@ -19,7 +19,7 @@ const ToCommunity = () => {
         <p className=" text-[32px] md:text-[57px]">
           Join 200,000+ Anonymous Soberpals,{" "}
           <span className="md:inline-block">
-            Share Your Struggles And Accomplishmets
+            Share Your Struggles And Accomplishmnets
           </span>
         </p>
       </div>
@@ -28,7 +28,7 @@ const ToCommunity = () => {
           We have a community of over 200+ soberpal members constantly sharing
           tips,{" "}
           <span className="md:inline-block">
-            advices, experiences in our community section hencemaking each
+            advices, experiences in our community section hence making each
             other’s journey easier .
           </span>
         </p>
