@@ -34,7 +34,6 @@ const NavBar = () => {
     }
 
     if (user) {
-      console.log("user :>> ", user);
       setUserName(JSON.parse(user));
     }
     if (avatar) {

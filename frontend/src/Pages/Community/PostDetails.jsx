@@ -19,20 +19,19 @@ const PostDetails = () => {
     error,
   } = useFetch("https://soberpal.hng.tech/api/forum/" + postId);
  
-
   // const handleDeletePost = () => {
   //   fetch("https://soberpal.hng.tech/api/forum/" + post.id, {
-  //     method: 'DELETE',
-  //     header: {
-  //       'Authorization': `Bearer ${token} `,
-  //     }
-  //   }).then(() => {
-  //     console.log("delect " + post.id)
-  //     navigate('/communitypost')
-  //     window.location.reload(false);
-
-  //   })
-  // }
+    //     method: 'DELETE',
+    //     header: {
+      //       'Authorization': `Bearer ${token} `,
+      //     }
+      //   }).then(() => {
+        //     console.log("delect " + post.id)
+        //     navigate('/communitypost')
+        //     window.location.reload(false);
+        
+        //   })
+        // }
 
   const token = localStorage.getItem("token");
   
@@ -40,7 +39,7 @@ const PostDetails = () => {
   useEffect(() => {
     const user = localStorage.getItem("username");
     const avatar = localStorage.getItem("avatar");
-    
+
     if (token) {
       // setDeletePost(true)
     } 
@@ -51,6 +50,7 @@ const PostDetails = () => {
       setAvatar(JSON.parse(avatar));
     }
   }, []);
+
 
   return (
     <div className="max-w-[800px] bg-[#F5F5F5] my-16 py-4 mx-auto w-[90%] rounded-[14px]">
@@ -77,7 +77,7 @@ const PostDetails = () => {
               />
               <div className="flex flex-col justify-between">
                 <p className="font-[500]">{post.user.username}</p>
-                <p className="text-[12px]">{moment(post.date_posted).startOf('seconds').fromNow()}</p>
+                <p className="text-[12px]">{moment(post.date_posted).add(1, 'hours').startOf('seconds').fromNow()}</p>
               </div>
               </div>
             </div>
