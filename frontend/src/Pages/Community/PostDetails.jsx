@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import moment from 'moment';
+import { useParams, useNavigate } from "react-router-dom";
 import useFetch from "../../API/userFetch";
 import messageText from "../../assets/message-text.png";
 import Comment from "../../Components/Community/Comment";
@@ -8,6 +9,7 @@ import ComSection from "../../Components/Community/ComSection";
 const PostDetails = () => {
   const [username, setUserName] = useState("");
   const [avatar, setAvatar] = useState("");
+  const navigate = useNavigate;
 
   const { postId } = useParams();
   const {
@@ -17,10 +19,13 @@ const PostDetails = () => {
   } = useFetch("https://soberpal.hng.tech/api/forum/" + postId);
  
 
-  const getIdFomNewFile = (id) => {
-    console.log(id + " num");
-    return id;
-  };
+  const handleDeletePost = () => {
+    fetch("https://soberpal.hng.tech/api/forum/" + postId, {
+      method: 'DELETE',
+    }).then(() => {
+      navigate('/#/communitypost')
+    })
+  }
 
   useEffect(() => {
     const token = localStorage.getItem("token");
@@ -55,17 +60,20 @@ const PostDetails = () => {
         <section className="w-[90%] mx-auto mb-16">
           <div className=" mx-auto">
             <div className="bg-white w-full my-5 p-5 rounded-lg">
-              <div className="flex gap-3">
-                <img
-                  className="w-[50px] h-[50px] border-2 border-[#BBBBBB] rounded-full"
-                  src={post.user.avatar}
-                  alt="avatar"
-                />
-                <div className="flex flex-col justify-between">
-                  <p className="font-[500]">{post.user.username}</p>
-                  <p className="text-[12px]">{post.date_posted}</p>
-                </div>
+             <div className="flex justify-between ">
+            <div className="flex gap-3 ">
+              <img
+                className="w-[50px] h-[50px] border-2 border-[#BBBBBB] rounded-full"
+                src={post.user.avatar}
+                alt="avatar"
+              />
+              <div className="flex flex-col justify-between">
+                <p className="font-[500]">{post.user.username}</p>
+                <p className="text-[12px]">{moment(post.date_posted).startOf('seconds').fromNow()}</p>
               </div>
+              </div>
+              <button onClick={handleDeletePost}>delete</button>
+            </div>
               <p className="mt-5">{post.message}</p>
               <div className="flex gap-2 mt-3 items-center">
                 <img
@@ -79,7 +87,7 @@ const PostDetails = () => {
               <hr className="bg-[#BBBBBB] h-[2px] mt-6 mb-4" />
 
               {/* Comment section  */}
-              <Comment idHandler={getIdFomNewFile} post={post} />
+              <Comment post={post} />
               <ComSection post={post} />
             </div>
           </div>
