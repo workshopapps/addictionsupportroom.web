@@ -303,7 +303,7 @@ const Home = () => {
           <p>
             Everything you need to go through the journey of reducing your
             alcohol intake. These are frequently asked questions about the
-            product. can't find answer to your question? Send us a message.
+            product. Dont't find answer to your question? Send us a message.
           </p>
 
           <div className="">
