@@ -31,7 +31,7 @@ const CreateRoute = () => {
     <Routes>
       <Route index element={<Home/>} />
       <Route path='/careers' element={<Career/>} />
-      <Route path='/community' element={<Community />} />
+      {/* <Route path='/community' element={<Community />} /> */}
       <Route path='/about' element={<About/>} />
       <Route path='/contact' element={<Contact/>} />
       <Route path='/faq' element={<Faqs/>} />

@@ -22,8 +22,8 @@ const NavBar = () => {
   // setTimeout(() => {
   //   console.log("logged out")
   //   handleLogout();
-  // }, 86400000);
-
+  // }, 20000);
+  // 86400000
   useEffect(() => {
     const token = localStorage.getItem("token");
     const user = localStorage.getItem("username");
@@ -76,7 +76,7 @@ const NavBar = () => {
           <a
             className="hidden laptop:block"
             rel="noreferrer"
-            href="https://appetize.io/app/q3qnqdo5ibklola6h5xlimn6rq?device=pixel4&osVersion=11.0&scale=75"
+            href="https://appetize.io/app/eeysp57n33smvpijzflyzvhkee?device=pixel4&osVersion=11.0&scale=75"
             target="_blank"
           >
             <Button className="font-[500]" text="Download App" />
