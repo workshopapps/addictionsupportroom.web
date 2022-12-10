@@ -19,6 +19,11 @@ const NavBar = () => {
     window.location.reload(false);
   };
 
+  setTimeout(() => {
+    console.log("logged out")
+    handleLogout();
+  }, 86400000);
+
   useEffect(() => {
     const token = localStorage.getItem("token");
     const user = localStorage.getItem("username");
@@ -26,7 +31,6 @@ const NavBar = () => {
 
     if (token) {
       setChangeState(true);
-      // window.location.reload(changeState);
     }
 
     if (user) {
@@ -65,13 +69,6 @@ const NavBar = () => {
               />
               <p className="ml-3 font-[500]">{username}</p>
             </div>
-            <button
-              className="font-[500] ml-8 mt-2 text-[18px] "
-              onClick={() => handleLogout()}
-            >
-              Logout
-            </button>
-            <p>.</p>
           </div>
         ) : (
           <a

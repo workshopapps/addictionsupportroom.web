@@ -171,8 +171,7 @@ const Home = () => {
             </div>
             <p>
               Get support from advocates and recovering addicts willing to help
-              put you on <br />
-              the right path to recovery.
+              put you on the right path to recovery.
             </p>
           </div>
         </div>

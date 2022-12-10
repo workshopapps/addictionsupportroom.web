@@ -5,6 +5,7 @@ const useFetch = (url) => {
     const [data, setData] = useState(null);
     const [isLoading, setIsLoading] = useState(true);
     const [error, setError] = useState(null);
+    const [scroll] = useState(true)
 
     
     
@@ -12,6 +13,11 @@ const useFetch = (url) => {
     const myHeaders = new Headers({
       'Authorization': `Bearer ${token} `,
     });
+
+    const scrollUp = () => {
+      window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
+    };
+
     useEffect(() => {
           const abortCont = new AbortController();
         //  setTimeout (() => {
@@ -22,17 +28,18 @@ const useFetch = (url) => {
           }
             )
             .then(res => {
-              console.log(res)
+              // console.log(res)
               if(!res.ok) {
                 throw Error("Could not fetch data from that resource") 
               }
               return res.json();
             })
             .then(data => {
-              console.log(data)
+              // console.log(data)
               setData(data);
               setIsLoading(false);
               setError(null);
+              scrollUp(scroll)
             })
             .catch(err => {
               if (err.name === 'AbortError') {
