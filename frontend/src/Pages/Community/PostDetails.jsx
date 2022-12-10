@@ -53,7 +53,7 @@ const PostDetails = () => {
 
 
   return (
-    <div className="max-w-[800px] bg-[#F5F5F5] my-16 py-4 mx-auto w-[90%] rounded-[14px]">
+    <div className="max-w-[800px] bg-[#F5F5F5] my-16 py-4 mx-auto w-full tablet:w-[90%] rounded-[14px]">
       {error && (
         <div className="text-blue text-[24px] font-[500] text-center">
           {error}
