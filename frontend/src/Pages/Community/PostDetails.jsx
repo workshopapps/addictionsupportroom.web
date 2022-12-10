@@ -9,9 +9,8 @@ import ComSection from "../../Components/Community/ComSection";
 const PostDetails = () => {
   const [username, setUserName] = useState("");
   const [avatar, setAvatar] = useState("");
-  
 
-  const navigate = useNavigate;
+  const navigate = useNavigate();
 
   const { postId } = useParams();
   const {
@@ -21,25 +20,30 @@ const PostDetails = () => {
   } = useFetch("https://soberpal.hng.tech/api/forum/" + postId);
  
 
-  const handleDeletePost = () => {
-    fetch("https://soberpal.hng.tech/api/forum/" + postId, {
-      method: 'DELETE',
-    }).then(() => {
-      navigate('/communitypost')
-      window.location.reload(false);
+  // const handleDeletePost = () => {
+  //   fetch("https://soberpal.hng.tech/api/forum/" + post.id, {
+  //     method: 'DELETE',
+  //     header: {
+  //       'Authorization': `Bearer ${token} `,
+  //     }
+  //   }).then(() => {
+  //     console.log("delect " + post.id)
+  //     navigate('/communitypost')
+  //     window.location.reload(false);
 
-    })
-  }
+  //   })
+  // }
 
+  const token = localStorage.getItem("token");
+  
+  
   useEffect(() => {
-    const token = localStorage.getItem("token");
     const user = localStorage.getItem("username");
     const avatar = localStorage.getItem("avatar");
-
-    // if (!token) {
-    //   navigate("/community/login")
-    // }
-
+    
+    if (token) {
+      // setDeletePost(true)
+    } 
     if (user) {
       setUserName(JSON.parse(user));
     }
@@ -76,7 +80,6 @@ const PostDetails = () => {
                 <p className="text-[12px]">{moment(post.date_posted).startOf('seconds').fromNow()}</p>
               </div>
               </div>
-              <button onClick={handleDeletePost}>delete</button>
             </div>
               <p className="mt-5">{post.message}</p>
               <div className="flex gap-2 mt-3 items-center">
