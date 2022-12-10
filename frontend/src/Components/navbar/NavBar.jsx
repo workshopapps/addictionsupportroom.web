@@ -70,6 +70,7 @@ const NavBar = () => {
             >
               Logout
             </button>
+            <p>.</p>
           </div>
         ) : (
           <a
