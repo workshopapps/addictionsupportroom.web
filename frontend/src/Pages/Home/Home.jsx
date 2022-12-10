@@ -24,17 +24,36 @@ import { toast, ToastContainer } from "react-toastify";
 const Home = () => {
   const size = 40;
   const [email, setEmail] = useState("")
+  const [message, setMessage] = useState("");
+  const [valid, setValid] = useState(false);
 
   const success = () =>
     toast.success("Email received! you will be contacted shortly", {
       position: toast.POSITION.TOP_CENTER,
     });
 
+  const emailValidation = () => {
+    const regex = /\S+@\S+\.\S+/;
+
+    if (regex.test(email)) {
+      setValid(true);
+      setMessage("Email is valid");
+    } else if (email === "") {
+      setValid(false);
+      setMessage("Input your email address");
+    } else if (!regex.test(email)) {
+      setValid(false);
+      setMessage("Email is invalid");
+    } else {
+      setMessage("");
+    }
+  };
+
   const handleChange = (e) => {
     setEmail(e.target.value)
   }
 
-  // Fecthing the lead list
+  // Fecthing the leads list
   // useEffect(() => {
   //   const fetchData = async () =>{
   //     const result = await fetch("https://soberpal.hng.tech/api/home/faq");
@@ -46,23 +65,26 @@ const Home = () => {
   // },[])
 
 
-  // Posting email to the db
+  // Posting email to the API
   const handleSubmit = async (e) => {
     const myData = {
       "email" : email
     }
     e.preventDefault()
-    const result = await fetch("https://soberpal.hng.tech/api/home/faq", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(myData),
-    });
-    const jsonResult = await result.json()
-    console.log(jsonResult)
-    success()
-    setEmail("")
+    if(valid) {
+      const result = await fetch("https://soberpal.hng.tech/api/home/faq", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(myData),
+      });
+      // const jsonResult = await result.json()
+      // console.log(jsonResult)
+      success()
+      setEmail("")
+      setMessage("");
+    }
   }
 
   return (
@@ -285,7 +307,7 @@ const Home = () => {
           </div>
         </motion.section>
       </div>
-      
+
       <ToCommunity />
 
       <motion.section
@@ -361,14 +383,20 @@ const Home = () => {
                 name="email"
                 value={email}
                 onChange={handleChange}
-                required
                 id="email"
                 placeholder="Enter your email address"
               />
-              <button>send</button>
+              <button onClick={emailValidation}>send</button>
+              <div className="absolute -bottom-7">
+                <span
+                  className={`${
+                    valid ? "text-green-600" : "text-red-400"
+                  } text-sm`}
+                >
+                  {message}
+                </span>
+              </div>
             </form>
-          </div>
-          <div className="absolute left-20">
           </div>
         </motion.div>
         <div className="w-full mb-[50px] mt-[150px] tablet:w-[100%] max-w-[1000px] mx-auto">
