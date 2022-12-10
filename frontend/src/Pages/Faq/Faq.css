@@ -70,6 +70,7 @@
     justify-content: center;
     align-items: center;
     flex-direction: column;
+    margin-bottom: 6rem;
 }
 
 .faq__form__title {
@@ -114,7 +115,7 @@
 .faq__section2 {
     text-align: left;
     padding: 0 5rem 0 5rem;
-    margin: 10rem 100px;
+    margin: 0 80px 8rem 100px;
 }
 
 .faq__section2 h2 {

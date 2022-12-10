@@ -35,7 +35,7 @@ const TeamData = [
   },
   {
     id: 4,
-    name: "Egbeyale",
+    name: "Oluwafunmilayo",
     designation: "Product Manager",
     avatar: David,
     linkedIn: "https://www.linkedin.com/in/oluwafunmilayo-egbeyale",
@@ -43,14 +43,22 @@ const TeamData = [
   },
   {
     id: 5,
-    name: "Muhammed",
+    name: "Amos",
+    designation: "Product Manager",
+    avatar: Joe,
+    linkedIn: "https://www.linkedin.com/in/amosadereti",
+    twitter: "https://twitter.com/AderetiAmos?t=uNwu-Dtn7odgb50B2gqhAQ&s=09",
+  },
+  {
+    id: 6,
+    name: "Muhammod",
     designation: "Frontend Developer",
     avatar: Tomiwa,
     linkedIn: "https://www.linkedin.com/in/ajibade-olawale-6111911b5",
     twitter: "https://twitter.com/muhaj_dev?t=gVq4i7U3D2nHdY9o1nMf9w&s=09",
   },
   {
-    id: 6,
+    id: 7,
     name: "Uchechukwu",
     designation: "Backend Developer",
     avatar: Joe,
@@ -58,20 +66,12 @@ const TeamData = [
     twitter: "https://twitter.com/henry96900698",
   },
   {
-    id: 7,
+    id: 8,
     name: "Abdullah",
     designation: "Frontend Developer",
     avatar: David,
     linkedIn: "https://www.linkedin.com/in/abdullah-oyewale-8a1041189/",
     twitter: "https://twitter.com/4biol4",
-  },
-  {
-    id: 8,
-    name: "Amos",
-    designation: "Product Manager",
-    avatar: Joe,
-    linkedIn: "https://www.linkedin.com/in/amosadereti",
-    twitter: "http://https//twitter.com/aderetiamos",
   },
 ];
 

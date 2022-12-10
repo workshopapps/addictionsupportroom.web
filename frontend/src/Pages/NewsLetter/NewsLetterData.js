@@ -8,7 +8,7 @@ const NewsLetterData = [
     {
         id: 'Soberpal#162',
         title: 'We’re looking for talented people',
-        content: 'We’re a 100% remote team spread allacross the world. Join us!',
+        content: 'We’re a 100% remote team spread all across the world. Join us!',
         date: '14 Nov, 2022'
     },
     {

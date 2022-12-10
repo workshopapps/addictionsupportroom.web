@@ -314,7 +314,7 @@ const Home = () => {
                 type="text"
                 name="email"
                 id="email"
-                placeholder="Enter your email"
+                placeholder="Enter your email address..."
               />
               <button>send</button>
             </div>

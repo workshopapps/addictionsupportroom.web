@@ -64,7 +64,6 @@ const Team = () => {
           ))}
         </motion.div>
       </div>
-   
 
       {/* download app section */}
       <motion.div
@@ -72,7 +71,7 @@ const Team = () => {
         transition={{ duration: 1.3 }}
         className="team__download-app"
       >
-        <div className="w-full mb-[50px] mt-[150px] tablet:w-[100%] max-w-[1000px] mx-auto">
+        <div className="w-full mb-[50px] mt-[100px] tablet:w-[90%] max-w-[1400px] mx-auto">
           <Download />
         </div>
       </motion.div>
