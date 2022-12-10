@@ -11,18 +11,18 @@ const NavBar = () => {
   const [username, setUserName] = useState("");
   const [avatar, setAvatar] = useState("");
 
-  const handleLogout = () => {
-    localStorage.removeItem("token");
-    localStorage.removeItem("user");
-    localStorage.removeItem("avatar");
-    window.location.href = "/#/community/login";
-    window.location.reload(false);
-  };
+  // const handleLogout = () => {
+  //   localStorage.removeItem("token");
+  //   localStorage.removeItem("user");
+  //   localStorage.removeItem("avatar");
+  //   window.location.href = "/#/community/login";
+  //   window.location.reload(false);
+  // };
 
-  setTimeout(() => {
-    console.log("logged out")
-    handleLogout();
-  }, 86400000);
+  // setTimeout(() => {
+  //   console.log("logged out")
+  //   handleLogout();
+  // }, 86400000);
 
   useEffect(() => {
     const token = localStorage.getItem("token");

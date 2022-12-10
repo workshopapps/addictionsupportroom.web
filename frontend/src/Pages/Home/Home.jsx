@@ -285,30 +285,7 @@ const Home = () => {
           </div>
         </motion.section>
       </div>
-
-      {/* <motion.section
-        className="join__community"
-        whileInView={{ y: [100, 50], opacity: [0, 0, 1] }}
-        transition={{ duration: 0.7 }}
-      >
-        <h4>
-          Join 200+ Anonymous Soberpals, <br />
-          Share Your Struggles And Accomplishmets
-        </h4>
-        <p>
-          We have a community of over 200+ soberpal members constantly sharing
-          tips, <br />
-          advices, experiences in our community section hencemaking each other’s
-          journey easier .
-        </p>
-
-          <Link classname="mx-auto bg-blue w-fit" to="/communitypost">
-            <p classname="mx-auto mt-4 py-3 w-fit px-4 bg-blue text-white">
-             Join The Community
-             </p>
-          </Link>
-         
-      </motion.section> */}
+      
       <ToCommunity />
 
       <motion.section

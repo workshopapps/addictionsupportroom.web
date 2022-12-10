@@ -9,6 +9,7 @@ import ComSection from "../../Components/Community/ComSection";
 const PostDetails = () => {
   const [username, setUserName] = useState("");
   const [avatar, setAvatar] = useState("");
+  
 
   const navigate = useNavigate;
 
