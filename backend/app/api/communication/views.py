@@ -40,7 +40,7 @@ from fastapi.responses import HTMLResponse
 @router.get(
     "/contacts",
     response_model=GetAllContactsResults | ResponseSchema,
-    status_code=200,
+    status_code=201,
     name="contacts:get-all-user-contacts",
     responses={
         200: {
@@ -171,6 +171,7 @@ async def get_conversation(
 
 @router.post(
     "/room",
+    # include_in_schema=False,
     status_code=200,
     name="room:create-join",
     responses={
@@ -203,19 +204,6 @@ async def create_room(
     return results
 
 
-@router.get("/room/conversation", name="room:get-conversations")
-async def get_room_users_conversation(
-        room: str,
-        currentUser: UserBase = Depends(deps.get_current_user),
-        session: Session = Depends(deps.get_db),
-):
-    """
-    Get Room by room name
-    """
-    results = await get_room_conversations(room, currentUser.id, session)
-    return results
-
-
 @router.post("/room/message", name="room:send-text-message")
 async def send_room_message(
         request: MessageCreateRoom,
@@ -224,13 +212,34 @@ async def send_room_message(
 ):
     """
     Send a new message.
+    Room equals `general` for the general chat room
+
     """
     results = await send_new_room_message(currentUser.id, request, None,
                                           session)
     return results
 
 
-@router.get("/rooms", status_code=200, name="rooms:get-rooms-for-user")
+@router.get("/room/conversation", name="room:get-conversations")
+async def get_room_users_conversation(
+        room: str,
+        currentUser: UserBase = Depends(deps.get_current_user),
+        session: Session = Depends(deps.get_db),
+):
+    """
+    Get Conversations in room by name 
+    
+    Room equals `general` for the general chat room
+    
+    """
+    results = await get_room_conversations(room, currentUser.id, session)
+    return results
+
+
+@router.get("/rooms",
+            status_code=200,
+            name="rooms:get-rooms-for-user",
+            include_in_schema=False)
 async def get_rooms_for_user(
         currentUser: UserBase = Depends(deps.get_current_user),
         session: Session = Depends(deps.get_db),

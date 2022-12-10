@@ -89,7 +89,7 @@ const Career = () => {
         />
       </section>
 
-      <section className="soberpal__career-third__section">
+      {/* <section className="soberpal__career-third__section">
         <h4>open positions</h4>
         <h1>We're looking for talented people</h1>
         <p>We're 100% remote team spread all across the world. Join us!</p>
@@ -120,7 +120,7 @@ const Career = () => {
             Ux researcher <img src={arrow} alt="arrow" />
           </Link>
         </motion.div>
-      </section>
+      </section> */}
     </div>
   );
 };

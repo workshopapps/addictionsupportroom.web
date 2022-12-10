@@ -40,6 +40,28 @@ class ContactusMessages(Base):
     user_id = Column(String, nullable=False)
     message = Column(String, nullable=False)
 
+class ForumPost(Base):
+    __tablename__ = 'forum_post'
+    id = Column(Integer, primary_key=True, index=True)
+    message = Column(String)
+    date_posted = Column(DateTime,
+                        default=datetime.datetime.utcnow,
+                        nullable=False)
+    user_username = Column(String, ForeignKey('users.username'))
+    user = relationship('User', back_populates='forum_posts')
+    forum_post_comments = relationship('ForumPostComment', back_populates='origin_post')
+
+class ForumPostComment(Base):
+    __tablename__ = 'forum_post_comments'
+    id = Column(Integer, primary_key=True, index=True)
+    owner_username = Column(String, ForeignKey('users.username'))
+    owner = relationship('User', back_populates='forum_comments')
+    origin_post_id = Column(Integer, ForeignKey('forum_post.id'))
+    origin_post = relationship('ForumPost', back_populates='forum_post_comments')
+    comment = Column(String)
+    date_posted = Column(DateTime,
+                        default=datetime.datetime.utcnow,
+                        nullable=False)
 
 class User(Base):
     __tablename__ = "users"
@@ -49,6 +71,8 @@ class User(Base):
     avatar = Column(String)
     hashed_password = Column(String)
     is_active = Column(Boolean, default=True)
+    forum_posts = relationship('ForumPost', back_populates='user')
+    forum_comments = relationship('ForumPostComment', back_populates='owner')
     date_added = Column(DateTime,
                         default=datetime.datetime.utcnow,
                         nullable=False)
@@ -176,6 +200,12 @@ class Emergency(Base):
     created_at = Column(DateTime)
 
 
+class NewsLetterEmail(Base):
+    __tablename__ = 'news_letter_email'
+
+    id = Column(Integer, primary_key=True, index=True)
+    email = Column(String)
+
 class Blog(Base):
     __tablename__ = 'blogs'
 
@@ -188,3 +218,13 @@ class Blog(Base):
     article = Column(Boolean)
     created_at = Column(DateTime, nullable=False, default=datetime.datetime.utcnow())
     updated_at = Column(DateTime, nullable=False, default=datetime.datetime.utcnow())
+
+
+class Feedbacks(Base):
+    __tablename__ = "feedback"
+
+    id = Column(Integer, primary_key=True, index=True)
+    rating = Column(Integer)
+    description = Column(String)
+    created_at = Column(DateTime, nullable=False, default=datetime.datetime.utcnow())
+    updated_at = Column(DateTime, nullable=True)

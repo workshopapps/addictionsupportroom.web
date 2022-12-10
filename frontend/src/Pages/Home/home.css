@@ -46,6 +46,11 @@
     margin-bottom: 6rem;
 }
 
+.soberpal__home-third__section p {
+    color: #303030;
+    margin-left: 5.2rem;
+}
+
 .soberpal__home-third__section-cards {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -97,9 +102,9 @@
 
 .icon__round {
     border-radius: 100%;
-    background-color: var(--primary-50);
+    background-color: rgba(14, 138, 203, 0.07);
     padding: 10px;
-    color: var(--primary-500);
+    color: #0E8ACB;
 }
 
 .icon__round:hover {
@@ -108,8 +113,8 @@
 
 .icon__padding {
     border-radius: 100%;
-    background-color: var(--primary-50);
-    color: var(--primary-500);
+    background-color: rgba(14, 138, 203, 0.07);
+    color: #0E8ACB;
     padding: 9px
 }
 
@@ -217,7 +222,7 @@
     font-weight: 700;
     font-size: 3rem;
     line-height: 2rem;
-    color: var(--primary-500);
+    color: black;
 }
 
 .soberpal__home-fifth__section__padding p {
@@ -265,10 +270,9 @@
     height: 2.5rem;
 }
 
-.soberpal__home-fifth__section__flex2 input::placeholder {
-    padding-left: 8px;
-    color: #000000;
-}
+/* .soberpal__home-fifth__section__flex2 input::placeholder {
+    padding-left: 5px;
+} */
 
 .soberpal__home-fifth__section__flex2 input:focus {
     border: 1px solid white;
@@ -298,7 +302,7 @@
         font-size: 2.5rem;
         line-height: 4rem;
     }
-    
+
     .soberpal__home-first__section p {
         font-size: 1rem;
         line-height: 1.5rem;
@@ -313,12 +317,12 @@
     .soberpal__home-fourth__section__flex h4 {
         font-size: 1.8rem;
     }
-    
+
     .soberpal__home-fourth__section__flex button {
         padding: 5px 13px 5px 13px;
         font-family: 'Cabinet Grotesk';
         font-size: .9rem;
-    
+
     }
 }
 
@@ -341,18 +345,18 @@
     .soberpal__home-third__section-cards p {
         font-size: .9rem;
     }
-    
+
     .cards__flex {
         gap: 20px;
         margin-bottom: .9rem;
     }
-    
+
     .cards__flex h3 {
         font-size: 1.2rem;
     }
 
     .soberpal__home-fourth__section__flex {
-        padding: 5rem 0rem 0 0rem ;
+        padding: 5rem 0rem 0 0rem;
     }
 
     .soberpal__home-fifth__section {
@@ -390,7 +394,7 @@
     .soberpal__home-fourth__section h1 {
         font-size: 2rem;
     }
-    
+
     .soberpal__home-fourth__section p {
         font-size: .9rem;
     }
@@ -417,7 +421,7 @@
     .soberpal__home-fifth__section__padding h1 {
         font-size: 2.5rem;
     }
-    
+
     .soberpal__home-fifth__section__padding p {
         font-size: 1rem;
         line-height: 2.2rem;
@@ -478,8 +482,8 @@
 
     .soberpal__home-first__section p {
         font-size: .9rem;
-    } 
-    
+    }
+
     .soberpal__home-first__section img {
         margin: 3rem 0 3rem 0;
     }
@@ -502,13 +506,14 @@
 
     .soberpal__home-fifth__section__padding h1 {
         font-size: 2rem;
+
     }
 
     .soberpal__home-fifth__section__padding2 p {
         font-size: .8rem;
         line-height: 1.8rem;
     }
-}  
+}
 
 @media screen and (max-width: 400px) {
     /* .soberpal__home-fourth__section h1 {
@@ -531,7 +536,7 @@
     } */
 
     .soberpal__home-fifth__section__padding2 p {
-        font-size: .75rem;   
+        font-size: .75rem;
     }
 
     .soberpal__home-fifth__section__padding h1 {
@@ -548,7 +553,7 @@
     .soberpal__home-third__section-cards p {
         font-size: .85rem;
     }
-    
+
     .cards__flex h3 {
         font-size: 1.1rem;
     }
@@ -573,9 +578,31 @@
 
     .soberpal__home-first__section p {
         font-size: .8rem;
-    } 
+    }
 
     .soberpal__home-third__section h1 {
         font-size: 1.5rem;
     }
+}
+
+
+.join__community {
+    text-align: center;
+    margin-bottom: 6rem;
+}
+
+.join__community h4 {
+    font-size: 3.5rem;
+    font-weight: 700;
+    line-height: 50px;
+    color: var(--gray-900);
+}
+
+.join__community p {
+    color: var(--gray-500);
+    font-weight: 400;
+    font-size: 1.2rem;
+    /* line-height: 30px; */
+    margin-top: 2rem;
+    margin-bottom: 2rem;
 }

@@ -1,7 +1,6 @@
 from pydantic import BaseModel, Field
 from typing import (
-    Any,
-)
+    Any, )
 
 
 class ResponseSchema(BaseModel):
@@ -25,6 +24,75 @@ class ResponseSchema(BaseModel):
         ...,
         example="A message to indicate that the request was not successful!",
     )
-    data: Any | None = Field(
-        example="Data !",
-    )
+    data: Any | None
+
+
+class ResponseModel(BaseModel):
+    """Creates a response model for the API.
+
+    Provides a structure for providing a response to the API.
+    Provides a static method for success responses
+
+    Attributes:
+        status: The status of the response.
+        message: The message of the response.
+        data: The data of the response.
+    """
+
+    status: str
+    message: str
+    data: Any
+
+    @staticmethod
+    def success(data: Any, message: str = "success") -> dict[str, Any]:
+        """Provides a success response data
+
+        Args:
+            data (dict): data to be returned
+            message (str, optional): Descriptive messaged. Defaults to "success".
+
+        Returns:
+            dict: key-value pair of status, message and data
+        """
+        return ResponseModel(status="success", message=message,
+                             data=data).dict()
+
+    @staticmethod
+    def error(message: str, detail: str | None = None) -> dict[str, Any]:
+        """Provides an error response data
+
+        Args:
+            data (dict): data to be returned
+            detail (str): Descriptive error message.
+
+        Returns:
+            dict: key-value pair of status, detail
+        """
+
+        return ResponseModel(
+            status="error",
+            message=message,
+            data={
+                "detail": detail
+            },
+        ).dict()
+
+    @staticmethod
+    def sample(description: str, example: dict[str, Any]) -> dict[str, Any]:
+        """Provides an error response data
+
+        Args:
+            data (dict): data to be returned
+            detail (str): Descriptive  message.
+
+        Returns:
+            dict: key-value pair of status, detail
+        """
+        return {
+            "description": description,
+            'content': {
+                'application/json': {
+                    'example': example
+                }
+            }
+        }

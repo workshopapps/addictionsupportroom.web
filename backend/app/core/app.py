@@ -5,7 +5,6 @@ from fastapi.middleware.cors import CORSMiddleware
 
 from db.models import Base
 from db.db import engine
-from api.auth.views import login
 
 
 

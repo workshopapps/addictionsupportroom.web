@@ -7,7 +7,7 @@ from jose import JWTError
 # from jose import jwt
 from pydantic import ValidationError
 from sqlalchemy.orm import Session
-from api.auth.schemas import UserBase
+from api.auth.schemas import UserBase, AccessToken
 
 from db import models
 from db.db import SessionLocal
@@ -104,7 +104,7 @@ def create_access_token(data: dict):
 
     to_encode.update({"exp": expire})
     encoded_jwt = jwt.encode(to_encode, SECRET_KEY, algorithm=ALGORITHM)
-    return {"token": encoded_jwt, "token_type": "bearer"}
+    return AccessToken(token=encoded_jwt, token_type='bearer')
 
 
 async def get_current_user(db: Session = Depends(get_db),

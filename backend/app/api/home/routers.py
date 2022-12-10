@@ -7,6 +7,8 @@ from db.models import Emergency, User
 from db.db import get_db
 from . import quotes
 from api import deps
+from api.common.schemas import ResponseModel
+
 
 router = APIRouter()
 
@@ -83,7 +85,9 @@ def get_specific_note(note_id: int,
 
 
 @router.delete("/notes/delete/{note_id}")
-def delete_note(note_id: int, db: Session = Depends(get_db), current_user: User = Depends(deps.get_current_user)):
+def delete_note(note_id: int,
+                db: Session = Depends(get_db),
+                current_user: User = Depends(deps.get_current_user)):
     note = crud.delete_note(db=db, note_id=note_id)
     return note
 
@@ -103,3 +107,32 @@ def update_note(note: schemas.Note,
 #                 db: Session = Depends(get_db)):
 #     note = crud.update_note(db=db, note_id=note_id, note=note)
 #     return 'note'
+
+
+@router.post(
+    '/faq',
+    name='Have a question?'
+)
+def ask_question(request: schemas.LeadCollectedModel, db: Session = Depends(get_db)):
+    '''
+    This endpoint is for collecting email from the user.\n
+
+    Args:\n
+    \temail  :   Required
+
+    Response:\n
+    \t{
+        \t"status": "success",
+        \t"message": "Successfully joined the newsletter",
+        \t"data": {
+        \t    "id": 1,
+        \t    "email": "askquestion@app.soberpal.com"
+        \t}
+    \t}
+    '''
+    email = crud.create_lead_email(db, request)
+
+    return ResponseModel.success(
+        email,
+        message='Successfully joined the newsletter',
+    )
