@@ -5,7 +5,6 @@ import newsletterImg from "../../assets/newsletter.png";
 import Maradel from "../../assets/Maradel.png";
 import NewsCard from "./NewsCard";
 import { BsInstagram, BsLinkedin } from "react-icons/bs";
-import { AiOutlineFacebook } from "react-icons/ai";
 import { ImTwitter } from "react-icons/im";
 import { useForm } from "react-hook-form";
 import { toast, ToastContainer } from "react-toastify";

@@ -1,22 +1,15 @@
 import React, { useState,useEffect } from "react";
 import Faq from "../../Components/faq/Faq";
-import { Link } from "react-router-dom";
-
-// import Appstats from "../../Components/AppStats/Appstats";
 import { AiOutlineHeart } from "react-icons/ai";
 import { BiLineChart } from "react-icons/bi";
 import { TiFlashOutline } from "react-icons/ti";
 import HomeBg from "../../assets/bg-home.png";
 import phone from "../../assets/phone.png";
-// import cell2 from "../../assets/cell2.png";
 import { BsChatDots } from "react-icons/bs";
 import start from "../../assets/start.png";
-// import phone from "../../assets/Frame76.png";
 import Download from "../../Components/Download/Download";
 import { motion } from "framer-motion";
-// import add from "../../assets/add.png";
 import "./home.css";
-// import ToCommunity from "../../Components/Community/ToCommunity";
 import Button from "../../UI/Button";
 import ToCommunity from "../../Components/Community/ToCommunity";
 import { toast, ToastContainer } from "react-toastify";
