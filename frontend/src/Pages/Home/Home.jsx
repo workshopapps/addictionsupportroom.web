@@ -14,6 +14,7 @@ import Button from "../../UI/Button";
 import ToCommunity from "../../Components/Community/ToCommunity";
 import { toast, ToastContainer } from "react-toastify";
 
+
 const Home = () => {
   const size = 40;
   const [email, setEmail] = useState("")
@@ -79,9 +80,12 @@ const Home = () => {
       setMessage("");
     }
   }
+  
+  
 
   return (
     <div className="soberpal__home">
+      <ToastContainer autoClose={2000} />
       <ToastContainer autoClose={2000} />
       <motion.section
         className="soberpal__home-first__section"
@@ -186,6 +190,7 @@ const Home = () => {
             </div>
             <p>
               Get support from advocates and recovering addicts willing to help
+              put you on the right path to recovery.
               put you on the right path to recovery.
             </p>
           </div>
@@ -292,6 +297,7 @@ const Home = () => {
         </motion.section>
       </div>
 
+
       <ToCommunity />
 
       <motion.section
@@ -309,6 +315,7 @@ const Home = () => {
           <p>
             Everything you need to go through the journey of reducing your
             alcohol intake. These are frequently asked questions about the
+            product. Dont't find answer to your question? Send us a message.
             product. Dont't find answer to your question? Send us a message.
           </p>
 
@@ -355,8 +362,13 @@ const Home = () => {
         >
           <h3 className="text-center font-[500] text-[28px]">
             Have a question?
+            Have a question?
           </h3>
           <div className="soberpal__home-fifth__section__flexy">
+            <form
+              onSubmit={handleSubmit}
+              className="soberpal__home-fifth__section__flex2"
+            >
             <form
               onSubmit={handleSubmit}
               className="soberpal__home-fifth__section__flex2"
@@ -370,6 +382,17 @@ const Home = () => {
                 id="email"
                 placeholder="Enter your email address"
               />
+              <button onClick={emailValidation}>send</button>
+              <div className="absolute -bottom-7">
+                <span
+                  className={`${
+                    valid ? "text-green-600" : "text-red-400"
+                  } text-sm`}
+                >
+                  {message}
+                </span>
+              </div>
+            </form>
               <button onClick={emailValidation}>send</button>
               <div className="absolute -bottom-7">
                 <span
