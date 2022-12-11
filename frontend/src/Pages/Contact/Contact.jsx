@@ -3,13 +3,8 @@ import { useState, useRef } from "react";
 import "./contact.scss";
 import { GrLocation } from "react-icons/gr";
 import { BsTelephone } from "react-icons/bs";
-<<<<<<< HEAD
 import { BsInstagram } from "react-icons/bs";
 import { BsLinkedin } from "react-icons/bs";
-=======
-import { BsInstagram, BsLinkedin } from "react-icons/bs";
-// import { AiOutlineFacebook } from "react-icons/ai";
->>>>>>> 6ed7a7fb7f9f02487384fff92465da7f32b2adf6
 import { ImTwitter } from "react-icons/im";
 import mapImg from "../../assets/Map.png";
 import { ThreeDots } from "react-loading-icons";
