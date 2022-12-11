@@ -204,7 +204,7 @@ const Contact = () => {
                   <a href="https://www.instagram.com/soberpal_ng/" ><BsInstagram  className="icon" /></a>
                 </div>
                 <div className="icon__container">
-                  <AiOutlineFacebook className="icon" />
+                  <a href="https://www.linkedin.com/company/soberpal/"><AiOutlineFacebook className="icon" /></a>
                 </div>
                 <div className="icon__container">
                   <a href="https://twitter.com/SoberPal_NG/" ><ImTwitter className="icon" /></a>
