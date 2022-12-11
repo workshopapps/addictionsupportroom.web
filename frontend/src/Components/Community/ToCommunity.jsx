@@ -4,6 +4,11 @@ import { motion } from "framer-motion";
 
 
 const ToCommunity = () => {
+
+  const scrollUp = () => {
+    window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
+  };
+
   return (
     <motion.div
       className="flex flex-col items-center pb-14"
@@ -14,7 +19,7 @@ const ToCommunity = () => {
         <p className=" text-[32px] md:text-[57px]">
           Join 200,000+ Anonymous Soberpals,{" "}
           <span className="md:inline-block">
-            Share Your Struggles And Accomplishmets
+            Share Your Struggles And Accomplishments
           </span>
         </p>
       </div>
@@ -23,13 +28,13 @@ const ToCommunity = () => {
           We have a community of over 200+ soberpal members constantly sharing
           tips,{" "}
           <span className="md:inline-block">
-            advices, experiences in our community section hencemaking each
+            advices, experiences in our community section hence making each
             other’s journey easier .
           </span>
         </p>
       </div>
-      <Link to="/communitypost">
-        <button className="h-[57px] w-[227px] bg-[#0E8ACB] rounded-[8px] text-white mt-4 hover--effect">
+      <Link onClick={scrollUp} to="/communitypost">
+        <button  className="h-[57px] w-[227px] bg-[#0E8ACB] rounded-[8px] text-white mt-4 hover--effect">
           Join The Community
         </button>
       </Link>

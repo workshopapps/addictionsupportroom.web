@@ -11,17 +11,22 @@ const AddPosts = ({ setShowModal }) => {
 
   const navigate = useNavigate();
 
+  const scrollUp = () => {
+    window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
+  };
+
+
   const token = localStorage.getItem("token");
   useEffect(() => {
       const user = localStorage.getItem("username");
       const avatar = localStorage.getItem("avatar");
 
-    // if (token) {
-    //   setChangeState(true);
-    // }
+    if (token) {
+      setChangeState(true);
+      console.log(changeState)
+    }
 
     if (user) {
-      // window.location.reload();
       setUserName(JSON.parse(user));
     }
     if (avatar) {
@@ -49,13 +54,12 @@ const AddPosts = ({ setShowModal }) => {
         'Authorization': `Bearer ${token}`,
         },
       body: JSON.stringify(post),
-    }).then((data) => {
-        console.log(data)
-      console.log("added");
+      }).then((data) => {
+        console.log(token)
       setIsPending(false);
       window.location.reload(false)
     });
-
+    scrollUp();
   };
   return (
     <div>
@@ -69,7 +73,7 @@ const AddPosts = ({ setShowModal }) => {
               <GrClose />
             </button>
 
-            <form onSubmit={handleSubmit}>
+            <form onSubmit={handleSubmit} >
               <div className="hidden">
                 <label>Post author</label>
                 <input
@@ -88,9 +92,9 @@ const AddPosts = ({ setShowModal }) => {
               </div>
                 <p className="mt-8 font-[600] text-[20px]">Make a post</p>
               <div className=" gap-3 mt-6 ">
-                <img className='w-[50px] h-[50px] border-2 border-[black] rounded-full mb-4' src={avatar} alt="" />
+                <img className='w-[50px] h-[50px] border-2 border-[#BBBBBB] rounded-full mb-4' src={avatar} alt="" />
                 <textarea
-                  className="border-[1px] p-2 w-full h-[200px] rounded-lg border-[black] outline-2 outline-blue"
+                  className="border-[1px] p-2 w-full h-[200px] rounded-lg border-[#BBBBBB] outline-2 outline-blue"
                   required
                   value={message}
                   onChange={(e) => setMessage(e.target.value)}

@@ -31,6 +31,9 @@ const Footer = () => {
           <div className="soberpal__footer-flex__box2">
             <div>
               <p>Company</p>
+              <Link onClick={scrollUp} to="/communitypost">
+                Community
+              </Link>
               <Link onClick={scrollUp} to="/about">
                 About us
               </Link>
@@ -65,6 +68,7 @@ const Footer = () => {
               <a href="https://twitter.com/SoberPal_NG/" >Twitter</a>
               <a href="https://www.instagram.com/soberpal_ng/" >Instagram</a>
               <a href="https://github.com/workshopapps/addictionsupportroom.web/" >Github</a>
+              <a href="https://www.linkedin.com/company/soberpal/">Linkedin</a>
             </div>
             <div>
               <p>Legal</p>

@@ -3,31 +3,43 @@ import { NavLink, Link } from "react-router-dom";
 import { navbarList } from "../../Data/navbar";
 import Button from "../../UI/Button";
 import MobileNav from "./MobileNav";
-import logo from '../../assets/soberpal-logo.png'
+import logo from "../../assets/soberpal-logo.png";
 
 const NavBar = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const [changeState, setChangeState] = useState(false)
+  const [changeState, setChangeState] = useState(false);
   const [username, setUserName] = useState("");
   const [avatar, setAvatar] = useState("");
 
+  // const handleLogout = () => {
+  //   localStorage.removeItem("token");
+  //   localStorage.removeItem("user");
+  //   localStorage.removeItem("avatar");
+  //   window.location.href = "/#/community/login";
+  //   window.location.reload(false);
+  // };
+
+  // setTimeout(() => {
+  //   console.log("logged out")
+  //   handleLogout();
+  // }, 20000);
+  // 86400000
   useEffect(() => {
-    const token = localStorage.getItem("token")
-    const user = localStorage.getItem("username")
-    const avatar = localStorage.getItem("avatar")
+    const token = localStorage.getItem("token");
+    const user = localStorage.getItem("username");
+    const avatar = localStorage.getItem("avatar");
 
     if (token) {
-      setChangeState(true)
-      // window.location.reload(changeState);
-    } 
-    
+      setChangeState(true);
+    }
+
     if (user) {
       setUserName(JSON.parse(user));
     }
     if (avatar) {
       setAvatar(JSON.parse(avatar));
     }
-  }, [changeState])
+  }, [changeState]);
   return (
     <div>
       <div className="py-4 max-w-[1400px] w-[90%] mx-auto flex justify-between">
@@ -47,15 +59,24 @@ const NavBar = () => {
           </ul>
         </div>
         {changeState ? (
-          <div className="bg-white hidden laptop:flex items-center px-3 ">
-            <img className=" w-[45px] h-[45px] border-2 border-[black] rounded-full " src={avatar} alt="fe" />
-            <p className="ml-3 font-[500]">{username}</p>
+          <div>
+            <div className="bg-white hidden laptop:flex items-center px-3 ">
+              <img
+                className=" w-[45px] h-[45px] border-2 border-[#BBBBBB] rounded-full "
+                src={avatar}
+                alt="fe"
+              />
+              <p className="ml-3 font-[500]">{username}</p>
+            </div>
+            {/* <button onClick={handleLogout}>
+              log out
+            </button> */}
           </div>
         ) : (
           <a
             className="hidden laptop:block"
             rel="noreferrer"
-            href="https://appetize.io/app/q3qnqdo5ibklola6h5xlimn6rq?device=pixel4&osVersion=11.0&scale=75"
+            href="https://appetize.io/app/eeysp57n33smvpijzflyzvhkee?device=pixel4&osVersion=11.0&scale=75"
             target="_blank"
           >
             <Button className="font-[500]" text="Download App" />

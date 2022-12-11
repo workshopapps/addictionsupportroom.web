@@ -20,3 +20,11 @@ class Note(Base):
     updated_at = Column(DateTime,
                         default=datetime.date(datetime.today()),
                         nullable=False)
+
+
+class LeadCollected(Base):
+    __tablename__ = 'lead_collected_email'
+
+    id = Column(Integer, primary_key=True, index=True)
+    email = Column(String)
+

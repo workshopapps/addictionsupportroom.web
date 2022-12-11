@@ -584,6 +584,16 @@
         font-size: 1.5rem;
     }
 }
+@media screen and (max-width: 271px) {
+    .soberpal__home-third__section p{
+        display: grid;
+        margin: auto;
+    }
+    .soberpal__home-third__section-cards p{
+       margin-left: 5rem;
+       margin-top: -1.6rem;
+    }
+}
 
 
 .join__community {

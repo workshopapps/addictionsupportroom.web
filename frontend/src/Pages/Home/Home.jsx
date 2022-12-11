@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState,useEffect } from "react";
 import Faq from "../../Components/faq/Faq";
 import { Link } from "react-router-dom";
 
@@ -19,12 +19,77 @@ import "./home.css";
 // import ToCommunity from "../../Components/Community/ToCommunity";
 import Button from "../../UI/Button";
 import ToCommunity from "../../Components/Community/ToCommunity";
+import { toast, ToastContainer } from "react-toastify";
 
 const Home = () => {
   const size = 40;
+  const [email, setEmail] = useState("")
+  const [message, setMessage] = useState("");
+  const [valid, setValid] = useState(false);
+
+  const success = () =>
+    toast.success("Email received! you will be contacted shortly", {
+      position: toast.POSITION.TOP_CENTER,
+    });
+
+  const emailValidation = () => {
+    const regex = /\S+@\S+\.\S+/;
+
+    if (regex.test(email)) {
+      setValid(true);
+      setMessage("Email is valid");
+    } else if (email === "") {
+      setValid(false);
+      setMessage("Input your email address");
+    } else if (!regex.test(email)) {
+      setValid(false);
+      setMessage("Email is invalid");
+    } else {
+      setMessage("");
+    }
+  };
+
+  const handleChange = (e) => {
+    setEmail(e.target.value)
+  }
+
+  // Fecthing the leads list
+  // useEffect(() => {
+  //   const fetchData = async () =>{
+  //     const result = await fetch("https://soberpal.hng.tech/api/home/faq");
+  //     const jsonResult = await result.json()
+
+  //     console.log(jsonResult)
+  //   }
+  //   fetchData()
+  // },[])
+
+
+  // Posting email to the API
+  const handleSubmit = async (e) => {
+    const myData = {
+      "email" : email
+    }
+    e.preventDefault()
+    if(valid) {
+      const result = await fetch("https://soberpal.hng.tech/api/home/faq", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(myData),
+      });
+      // const jsonResult = await result.json()
+      // console.log(jsonResult)
+      success()
+      setEmail("")
+      setMessage("");
+    }
+  }
 
   return (
     <div className="soberpal__home">
+      <ToastContainer autoClose={2000} />
       <motion.section
         className="soberpal__home-first__section"
         whileInView={{ y: [100, 50], opacity: [0, 0, 1] }}
@@ -40,7 +105,7 @@ const Home = () => {
           your progress and see results over time.
         </p>
 
-        <a href="https://appetize.io/app/3tqubo6rf6nodzau3rez6v2r5u?device=pixel4&osVersion=11.0&scale=75">
+        <a href="https://appetize.io/app/eeysp57n33smvpijzflyzvhkee?device=pixel4&osVersion=11.0&scale=75">
           <Button text="Start your recovery journey" />
         </a>
         <img src={HomeBg} alt="people" className="big_device" />
@@ -128,8 +193,7 @@ const Home = () => {
             </div>
             <p>
               Get support from advocates and recovering addicts willing to help
-              put you on <br />
-              the right path to recovery.
+              put you on the right path to recovery.
             </p>
           </div>
         </div>
@@ -181,16 +245,7 @@ const Home = () => {
         </div>
       </motion.section>
 
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
+    
       <div className="bg-[#D8F2FF] h-full  mb-[100px] pb-[100px]">
         <motion.section
           whileInView={{ y: [100, 50], opacity: [0, 0, 1] }}
@@ -244,29 +299,6 @@ const Home = () => {
         </motion.section>
       </div>
 
-      {/* <motion.section
-        className="join__community"
-        whileInView={{ y: [100, 50], opacity: [0, 0, 1] }}
-        transition={{ duration: 0.7 }}
-      >
-        <h4>
-          Join 200+ Anonymous Soberpals, <br />
-          Share Your Struggles And Accomplishmets
-        </h4>
-        <p>
-          We have a community of over 200+ soberpal members constantly sharing
-          tips, <br />
-          advices, experiences in our community section hencemaking each other’s
-          journey easier .
-        </p>
-
-          <Link classname="mx-auto bg-blue w-fit" to="/communitypost">
-            <p classname="mx-auto mt-4 py-3 w-fit px-4 bg-blue text-white">
-             Join The Community
-             </p>
-          </Link>
-         
-      </motion.section> */}
       <ToCommunity />
 
       <motion.section
@@ -284,7 +316,7 @@ const Home = () => {
           <p>
             Everything you need to go through the journey of reducing your
             alcohol intake. These are frequently asked questions about the
-            product. Can't find answer to your question? Send us a message.
+            product. Dont't find answer to your question? Send us a message.
           </p>
 
           <div className="">
@@ -329,19 +361,33 @@ const Home = () => {
           transition={{ duration: 0.7 }}
         >
           <h3 className="text-center font-[500] text-[28px]">
-            Have a questions ?
+            Have a question?
           </h3>
           <div className="soberpal__home-fifth__section__flexy">
-            <div className="soberpal__home-fifth__section__flex2">
+            <form
+              onSubmit={handleSubmit}
+              className="soberpal__home-fifth__section__flex2"
+            >
               <input
-                className="placeholder:text-slate-400 pl-2"
-                type="text"
+                className="placeholder:text-slate-400 pl-2 relative"
+                type="email"
                 name="email"
+                value={email}
+                onChange={handleChange}
                 id="email"
-                placeholder="Enter your email"
+                placeholder="Enter your email address"
               />
-              <button>send</button>
-            </div>
+              <button onClick={emailValidation}>send</button>
+              <div className="absolute -bottom-7">
+                <span
+                  className={`${
+                    valid ? "text-green-600" : "text-red-400"
+                  } text-sm`}
+                >
+                  {message}
+                </span>
+              </div>
+            </form>
           </div>
         </motion.div>
         <div className="w-full mb-[50px] mt-[150px] tablet:w-[100%] max-w-[1000px] mx-auto">

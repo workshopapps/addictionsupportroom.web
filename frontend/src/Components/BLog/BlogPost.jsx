@@ -10,13 +10,13 @@ const BlogPost = ({blogs, loading}) => {
 
   return (
     
-    <div className="flex flex-wrap max-w-[1300px] w-[90%] mx-auto justify-between">
+    <div className="flex flex-wrap max-w-[1300px] w-full tablet:w-[90%] mx-auto justify-between">
       
       { blogs?.map(({ imageURL, title, body, origin_blog, id }) => (
         <div Key={id} 
           className="block tablet:flex mt-12 gap-2 tablet:gap-5 mx-auto w-[95%] tablet:w-[90%] desktop:w-[45%] "
         >
-          <img className="h-[150px] w-[100%] tablet:h-[140px] tablet:w-[150px] laptop:h-[150px] laptop:w-[160px] desktop:h-[150px] desktop:w-[150px] xl:h-[180px] xl:w-[180px]" src={imageURL} alt="c1" />
+          <img className="h-[220px] w-[100%] tablet:h-[140px] mb-3 tablet:w-[150px] laptop:h-[150px] laptop:w-[160px] desktop:h-[120px] desktop:w-[150px] xl:h-[170px] xl:w-[180px]" src={imageURL} alt="c1" />
           <div>
             <p className="text-[16px] tablet:text-[19px] laptop:text-[20px] text-[black] font-[600] leading-5 tablet:leading-6 laptop:leading-8">
               {title}
