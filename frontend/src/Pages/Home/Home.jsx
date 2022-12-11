@@ -1,4 +1,4 @@
-import React, { useState,useEffect } from "react";
+import React, { useState } from "react";
 import Faq from "../../Components/faq/Faq";
 import { AiOutlineHeart } from "react-icons/ai";
 import { BiLineChart } from "react-icons/bi";
