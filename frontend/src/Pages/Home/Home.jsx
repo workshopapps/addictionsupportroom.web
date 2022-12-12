@@ -244,7 +244,7 @@ const Home = () => {
       </motion.section>
 
     
-      <div className="bg-[#D8F2FF] h-full  mb-[100px] pb-[100px]">
+      <div className="bg-[#D8F2FF] h-full mt-[17rem] mb-[100px] pb-[100px]">
         <motion.section
           whileInView={{ y: [100, 50], opacity: [0, 0, 1] }}
           transition={{ duration: 0.7 }}
@@ -362,13 +362,9 @@ const Home = () => {
         >
           <h3 className="text-center font-[500] text-[28px]">
             Have a question?
-            Have a question?
           </h3>
           <div className="soberpal__home-fifth__section__flexy">
-            <form
-              onSubmit={handleSubmit}
-              className="soberpal__home-fifth__section__flex2"
-            >
+           
             <form
               onSubmit={handleSubmit}
               className="soberpal__home-fifth__section__flex2"
@@ -384,26 +380,16 @@ const Home = () => {
               />
               <button onClick={emailValidation}>send</button>
               <div className="absolute -bottom-7">
-                <span
-                  className={`${
-                    valid ? "text-green-600" : "text-red-400"
-                  } text-sm`}
-                >
-                  {message}
-                </span>
+                  <span
+                    className={`${
+                      valid ? "text-green-600" : "text-red-400"
+                    } text-sm`}
+                  >
+                    {message}
+                  </span>
               </div>
             </form>
-              <button onClick={emailValidation}>send</button>
-              <div className="absolute -bottom-7">
-                <span
-                  className={`${
-                    valid ? "text-green-600" : "text-red-400"
-                  } text-sm`}
-                >
-                  {message}
-                </span>
-              </div>
-            </form>
+  
           </div>
         </motion.div>
         <div className="w-full mb-[50px] mt-[150px] tablet:w-[100%] max-w-[1000px] mx-auto">
