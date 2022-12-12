@@ -9,7 +9,7 @@ const useFetch = (url) => {
 
     
     
-    const token = localStorage.getItem("token");
+    const token = sessionStorage.getItem("token");
     const myHeaders = new Headers({
       'Authorization': `Bearer ${token} `,
     });

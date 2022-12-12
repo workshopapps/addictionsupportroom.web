@@ -134,7 +134,8 @@
     flex-direction: column;
     text-align: center;
     margin-top: 4rem;
-    /* padding: 0 1rem 0 1rem; */
+    margin-bottom: 6rem;
+    padding: 0 1rem 0 1rem;
     background-color: #fff;
 }
 

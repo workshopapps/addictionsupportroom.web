@@ -23,7 +23,14 @@ const PostDetails = () => {
     error,
   } = useFetch("https://soberpal.hng.tech/api/forum/" + postId);
 
-  const token = localStorage.getItem("token");
+  const token = sessionStorage.getItem("token");
+  
+  
+  // useEffect(() => {
+  //   const user = sessionStorage.getItem("username");
+  //   const avatar = sessionStorage.getItem("avatar");
+
+  // const token = localStorage.getItem("token");
 
   const handleDeletePost = () => {
 
