@@ -212,7 +212,7 @@ const Home = () => {
         className="soberpal__home-fourth__section pb-[50px] md:pb-[100px]"
       >
         <main className="text-[32px] text-center font-[700]">
-          How we can help You
+          How we can help you
         </main>
         <p className="text-[18px] mt-[20px] mb-[30px] text-center font-[400]">
           You are not alone in the fight against addiction
