@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { GrClose } from "react-icons/gr";
-import { useNavigate } from "react-router-dom";
 
 const AddPosts = ({ setShowModal }) => {
   const [message, setMessage] = useState("");
@@ -9,8 +8,7 @@ const AddPosts = ({ setShowModal }) => {
   const [isPending, setIsPending] = useState(false);
   const [changeState, setChangeState] = useState(false);
 
-  const navigate = useNavigate();
-
+  
   const scrollUp = () => {
     window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
   };

@@ -26,6 +26,7 @@ const Comment = ({post}) => {
   }, []);
 
   const handleSubmit = (e) => {
+    e.preventDefault();
     const comments = {
       origin_post_id: post.id,
       comment,
