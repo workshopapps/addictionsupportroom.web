@@ -51,7 +51,7 @@ def get_app() -> FastAPI:
 
     appv2.include_router(router=api_router_v2, prefix="/api")
 
-    app.mount("/v2", appv2)
+    app.mount("/api/v2", appv2)
 
 
 
