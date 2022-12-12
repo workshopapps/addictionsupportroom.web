@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams, useNavigate, Link } from "react-router-dom";
 import useFetch from "../../API/userFetch";
 
-import { BsThreeDots } from "react-icons/bs";
+import { BsThreeDots, BsArrowLeftCircleFill } from "react-icons/bs";
 import moment from "moment";
 
 import messageText from "../../assets/message-text.png";
@@ -24,8 +24,7 @@ const PostDetails = () => {
   } = useFetch("https://soberpal.hng.tech/api/forum/" + postId);
 
   const token = sessionStorage.getItem("token");
-  
-  
+
   // useEffect(() => {
   //   const user = sessionStorage.getItem("username");
   //   const avatar = sessionStorage.getItem("avatar");
@@ -33,7 +32,6 @@ const PostDetails = () => {
   // const token = localStorage.getItem("token");
 
   const handleDeletePost = () => {
-
     fetch("https://soberpal.hng.tech/api/forum/" + postId, {
       method: "DELETE",
       headers: {
@@ -45,10 +43,9 @@ const PostDetails = () => {
     });
   };
 
-
   useEffect(() => {
-    const user = localStorage.getItem("username");
-    const avatar = localStorage.getItem("avatar");
+    const user = sessionStorage.getItem("username");
+    const avatar = sessionStorage.getItem("avatar");
     if (token) {
       // setDeletePost(true)
     }
@@ -74,6 +71,12 @@ const PostDetails = () => {
       )}
       {post && (
         <section className="w-[90%] mx-auto mb-16">
+          <Link
+            to="/communitypost"
+            className="flex gap-3 mb-8 items-center text-[18px] hover:text-blue"
+          >
+            <BsArrowLeftCircleFill className="text-blue" size={25} /> Back
+          </Link>
           <div className=" mx-auto">
             <div className="bg-white w-full my-5 p-5 rounded-lg">
               <div className="flex justify-between items-center">
@@ -100,15 +103,18 @@ const PostDetails = () => {
                     </div>
                     {deleteBtn && (
                       <div className="absolute  top-0 left-[-18px] ">
-                        <div className="mx-auto bg-white" onClick={() => setDeleteBtn(false)}>
-                        <BsThreeDots className="mx-auto text-[20px] "/>
-                      </div>
-                      <div
-                        onClick={handleDeletePost}
-                        className="shadow-lg py-1 px-2 text-[12px] cursor-pointer rounded-md border-[1px] border-gray-400"
-                      >
-                        Delete
-                      </div>
+                        <div
+                          className="mx-auto bg-white"
+                          onClick={() => setDeleteBtn(false)}
+                        >
+                          <BsThreeDots className="mx-auto text-[20px] " />
+                        </div>
+                        <div
+                          onClick={handleDeletePost}
+                          className="shadow-lg py-1 px-2 text-[12px] cursor-pointer rounded-md border-[1px] border-gray-400"
+                        >
+                          Delete
+                        </div>
                       </div>
                     )}
                   </div>
@@ -118,11 +124,11 @@ const PostDetails = () => {
               <p className="mt-5">{post.message}</p>
               <div className="flex gap-2 mt-3 items-center">
                 <img
-                  className="w-[20px] h-[20px]"
+                  className="w-[15px] h-[15px]"
                   src={messageText}
                   alt="message"
                 />
-                <p>{post.num_of_comments}</p>
+                <p className="hover:text-blue cursor-pointer text-[14px]">{post.num_of_comments}</p>
               </div>
 
               <hr className="bg-[#BBBBBB] h-[2px] mt-6 mb-4" />
