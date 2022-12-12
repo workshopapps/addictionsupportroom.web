@@ -26,8 +26,6 @@ const Comment = ({post}) => {
   }, []);
 
   const handleSubmit = (e) => {
-    e.preventDefault();
-    // console.log("This post ID -----> ", post.id);
     const comments = {
       origin_post_id: post.id,
       comment,
