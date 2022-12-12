@@ -33,12 +33,12 @@ const PostDetails = () => {
         //   })
         // }
 
-  const token = localStorage.getItem("token");
+  const token = sessionStorage.getItem("token");
   
   
   useEffect(() => {
-    const user = localStorage.getItem("username");
-    const avatar = localStorage.getItem("avatar");
+    const user = sessionStorage.getItem("username");
+    const avatar = sessionStorage.getItem("avatar");
 
     if (token) {
       // setDeletePost(true)

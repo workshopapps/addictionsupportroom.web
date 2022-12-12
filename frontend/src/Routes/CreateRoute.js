@@ -25,7 +25,7 @@ import AddPosts from '../Pages/Community/AddPosts';
 const CreateRoute = () => {
 
   const [token, setToken] = useState();
-  // const token = localStorage.getItem('accessToken');
+  // const token = sessionStorage.getItem('accessToken');
 
   return (
     <Routes>
