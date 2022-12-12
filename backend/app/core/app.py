@@ -46,7 +46,7 @@ def get_app() -> FastAPI:
         openapi_url="/openapi.json",
         default_response_class=UJSONResponse,
     )
-    appv1.include_router(router=api_router_v1, prefix="/api")
+    appv1.include_router(router=api_router_v1)
     app.mount("/api/v1", appv1)
 
 
@@ -61,7 +61,7 @@ def get_app() -> FastAPI:
         default_response_class=UJSONResponse
     )
 
-    appv2.include_router(router=api_router_v2, prefix="/api")
+    appv2.include_router(router=api_router_v2)
     app.mount("/api/v2", appv2)
 
 
