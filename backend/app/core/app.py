@@ -1,5 +1,5 @@
 from api.router import api_router
-from v2.router import api_router_v2
+from api.v2.router import api_router_v2
 from fastapi import FastAPI
 from fastapi.responses import UJSONResponse
 from fastapi.middleware.cors import CORSMiddleware

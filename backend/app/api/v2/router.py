@@ -1,27 +1,27 @@
 from fastapi.routing import APIRouter
 
-from v2.auth.views import router as auth_router
-from v2.communication.views import router as communication_router
-from v2.community.views import router as community_router
-from v2.contact_us.views import router as contact_router
-from v2.home.routers import router as home_router
-from v2.example.views import router as example_router
-from v2.progress.views import router as progress_router
-from v2.call.views import router as call_router
-from v2.blog.views import router as blog_router
-from v2.emergency.views import router as emergency_router
-from v2.forum.views import router as forum_router
-from v2.feedback.views import router as feedback_router
-from v2.settings.views import router as settings_router
+from api.v2.auth.views import router as auth_router
+from api.v2.communication.views import router as communication_router
+from api.v2.community.views import router as community_router
+from api.v2.contact_us.views import router as contact_router
+from api.v2.home.routers import router as home_router
+from api.v2.example.views import router as example_router
+from api.v2.progress.views import router as progress_router
+from api.v2.call.views import router as call_router
+from api.v2.blog.views import router as blog_router
+from api.v2.emergency.views import router as emergency_router
+from api.v2.forum.views import router as forum_router
+from api.v2.feedback.views import router as feedback_router
+from api.v2.settings.views import router as settings_router
 
 
 from fastapi.security import OAuth2PasswordRequestForm
 from fastapi import Depends, FastAPI, HTTPException, status
 from sqlalchemy.orm import Session
 
-from v2.auth.views import login
-from v2 import deps
-from v2.auth.schemas import UserLogin
+from api.v2.auth.views import login
+from api.v2 import deps
+from api.v2.auth.schemas import UserLogin
 
 api_router_v2 = APIRouter()
 

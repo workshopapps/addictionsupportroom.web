@@ -13,7 +13,6 @@ from api.emergency.views import router as emergency_router
 from api.forum.views import router as forum_router
 from api.feedback.views import router as feedback_router
 from api.settings.views import router as settings_router
-from v2.router import api_router_v2 as v2_router
 
 from fastapi.security import OAuth2PasswordRequestForm
 from fastapi import Depends, FastAPI, HTTPException, status
@@ -64,6 +63,3 @@ api_router.include_router(emergency_router,
 api_router.include_router(feedback_router, prefix="/feedback", tags=["Feedback"])
 api_router.include_router(forum_router, prefix="/forum", tags=["Forum"])
 api_router.include_router(settings_router, prefix="/settings", tags=["Settings"])
-
-
-api_router.include_router(v2_router, prefix="/v2", tags=["v2"])
