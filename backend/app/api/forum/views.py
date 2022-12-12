@@ -82,6 +82,7 @@ def get_post_EP(
     '''
     post_intance = PostClass(current_user)
     post = post_intance.delete_a_post(db, id)
+    return ResponseModel(status=204, message=f'Post of ID {id} has been deleted')
 
 
 @router.post(
@@ -101,4 +102,4 @@ def create_post_comment_EP(request: PostCommentBase, db: Session = Depends(get_d
     if post:
         return post
     else:
-        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail=f'Post of ID {request.origin_post_id} does not exist and can not have comment')
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail=f'Post of ID {request.origin_post_id} does not exist and can not have comment') 
