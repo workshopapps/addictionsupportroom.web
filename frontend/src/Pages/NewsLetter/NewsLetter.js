@@ -4,7 +4,7 @@ import "./newsletter.scss";
 import newsletterImg from "../../assets/newsletter.png";
 import Maradel from "../../assets/Maradel.png";
 import NewsCard from "./NewsCard";
-import { BsInstagram } from "react-icons/bs";
+import { BsInstagram, BsLinkedin } from "react-icons/bs";
 import { AiOutlineFacebook } from "react-icons/ai";
 import { ImTwitter } from "react-icons/im";
 import { useForm } from "react-hook-form";
@@ -79,7 +79,7 @@ const NewsLetter = () => {
           whileInView={{ y: [100, 30], opacity: [0, 0, 1] }}
           transition={{ duration: 1.2 }}
         >
-          We provide our network of customers, prospects and subbscriers
+          We provide our network of customers, prospects and subscribers
           <br />
           with relevant and valuable information about our latest products
           <br />
@@ -154,7 +154,7 @@ const NewsLetter = () => {
       >
         <h1>Recent News</h1>
         <p>
-          We provide top notch and interesting newsletters. elow are some
+          We provide top notch and interesting newsletters. Below are some
           examples
         </p>
         <div className="newscard__container">
@@ -174,22 +174,20 @@ const NewsLetter = () => {
           className="newsletter__icons"
         >
           <div className="icon__container-newsletter">
-            <BsInstagram className="icon__newsletter" />
+            <a href="https://www.instagram.com/soberpal_ng/">
+              <BsInstagram className="icon__newsletter" />
+            </a>
           </div>
-          <motion.div
-            whileInView={{ y: [100, 1], opacity: [0, 0, 1] }}
-            transition={{ duration: 1.2 }}
-            className="icon__container-newsletter"
-          >
-            <AiOutlineFacebook className="icon__newsletter" />
-          </motion.div>
-          <motion.div
-            whileInView={{ y: [100, 1], opacity: [0, 0, 1] }}
-            transition={{ duration: 1.2 }}
-            className="icon__container-newsletter"
-          >
-            <ImTwitter className="icon__newsletter" />
-          </motion.div>
+          <div className="icon__container-newsletter">
+            <a href="https://www.linkedin.com/company/soberpal/">
+              <BsLinkedin className="icon__newsletter" />
+            </a>
+          </div>
+          <div className="icon__container-newsletter">
+            <a href="https://twitter.com/SoberPal_NG/">
+              <ImTwitter className="icon__newsletter" />
+            </a>
+          </div>
         </motion.div>
       </motion.section>
 

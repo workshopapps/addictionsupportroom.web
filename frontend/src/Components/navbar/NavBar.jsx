@@ -11,14 +11,19 @@ const NavBar = () => {
   const [username, setUserName] = useState("");
   const [avatar, setAvatar] = useState("");
 
-  const handleLogout = () => {
-    localStorage.removeItem("token");
-    localStorage.removeItem("user");
-    localStorage.removeItem("avatar");
-    window.location.href = "/#/community/login";
-    window.location.reload(false);
-  };
+  // const handleLogout = () => {
+  //   localStorage.removeItem("token");
+  //   localStorage.removeItem("user");
+  //   localStorage.removeItem("avatar");
+  //   window.location.href = "/#/community/login";
+  //   window.location.reload(false);
+  // };
 
+  // setTimeout(() => {
+  //   console.log("logged out")
+  //   handleLogout();
+  // }, 20000);
+  // 86400000
   useEffect(() => {
     const token = localStorage.getItem("token");
     const user = localStorage.getItem("username");
@@ -26,11 +31,9 @@ const NavBar = () => {
 
     if (token) {
       setChangeState(true);
-      // window.location.reload(changeState);
     }
 
     if (user) {
-      console.log("user :>> ", user);
       setUserName(JSON.parse(user));
     }
     if (avatar) {
@@ -65,19 +68,15 @@ const NavBar = () => {
               />
               <p className="ml-3 font-[500]">{username}</p>
             </div>
-            <button
-              className="font-[500] ml-8 mt-2 text-[18px] "
-              onClick={() => handleLogout()}
-            >
-              Logout
-            </button>
-            <p>.</p>
+            {/* <button onClick={handleLogout}>
+              log out
+            </button> */}
           </div>
         ) : (
           <a
             className="hidden laptop:block"
             rel="noreferrer"
-            href="https://appetize.io/app/q3qnqdo5ibklola6h5xlimn6rq?device=pixel4&osVersion=11.0&scale=75"
+            href="https://appetize.io/app/eeysp57n33smvpijzflyzvhkee?device=pixel4&osVersion=11.0&scale=75"
             target="_blank"
           >
             <Button className="font-[500]" text="Download App" />

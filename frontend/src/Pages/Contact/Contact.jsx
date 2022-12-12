@@ -3,8 +3,8 @@ import { useState, useRef } from "react";
 import "./contact.scss";
 import { GrLocation } from "react-icons/gr";
 import { BsTelephone } from "react-icons/bs";
-import { BsInstagram } from "react-icons/bs";
-import { AiOutlineFacebook } from "react-icons/ai";
+import { BsInstagram, BsLinkedin } from "react-icons/bs";
+// import { AiOutlineFacebook } from "react-icons/ai";
 import { ImTwitter } from "react-icons/im";
 import mapImg from "../../assets/Map.png";
 import { ThreeDots } from "react-loading-icons";
@@ -204,7 +204,7 @@ const Contact = () => {
                   <a href="https://www.instagram.com/soberpal_ng/" ><BsInstagram  className="icon" /></a>
                 </div>
                 <div className="icon__container">
-                  <AiOutlineFacebook className="icon" />
+                <a href="https://www.linkedin.com/company/soberpal/" ><BsLinkedin className="icon" /></a>
                 </div>
                 <div className="icon__container">
                   <a href="https://twitter.com/SoberPal_NG/" ><ImTwitter className="icon" /></a>

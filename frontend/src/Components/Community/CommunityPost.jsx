@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import useFetch from "../../API/userFetch";
 import AddPosts from "../../Pages/Community/AddPosts";
 import ComPosts from "./Posts";
@@ -13,7 +13,7 @@ const CommunityPost = ({ username, avatar }) => {
   } = useFetch("https://soberpal.hng.tech/api/forum/");
 
   return (
-    <div className="max-w-[800px] bg-[#F5F5F5] my-16 py-10 mx-auto w-[90%] rounded-[14px]">
+    <div className="max-w-[800px] bg-[#F5F5F5] my-16 py-10 mx-auto w-full tablet:w-[90%] rounded-[14px]">
       <div className="w-[90%] mx-auto mb-16">
         <div
           to="/community/addPosts"
@@ -23,7 +23,7 @@ const CommunityPost = ({ username, avatar }) => {
           <img
             className="w-[40px] h-[40px] border-2 border-[#BBBBBB] rounded-full"
             src={avatar}
-            alt=""
+            alt="hh"
           />
           <input
             type="text"
