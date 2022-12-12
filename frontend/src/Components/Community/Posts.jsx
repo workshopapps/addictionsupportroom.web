@@ -66,7 +66,7 @@ const ComPosts = ({ posts }) => {
                   src={messageText}
                   alt="message"
                 />
-                <p>{post.num_of_comments}</p>
+                <p className="hover:text-blue cursor-pointer text-[14px]">{post.num_of_comments}</p>
               </div>
             </Link>
 
