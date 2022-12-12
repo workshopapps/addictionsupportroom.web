@@ -6,7 +6,7 @@ const Alcohol = () => {
   return (
     <motion.div
       whileInView={{ y: [100, 0], opacity: [0, 0, 1] }}
-      transition={{ duration: 1 }}
+      transition={{ duration: 0.7 }}
       className="min-w-[343px] md:max-w-[1100px] mx-auto px-4 md:px-8 py-10"
     >
       <p className="text-[12px] md:text-[16px] font-[700] text-center text-[#387E9C]">
@@ -21,7 +21,7 @@ const Alcohol = () => {
         untreated, causes severe consequences.
       </p>
       <motion.div
-        whileInView={{ x: [-100, 0], opacity: [0, 0, 1] }}
+        whileInView={{ y: [100, 0], opacity: [0, 0, 1] }}
         transition={{ duration: 0.7 }}
         className="flex justify-center md:gap-10 text-[#0E8ACB] gap-5 text-[14px] md:text-[20px] font-[700] my-8"
       >
@@ -40,7 +40,7 @@ const Alcohol = () => {
       </motion.div>
 
       <motion.div
-        whileInView={{ x: [100, 0], opacity: [0, 0, 1] }}
+        whileInView={{ y: [100, 0], opacity: [0, 0, 1] }}
         transition={{ duration: 0.7 }}
         className="py-2"
       >
@@ -75,7 +75,7 @@ const Alcohol = () => {
       </motion.div>
 
       <motion.div
-        whileInView={{ x: [100, 0], opacity: [0, 0, 1] }}
+        whileInView={{ y: [100, 0], opacity: [0, 0, 1] }}
         transition={{ duration: 0.7 }}
         id="symptoms"
         className="py-3"
@@ -135,7 +135,7 @@ const Alcohol = () => {
       </motion.div>
 
       <motion.div
-        whileInView={{ x: [100, 0], opacity: [0, 0, 1] }}
+        whileInView={{ y: [100, 0], opacity: [0, 0, 1] }}
         transition={{ duration: 0.7 }}
         id="complications"
         className="py-3"
@@ -173,7 +173,7 @@ const Alcohol = () => {
       </motion.div>
 
       <motion.div
-        whileInView={{ x: [100, 0], opacity: [0, 0, 1] }}
+        whileInView={{ y: [100, 0], opacity: [0, 0, 1] }}
         transition={{ duration: 0.7 }}
         id="treatment"
         className="py-3"
@@ -263,7 +263,7 @@ const Alcohol = () => {
       </motion.div>
 
       <motion.div
-        whileInView={{ x: [100, 0], opacity: [0, 0, 1] }}
+        whileInView={{ y: [100, 0], opacity: [0, 0, 1] }}
         transition={{ duration: 0.7 }}
         id="outlook"
         className="py-3 mt-6"
