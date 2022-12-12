@@ -10,7 +10,7 @@ import { motion } from 'framer-motion'
 
 const Career = () => {
   return (
-    <div className="soberpal__career">
+    <div className="soberpal__career max-w-[1400px] mx-auto">
       <section className="soberpal__career-first__section">
         <motion.div
           initial={{ opacity: 0 }}

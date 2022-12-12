@@ -47,8 +47,8 @@ const PostDetails = () => {
 
 
   useEffect(() => {
-    const user = localStorage.getItem("username");
-    const avatar = localStorage.getItem("avatar");
+    const user = sessionStorage.getItem("username");
+    const avatar = sessionStorage.getItem("avatar");
     if (token) {
       // setDeletePost(true)
     }
