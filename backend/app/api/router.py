@@ -1,6 +1,5 @@
 from fastapi.routing import APIRouter
 
-# from api.system.views import router as system_router
 from api.auth.views import router as auth_router
 from api.communication.views import router as communication_router
 from api.community.views import router as community_router
@@ -9,7 +8,6 @@ from api.home.routers import router as home_router
 from api.example.views import router as example_router
 from api.progress.views import router as progress_router
 from api.call.views import router as call_router
-# from api.relapse.views import router as relapse_router
 from api.blog.views import router as blog_router
 from api.emergency.views import router as emergency_router
 from api.forum.views import router as forum_router
