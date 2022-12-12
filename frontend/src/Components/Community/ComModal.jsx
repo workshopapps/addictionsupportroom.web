@@ -32,9 +32,9 @@ const ComModal = ({ setShowModal, setToken }) => {
       .then((data) => data.json())
       .then((res) => {
         console.log(res);
-        localStorage.setItem("token", res.data.access_token.token);
-        localStorage.setItem("username", JSON.stringify(username));
-        localStorage.setItem("avatar", JSON.stringify(res.data.avatar));
+        sessionStorage.setItem("token", res.data.access_token.token);
+        sessionStorage.setItem("username", JSON.stringify(username));
+        sessionStorage.setItem("avatar", JSON.stringify(res.data.avatar));
         navigate("/communitypost");
         
         window.location.reload(false);

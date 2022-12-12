@@ -13,9 +13,9 @@ const Community = () => {
   
 
   useEffect(() => {
-    const token = localStorage.getItem("token");
-    const user = localStorage.getItem("username");
-    const avatar = localStorage.getItem("avatar");
+    const token = sessionStorage.getItem("token");
+    const user = sessionStorage.getItem("username");
+    const avatar = sessionStorage.getItem("avatar");
 
     if (!token) {
       navigate("/community/login");

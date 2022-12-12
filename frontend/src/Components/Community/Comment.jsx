@@ -8,10 +8,10 @@ const Comment = ({post}) => {
   const [isPending, setIsPending] = useState(false);
   const [changeState, setChangeState] = useState(false);
 
-  const token = localStorage.getItem("token");
+  const token = sessionStorage.getItem("token");
   useEffect(() => {
-    const user = localStorage.getItem("username");
-    const avatar = localStorage.getItem("avatar");
+    const user = sessionStorage.getItem("username");
+    const avatar = sessionStorage.getItem("avatar");
 
     // if (token) {
     //   setChangeState(true);
@@ -26,8 +26,6 @@ const Comment = ({post}) => {
   }, []);
 
   const handleSubmit = (e) => {
-    e.preventDefault();
-    // console.log("This post ID -----> ", post.id);
     const comments = {
       origin_post_id: post.id,
       comment,

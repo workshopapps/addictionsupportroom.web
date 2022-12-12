@@ -9,6 +9,7 @@ module.exports = {
         blue: "#0E8ACB",
       },
       screens: {
+        phone: "279px",
         mobile: "360px",
         tablet: "480px",
         laptop: "780px",
