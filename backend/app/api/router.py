@@ -1,6 +1,5 @@
 from fastapi.routing import APIRouter
 
-# from api.system.views import router as system_router
 from api.auth.views import router as auth_router
 from api.communication.views import router as communication_router
 from api.community.views import router as community_router
@@ -9,12 +8,12 @@ from api.home.routers import router as home_router
 from api.example.views import router as example_router
 from api.progress.views import router as progress_router
 from api.call.views import router as call_router
-# from api.relapse.views import router as relapse_router
 from api.blog.views import router as blog_router
 from api.emergency.views import router as emergency_router
 from api.forum.views import router as forum_router
 from api.feedback.views import router as feedback_router
 from api.settings.views import router as settings_router
+from v2.router import api_router_v2 as v2_router
 
 from fastapi.security import OAuth2PasswordRequestForm
 from fastapi import Depends, FastAPI, HTTPException, status
@@ -65,3 +64,6 @@ api_router.include_router(emergency_router,
 api_router.include_router(feedback_router, prefix="/feedback", tags=["Feedback"])
 api_router.include_router(forum_router, prefix="/forum", tags=["Forum"])
 api_router.include_router(settings_router, prefix="/settings", tags=["Settings"])
+
+
+api_router.include_router(v2_router, prefix="/v2", tags=["v2"])
