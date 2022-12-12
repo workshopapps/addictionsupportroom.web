@@ -98,7 +98,7 @@ const PostDetails = () => {
                       </div>
                       <div
                         onClick={handleDeletePost}
-                        className="shadow-lg p-1 cursor-pointer rounded-md border-2 border-gray-400"
+                        className="shadow-lg py-1 px-2 text-[12px] cursor-pointer rounded-md border-[1px] border-gray-400"
                       >
                         Delete
                       </div>
