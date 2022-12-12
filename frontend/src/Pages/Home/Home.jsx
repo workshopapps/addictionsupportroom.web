@@ -14,10 +14,9 @@ import Button from "../../UI/Button";
 import ToCommunity from "../../Components/Community/ToCommunity";
 import { toast, ToastContainer } from "react-toastify";
 
-
 const Home = () => {
   const size = 40;
-  const [email, setEmail] = useState("")
+  const [email, setEmail] = useState("");
   const [message, setMessage] = useState("");
   const [valid, setValid] = useState(false);
 
@@ -44,8 +43,8 @@ const Home = () => {
   };
 
   const handleChange = (e) => {
-    setEmail(e.target.value)
-  }
+    setEmail(e.target.value);
+  };
 
   // Fecthing the leads list
   // useEffect(() => {
@@ -58,14 +57,13 @@ const Home = () => {
   //   fetchData()
   // },[])
 
-
   // Posting email to the API
   const handleSubmit = async (e) => {
     const myData = {
-      "email" : email
-    }
-    e.preventDefault()
-    if(valid) {
+      email: email,
+    };
+    e.preventDefault();
+    if (valid) {
       const result = await fetch("https://soberpal.hng.tech/api/home/faq", {
         method: "POST",
         headers: {
@@ -75,13 +73,11 @@ const Home = () => {
       });
       // const jsonResult = await result.json()
       // console.log(jsonResult)
-      success()
-      setEmail("")
+      success();
+      setEmail("");
       setMessage("");
     }
-  }
-  
-  
+  };
 
   return (
     <div className="soberpal__home">
@@ -89,7 +85,7 @@ const Home = () => {
       <ToastContainer autoClose={2000} />
       <motion.section
         className="soberpal__home-first__section"
-        whileInView={{ y: [100, 50], opacity: [0, 0, 1] }}
+        whileInView={{ y: [100, 0], opacity: [0, 0, 1] }}
         transition={{ duration: 0.7 }}
       >
         <h1 className="text-[black]">
@@ -110,10 +106,10 @@ const Home = () => {
       </motion.section>
 
       <motion.section
-        whileInView={{ y: [100, 50], opacity: [0, 0, 1] }}
+        whileInView={{ y: [100, 0], opacity: [0, 0, 1] }}
         transition={{ duration: 0.7 }}
       >
-        <p className="mt-[70px] mb-[40px] text-[28px] font-[600] text-center">
+        <p className="mt-[10px] md:mt-[70px] mb-[40px] text-[28px] font-[600] text-center">
           We’ve helped a couple of people reduce their intake of alcohol
         </p>
         <div className="flex flex-wrap justify-between mt-[20px] mb-[70px] ">
@@ -141,66 +137,79 @@ const Home = () => {
       </motion.section>
 
       <motion.section
-        whileInView={{ y: [100, 50], opacity: [0, 0, 1] }}
+        whileInView={{ y: [100, 0], opacity: [0, 0, 1] }}
         transition={{ duration: 0.7 }}
         className="soberpal__home-third__section"
       >
-        <p className="text-[32px] text-center font-[700]">Our services</p>
-        <p className="text-[18px] mt-[20px] mb-[50px] text-center font-[400]">
-          You are not alone in the fight against addiction
-        </p>
+        <div className="w-[100%] text-center">
+          <p className="text-[32px] mx-auto font-[700] p-0">Our services</p>
+          <p className="text-[18px] mt-[20px] mb-[50px] text-center font-[400]">
+            You are not alone in the fight against addiction
+          </p>
+        </div>
 
         <div className="soberpal__home-third__section-cards ">
           <div className="cards__padding">
             <div className="cards__flex">
-              <AiOutlineHeart size={size} className="icon__round" />
-              <h3>Progress Reports</h3>
+              <AiOutlineHeart
+                size={size}
+                className="icon__round items-start justify-start"
+              />
+              <div className="flex flex-col gap-6">
+                <h3>Progress Reports</h3>
+                <p>Keep track of your success journey and stay motivated.</p>
+              </div>
             </div>
-            <p>Keep track of your success journey and stay motivated.</p>
           </div>
 
           <div className="cards__padding">
             <div className="cards__flex">
               <BsChatDots size={size} className="icon__round" />
-              <h3>Chat Room</h3>
+              <div className="flex flex-col gap-6">
+                <h3>Chat Room</h3>
+                <p>
+                  We help you identify the different types of alchol addiction,
+                  the health <br />
+                  implication and what needs to be done to reduce your alchol
+                  consumption.
+                </p>
+              </div>
             </div>
-            <p>
-              We help you identify the different types of alchol addiction, the
-              health <br />
-              implication and what needs to be done to reduce your alchol
-              consumption.
-            </p>
           </div>
 
           <div className="cards__padding">
             <div className="cards__flex">
               <BiLineChart size={size} className="icon__round" />
-              <h3>Daily Notes</h3>
+              <div className="flex flex-col gap-6">
+                <h3>Daily Notes</h3>
+                <p>
+                  You have a personal journal for everyday moods or urges which
+                  can serve as a reference in your sobriety journey.
+                </p>
+              </div>
             </div>
-            <p>
-              You have a personal journal for everyday moods or urges which can
-              serve as a reference in your sobriety journey.
-            </p>
           </div>
 
           <div className="cards__padding">
             <div className="cards__flex">
-              <TiFlashOutline size={50} className="icon__padding" />
-              <h3>Support Team</h3>
+              <TiFlashOutline size={50} className="icon__padding h-[40px]" />
+              <div className="flex flex-col gap-6">
+                <h3>Support Team</h3>
+                <p>
+                  Get support from advocates and recovering addicts willing to
+                  help put you on the right path to recovery. put you on the
+                  right path to recovery.
+                </p>
+              </div>
             </div>
-            <p>
-              Get support from advocates and recovering addicts willing to help
-              put you on the right path to recovery.
-              put you on the right path to recovery.
-            </p>
           </div>
         </div>
       </motion.section>
 
       <motion.section
-        whileInView={{ y: [100, 50], opacity: [0, 0, 1] }}
+        whileInView={{ y: [100, 0], opacity: [0, 0, 1] }}
         transition={{ duration: 0.7 }}
-        className="soberpal__home-fourth__section"
+        className="soberpal__home-fourth__section pb-[50px] md:pb-[100px]"
       >
         <main className="text-[32px] text-center font-[700]">
           How we can help You
@@ -210,16 +219,20 @@ const Home = () => {
         </p>
         <div className="h-full w-[90%] max-w-[900px] flex flex-wrap ">
           <div className="mx-auto mt-[20px]">
-            <img src={phone} alt="phones" className="h-[400px] w-auto " />
+            <img
+              src={phone}
+              alt="phones"
+              className="h-[200px] object-contain md:h-[400px] w-auto "
+            />
           </div>
-          <div className="mt-[100px] tablet:mt-[50px] mx-auto">
+          <div className="tablet:mt-[50px] mx-auto">
             <div className="flex gap-4 h-auto items-center mx-auto">
               <p className="rounded-[100%] text-[white] bg-blue p-2 px-5 mr-[16px]">
                 1
               </p>
               <p className="text-[16px]">Getting sober</p>
             </div>
-            <div className="flex gap-4 h-auto items-center">
+            <div className="flex gap-4 text-start h-auto items-center">
               <p className="rounded-[100%] text-[white] bg-blue p-2 px-5 mr-[16px]">
                 2
               </p>
@@ -248,7 +261,7 @@ const Home = () => {
         <motion.section
           whileInView={{ y: [100, 50], opacity: [0, 0, 1] }}
           transition={{ duration: 0.7 }}
-          className="w-[90%] laptop:w-[70%] mx-auto"
+          className="w-[90%] laptop:w-[70%] mx-auto pt-[40px]"
         >
           <main className="text-[38px] text-center font-[700]">
             What people say about us
@@ -297,11 +310,10 @@ const Home = () => {
         </motion.section>
       </div>
 
-
       <ToCommunity />
 
       <motion.section
-        whileInView={{ y: [100, 50], opacity: [0, 0, 1] }}
+        whileInView={{ y: [100, 0], opacity: [0, 0, 1] }}
         transition={{ duration: 0.7 }}
         className="soberpal__home-fifth__section max-w-[1300px] mx-auto"
       >
@@ -357,7 +369,7 @@ const Home = () => {
           </div>
         </motion.div>
         <motion.div
-          whileInView={{ y: [100, 50], opacity: [0, 0, 1] }}
+          whileInView={{ y: [100, 0], opacity: [0, 0, 1] }}
           transition={{ duration: 0.7 }}
         >
           <h3 className="text-center font-[500] text-[28px]">

@@ -10,9 +10,9 @@ const About = () => {
   return (
     <div className="about__container">
       <motion.header
-        whileInView={{ y: [100, 50], opacity: [0, 0, 1] }}
+        whileInView={{ y: [100, 0], opacity: [0, 0, 1] }}
         transition={{ duration: 0.7 }}
-        className="header"
+        className="header p-4"
       >
         <p className="about">About us</p>
         <h1>About Soberpal</h1>
@@ -22,17 +22,17 @@ const About = () => {
           <br />
           so you don’t have to - the perfect starting point.
         </p>
-        <p className="learn__more">Learn more about the team behind soberpal</p>
+        <p className="learn__more ">Learn more about the team behind soberpal</p>
       </motion.header>
       {/* app stats section */}
       <motion.div
-        whileInView={{ y: [100, 50], opacity: [0, 0, 1] }}
+        whileInView={{ y: [100, 0], opacity: [0, 0, 1] }}
         transition={{ duration: 0.7 }}
       >
         <AppStats />
       </motion.div>
       <motion.div
-        whileInView={{ y: [100, 50], opacity: [0, 0, 1] }}
+        whileInView={{ y: [100, 0], opacity: [0, 0, 1] }}
         transition={{ duration: 0.7 }}
         className="team__container"
       >
@@ -57,7 +57,7 @@ const About = () => {
 
       {/* ourvalues section */}
       <motion.section
-        whileInView={{ y: [100, 50], opacity: [0, 0, 1] }}
+        whileInView={{ y: [100, 0], opacity: [0, 0, 1] }}
         transition={{ duration: 0.7 }}
         className="center"
       >
@@ -70,7 +70,7 @@ const About = () => {
       </motion.section>
 
 
-      <div className="w-full mb-[50px] mt-[120px] tablet:w-[90%] max-w-[1000px] mx-auto">
+      <div className="w-full mb-[50px] mt-[80px] tablet:w-[90%] max-w-[1000px] mx-auto px-4">
         <Download />
       </div>
     </div>
