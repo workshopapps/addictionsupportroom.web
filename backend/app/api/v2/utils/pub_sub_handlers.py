@@ -19,15 +19,16 @@ from typing import (
 )
 from sqlalchemy.orm import Session
 
-from api.deps import (
+from ..deps import (
     find_existed_user, )
-from api.communication.crud import (
+
+from ..communication.crud import (
     send_new_message,
     find_admin_in_room,
     find_existed_room,
     send_new_room_message,
 )
-from api.auth.schemas import UserBase
+from ..auth.schemas import UserBase
 
 # from app.rooms.crud import (
 #     ban_user_from_room,

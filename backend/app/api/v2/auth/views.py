@@ -1,14 +1,14 @@
-from api.auth import schemas
-from api.auth.schemas import UserLogin, AccessToken
-from api.common.schemas import ResponseSchema, ResponseModel
-from api.communication.schemas import RoomCreate
+from . import schemas
+from .schemas import UserLogin, AccessToken
+from ..common.schemas import ResponseSchema, ResponseModel
+from ..communication.schemas import RoomCreate
+from ..communication import crud
 from db import models
 import logging
 from sqlalchemy.orm import Session
 from fastapi import APIRouter, Depends, HTTPException, status
 
-from api import deps
-from api.communication import crud
+from .. import deps
 
 from fastapi.security import OAuth2PasswordBearer, OAuth2PasswordRequestForm
 # from deps import get_current_user
@@ -73,15 +73,17 @@ async def create_assign_new_room_member(
         return results
 
     # Check if room already exists
-    room = await crud.find_existed_room(room_obj.room_name, session)
+    room = await crud.find_existed_room(room_obj.room_name,
+                                                     session)
     if not room:
         # Room doesn't exist: do this
-        await crud.create_room(room_obj.room_name, room_obj.description,
-                               session)
+        await crud.create_room(room_obj.room_name,
+                                            room_obj.description, session)
 
         logger.info(f"Creating room `{room_obj.room_name}`.")
 
-    results = await crud.create_assign_new_room(user_id, room_obj, session)
+    results = await crud.create_assign_new_room(
+        user_id, room_obj, session)
     return results
 
 

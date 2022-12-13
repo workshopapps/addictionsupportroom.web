@@ -1,4 +1,4 @@
-from api.example import schemas
+from .example import schemas
 from db.models import Example
 from sqlalchemy import select
 from sqlalchemy.orm import Session

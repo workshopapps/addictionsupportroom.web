@@ -2,16 +2,14 @@ import datetime
 import random
 from fastapi import APIRouter, Depends
 from sqlalchemy.orm import Session
-from api.home import schemas, crud
+from ..home import schemas, crud
 from db.models import Emergency, User
 from db.db import get_db
 from . import quotes
-from api import deps
-from api.common.schemas import ResponseModel
-
+from .. import deps
+from ..common.schemas import ResponseModel
 
 router = APIRouter()
-
 
 @router.post("/emotions")
 async def post_emotion(emotion: str):
@@ -109,11 +107,9 @@ def update_note(note: schemas.Note,
 #     return 'note'
 
 
-@router.post(
-    '/faq',
-    name='Have a question?'
-)
-def ask_question(request: schemas.LeadCollectedModel, db: Session = Depends(get_db)):
+@router.post('/faq', name='Have a question?')
+def ask_question(request: schemas.LeadCollectedModel,
+                 db: Session = Depends(get_db)):
     '''
     This endpoint is for collecting email from the user.\n
 

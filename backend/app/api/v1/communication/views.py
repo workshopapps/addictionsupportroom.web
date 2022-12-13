@@ -1,12 +1,10 @@
-from api.example.schemas import Examples, ExampleSchema
-from api.example.services import ExampleService
 from sqlalchemy.orm import Session
-from api.common.schemas import ResponseSchema
+from ..common.schemas import ResponseSchema
 from .schemas import GetAllContactsResults, RoomCreate, MessageCreateRoom
 
 from fastapi import APIRouter, Depends
 
-from api import deps
+from .. import deps
 from typing import List
 from .crud import (
     # delete_chat_messages,
@@ -25,9 +23,9 @@ from .schemas import (
     MessageCreate,
 )
 
-from api.auth.schemas import (
+from ..auth.schemas import (
     UserBase, )
-from api.web_sockets.router import router as web_socket_router
+from ..web_sockets.router import router as web_socket_router
 
 router = APIRouter()
 

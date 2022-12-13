@@ -4,7 +4,7 @@ from fastapi.encoders import jsonable_encoder
 from pydantic import BaseModel
 from sqlalchemy.orm import Session
 
-from api.utils.mixins import Base
+from ...mixins import Base
 from .schemas import RelapseCreate
 from db.models import Relapse
 from datetime import datetime

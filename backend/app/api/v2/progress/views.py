@@ -1,7 +1,6 @@
-from api.example.schemas import Examples, ExampleSchema
-from api.example.services import ExampleService
-from api.common.schemas import ResponseSchema
-from api.auth.schemas import UserBase
+
+from ..common.schemas import ResponseSchema
+from ..auth.schemas import UserBase
 from . import services
 from sqlalchemy.orm import Session
 from db.models import Month
@@ -21,7 +20,7 @@ from .crud import relapse, create_relapse_with_user
 
 auth_scheme = HTTPBearer()
 
-from api import deps
+from .. import deps
 
 router = APIRouter()
 
@@ -81,13 +80,13 @@ async def mark_a_day(
         user_id=current_user.id,
         month_id=month_history.id,
     )
-    
+
     # new_relapse = create_relapse_with_user(db=db, user_id=current_user.id, relapse=relapse_in)
     # Save the new relapse
     db.add(new_relapse)
     db.commit()
     db.refresh(new_relapse)
-    
+
     current_user_id = current_user.id
 
     currentuser = db.query(User).get(current_user_id)
@@ -221,7 +220,6 @@ async def get_leaderboard_top_rankings(
     return {"status_code": 200, "result": result}
 
 
-
 @router.get(
     "/leaderboard/all",
     response_model=GetAllRanking | ResponseSchema,
@@ -291,12 +289,12 @@ async def get_current_user_total_clean_days(
     # Check user db & order by last relapse date
     id = current_user.id
 
-    users = db.query(User).get(id) 
+    users = db.query(User).get(id)
 
     today = datetime.date.today()
     difference = today - users.last_relapse_date
     clean_days = difference.days
-    
+
     return {"status_code": 200, "clean_days": clean_days}
 
 

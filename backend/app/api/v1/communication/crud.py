@@ -1,6 +1,5 @@
 import datetime
 import logging
-from api.example import schemas
 from db.models import Example, Messages, Rooms, RoomMembers
 from sqlalchemy import select
 from sqlalchemy.orm import Session
@@ -17,10 +16,10 @@ from .schemas import (
 )
 from sqlalchemy.sql import (
     text, )
-from api.auth.schemas import (
+from ..auth.schemas import (
     UserBase, )
 import uuid
-from api import deps
+from .. import deps
 
 
 async def get_user_contacts(user_id: int, session: Session):

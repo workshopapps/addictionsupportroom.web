@@ -4,27 +4,24 @@ from fastapi import (
     Depends,
 )
 from aioredis import (
-    from_url,
-)
+    from_url, )
 
 from fastapi.responses import HTMLResponse
 
 from fastapi.websockets import (
-    WebSocket,
-)
+    WebSocket, )
 import logging
 from sqlalchemy.orm import Session
-from api import deps
+from .. import deps
 from core import settings
 
-from api.auth.schemas import (
-    UserBase,
-)
+from ..auth.schemas import (
+    UserBase, )
 
 # from app.utils.dependencies import (
 #     get_db_autocommit_session_socket,
 # )
-from api.utils.pub_sub_handlers import (
+from ..utils.pub_sub_handlers import (
     consumer_handler,
     producer_handler,
 )
@@ -44,15 +41,9 @@ async def redis_conn() -> str:
     print(settings.settings.REDIS_USERNAME)
 
     return await from_url(
-        "redis://"
-        + settings.settings.REDIS_USERNAME
-        + ":"
-        + settings.settings.REDIS_PASSWORD
-        + "@"
-        + settings.settings.REDIS_HOST
-        + ":"
-        + settings.settings.REDIS_PORT
-        + "/"
+        "redis://" + settings.settings.REDIS_USERNAME + ":" +
+        settings.settings.REDIS_PASSWORD + "@" + settings.settings.REDIS_HOST +
+        ":" + settings.settings.REDIS_PORT + "/"
         "0",
         decode_responses=True,
     )
@@ -109,13 +100,14 @@ router = APIRouter()
 #             await conn.close()
 #             del conn
 
+
 # ws://localhost:8000/ws
 @router.websocket("/ws/chat/{sender_id}/{receiver_id}")
 async def websocket_contact_chat_endpoint(
-    websocket: WebSocket,
-    sender_id: int,
-    receiver_id: int,
-    session: Session = Depends(deps.get_db),
+        websocket: WebSocket,
+        sender_id: int,
+        receiver_id: int,
+        session: Session = Depends(deps.get_db),
 ):
     try:
         sorted_chat = sorted([sender_id, receiver_id])

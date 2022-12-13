@@ -7,7 +7,7 @@ from jose import JWTError
 # from jose import jwt
 from pydantic import ValidationError
 from sqlalchemy.orm import Session
-from api.auth.schemas import UserBase, AccessToken
+from .auth.schemas import UserBase, AccessToken
 
 from db import models
 from db.db import SessionLocal

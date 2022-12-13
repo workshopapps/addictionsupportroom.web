@@ -2,7 +2,7 @@
 from fastapi import APIRouter, Depends, WebSocket
 from pydantic import BaseModel
 from sqlalchemy.orm import Session
-from api import deps
+from .. import deps
 from db.models import User
 from .agora import Agora
 from typing import List

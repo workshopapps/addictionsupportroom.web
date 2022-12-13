@@ -1,14 +1,14 @@
-from api.auth import schemas
-from api.auth.schemas import UserLogin, AccessToken
-from api.common.schemas import ResponseSchema, ResponseModel
-from api.communication.schemas import RoomCreate
+from . import schemas
+from .schemas import UserLogin, AccessToken
+from ..common.schemas import ResponseSchema, ResponseModel
+from ..communication.schemas import RoomCreate
+from ..communication import crud
 from db import models
 import logging
 from sqlalchemy.orm import Session
 from fastapi import APIRouter, Depends, HTTPException, status
 
-from api import deps
-from api.communication import crud
+from .. import deps
 
 from fastapi.security import OAuth2PasswordBearer, OAuth2PasswordRequestForm
 # from deps import get_current_user

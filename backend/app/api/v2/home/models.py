@@ -1,12 +1,11 @@
 from sqlalchemy import Column, String, Integer, DateTime
 from datetime import datetime
 
-from api.utils.mixins import (
+from ...mixins import (
     Base,
     CommonMixin,
     TimestampMixin,
 )
-
 
 class Note(Base):
     __tablename__ = "notes"
@@ -21,10 +20,8 @@ class Note(Base):
                         default=datetime.date(datetime.today()),
                         nullable=False)
 
-
 class LeadCollected(Base):
     __tablename__ = 'lead_collected_email'
 
     id = Column(Integer, primary_key=True, index=True)
     email = Column(String)
-

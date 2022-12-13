@@ -11,7 +11,7 @@ from typing import (
     Optional,
 )
 
-from api.auth.schemas import UserObjectSchema
+from ..auth.schemas import UserObjectSchema
 
 
 class MessageCreate(BaseModel):

@@ -1,9 +1,9 @@
 from fastapi import APIRouter, Body, Depends, HTTPException, status
 from pydantic import BaseModel, Field
 from sqlalchemy.orm import Session
-from api import deps
-from api.contact_us.schemas import NewsLetterEmail
-from api.common.schemas import ResponseModel
+from .. import deps
+from ..contact_us.schemas import NewsLetterEmail
+from ..common.schemas import ResponseModel
 from db.models import ContactusMessages
 from db import models
 

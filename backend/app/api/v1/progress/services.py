@@ -1,4 +1,3 @@
-from api.example import schemas
 from db.models import Example, Streak, User
 from sqlalchemy import select
 from sqlalchemy import desc
