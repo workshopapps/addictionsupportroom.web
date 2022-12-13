@@ -27,14 +27,12 @@ const useFetch = (url) => {
           }
             )
             .then(res => {
-              // console.log(res)
               if(!res.ok) {
-                throw Error("No post yet.") 
+                throw Error("No post yet. Be the first to make a conversation") 
               }
               return res.json();
             })
             .then(data => {
-              // console.log(data)
               setData(data);
               setIsLoading(false);
               setError(null);
