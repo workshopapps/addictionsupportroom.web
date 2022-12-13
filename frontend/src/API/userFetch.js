@@ -8,7 +8,6 @@ const useFetch = (url) => {
     const [scroll] = useState(true)
 
     
-    
     const token = sessionStorage.getItem("token");
     const myHeaders = new Headers({
       'Authorization': `Bearer ${token} `,
@@ -30,7 +29,7 @@ const useFetch = (url) => {
             .then(res => {
               // console.log(res)
               if(!res.ok) {
-                throw Error("Could not fetch data from that resource") 
+                throw Error("No post yet.") 
               }
               return res.json();
             })
@@ -43,7 +42,7 @@ const useFetch = (url) => {
             })
             .catch(err => {
               if (err.name === 'AbortError') {
-                console.log("fetch abort")
+                // console.log("fetch abort")
               } else {
                 setError(err.message);
                 setIsLoading(false)

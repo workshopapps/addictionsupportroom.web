@@ -15,7 +15,7 @@ const Forum = () => {
   useEffect(() => {
     const fetchPosts = async () => {
       setLoading(true);
-      const res = await axios.get("https://soberpal.hng.tech/api/blog/");
+      const res = await axios.get("https://soberpal.hng.tech/api/v1/blog/");
       setBlogs(res.data);
       setLoading(false);
     };
