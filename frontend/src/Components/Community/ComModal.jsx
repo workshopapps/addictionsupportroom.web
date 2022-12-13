@@ -22,7 +22,7 @@ const ComModal = ({ setShowModal, setToken }) => {
     });
 
   async function loginUser(credentials) {
-    return fetch("https://soberpal.hng.tech/api/auth/login", {
+    return fetch("https://soberpal.hng.tech/api/v1/auth/login", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

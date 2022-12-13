@@ -21,18 +21,12 @@ const PostDetails = () => {
     data: post,
     isPending,
     error,
-  } = useFetch("https://soberpal.hng.tech/api/forum/" + postId);
+  } = useFetch("https://soberpal.hng.tech/api/v1/forum/" + postId);
 
   const token = sessionStorage.getItem("token");
 
-  // useEffect(() => {
-  //   const user = sessionStorage.getItem("username");
-  //   const avatar = sessionStorage.getItem("avatar");
-
-  // const token = localStorage.getItem("token");
-
   const handleDeletePost = () => {
-    fetch("https://soberpal.hng.tech/api/forum/" + postId, {
+    fetch("https://soberpal.hng.tech/api/v1/forum/" + postId, {
       method: "DELETE",
       headers: {
         Authorization: `Bearer ${token}`,
