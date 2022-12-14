@@ -322,3 +322,50 @@
     }
   }
 }
+@media screen and (max-width: 900px) {
+  .newsletter {
+    margin: 4% auto;
+    .newsletter__one {
+      flex-wrap: wrap;
+    }
+    .download {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      & > div {
+        text-align: center;
+      }
+    }
+  }
+}
+@media screen and (max-width: 283px) {
+  .newsletter {
+    margin: 5rem 20%;
+    width: auto;
+    .newsletter__one {
+      flex-wrap: wrap;
+    }
+    .author__newsletter {
+      padding: 1rem 0.7rem;
+      .author__content {
+        & > h2 {
+          margin-top: 2rem;
+          line-height: 2.4rem;
+          margin-bottom: 0.6rem;
+        }
+        & > p {
+          margin-bottom: 3rem;
+        }
+      }
+    }
+
+    .bottom__section {
+      form {
+        & > input {
+          margin-left: .1rem;
+          width: 21rem;
+        }
+      }
+    }
+  }
+}
