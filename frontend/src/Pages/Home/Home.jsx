@@ -64,7 +64,7 @@ const Home = () => {
     };
     e.preventDefault();
     if (valid) {
-      const result = await fetch("https://soberpal.hng.tech/api/home/faq", {
+      const result = await fetch("https://soberpal.hng.tech/api/v1/home/faq", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
