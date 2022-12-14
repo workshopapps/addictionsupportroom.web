@@ -12,7 +12,7 @@ const Download = () => {
         </h3>
       </div>
       <a
-        href="https://appetize.io/app/232d7qqi3lzmn422ecnxnjgj4q"
+        href="https://appetize.io/app/vqvnvoyvccxhqg33ed7bxsce5a"
         rel="noreferrer"
         target="_blank"
       >

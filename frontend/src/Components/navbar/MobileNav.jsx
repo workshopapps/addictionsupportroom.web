@@ -24,7 +24,7 @@ const MobileNav = ({setIsOpen}) => {
         <a
           className="ml-5 w-full mx-auto"
           rel="noreferrer"
-          href="https://appetize.io/app/232d7qqi3lzmn422ecnxnjgj4q"
+          href="https://appetize.io/app/vqvnvoyvccxhqg33ed7bxsce5a"
           target="_blank"
         >
           <button className="font-[500] p-4 bg-[white] text-blue mt-[30px] rounded-[16px] ">
