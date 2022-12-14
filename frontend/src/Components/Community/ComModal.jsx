@@ -31,14 +31,14 @@ const ComModal = ({ setShowModal, setToken }) => {
     })
       .then((data) => data.json())
       .then((res) => {
-        console.log(res);
+        // console.log(res);
         sessionStorage.setItem("token", res.data.access_token.token);
         sessionStorage.setItem("username", JSON.stringify(username));
         sessionStorage.setItem("avatar", JSON.stringify(res.data.avatar));
         navigate("/communitypost");
         
         window.location.reload(false);
-        console.log(res.data.access_token.token)
+        // console.log(res.data.access_token.token)
       })
 
       .catch((err) => {
@@ -53,7 +53,7 @@ const ComModal = ({ setShowModal, setToken }) => {
       username,
     });
     setToken(token);
-    console.log(token)
+    // console.log(token)
 
   };
   return (
