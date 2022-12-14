@@ -33,7 +33,7 @@ const Comment = ({post}) => {
     };
 
     setIsPending(true);
-    fetch("https://soberpal.hng.tech/api/forum/comment/", {
+    fetch("https://soberpal.hng.tech/api/v1/forum/comment/", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

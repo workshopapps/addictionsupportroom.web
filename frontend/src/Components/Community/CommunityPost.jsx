@@ -10,7 +10,7 @@ const CommunityPost = ({ username, avatar }) => {
     data: posts,
     isPending,
     error,
-  } = useFetch("https://soberpal.hng.tech/api/forum/");
+  } = useFetch("https://soberpal.hng.tech/api/v1/forum/");
 
   return (
     <div className="max-w-[800px] bg-[#F5F5F5] my-16 py-10 mx-auto w-full tablet:w-[90%] rounded-[14px]">

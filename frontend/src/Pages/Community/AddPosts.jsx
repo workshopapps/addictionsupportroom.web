@@ -45,7 +45,7 @@ const AddPosts = ({ setShowModal }) => {
 
     setIsPending(true);
     console.log(post);
-    fetch("https://soberpal.hng.tech/api/forum/", {
+    fetch("https://soberpal.hng.tech/api/v1/forum/", {
       method: "POST",
       headers: { 
         "Content-Type": "application/json",
