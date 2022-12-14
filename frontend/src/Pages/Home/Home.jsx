@@ -382,7 +382,7 @@ const Home = () => {
               className="soberpal__home-fifth__section__flex2"
             >
               <input
-                className="placeholder:text-slate-400 pl-2 relative w-2/3"
+                className="placeholder:text-slate-400 pl-2 relative w-2/3 placeholder:text-[15px]"
                 type="email"
                 name="email"
                 value={email}
