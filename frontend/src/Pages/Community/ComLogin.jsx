@@ -46,7 +46,7 @@ export default function Login() {
           growing with Soberpal.
           </div>
         </div>
-        <a href="https://appetize.io/app/232d7qqi3lzmn422ecnxnjgj4q" rel="noreferrer" target="_blank" >
+        <a href="https://appetize.io/app/vqvnvoyvccxhqg33ed7bxsce5a" rel="noreferrer" target="_blank" >
           <button className="h-[44px] w-[131px] bg-white rounded-[8px] text-blue mt-4 hover--effect ">
             Download App
           </button>

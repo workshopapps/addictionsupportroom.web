@@ -76,7 +76,7 @@ const NavBar = () => {
           <a
             className="hidden laptop:block"
             rel="noreferrer"
-            href="https://appetize.io/app/232d7qqi3lzmn422ecnxnjgj4q"
+            href="https://appetize.io/app/vqvnvoyvccxhqg33ed7bxsce5a"
             target="_blank"
           >
             <Button className="font-[500]" text="Download App" />
