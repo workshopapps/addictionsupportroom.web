@@ -369,7 +369,7 @@ const Home = () => {
           </div>
         </motion.div>
         <motion.div
-          whileInView={{ y: [100, 0], opacity: [0, 0, 1] }}
+          whileInView={{ y: [100, 50], opacity: [0, 0, 1] }}
           transition={{ duration: 0.7 }}
         >
           <h3 className="text-center font-[500] text-[28px]">
@@ -382,7 +382,7 @@ const Home = () => {
               className="soberpal__home-fifth__section__flex2"
             >
               <input
-                className="placeholder:text-slate-400 pl-2 relative"
+                className="placeholder:text-slate-400 pl-2 relative w-2/3"
                 type="email"
                 name="email"
                 value={email}
