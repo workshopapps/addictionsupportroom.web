@@ -30,7 +30,7 @@ export default function Login() {
           type="button"
           onClick={() => setShowModal(true)}
         >
-          Sign In
+          Sign In with username
         </button>
         <p className="text-[16px] text-center mb-10">You need to have an account on the mobile App before you can join the community</p>
       </div>
