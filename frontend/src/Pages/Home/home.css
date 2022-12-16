@@ -401,6 +401,7 @@
     .soberpal__home-first__section{
         width: 90%;
         margin: 0 auto;
+        padding: 0 0rem 0 0;
     }
     .soberpal__home-third__section-cards {
         display: grid;
@@ -433,7 +434,9 @@
 }
 
 @media screen and (max-width: 550px) {
-
+    .soberpal__home-first__section {
+        padding: 0 0rem 0 0;
+    }
     
     .soberpal__home-fifth__section__padding {
         margin: 0 1rem 5rem 1rem;
