@@ -13,7 +13,6 @@ const AppStats = () => {
     >
       <div className=" mx-auto  flex justify-between gap-16 flex-wrap desktop:flex-nowrap max-w-[1300px]">
       <img src={hands} alt="hands mx-auto w-full " className="hands" />
-
       <div className="mt-[20px] mx-auto">
         <div 
           className="font-[700] text-left text-blue text-[16px] "
