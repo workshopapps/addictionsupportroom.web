@@ -28,8 +28,12 @@ const About = () => {
       <motion.div
         whileInView={{ y: [100, 0], opacity: [0, 0, 1] }}
         transition={{ duration: 0.7 }}
+        
       >
+        <div className="bg-[#e9edf0]">
         <AppStats />
+          
+        </div>
       </motion.div>
       <motion.div
         whileInView={{ y: [100, 0], opacity: [0, 0, 1] }}

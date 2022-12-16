@@ -9,9 +9,9 @@ const AppStats = () => {
     <motion.section 
       whileInView={{y: [100, 0], opacity: [0,0,1]}} 
       transition={{ duration: 0.7 }}
-      className="stats p-4 md:p-[3rem]"
+      className="stats p-4 md:p-[3rem] mx-auto"
     >
-      <div className="w-[100%] flex justify-between gap-16 flex-wrap desktop:flex-nowrap max-w-[1300px]">
+      <div className=" mx-auto  flex justify-between gap-16 flex-wrap desktop:flex-nowrap max-w-[1300px]">
       <img src={hands} alt="hands mx-auto w-full " className="hands" />
 
       <div className="mt-[20px] mx-auto">
