@@ -22,7 +22,7 @@ const BlogPaignation = ({
           <li key={number} className="">
             <a 
               onClick={() => paginate(number)}
-              href='/#/blog/#' 
+              href='/blog/#' 
               className={currentPage === number
                   ? "px-3 py-2 rounded-md border-1 text-[18px] text-white font-[500] bg-blue border-[black]"
                   : "px-4 py-2 rounded-md border-1 text-[18px] text-black font-[500] border-[black]"

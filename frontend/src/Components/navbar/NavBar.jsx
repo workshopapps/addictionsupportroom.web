@@ -11,17 +11,17 @@ const NavBar = () => {
   const [username, setUserName] = useState("");
   const [avatar, setAvatar] = useState("");
 
-  // const handleLogout = () => {
-  //   sessionStorage.removeItem("token");
-  //   sessionStorage.removeItem("user");
-  //   sessionStorage.removeItem("avatar");
-  //   window.location.href = "/#/community/login";
-  //   window.location.reload(false);
-  // };
+  const handleLogout = () => {
+    sessionStorage.removeItem("token");
+    sessionStorage.removeItem("user");
+    sessionStorage.removeItem("avatar");
+    window.location.href = "/#/community/login";
+    window.location.reload(false);
+  };
 
   // setTimeout(() => {
-  //   console.log("logged out")
-  //   handleLogout();
+    // console.log("logged out")
+    // handleLogout();
   // }, 20000);
   // 86400000
   useEffect(() => {
@@ -59,7 +59,7 @@ const NavBar = () => {
           </ul>
         </div>
         {changeState ? (
-          <div>
+          <div className="flex gap-3">
             <div className="bg-white hidden laptop:flex items-center px-3 ">
               <img
                 className=" w-[45px] h-[45px] border-2 border-[#BBBBBB] rounded-full "
@@ -68,9 +68,9 @@ const NavBar = () => {
               />
               <p className="ml-3 font-[500]">{username}</p>
             </div>
-            {/* <button onClick={handleLogout}>
-              log out
-            </button> */}
+            <button className="text-[14px] text-white font-[500] rounded-lg bg-blue py-1 px-3 h-fit my-auto" onClick={handleLogout}>
+              Log out
+            </button>
           </div>
         ) : (
           <a

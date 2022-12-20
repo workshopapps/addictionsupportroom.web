@@ -15,7 +15,7 @@ const ToCommunity = () => {
       whileInView={{ y: [100, 0], opacity: [0, 0, 1] }}
       transition={{ duration: 0.7 }}
     >
-      <div className="text-center px-5 md:px-0 md:w-[80%] font-[700]">
+      <div className="text-center px-5 md:px-0 w-[87%] md:w-[80%] font-[700]">
         <p className=" text-[32px] md:text-[57px]">
           Join 200,000+ Anonymous Soberpals,{" "}
           <span className="md:inline-block">
