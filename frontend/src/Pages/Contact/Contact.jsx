@@ -3,8 +3,8 @@ import { useState, useRef } from "react";
 import "./contact.scss";
 import { GrLocation } from "react-icons/gr";
 import { BsTelephone } from "react-icons/bs";
-import { BsInstagram, BsLinkedin } from "react-icons/bs";
-// import { AiOutlineFacebook } from "react-icons/ai";
+import { BsInstagram } from "react-icons/bs";
+import { BsLinkedin } from "react-icons/bs";
 import { ImTwitter } from "react-icons/im";
 import mapImg from "../../assets/Map.png";
 import { ThreeDots } from "react-loading-icons";
@@ -62,7 +62,7 @@ const Contact = () => {
 
   // This function submits data from the form to the backend
   const fetchData = () => {
-    fetch("https://soberpal.hng.tech/api/contact/", {
+    fetch("https://soberpal.hng.tech/api/v1/contact/", {
       method: "POST",
       body: JSON.stringify(getValues()),
       headers: {

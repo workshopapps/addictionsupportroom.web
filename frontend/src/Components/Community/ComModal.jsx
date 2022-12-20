@@ -22,7 +22,7 @@ const ComModal = ({ setShowModal, setToken }) => {
     });
 
   async function loginUser(credentials) {
-    return fetch("https://soberpal.hng.tech/api/auth/login", {
+    return fetch("https://soberpal.hng.tech/api/v1/auth/login", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -31,14 +31,14 @@ const ComModal = ({ setShowModal, setToken }) => {
     })
       .then((data) => data.json())
       .then((res) => {
-        console.log(res);
-        localStorage.setItem("token", res.data.access_token.token);
-        localStorage.setItem("username", JSON.stringify(username));
-        localStorage.setItem("avatar", JSON.stringify(res.data.avatar));
+        // console.log(res);
+        sessionStorage.setItem("token", res.data.access_token.token);
+        sessionStorage.setItem("username", JSON.stringify(username));
+        sessionStorage.setItem("avatar", JSON.stringify(res.data.avatar));
         navigate("/communitypost");
         
         window.location.reload(false);
-        console.log(res.data.access_token.token)
+        // console.log(res.data.access_token.token)
       })
 
       .catch((err) => {
@@ -53,7 +53,7 @@ const ComModal = ({ setShowModal, setToken }) => {
       username,
     });
     setToken(token);
-    console.log(token)
+    // console.log(token)
 
   };
   return (

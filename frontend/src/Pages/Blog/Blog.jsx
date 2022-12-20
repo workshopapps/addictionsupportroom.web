@@ -15,7 +15,7 @@ const Forum = () => {
   useEffect(() => {
     const fetchPosts = async () => {
       setLoading(true);
-      const res = await axios.get("https://soberpal.hng.tech/api/blog/");
+      const res = await axios.get("https://soberpal.hng.tech/api/v1/blog/");
       setBlogs(res.data);
       setLoading(false);
     };
@@ -62,7 +62,7 @@ const Forum = () => {
       </div>
 
       <section className="block laptop:flex laptop:flex-rol justify-between mx-auto w-[90%]"></section>
-      <div className="w-full mb-[50px] mt-[90px] tablet:w-[70%] max-w-[1000px] mx-auto">
+      <div className="w-[80%]  mb-[50px] mt-[90px]  tablet:w-[70%] max-w-[1000px] mx-auto">
         <Download />
       </div>
       <br />

@@ -12,9 +12,9 @@ const NavBar = () => {
   const [avatar, setAvatar] = useState("");
 
   // const handleLogout = () => {
-  //   localStorage.removeItem("token");
-  //   localStorage.removeItem("user");
-  //   localStorage.removeItem("avatar");
+  //   sessionStorage.removeItem("token");
+  //   sessionStorage.removeItem("user");
+  //   sessionStorage.removeItem("avatar");
   //   window.location.href = "/#/community/login";
   //   window.location.reload(false);
   // };
@@ -25,9 +25,9 @@ const NavBar = () => {
   // }, 20000);
   // 86400000
   useEffect(() => {
-    const token = localStorage.getItem("token");
-    const user = localStorage.getItem("username");
-    const avatar = localStorage.getItem("avatar");
+    const token = sessionStorage.getItem("token");
+    const user = sessionStorage.getItem("username");
+    const avatar = sessionStorage.getItem("avatar");
 
     if (token) {
       setChangeState(true);
@@ -76,7 +76,7 @@ const NavBar = () => {
           <a
             className="hidden laptop:block"
             rel="noreferrer"
-            href="https://appetize.io/app/eeysp57n33smvpijzflyzvhkee?device=pixel4&osVersion=11.0&scale=75"
+            href="https://appetize.io/app/vqvnvoyvccxhqg33ed7bxsce5a"
             target="_blank"
           >
             <Button className="font-[500]" text="Download App" />

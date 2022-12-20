@@ -15,7 +15,7 @@ from sqlalchemy import (
 
 # from app.db.base_class import Base
 
-from api.utils.mixins import (
+from api.mixins import (
     Base,
     CommonMixin,
     TimestampMixin,
@@ -40,16 +40,19 @@ class ContactusMessages(Base):
     user_id = Column(String, nullable=False)
     message = Column(String, nullable=False)
 
+
 class ForumPost(Base):
     __tablename__ = 'forum_post'
     id = Column(Integer, primary_key=True, index=True)
     message = Column(String)
     date_posted = Column(DateTime,
-                        default=datetime.datetime.utcnow,
-                        nullable=False)
+                         default=datetime.datetime.utcnow,
+                         nullable=False)
     user_username = Column(String, ForeignKey('users.username'))
     user = relationship('User', back_populates='forum_posts')
-    forum_post_comments = relationship('ForumPostComment', back_populates='origin_post')
+    forum_post_comments = relationship('ForumPostComment',
+                                       back_populates='origin_post')
+
 
 class ForumPostComment(Base):
     __tablename__ = 'forum_post_comments'
@@ -57,11 +60,13 @@ class ForumPostComment(Base):
     owner_username = Column(String, ForeignKey('users.username'))
     owner = relationship('User', back_populates='forum_comments')
     origin_post_id = Column(Integer, ForeignKey('forum_post.id'))
-    origin_post = relationship('ForumPost', back_populates='forum_post_comments')
+    origin_post = relationship('ForumPost',
+                               back_populates='forum_post_comments')
     comment = Column(String)
     date_posted = Column(DateTime,
-                        default=datetime.datetime.utcnow,
-                        nullable=False)
+                         default=datetime.datetime.utcnow,
+                         nullable=False)
+
 
 class User(Base):
     __tablename__ = "users"
@@ -206,6 +211,7 @@ class NewsLetterEmail(Base):
     id = Column(Integer, primary_key=True, index=True)
     email = Column(String)
 
+
 class Blog(Base):
     __tablename__ = 'blogs'
 
@@ -216,8 +222,12 @@ class Blog(Base):
     story = Column(Boolean)
     family = Column(Boolean)
     article = Column(Boolean)
-    created_at = Column(DateTime, nullable=False, default=datetime.datetime.utcnow())
-    updated_at = Column(DateTime, nullable=False, default=datetime.datetime.utcnow())
+    created_at = Column(DateTime,
+                        nullable=False,
+                        default=datetime.datetime.utcnow())
+    updated_at = Column(DateTime,
+                        nullable=False,
+                        default=datetime.datetime.utcnow())
 
 
 class Feedbacks(Base):
@@ -226,5 +236,7 @@ class Feedbacks(Base):
     id = Column(Integer, primary_key=True, index=True)
     rating = Column(Integer)
     description = Column(String)
-    created_at = Column(DateTime, nullable=False, default=datetime.datetime.utcnow())
+    created_at = Column(DateTime,
+                        nullable=False,
+                        default=datetime.datetime.utcnow())
     updated_at = Column(DateTime, nullable=True)

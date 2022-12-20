@@ -13,9 +13,9 @@ const Community = () => {
   
 
   useEffect(() => {
-    const token = localStorage.getItem("token");
-    const user = localStorage.getItem("username");
-    const avatar = localStorage.getItem("avatar");
+    const token = sessionStorage.getItem("token");
+    const user = sessionStorage.getItem("username");
+    const avatar = sessionStorage.getItem("avatar");
 
     if (!token) {
       navigate("/community/login");
@@ -36,8 +36,8 @@ const Community = () => {
       
       <div className=" community  h-[300px] tablet:h-[300px] desktop:h-[350px]">
         <div className="w-[95%] max-w-[1400px] h-full flex justify-center tablet:justify-end mx-auto e top-0">
-          <div className="text-center mx-auto laptop:mx-0 my-auto w-fit font-[700] text-[48px] tablet:text-[68px] laptop:text-[74px] ">
-            Welcome to <br />
+          <div className="text-center mx-auto laptop:mx-0 my-auto w-[95%] laptop:w-[550px] font-[700] text-[48px] tablet:text-[68px] laptop:text-[74px] ">
+            Welcome to
             Our Community
           </div>
         </div>

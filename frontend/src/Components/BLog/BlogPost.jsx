@@ -6,8 +6,6 @@ const BlogPost = ({blogs, loading}) => {
     return <h2 className="text-[20px] font-[600] text-center">Loading...</h2>
   }
 
-
-
   return (
     
     <div className="flex flex-wrap max-w-[1300px] w-full tablet:w-[90%] mx-auto justify-between">

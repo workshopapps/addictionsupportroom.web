@@ -35,7 +35,7 @@ export default function Login() {
         <p className="text-[16px] text-center mb-10">You need to have an account on the mobile App before you can join the community</p>
       </div>
 
-      <div className="flex rounded-tl-[49px] mb-[90px] rounded-br-[49px] rounded-tr-[20px] rounded-bl-[20px] bg-blue flex-col pt-[60px] pb-[60px] px-[60px] md:flex-row w-[97%] text-center md:text-start items-center mobile:w-[97%] mx-auto md:justify-between py-3">
+      <div className="flex rounded-tl-[49px] mb-[90px] rounded-br-[49px] rounded-tr-[20px] rounded-bl-[20px] bg-blue flex-col pt-[60px] pb-[60px] px-[10px] tablet:px-[60px] md:flex-row w-[95%] text-center md:text-start items-center mobile:w-[97%] mx-auto md:justify-between py-3">
         <div>
           <h2 className="text-[32px] text-white font-[500]">
             Become a soberpal member
@@ -46,7 +46,7 @@ export default function Login() {
           growing with Soberpal.
           </div>
         </div>
-        <a href="https://appetize.io/app/3tqubo6rf6nodzau3rez6v2r5u?device=pixel4&osVersion=11.0&scale=75" rel="noreferrer" target="_blank" >
+        <a href="https://appetize.io/app/vqvnvoyvccxhqg33ed7bxsce5a" rel="noreferrer" target="_blank" >
           <button className="h-[44px] w-[131px] bg-white rounded-[8px] text-blue mt-4 hover--effect ">
             Download App
           </button>
