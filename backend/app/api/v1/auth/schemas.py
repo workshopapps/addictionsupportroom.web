@@ -10,7 +10,7 @@ class UserBase(BaseModel):
     username: str = Field(..., example="name123")
     avatar: str = Field(
         ...,
-        example="http://www.example.com/image",
+        example="https://www.kindpng.com/picc/m/451-4517876_default-profile-hd-png-download.png",
     )
     last_relapse_date: date | None
 
@@ -36,7 +36,7 @@ class UserCreate(BaseModel):
     username: str = Field(..., example="name123")
     avatar: str = Field(
         ...,
-        example="https://picsum.photos/200/200",
+        example="https://www.kindpng.com/picc/m/451-4517876_default-profile-hd-png-download.png",
     )
     # password: str
 

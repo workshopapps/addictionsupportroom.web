@@ -1,4 +1,4 @@
-from sqlalchemy import Column, String, Integer, DateTime
+from sqlalchemy import Column, String, Integer, DateTime, ForeignKey
 from datetime import datetime
 
 from ...mixins import (
@@ -6,11 +6,14 @@ from ...mixins import (
     CommonMixin,
     TimestampMixin,
 )
+from sqlalchemy.orm import relationship
 
 class Note(Base):
     __tablename__ = "notes"
 
     id = Column(Integer, primary_key=True, index=True)
+    owner_id = Column(Integer, ForeignKey('users.id'))
+    owner = relationship('User', back_populates='notes')
     title = Column(String)
     description = Column(String)
     created_at = Column(DateTime,
