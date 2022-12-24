@@ -20,9 +20,9 @@ const ComModal = ({ setShowModal, setToken }) => {
     toast.error("Input correct username", {
       position: toast.POSITION.TOP_CENTER,
     });
-
+    // https://soberpal.org/api/v2/docs/
   async function loginUser(credentials) {
-    return fetch("https://soberpal.hng.tech/api/v1/auth/login", {
+    return fetch("https://soberpal.org/api/v2//auth/login", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

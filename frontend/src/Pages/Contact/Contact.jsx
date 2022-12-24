@@ -62,7 +62,7 @@ const Contact = () => {
 
   // This function submits data from the form to the backend
   const fetchData = () => {
-    fetch("https://soberpal.hng.tech/api/v1/contact/", {
+    fetch("https://soberpal.org/api/v2//contact/", {
       method: "POST",
       body: JSON.stringify(getValues()),
       headers: {
