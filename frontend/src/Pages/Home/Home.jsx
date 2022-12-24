@@ -64,7 +64,7 @@ const Home = () => {
     };
     e.preventDefault();
     if (valid) {
-      const result = await fetch("https://soberpal.hng.tech/api/home/faq", {
+      const result = await fetch("https://soberpal.hng.tech/api/v1/home/faq", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -91,7 +91,7 @@ const Home = () => {
         <h1 className="text-[black]">
           Guiding you from alcohol addiction to recovery
         </h1>
-        <p className="mb-10">
+        <p className="mb-10 ">
           Looking for a way to cut back on your alcohol intake and live a sober
           lifestyle? Soberpal is the perfect app for you! With one click you
           have access to a community willing to motivate and guide you. Track
@@ -109,7 +109,7 @@ const Home = () => {
         whileInView={{ y: [100, 0], opacity: [0, 0, 1] }}
         transition={{ duration: 0.7 }}
       >
-        <p className="mt-[10px] md:mt-[70px] mb-[40px] text-[28px] font-[600] text-center">
+        <p className="mt-[10px] md:mt-[70px] mb-[40px] text-[28px] font-[600] text-center w-[87%] mx-auto ">
           We’ve helped a couple of people reduce their intake of alcohol
         </p>
         <div className="flex flex-wrap justify-between mt-[20px] mb-[70px] ">
@@ -141,7 +141,7 @@ const Home = () => {
         transition={{ duration: 0.7 }}
         className="soberpal__home-third__section"
       >
-        <div className="w-[100%] text-center">
+        <div className="w-[95%] mx-auto text-center">
           <p className="text-[32px] mx-auto font-[700] p-0">Our services</p>
           <p className="text-[18px] mt-[20px] mb-[50px] text-center font-[400]">
             You are not alone in the fight against addiction
@@ -212,7 +212,7 @@ const Home = () => {
         className="soberpal__home-fourth__section pb-[50px] md:pb-[100px]"
       >
         <main className="text-[32px] text-center font-[700]">
-          How we can help You
+          How we can help you
         </main>
         <p className="text-[18px] mt-[20px] mb-[30px] text-center font-[400]">
           You are not alone in the fight against addiction
@@ -256,11 +256,12 @@ const Home = () => {
         </div>
       </motion.section>
 
-      <div className="bg-[#D8F2FF] h-full  mb-[100px] pb-[100px]">
+    
+      <div className="bg-[#D8F2FF] h-full mt-[17rem] mb-[100px] pb-[100px]">
         <motion.section
           whileInView={{ y: [100, 50], opacity: [0, 0, 1] }}
           transition={{ duration: 0.7 }}
-          className="w-[90%] laptop:w-[70%] mx-auto pt-[40px]"
+          className="w-[86%] laptop:w-[70%] mx-auto pt-[40px]"
         >
           <main className="text-[38px] text-center font-[700]">
             What people say about us
@@ -314,7 +315,7 @@ const Home = () => {
       <motion.section
         whileInView={{ y: [100, 0], opacity: [0, 0, 1] }}
         transition={{ duration: 0.7 }}
-        className="soberpal__home-fifth__section max-w-[1300px] mx-auto"
+        className="soberpal__home-fifth__section max-w-[1300px]  mx-auto"
       >
         {/* <hr /> */}
         <motion.div
@@ -368,23 +369,21 @@ const Home = () => {
           </div>
         </motion.div>
         <motion.div
-          whileInView={{ y: [100, 0], opacity: [0, 0, 1] }}
+          whileInView={{ y: [100, 50], opacity: [0, 0, 1] }}
           transition={{ duration: 0.7 }}
+          className="w-[93%] mx-auto"
         >
-          <h3 className="text-center font-[500] text-[28px]">
+          <h3 className="text-center font-[500]  text-[28px]">
             Have a question?
           </h3>
           <div className="soberpal__home-fifth__section__flexy">
-            {/* <form
-              onSubmit={handleSubmit}
-              className="soberpal__home-fifth__section__flex2"
-            > */}
+           
             <form
               onSubmit={handleSubmit}
               className="soberpal__home-fifth__section__flex2"
             >
               <input
-                className="placeholder:text-slate-400 pl-2 relative"
+                className="placeholder:text-slate-400 pl-2 relative w-2/3 placeholder:text-[15px]"
                 type="email"
                 name="email"
                 value={email}
@@ -394,29 +393,19 @@ const Home = () => {
               />
               <button onClick={emailValidation}>send</button>
               <div className="absolute -bottom-7">
-                <span
-                  className={`${
-                    valid ? "text-green-600" : "text-red-400"
-                  } text-sm`}
-                >
-                  {message}
-                </span>
+                  <span
+                    className={`${
+                      valid ? "text-green-600" : "text-red-400"
+                    } text-sm`}
+                  >
+                    {message}
+                  </span>
               </div>
             </form>
-            {/* <button onClick={emailValidation}>send</button>
-              <div className="absolute -bottom-7">
-                <span
-                  className={`${
-                    valid ? "text-green-600" : "text-red-400"
-                  } text-sm`}
-                >
-                  {message}
-                </span>
-              </div>
-            </form> */}
+  
           </div>
         </motion.div>
-        <div className="w-full mb-[50px] mt-[150px] tablet:w-[100%] max-w-[1000px] mx-auto">
+        <div className="w-[92%] mb-[50px] mt-[150px] tablet:w-[100%] max-w-[1000px] mx-auto">
           <Download />
         </div>
       </motion.section>

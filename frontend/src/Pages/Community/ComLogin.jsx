@@ -30,7 +30,7 @@ export default function Login() {
           type="button"
           onClick={() => setShowModal(true)}
         >
-          Sign In Username
+          Sign In with username
         </button>
         <p className="text-[16px] text-center mb-10">You need to have an account on the mobile App before you can join the community</p>
       </div>
@@ -46,7 +46,7 @@ export default function Login() {
           growing with Soberpal.
           </div>
         </div>
-        <a href="https://appetize.io/app/3tqubo6rf6nodzau3rez6v2r5u?device=pixel4&osVersion=11.0&scale=75" rel="noreferrer" target="_blank" >
+        <a href="https://appetize.io/app/vqvnvoyvccxhqg33ed7bxsce5a" rel="noreferrer" target="_blank" >
           <button className="h-[44px] w-[131px] bg-white rounded-[8px] text-blue mt-4 hover--effect ">
             Download App
           </button>

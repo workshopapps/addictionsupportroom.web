@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { GrClose } from "react-icons/gr";
-import { useNavigate } from "react-router-dom";
 
 const AddPosts = ({ setShowModal }) => {
   const [message, setMessage] = useState("");
@@ -9,17 +8,16 @@ const AddPosts = ({ setShowModal }) => {
   const [isPending, setIsPending] = useState(false);
   const [changeState, setChangeState] = useState(false);
 
-  const navigate = useNavigate();
-
+  
   const scrollUp = () => {
     window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
   };
 
 
-  const token = localStorage.getItem("token");
+  const token = sessionStorage.getItem("token");
   useEffect(() => {
-      const user = localStorage.getItem("username");
-      const avatar = localStorage.getItem("avatar");
+      const user = sessionStorage.getItem("username");
+      const avatar = sessionStorage.getItem("avatar");
 
     if (token) {
       setChangeState(true);
@@ -47,7 +45,7 @@ const AddPosts = ({ setShowModal }) => {
 
     setIsPending(true);
     console.log(post);
-    fetch("https://soberpal.hng.tech/api/forum/", {
+    fetch("https://soberpal.hng.tech/api/v1/forum/", {
       method: "POST",
       headers: { 
         "Content-Type": "application/json",
