@@ -9,15 +9,16 @@ class Note(BaseModel):
     created_at: datetime.datetime
     updated_at: datetime.datetime
 
-    class Config:
-        orm_mode: True
 
-
-class ShowNote(Note):
+class ShowNote(BaseModel):
+    owner_id: int
     title: str
     description: str
     created_at: datetime.datetime
     updated_at: datetime.datetime
+    
+    class Config():
+        orm_mode = True
 
 
 class LeadCollectedModel(BaseModel):
