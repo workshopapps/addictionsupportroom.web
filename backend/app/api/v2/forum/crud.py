@@ -118,7 +118,6 @@ class PostClass():
                 raise HTTPException(status_code=401, detail=f'This user is not allowed to delete this post')
         else:
             raise HTTPException(status_code=404, detail=f'Post of ID {id} does not exist')
-        print(post_by_user)
         return post_by_user
 
     def create_post_comment(self, db: Session, request: PostCommentBase):
