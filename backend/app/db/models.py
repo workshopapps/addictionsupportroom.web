@@ -78,7 +78,6 @@ class User(Base):
     is_active = Column(Boolean, default=True)
     forum_posts = relationship('ForumPost', back_populates='user')
     forum_comments = relationship('ForumPostComment', back_populates='owner')
-    notes = relationship('Note', back_populates='owner')
     date_added = Column(DateTime,
                         default=datetime.datetime.utcnow,
                         nullable=False)
