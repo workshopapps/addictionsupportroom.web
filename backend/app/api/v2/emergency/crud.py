@@ -1,6 +1,8 @@
 from datetime import datetime
 from db.models import Emergency, User
 from datetime import datetime
+from sqlalchemy.orm.session import Session
+
 
 
 
@@ -45,3 +47,9 @@ def new_emergency(id, username, avatar, db):
     # db.commit()
 
     return "done"
+
+
+def get_current_emergency(db: Session):
+    emergency = db.query(Emergency).all()
+
+    return emergency

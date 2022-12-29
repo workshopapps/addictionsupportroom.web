@@ -4,6 +4,11 @@ from sqlalchemy.orm import Session
 from db.models import User
 from db.db import get_db
 from fastapi.requests import Request
+from .schema import EmergencyResponseModel
+from typing import List
+# from .. import deps
+from db.models import Emergency
+
 
 router = APIRouter()
 
@@ -91,3 +96,14 @@ def get_user_details(username: str,
     else:
         raise HTTPException(status_code=status.HTTP_405_METHOD_NOT_ALLOWED,
                             detail="Method not allowed")
+
+
+
+@router.get('/current-emergencies', name='All Current Emergencies', response_model=List[EmergencyResponseModel])
+def get_current_emergencies(db: Session = Depends(get_db)):
+    '''
+        This endpoint retrieves all the users that are <strong>about-to-relapse</strong>
+    '''
+
+    emergencies = db.query(Emergency).all()
+    return emergencies  
