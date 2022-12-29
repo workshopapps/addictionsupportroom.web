@@ -1,18 +1,16 @@
-from datetime import datetime, date
+from datetime import datetime
 from sqlalchemy.orm import Session
 from . import schemas
 from . import models
+from datetime import datetime
 from fastapi import HTTPException, status
-from db.models import User
 
 
-def create_note(db: Session, note: schemas.Note, user: User):
+def create_note(db: Session, note: schemas.Note):
     """ 
     This function is used to create new note
     """
-    print(user.id)
     db_note = models.Note(title=note.title,
-                          owner_id=user.id,
                           description=note.description,
                           created_at=datetime.utcnow(),
                           updated_at=datetime.utcnow())
@@ -22,24 +20,18 @@ def create_note(db: Session, note: schemas.Note, user: User):
     return db_note
 
 
-def get_all_notes_created_today(db: Session, user: User):
+def get_all_notes_created_today(db: Session):
     """
     This function return the all the notes created  daily
     if not Note then it will return empty list like this []
     
     """
-    notes = db.query(models.Note).filter(models.Note.owner_id == user.id).all()
-    today = date.today()
-    today_notes = []
-    for item in notes:
-        if item.created_at.date() == today:
-            today_notes.append(item)
-    return today_notes
-    
+    notes = db.query(models.Note).all()
+    return notes
 
 
-def get_specific_note(note_id: int, user: User, db: Session):
-    note = db.query(models.Note).filter(models.Note.owner_id == user.id).filter(models.Note.id == note_id).first()
+def get_specific_note(note_id: int, db: Session):
+    note = db.query(models.Note).filter(models.Note.id == note_id).first()
 
     if not note:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND,
@@ -47,13 +39,13 @@ def get_specific_note(note_id: int, user: User, db: Session):
     return note
 
 
-def delete_note(note_id: int, user: User, db: Session):
+def delete_note(note_id: int, db: Session):
     """ 
      This function delete the not based on id if there is no Note with that id.
      Then it will raise Exception HTTP_404_NOT_FOUND with a message
      there is no note with id: number
     """
-    note = db.query(models.Note).filter(models.Note.owner_id == user.id).filter(models.Note.id == note_id).first()
+    note = db.query(models.Note).filter(models.Note.id == note_id).first()
 
     if not note:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND,
@@ -63,13 +55,13 @@ def delete_note(note_id: int, user: User, db: Session):
     return note
 
 
-def update_note(note_id: int, note: schemas.Note, user: User, db: Session):
+def update_note(note_id: int, note: schemas.Note, db: Session):
     """ 
      This function update the not based on id if there is no Note with that id.
      Then it will raise Exception HTTP_404_NOT_FOUND with a message
      there is no note with id: number
     """
-    note_in = db.query(models.Note).filter(models.Note.owner_id == user.id).filter(models.Note.id == note_id).first()
+    note_in = db.query(models.Note).filter(models.Note.id == note_id).first()
     if not note:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND,
                             detail=f"there is no note with id: {note_id}")
@@ -80,11 +72,11 @@ def update_note(note_id: int, note: schemas.Note, user: User, db: Session):
     return note
 
 
-def get_all_notes(db: Session, user: User):
+def get_all_notes(db: Session):
     """ 
     This function return all Note if not return an empty list like this []
     """
-    notes = db.query(models.Note).filter(models.Note.owner_id == user.id).all()
+    notes = db.query(models.Note).all()
     return notes
 
 

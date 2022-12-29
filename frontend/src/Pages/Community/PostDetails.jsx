@@ -21,12 +21,12 @@ const PostDetails = () => {
     data: post,
     isPending,
     error,
-  } = useFetch("https://soberpal.hng.tech/api/v1/forum/" + postId);
+  } = useFetch("https://soberpal.org/api/v2//forum/" + postId);
 
   const token = sessionStorage.getItem("token");
 
   const handleDeletePost = () => {
-    fetch("https://soberpal.hng.tech/api/v1/forum/" + postId, {
+    fetch("https://soberpal.org/api/v2//forum/" + postId, {
       method: "DELETE",
       headers: {
         Authorization: `Bearer ${token}`,
