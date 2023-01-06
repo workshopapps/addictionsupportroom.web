@@ -240,3 +240,25 @@ class Feedbacks(Base):
                         nullable=False,
                         default=datetime.datetime.utcnow())
     updated_at = Column(DateTime, nullable=True)
+
+
+class Note(Base):
+    __tablename__ = "notes"
+    __table_args__ = {'extend_existing': True}
+
+    id = Column(Integer, primary_key=True, index=True)
+    title = Column(String)
+    description = Column(String)
+    created_at = Column(DateTime,
+                        default=datetime.datetime.utcnow(),
+                        nullable=False)
+    updated_at = Column(DateTime,
+                        default=datetime.datetime.utcnow(),
+                        nullable=False)
+
+class LeadCollected(Base):
+    __tablename__ = 'lead_collected_email'
+    __table_args__ = {'extend_existing': True} 
+
+    id = Column(Integer, primary_key=True, index=True)
+    email = Column(String)

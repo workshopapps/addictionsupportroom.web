@@ -7,21 +7,21 @@ from ...mixins import (
     TimestampMixin,
 )
 
-class Note(Base):
-    __tablename__ = "notes"
+# class Note(Base):
+#     __tablename__ = "notes"
 
-    id = Column(Integer, primary_key=True, index=True)
-    title = Column(String)
-    description = Column(String)
-    created_at = Column(DateTime,
-                        default=datetime.date(datetime.today()),
-                        nullable=False)
-    updated_at = Column(DateTime,
-                        default=datetime.date(datetime.today()),
-                        nullable=False)
+#     id = Column(Integer, primary_key=True, index=True)
+#     title = Column(String)
+#     description = Column(String)
+#     created_at = Column(DateTime,
+#                         default=datetime.date(datetime.today()),
+#                         nullable=False)
+#     updated_at = Column(DateTime,
+#                         default=datetime.date(datetime.today()),
+#                         nullable=False)
 
-class LeadCollected(Base):
-    __tablename__ = 'lead_collected_email'
+# class LeadCollected(Base):
+#     __tablename__ = 'lead_collected_email'
 
-    id = Column(Integer, primary_key=True, index=True)
-    email = Column(String)
+#     id = Column(Integer, primary_key=True, index=True)
+#     email = Column(String)
