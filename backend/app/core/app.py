@@ -1,3 +1,4 @@
+from api.v3.router import api_router_v3
 from api.v2.router import api_router_v2
 from api.v1.router import api_router_v1
 from fastapi import FastAPI
@@ -35,7 +36,7 @@ def get_app() -> FastAPI:
         version="1.0",
         redoc_url="/redoc/",
         openapi_url="/open.json",
-        default_response_class=UJSONResponse,
+        default_response_class=UJSONResponse
     )
     appv1.include_router(router=api_router_v1)
     app.mount("/api/v1", appv1)
@@ -47,9 +48,22 @@ def get_app() -> FastAPI:
                     docs_url="/docs/",
                     redoc_url="/redoc/",
                     openapi_url="/open.json",
-                    default_response_class=UJSONResponse)
+                    default_response_class=UJSONResponse
+                )
 
     appv2.include_router(router=api_router_v2)
     app.mount("/api/v2", appv2)
+
+    #create and mount version 3 of soberpal API
+    appv3 = FastAPI(title="Soberpal Project V3",
+                    description="Soberpal API V3",
+                    version="3.0",
+                    docs_url="/docs/",
+                    redoc_url="/redoc/",
+                    openapi_url="/open.json",
+                    default_response_class=UJSONResponse
+                )
+    appv3.include_router(router=api_router_v3)
+    app.mount("/api/v3", appv3)
 
     return app
