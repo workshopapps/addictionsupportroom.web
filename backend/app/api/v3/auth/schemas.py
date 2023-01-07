@@ -38,7 +38,7 @@ class UserCreate(BaseModel):
         ...,
         example="https://picsum.photos/200/200",
     )
-    # password: str
+    password: str
 
 
 class AccessToken(BaseModel):
@@ -51,6 +51,7 @@ class UserOut(UserBase):
 
 class UserLogin(BaseModel):
     username: str = Field(..., example="name123")
+    password: str = Field(..., example="password")
 
 class ChatStatus(str, Enum):
     online = "online"
