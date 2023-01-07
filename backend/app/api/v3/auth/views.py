@@ -25,7 +25,7 @@ async def signup(user: schemas.UserCreate, db: Session = Depends(deps.get_db)):
     db_user.username = user.username
     db_user.avatar = user.avatar
     db_user.is_active = True
-    db_user.hashed_password = deps.get_password_hash("general_password")
+    db_user.hashed_password = deps.get_password_hash(user.password)
 
     try:
         # Create a new user
@@ -90,7 +90,7 @@ async def create_assign_new_room_member(
 @router.post(
     "/login",
     description=
-    'Login with only a unique username, no password is needed for now',
+    'Login with username and password',
     response_model=ResponseModel,
     responses={
         400:
@@ -105,7 +105,7 @@ async def login(request: UserLogin, db: Session = Depends(deps.get_db)):
     print(request)
     db_user = await deps.authenticate_user(
         request.username,
-        'general-password',
+        request.password,
         db,
     )
     if not db_user:

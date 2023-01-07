@@ -61,7 +61,8 @@ async def find_existed_user(id: str, session: Session) -> UserBase:
     return user
 
 
-async def find_existed_user_by_username(username: str,
+async def find_existed_user_by_username_and_password(username: str,
+                                        password: str,
                                         session: Session) -> UserBase:
     """
     A method to fetch a user info given an username.
@@ -75,7 +76,8 @@ async def find_existed_user_by_username(username: str,
     user = session.query(
         models.User).filter(models.User.username == username).first()
     if user:
-        return UserBase(**user.__dict__)
+        if verify_password(password, user.hashed_password):
+            return UserBase(**user.__dict__)
 
 
 def get_user(db, username: str):
@@ -86,13 +88,12 @@ def get_user(db, username: str):
 
 
 def authenticate_user(username, password, db):
-    # get user by username
-    user = find_existed_user_by_username(session=db, username=username)
+    # get user by username and password
+    user = find_existed_user_by_username_and_password(session=db, username=username, password=password)
 
     if not user:
         return False
-    # if not verify_password(password, hashed_password):
-    #     return False
+
     return user
 
 
