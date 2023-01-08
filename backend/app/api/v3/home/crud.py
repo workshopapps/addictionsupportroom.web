@@ -67,32 +67,38 @@ def delete_note(token: str, note_id: int, db: Session):
     db.commit()
 
     return f"Note with ID: {note_id} has been successfully deleted."
-    
 
 
-def update_note(note_id: int, note: schemas.Note, db: Session):
+
+def update_note(token:str, note_id: int, note: schemas.Note, db: Session):
     """ 
      This function update the not based on id if there is no Note with that id.
      Then it will raise Exception HTTP_404_NOT_FOUND with a message
      there is no note with id: number
     """
-    note_in = db.query(models.Note).filter(models.Note.id == note_id).first()
-    if not note:
+    current_user_id = (Depends(deps.get_current_user(token=token))).dependency
+
+    note_in = db.query(Note).filter(Note.id==note_id).filter(Note.user_id==current_user_id).first()
+
+    if not note_in:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND,
                             detail=f"there is no note with id: {note_id}")
+
     note_in.title = note.title
     note_in.description = note.description
+
     db.commit()
     db.refresh(note_in)
+
     return note
 
 
-def get_all_notes(db: Session):
-    """ 
-    This function return all Note if not return an empty list like this []
-    """
-    notes = db.query(models.Note).all()
-    return notes
+# def get_all_notes(db: Session):
+#     """ 
+#     This function return all Note if not return an empty list like this []
+#     """
+#     notes = db.query(models.Note).all()
+#     return notes
 
 
 def create_lead_email(db: Session, request: schemas.LeadCollectedModel):

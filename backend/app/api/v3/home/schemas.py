@@ -1,6 +1,5 @@
 from pydantic import BaseModel, Field
 import datetime
-from typing import List
 
 
 class Note(BaseModel):

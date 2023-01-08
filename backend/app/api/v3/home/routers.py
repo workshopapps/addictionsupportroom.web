@@ -99,10 +99,13 @@ def delete_note(token: str,
 
 
 @router.put("/note/edit/{note_id}")
-def update_note(note: schemas.Note,
+def update_note(token: str,
+                note: schemas.Note,
                 note_id: int,
                 db: Session = Depends(get_db)):
-    note = crud.update_note(db=db, note_id=note_id, note=note)
+
+    note = crud.update_note(token=token, db=db, note_id=note_id, note=note)
+
     return note
 
 
