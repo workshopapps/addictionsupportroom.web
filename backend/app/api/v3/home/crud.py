@@ -3,20 +3,27 @@ from sqlalchemy.orm import Session
 from . import schemas
 from . import models
 from datetime import datetime
-from fastapi import HTTPException, status
+from fastapi import HTTPException, status, Depends
+from .. import deps
+from db.models import Note
 
 
-def create_note(db: Session, note: schemas.Note):
+def create_note(token: str, db: Session, note: schemas.Note):
     """ 
     This function is used to create new note
     """
-    db_note = models.Note(title=note.title,
+
+    current_user_id = (Depends(deps.get_current_user(token=token))).dependency
+
+    db_note = Note(user_id=current_user_id,
+                          title=note.title,
                           description=note.description,
                           created_at=datetime.utcnow(),
                           updated_at=datetime.utcnow())
     db.add(db_note)
     db.commit()
     db.refresh(db_note)
+
     return db_note
 
 

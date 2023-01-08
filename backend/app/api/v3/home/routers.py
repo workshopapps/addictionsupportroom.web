@@ -61,10 +61,13 @@ def get_all_notes(token: str, db: Session = Depends(get_db)):
 
 
 @router.post("/notes/create")
-def create_note(note: schemas.Note,
-                db: Session = Depends(get_db),
-                current_user: User = Depends(deps.get_current_user)):
-    db_note = crud.create_note(db=db, note=note)
+def create_note(token: str, 
+                note: schemas.Note,
+                db: Session = Depends(get_db)):
+    # current_user_id =(Depends(deps.get_current_user(token=token))).dependency
+
+    db_note = crud.create_note(token=token, db=db, note=note)
+
     return db_note
 
 

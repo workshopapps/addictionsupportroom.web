@@ -248,7 +248,7 @@ class Note(Base):
 
     id = Column(Integer, primary_key=True, index=True)
     user_id = Column(Integer, nullable=False)
-    title = Column(String, nullable=True)
+    title = Column(String)
     description = Column(String)
     created_at = Column(DateTime,
                         default=datetime.datetime.utcnow(),
