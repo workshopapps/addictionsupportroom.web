@@ -3,7 +3,7 @@ import random
 from fastapi import APIRouter, Depends
 from sqlalchemy.orm import Session
 from ..home import schemas, crud
-from db.models import Emergency, User
+from db.models import Emergency, User, Note
 from db.db import get_db
 from . import quotes
 from .. import deps
@@ -55,7 +55,7 @@ def get_all_notes(token: str, db: Session = Depends(get_db)):
 
     current_user_id =(Depends(deps.get_current_user(token=token))).dependency
 
-    current_user_notes = db.query(User).filter(User.id==current_user_id).first()
+    current_user_notes = db.query(Note).filter(Note.user_id==current_user_id).all()
 
     return current_user_notes
 

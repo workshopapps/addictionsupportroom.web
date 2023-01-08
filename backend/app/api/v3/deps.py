@@ -55,9 +55,10 @@ async def find_existed_user(id: str, db: Session = Depends(get_db)) -> UserBase:
         Dict[str, Any]: a dict object that contains info about a user.
     """
 
-    user = db.query(models.User).filter(models.User.id == id).first()
+    user = await db.query(models.User).filter(models.User.id == id).first()
     if user:
         return UserBase(**user.__dict__)
+
     return user
 
 
@@ -119,12 +120,12 @@ def get_current_user(token: str, db: Session = Depends(get_db)):
 
         user = find_existed_user(id=id, db=db)
 
-        if user is None:
+        if not user:
             raise get_user_exception()
 
         return int(id)
         
-    except (JWTError, ValidationError) as ex:
+    except (JWTError, ValidationError):
         raise get_user_exception()
 
 

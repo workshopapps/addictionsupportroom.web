@@ -73,7 +73,7 @@ class User(Base):
 
     id = Column(Integer, primary_key=True, index=True)
     username = Column(String, unique=True)
-    avatar = Column(String)
+    avatar = Column(String, nullable=True)
     hashed_password = Column(String)
     is_active = Column(Boolean, default=True)
     forum_posts = relationship('ForumPost', back_populates='user')
@@ -247,7 +247,8 @@ class Note(Base):
     __table_args__ = {'extend_existing': True}
 
     id = Column(Integer, primary_key=True, index=True)
-    title = Column(String)
+    user_id = Column(Integer, nullable=False)
+    title = Column(String, nullable=True)
     description = Column(String)
     created_at = Column(DateTime,
                         default=datetime.datetime.utcnow(),
