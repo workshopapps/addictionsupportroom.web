@@ -21,9 +21,10 @@ from jose import jwt, JWTError
 from passlib.context import CryptContext
 
 pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
-oauth2_bearer = OAuth2PasswordBearer(tokenUrl="token")
+# oauth2_bearer = OAuth2PasswordBearer(tokenUrl="token")
 
-SECRET_KEY = "Kffdjkfskjdnsjdkjsdnksjjkdnkjskjd"
+# SECRET_KEY = "Kffdjkfskjdnsjdkjsdnksjjkdnkjskjd"
+SECRET_KEY = "Pr4aIQapyXbC2bgApiLZTNRbgPB1nd15"
 ALGORITHM = "HS256"
 ACCESS_TOKEN_EXPIRE_MINUTES = 3000
 
@@ -44,8 +45,7 @@ def verify_password(plain_password, hashed_password):
     return pwd_context.verify(plain_password, hashed_password)
 
 
-async def find_existed_user(id: str, session: Session) -> UserBase:
-    print(f"{id}")
+async def find_existed_user(id: str, db: Session = Depends(get_db)) -> UserBase:
     """
     A method to fetch a user info given an ID.
     Args:
@@ -55,9 +55,10 @@ async def find_existed_user(id: str, session: Session) -> UserBase:
         Dict[str, Any]: a dict object that contains info about a user.
     """
 
-    user = session.query(models.User).filter(models.User.id == id).first()
+    user = await db.query(models.User).filter(models.User.id == id).first()
     if user:
         return UserBase(**user.__dict__)
+
     return user
 
 
@@ -108,21 +109,24 @@ def create_access_token(data: dict):
     return AccessToken(token=encoded_jwt, token_type='bearer')
 
 
-async def get_current_user(db: Session = Depends(get_db),
-                           token: str = Depends(oauth2_bearer)):
-    print(token)
+def get_current_user(token: str, db: Session = Depends(get_db)):
+
     try:
-        payload = jwt.decode(token, SECRET_KEY, algorithms=[ALGORITHM])
-        id: str = payload.get("sub")
+        payload = jwt.decode(token, key=SECRET_KEY, algorithms=[ALGORITHM])
+        id = payload.get("sub")
         if id is None:
             raise get_user_exception()
-    except (JWTError, ValidationError) as ex:
-        raise get_user_exception()
-    user = await find_existed_user(id=id, session=db)
-    if not user:
-        raise get_user_exception()
+        
 
-    return user
+        user = find_existed_user(id=id, db=db)
+
+        if not user:
+            raise get_user_exception()
+
+        return int(id)
+        
+    except (JWTError, ValidationError):
+        raise get_user_exception()
 
 
 # def get_current_active_user(

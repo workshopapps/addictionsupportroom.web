@@ -3,7 +3,7 @@ import random
 from fastapi import APIRouter, Depends
 from sqlalchemy.orm import Session
 from ..home import schemas, crud
-from db.models import Emergency, User
+from db.models import Emergency, User, Note
 from db.db import get_db
 from . import quotes
 from .. import deps
@@ -51,50 +51,61 @@ def about_to_relapse(currentUser: User = Depends(deps.get_current_user),
 
 
 @router.get("/notes/")
-def get_all_notes(db: Session = Depends(get_db),
-                  current_user: User = Depends(deps.get_current_user)):
-    notes = crud.get_all_notes(db=db)
-    return notes
+def get_all_notes(token: str, db: Session = Depends(get_db)):
+
+    current_user_id =(Depends(deps.get_current_user(token=token))).dependency
+
+    current_user_notes = db.query(Note).filter(Note.user_id==current_user_id).all()
+
+    return current_user_notes
 
 
 @router.post("/notes/create")
-def create_note(note: schemas.Note,
-                db: Session = Depends(get_db),
-                current_user: User = Depends(deps.get_current_user)):
-    db_note = crud.create_note(db=db, note=note)
+def create_note(token: str, 
+                note: schemas.Note,
+                db: Session = Depends(get_db)):
+
+    db_note = crud.create_note(token=token, db=db, note=note)
+
     return db_note
 
 
-@router.get("/notes/today")  #  response_model=list[schemas.ShowNote]
-def get_all_notes_created_today(db: Session = Depends(get_db),
-                                current_user: User = Depends(
-                                    deps.get_current_user)):
-    notes = crud.get_all_notes_created_today(db=db)
-    return notes
+# @router.get("/notes/today")  #  response_model=list[schemas.ShowNote]
+# def get_all_notes_created_today(db: Session = Depends(get_db),
+#                                 current_user: User = Depends(
+#                                     deps.get_current_user)):
+#     notes = crud.get_all_notes_created_today(db=db)
+#     return notes
 
 
 @router.get(
     "/notes/{note_id}", )  #  response_model=schemas.ShowNote
-def get_specific_note(note_id: int,
-                      db: Session = Depends(get_db),
-                      current_user: User = Depends(deps.get_current_user)):
-    note = crud.get_specific_note(db=db, note_id=note_id)
+def get_specific_note(token: str, note_id: int,
+                      db: Session = Depends(get_db)):
+
+    note = crud.get_specific_note(token=token, db=db, note_id=note_id)
+
     return note
 
 
 @router.delete("/notes/delete/{note_id}")
-def delete_note(note_id: int,
-                db: Session = Depends(get_db),
-                current_user: User = Depends(deps.get_current_user)):
-    note = crud.delete_note(db=db, note_id=note_id)
+def delete_note(token: str,
+                note_id: int,
+                db: Session = Depends(get_db)):
+
+    note = crud.delete_note(token=token, db=db, note_id=note_id)
+
     return note
 
 
 @router.put("/note/edit/{note_id}")
-def update_note(note: schemas.Note,
+def update_note(token: str,
+                note: schemas.Note,
                 note_id: int,
                 db: Session = Depends(get_db)):
-    note = crud.update_note(db=db, note_id=note_id, note=note)
+
+    note = crud.update_note(token=token, db=db, note_id=note_id, note=note)
+
     return note
 
 
