@@ -49,21 +49,25 @@ def get_specific_note(token: str, note_id: int, db: Session):
     return note
 
 
-def delete_note(note_id: int, db: Session):
+def delete_note(token: str, note_id: int, db: Session):
     """ 
      This function delete the not based on id if there is no Note with that id.
      Then it will raise Exception HTTP_404_NOT_FOUND with a message
      there is no note with id: number
     """
-    note = db.query(models.Note).filter(models.Note.id == note_id).first()
+    current_user_id =(Depends(deps.get_current_user(token=token))).dependency
+
+    note = db.query(Note).filter(Note.id == note_id).filter(Note.user_id==current_user_id).first()
 
     if not note:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND,
                             detail=f"there is no note with id: {note_id}")
+    
     db.delete(note)
     db.commit()
 
-    return note
+    return f"Note with ID: {note_id} has been successfully deleted."
+    
 
 
 def update_note(note_id: int, note: schemas.Note, db: Session):
