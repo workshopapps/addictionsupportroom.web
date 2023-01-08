@@ -51,10 +51,13 @@ def about_to_relapse(currentUser: User = Depends(deps.get_current_user),
 
 
 @router.get("/notes/")
-def get_all_notes(db: Session = Depends(get_db),
-                  current_user: User = Depends(deps.get_current_user)):
-    notes = crud.get_all_notes(db=db)
-    return notes
+def get_all_notes(token: str, db: Session = Depends(get_db)):
+
+    current_user_id =(Depends(deps.get_current_user(token=token))).dependency
+
+    current_user_notes = db.query(User).filter(User.id==current_user_id).first()
+
+    return current_user_notes
 
 
 @router.post("/notes/create")
