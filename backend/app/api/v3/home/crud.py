@@ -27,22 +27,25 @@ def create_note(token: str, db: Session, note: schemas.Note):
     return db_note
 
 
-def get_all_notes_created_today(db: Session):
-    """
-    This function return the all the notes created  daily
-    if not Note then it will return empty list like this []
+# def get_all_notes_created_today(db: Session):
+#     """
+#     This function return the all the notes created  daily
+#     if not Note then it will return empty list like this []
     
-    """
-    notes = db.query(models.Note).all()
-    return notes
+#     """
+#     notes = db.query(models.Note).all()
+#     return notes
 
 
-def get_specific_note(note_id: int, db: Session):
-    note = db.query(models.Note).filter(models.Note.id == note_id).first()
+def get_specific_note(token: str, note_id: int, db: Session):
+    current_user_id = (Depends(deps.get_current_user(token=token))).dependency
+
+    note = db.query(Note).filter(Note.id==note_id).filter(Note.user_id==current_user_id).first()
 
     if not note:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND,
-                            detail=f"there is no note with id: {note_id}")
+                            detail=f"there is no user-owned note ith id: {note_id}")
+
     return note
 
 
@@ -59,6 +62,7 @@ def delete_note(note_id: int, db: Session):
                             detail=f"there is no note with id: {note_id}")
     db.delete(note)
     db.commit()
+
     return note
 
 
