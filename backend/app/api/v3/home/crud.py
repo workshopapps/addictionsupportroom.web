@@ -26,6 +26,14 @@ def create_note(token: str, db: Session, note: schemas.Note):
 
     return db_note
 
+def get_notes(token: str, db: Session):
+
+    current_user_id = (Depends(deps.get_current_user(token=token))).dependency
+
+    note = db.query(Note).filter(Note.user_id==current_user_id).all()
+
+    return note
+
 
 # def get_all_notes_created_today(db: Session):
 #     """
