@@ -244,7 +244,6 @@ class Feedbacks(Base):
 
 class Note(Base):
     __tablename__ = "notes"
-    __table_args__ = {'extend_existing': True}
 
     id = Column(Integer, primary_key=True, index=True)
     user_id = Column(Integer, nullable=False)
@@ -259,7 +258,6 @@ class Note(Base):
 
 class LeadCollected(Base):
     __tablename__ = 'lead_collected_email'
-    __table_args__ = {'extend_existing': True} 
-
+    
     id = Column(Integer, primary_key=True, index=True)
     email = Column(String)
