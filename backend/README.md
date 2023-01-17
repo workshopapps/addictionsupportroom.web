@@ -2,9 +2,9 @@
 
 Project includes:
 
--   `fastapi`
--   `sqlmodel`
--   `alembic`
+- `fastapi`
+- `sqlmodel`
+- `alembic`
 
 ##
 
@@ -68,6 +68,8 @@ python app/server.py
 ```
 
 Go to: http://localhost:8000/api/docs/
+or
+Go to: http://localhost:4455/api/docs/
 
 #### Migrations
 
