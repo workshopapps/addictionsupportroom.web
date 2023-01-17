@@ -31,7 +31,7 @@ class MessageCreate(BaseModel):
         >>> media = ""
     """
 
-    receiver: str = Field(...,
+    receiver: int = Field(...,
                           example="The recipient user_id for this message.")
     content: str = Field(
         ..., example="The message text content or URL to the media file.")

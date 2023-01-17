@@ -45,7 +45,7 @@ def verify_password(plain_password, hashed_password):
     return pwd_context.verify(plain_password, hashed_password)
 
 
-async def find_existed_user(id: str, db: Session = Depends(get_db)) -> UserBase:
+async def find_existed_user(id: int, db: Session = Depends(get_db)) -> UserBase:
     """
     A method to fetch a user info given an ID.
     Args:
@@ -55,7 +55,7 @@ async def find_existed_user(id: str, db: Session = Depends(get_db)) -> UserBase:
         Dict[str, Any]: a dict object that contains info about a user.
     """
 
-    user = await db.query(models.User).filter(models.User.id == id).first()
+    user = db.query(models.User).filter(models.User.id == id).first()
     if user:
         return UserBase(**user.__dict__)
 

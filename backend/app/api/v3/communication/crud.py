@@ -155,7 +155,7 @@ async def send_new_message(  # pylint: disable=R0911
                 "message": "You can't send an empty message!",
             }
         receiver = await deps.find_existed_user(id=request.receiver,
-                                                session=session)
+                                                db=session)
         if not receiver:
             return {
                 "status_code": 400,
@@ -193,7 +193,7 @@ async def send_new_message(  # pylint: disable=R0911
     return results
 
 
-async def get_sender_receiver_messages(sender: UserBase, receiver: str,
+async def get_sender_receiver_messages(sender: UserBase, receiver: int,
                                        session: Session):
     """
     A method to fetch messages between a sender and a receiver.
@@ -206,7 +206,7 @@ async def get_sender_receiver_messages(sender: UserBase, receiver: str,
     Returns:
         Result: Database result.
     """
-    receiver = await deps.find_existed_user(id=receiver, session=session)
+    receiver = await deps.find_existed_user(id=receiver, db=session)
     if not receiver:
         return {
             "status_code": 400,
