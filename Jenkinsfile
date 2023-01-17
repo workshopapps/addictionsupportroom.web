@@ -2,9 +2,7 @@ pipeline {
 
     	agent any
 	    stages {
-		
-		
-
+		    
 		            stage("build frontend"){
 
                       steps {
@@ -25,11 +23,19 @@ pipeline {
                     steps {
 			    sh "sudo cp -rf ${workspace}/backend/app/* /home/judgejudy/addictionsupportroom/backend"
                             sh "sudo cp -fr ${WORKSPACE}/frontend/build/* /var/www/soberpal.hng.tech/html"
-                            sh "sudo su - judgejudy && whoami"
-                            sh "sudo systemctl restart addictionsupportroom.service"
+//                           sh "sudo su - judgejudy && whoami"
+//                           sh "sudo systemctl restart addictionsupportroom.service"
+			    sh "sudo bash /home/judgejudy/addictionsupportroom.sh"
                     }
 
         }
+		
+	stage("remove files") {
+			
+		steps {
+			     sh "sudo rm -rf *"
+			}
+		}
 
 
         }
