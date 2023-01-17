@@ -245,8 +245,8 @@ class Feedbacks(Base):
 class Note(Base):
     __tablename__ = "notes"
 
-    id = Column(Integer, primary_key=True, index=True, default=1)
-    user_id = Column(Integer, nullable=False)
+    id = Column(Integer, primary_key=True, index=True)
+    user_id = Column(Integer, nullable=False, default=1)
     title = Column(String)
     description = Column(String)
     created_at = Column(DateTime,
