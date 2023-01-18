@@ -79,12 +79,12 @@ class User(Base):
     forum_posts = relationship('ForumPost', back_populates='user')
     forum_comments = relationship('ForumPostComment', back_populates='owner')
     date_added = Column(DateTime,
-                        default=datetime.datetime.utcnow,
+                        default=datetime.datetime.utcnow(),
                         nullable=False)
     last_relapse_date = Column(
-        Date,
+        DateTime,
         nullable=False,
-        default=datetime.date.today(),
+        default=datetime.datetime.utcnow(),
         # default=datetime.date(2008, 11, 25),
     )
 
