@@ -109,7 +109,7 @@ def create_access_token(data: dict):
     return AccessToken(token=encoded_jwt, token_type='bearer')
 
 
-def get_current_user(token: str, db: Session = Depends(get_db)):
+async def get_current_user(token: str, db: Session = Depends(get_db)):
 
     try:
         payload = jwt.decode(token, key=SECRET_KEY, algorithms=[ALGORITHM])
@@ -118,12 +118,12 @@ def get_current_user(token: str, db: Session = Depends(get_db)):
             raise get_user_exception()
         
 
-        user = find_existed_user(id=id, db=db)
+        user = await find_existed_user(id=id, db=db)
 
         if not user:
             raise get_user_exception()
 
-        return int(id)
+        return user
         
     except (JWTError, ValidationError):
         raise get_user_exception()

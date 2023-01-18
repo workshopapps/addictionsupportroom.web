@@ -101,7 +101,7 @@ async def send_message(
     #     "data": currentUser,
     # }
     # return results
-    results = await send_new_message(currentUser, request, None, None,
+    results = await send_new_message(currentUser.id, request, None, None,
                                      session)
     return results
 
@@ -141,7 +141,7 @@ async def get_conversation(
     #     "data": currentUser,
     # }
     # return results
-    results = await get_sender_receiver_messages(currentUser, receiver,
+    results = await get_sender_receiver_messages(currentUser.id, receiver,
                                                  session)
     return results
 

@@ -142,3 +142,7 @@ dmypy.json
 cython_debug/
 
 .python-version
+
+
+# Database File
+*.db
