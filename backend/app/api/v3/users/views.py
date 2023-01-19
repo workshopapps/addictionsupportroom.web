@@ -15,5 +15,4 @@ async def profile(db: Session = Depends(get_db), current_user: User = Depends(ge
     # print(await current_user)
     # user = current_user
     user = db.query(User).filter(User.id == current_user.id).first()
-    print(user)
     return user
