@@ -59,11 +59,11 @@ def get_all_notes(token: str, db: Session = Depends(get_db)):
 
 
 @router.post("/notes/create")
-def create_note(token: str, 
+async def create_note(token: str, 
                 note: schemas.Note,
                 db: Session = Depends(get_db)):
 
-    db_note = crud.create_note(token=token, db=db, note=note)
+    db_note = await crud.create_note(token=token, db=db, note=note)
 
     return db_note
 
