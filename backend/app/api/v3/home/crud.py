@@ -8,14 +8,15 @@ from .. import deps
 from db.models import Note
 
 
-def create_note(token: str, db: Session, note: schemas.Note):
+async def create_note(token: str, db: Session, note: schemas.Note):
     """ 
     This function is used to create new note
     """
 
-    current_user_id = (Depends(deps.get_current_user(token=token))).dependency
+    current_user_id = await deps.get_current_user(token=token, db=db)
+    print(current_user_id)
 
-    db_note = Note(user_id=current_user_id,
+    db_note = Note(user_id=current_user_id.id,
                           title=note.title,
                           description=note.description,
                           created_at=datetime.utcnow(),
