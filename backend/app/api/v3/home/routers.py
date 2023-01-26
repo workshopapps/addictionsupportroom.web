@@ -51,19 +51,20 @@ def about_to_relapse(currentUser: User = Depends(deps.get_current_user),
 
 
 @router.get("/notes/")
-def get_all_notes(token: str, db: Session = Depends(get_db)):
+def get_all_notes(current_user: User = Depends(deps.get_current_user), db: Session = Depends(get_db)):
 
-    current_user_notes = crud.get_notes(token=token, db=db)
+    current_user_notes = crud.get_notes(current_user=current_user, db=db)
 
     return current_user_notes
 
 
 @router.post("/notes/create")
-async def create_note(token: str, 
+async def create_note(
                 note: schemas.Note,
+                current_user: User = Depends(deps.get_current_user), 
                 db: Session = Depends(get_db)):
 
-    db_note = await crud.create_note(token=token, db=db, note=note)
+    db_note = await crud.create_note(current_user=current_user, db=db, note=note)
 
     return db_note
 
@@ -78,31 +79,35 @@ async def create_note(token: str,
 
 @router.get(
     "/notes/{note_id}", )  #  response_model=schemas.ShowNote
-def get_specific_note(token: str, note_id: int,
-                      db: Session = Depends(get_db)):
+def get_specific_note(
+                        note_id: int,
+                        current_user: User = Depends(deps.get_current_user), 
+                        db: Session = Depends(get_db)):
 
-    note = crud.get_specific_note(token=token, db=db, note_id=note_id)
+    note = crud.get_specific_note(current_user=current_user, db=db, note_id=note_id)
 
     return note
 
 
 @router.delete("/notes/delete/{note_id}")
-def delete_note(token: str,
+def delete_note(
                 note_id: int,
+                current_user: User = Depends(deps.get_current_user),
                 db: Session = Depends(get_db)):
 
-    note = crud.delete_note(token=token, db=db, note_id=note_id)
+    note = crud.delete_note(current_user=current_user, db=db, note_id=note_id)
 
     return note
 
 
 @router.put("/note/edit/{note_id}")
-def update_note(token: str,
+def update_note(
                 note: schemas.Note,
                 note_id: int,
+                current_user: User = Depends(deps.get_current_user),
                 db: Session = Depends(get_db)):
 
-    note = crud.update_note(token=token, db=db, note_id=note_id, note=note)
+    note = crud.update_note(current_user=current_user, db=db, note_id=note_id, note=note)
 
     return note
 

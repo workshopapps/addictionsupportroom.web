@@ -21,7 +21,7 @@ from jose import jwt, JWTError
 from passlib.context import CryptContext
 
 pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
-# oauth2_bearer = OAuth2PasswordBearer(tokenUrl="token")
+oauth2_bearer = OAuth2PasswordBearer(tokenUrl="token")
 
 # SECRET_KEY = "Kffdjkfskjdnsjdkjsdnksjjkdnkjskjd"
 SECRET_KEY = "Pr4aIQapyXbC2bgApiLZTNRbgPB1nd15"
@@ -109,8 +109,10 @@ def create_access_token(data: dict):
     return AccessToken(token=encoded_jwt, token_type='bearer')
 
 
-async def get_current_user(token: str, db: Session = Depends(get_db)):
-
+async def get_current_user(
+    token: str = Depends(oauth2_bearer), 
+    db: Session = Depends(get_db)
+):
     try:
         payload = jwt.decode(token, key=SECRET_KEY, algorithms=[ALGORITHM])
         id = payload.get("sub")

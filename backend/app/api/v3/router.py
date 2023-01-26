@@ -35,7 +35,7 @@ async def token(form_data: OAuth2PasswordRequestForm = Depends(),
         UserOut: return a UserOut schema with a token object.
     """
 
-    val = await login(UserLogin(username=form_data.username), db=db)
+    val = await login(UserLogin(username=form_data.username, password=form_data.password), db=db)
 
     access_token = val['data']['access_token']
 

@@ -5,18 +5,15 @@ from . import models
 from datetime import datetime
 from fastapi import HTTPException, status, Depends
 from .. import deps
-from db.models import Note
+from db.models import Note, User
 
 
-async def create_note(token: str, db: Session, note: schemas.Note):
+async def create_note(current_user: User, db: Session, note: schemas.Note):
     """ 
     This function is used to create new note
-    """
+    """    
 
-    current_user_id = await deps.get_current_user(token=token, db=db)
-    print(current_user_id)
-
-    db_note = Note(user_id=current_user_id.id,
+    db_note = Note(user_id=current_user.id,
                           title=note.title,
                           description=note.description,
                           created_at=datetime.utcnow(),
@@ -27,11 +24,12 @@ async def create_note(token: str, db: Session, note: schemas.Note):
 
     return db_note
 
-def get_notes(token: str, db: Session):
+def get_notes(current_user: User, db: Session):
+    '''
+    This is a crud fuction used to get all notes created by the current user from the database
+    '''
 
-    current_user_id = (Depends(deps.get_current_user(token=token))).dependency
-
-    note = db.query(Note).filter(Note.user_id==current_user_id).all()
+    note = db.query(Note).filter(Note.user_id==current_user.id).all()
 
     return note
 
@@ -46,10 +44,12 @@ def get_notes(token: str, db: Session):
 #     return notes
 
 
-def get_specific_note(token: str, note_id: int, db: Session):
-    current_user_id = (Depends(deps.get_current_user(token=token))).dependency
+def get_specific_note(current_user: User, note_id: int, db: Session):
+    '''
+    This crud function is used to get specific note created by the current user from database
+    '''
 
-    note = db.query(Note).filter(Note.id==note_id).filter(Note.user_id==current_user_id).first()
+    note = db.query(Note).filter(Note.id==note_id).filter(Note.user_id==current_user.id).first()
 
     if not note:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND,
@@ -58,15 +58,14 @@ def get_specific_note(token: str, note_id: int, db: Session):
     return note
 
 
-def delete_note(token: str, note_id: int, db: Session):
+def delete_note(current_user: User, note_id: int, db: Session):
     """ 
      This function delete the not based on id if there is no Note with that id.
      Then it will raise Exception HTTP_404_NOT_FOUND with a message
      there is no note with id: number
     """
-    current_user_id =(Depends(deps.get_current_user(token=token))).dependency
 
-    note = db.query(Note).filter(Note.id == note_id).filter(Note.user_id==current_user_id).first()
+    note = db.query(Note).filter(Note.id == note_id).filter(Note.user_id==current_user.id).first()
 
     if not note:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND,
@@ -79,15 +78,14 @@ def delete_note(token: str, note_id: int, db: Session):
 
 
 
-def update_note(token:str, note_id: int, note: schemas.Note, db: Session):
+def update_note(current_user: User, note_id: int, note: schemas.Note, db: Session):
     """ 
      This function update the not based on id if there is no Note with that id.
      Then it will raise Exception HTTP_404_NOT_FOUND with a message
      there is no note with id: number
     """
-    current_user_id = (Depends(deps.get_current_user(token=token))).dependency
 
-    note_in = db.query(Note).filter(Note.id==note_id).filter(Note.user_id==current_user_id).first()
+    note_in = db.query(Note).filter(Note.id==note_id).filter(Note.user_id==current_user.id).first()
 
     if not note_in:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND,
