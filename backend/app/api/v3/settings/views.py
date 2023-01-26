@@ -23,10 +23,11 @@ router = APIRouter()
                 }
             })
 def edit_user_profile(request: Request,
-                      username: str,
+                      old_username: str,
                       db: Session = Depends(deps.get_db),
                       user_name: str = None,
-                      avatar: str = None):
+                      avatar: str = None,
+                      current_user: User = Depends(deps.get_current_user)):
     """ Changes the username and avatar of an existing user
         
         Args:
@@ -50,11 +51,16 @@ def edit_user_profile(request: Request,
     """
     if request.method == "PUT":
 
-        user = db.query(User).filter(User.username == username).first()
+        user = db.query(User).filter(User.username == old_username).first()
 
         if not user:
             return HTTPException(status_code=status.HTTP_204_NO_CONTENT,
                                  detail="User not found")
+
+        if current_user.id != user.id:
+            return HTTPException(status_code=status.HTTP_401_UNAUTHORIZED,
+                                 detail="User not allowed")
+            
 
         old_user_profile = {"username": user.username, "avatar": user.avatar}
 
