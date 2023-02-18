@@ -37,7 +37,7 @@ from fastapi.responses import HTMLResponse
 
 @router.get(
     "/contacts",
-    response_model=GetAllContactsResults | ResponseSchema,
+    # response_model=GetAllContactsResults,
     status_code=201,
     name="contacts:get-all-user-contacts",
     responses={
@@ -60,6 +60,7 @@ async def get_contacts_user(
     """
     results = await get_user_contacts(currentUser.id, session)
     return results
+
 
 
 @router.post(
