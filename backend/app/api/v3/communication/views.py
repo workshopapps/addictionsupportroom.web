@@ -109,7 +109,7 @@ async def send_message(
 
 @router.get(
     "/conversation",
-    response_model=ResponseSchema | GetAllMessageResults,
+    # response_model=ResponseSchema | GetAllMessageResults,
     status_code=200,
     name="chats:get-all-conversations",
     responses={
@@ -120,7 +120,7 @@ async def send_message(
     },
 )
 async def get_conversation(
-        receiver: str,
+        receiver: int,
         currentUser: UserBase = Depends(deps.get_current_user),  # pylint: disable=C0103
         session: Session = Depends(deps.get_db),
 ):
@@ -135,13 +135,7 @@ async def get_conversation(
     Returns:
         ResponseSchema | GetAllMessageResults: return a list of messages between sender and receiver
     """
-
-    # results = {
-    #     "status_code": 201,
-    #     "message": "A new message has been delivered successfully!",
-    #     "data": currentUser,
-    # }
-    # return results
+    
     results = await get_sender_receiver_messages(currentUser.id, receiver,
                                                  session)
     return results
