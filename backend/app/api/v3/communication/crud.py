@@ -193,7 +193,7 @@ async def send_new_message(  # pylint: disable=R0911
     return results
 
 
-async def get_sender_receiver_messages(sender: UserBase, receiver: int,
+async def get_sender_receiver_messages(sender: int, receiver: int,
                                        session: Session):
     """
     A method to fetch messages between a sender and a receiver.
@@ -206,7 +206,8 @@ async def get_sender_receiver_messages(sender: UserBase, receiver: int,
     Returns:
         Result: Database result.
     """
-    receiver = await deps.find_existed_user(id=receiver, db=session)
+    receiver = await deps.find_receiver(id=receiver, db=session)
+    
     if not receiver:
         return {
             "status_code": 400,
@@ -239,7 +240,7 @@ async def get_sender_receiver_messages(sender: UserBase, receiver: int,
         ORDER BY
           creation_date
     """
-    values = {"sender_id": sender.id, "receiver_id": receiver.id}
+    values = {"sender_id": sender, "receiver_id": receiver}
 
     result = session.execute(text(query), values)
     messages_sent_received = result.fetchall()
@@ -260,8 +261,8 @@ async def get_sender_receiver_messages(sender: UserBase, receiver: int,
           receiver = :sender_id
     """
     values = {
-        "sender_id": sender.id,
-        "receiver_id": receiver.id,
+        "sender_id": sender,
+        "receiver_id": receiver,
         "modified_date": datetime.datetime.utcnow(),
     }
     session.execute(text(query), values)

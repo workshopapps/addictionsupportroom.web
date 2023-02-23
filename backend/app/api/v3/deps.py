@@ -61,6 +61,23 @@ async def find_existed_user(id: int, db: Session = Depends(get_db)) -> UserBase:
 
     return user
 
+async def find_receiver(id: int, db: Session = Depends(get_db)) -> UserBase:
+    """
+    A method to fetch a user info given an ID.
+    Args:
+        ID (Str) : A given user ID.
+        session (AsyncSession) : SqlAlchemy session object.
+    Returns:
+        Dict[str, Any]: a dict object that contains info about a user.
+    """
+
+    user = db.query(models.User).filter(models.User.id == id).first()
+    if user:
+        # return UserBase(**user.__dict__)
+        return user.id
+
+    return user.id
+
 
 async def find_existed_user_by_username_and_password(username: str,
                                         password: str,
