@@ -136,7 +136,6 @@ async def get_conversation(
         ResponseSchema | GetAllMessageResults: return a list of messages between sender and receiver
     """
     
-    print(currentUser.id)
     results = await get_sender_receiver_messages(currentUser.id, receiver,
                                                  session)
     return results
