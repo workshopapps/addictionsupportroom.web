@@ -28,7 +28,12 @@ async def get_user_contacts(user_id: int, session: Session):
         # get all contacts for each user.
         query = """
             SELECT
-              *
+              id,
+              username,
+              avatar,
+              is_active,
+              date_added,
+              last_relapse_date
             FROM
               users
         """
