@@ -46,9 +46,9 @@ milestones = [1, 7, 30, 90]
 
 @router.post("/")
 async def mark_a_day(
+    relapse_in: RelapseCreate,
         *,
         db: Session = Depends(deps.get_db),
-        relapse_in: RelapseCreate,
         current_user: User = Depends(deps.get_current_user),
 ) -> Any:
     """
@@ -299,24 +299,6 @@ async def get_current_user_total_clean_days(
 
     return {"status_code": 200, "clean_days": clean_days}
 
-
-# @router.get(
-#     "/summary",
-#     response_model=SummarySchema | ResponseSchema,
-#     responses={
-#         200: {
-#             "model": SummarySchema,
-#             "description": "A summary for user progress",
-#         },
-#         400: {
-#             "model": ResponseSchema,
-#             "description": "User not found.",
-#         },
-#     })
-# async def get_summary():
-
-
-#     return "Done"
 
 @router.get(
     "/summary",
