@@ -41,7 +41,7 @@ class UserCreate(BaseModel):
         example="https://picsum.photos/200/200",
     )
     password: str
-    addiction: str
+    addiction: str = "alcohol"
 
 
 class AccessToken(BaseModel):
