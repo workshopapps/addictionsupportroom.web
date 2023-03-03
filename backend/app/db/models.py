@@ -87,6 +87,7 @@ class User(Base):
         default=datetime.datetime.utcnow(),
         # default=datetime.date(2008, 11, 25),
     )
+    addiction = Column(String, nullable=True)
 
 
 class Month(Base):

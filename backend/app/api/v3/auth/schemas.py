@@ -13,6 +13,8 @@ class UserBase(BaseModel):
         example="http://www.example.com/image",
     )
     last_relapse_date: date | None
+    addiction: str | None
+    
 
     # chat_status: Optional[str] = Field(..., example=ChatStatus.online)
     # first_name: str = Field(..., example="First name.")
@@ -39,6 +41,7 @@ class UserCreate(BaseModel):
         example="https://picsum.photos/200/200",
     )
     password: str
+    addiction: str
 
 
 class AccessToken(BaseModel):
