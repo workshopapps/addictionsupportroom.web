@@ -26,6 +26,7 @@ async def signup(user: schemas.UserCreate, db: Session = Depends(deps.get_db)):
     db_user.avatar = user.avatar
     db_user.is_active = True
     db_user.hashed_password = deps.get_password_hash(user.password)
+    db_user.addiction = user.addiction
 
     try:
         # Create a new user
