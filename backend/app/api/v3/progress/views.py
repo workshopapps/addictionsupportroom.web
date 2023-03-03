@@ -8,6 +8,8 @@ from fastapi import APIRouter, Depends
 from . import schemas
 from sqlalchemy.orm import Session
 import datetime
+# from datetime import date
+# from datetime import datetime
 from .schemas import GetAllHistoryResult, GetAllRanking, Ranking, SummarySchema, TotalCleanDays
 
 from typing import Any
@@ -298,9 +300,26 @@ async def get_current_user_total_clean_days(
     return {"status_code": 200, "clean_days": clean_days}
 
 
+# @router.get(
+#     "/summary",
+#     response_model=SummarySchema | ResponseSchema,
+#     responses={
+#         200: {
+#             "model": SummarySchema,
+#             "description": "A summary for user progress",
+#         },
+#         400: {
+#             "model": ResponseSchema,
+#             "description": "User not found.",
+#         },
+#     })
+# async def get_summary():
+
+
+#     return "Done"
+
 @router.get(
     "/summary",
-    response_model=SummarySchema | ResponseSchema,
     responses={
         200: {
             "model": SummarySchema,
@@ -313,40 +332,28 @@ async def get_current_user_total_clean_days(
     },
 )
 async def get_summary(
-        current_user: User = Depends(deps.get_current_user), ) -> Any:
+        current_user: User = Depends(deps.get_current_user),
+        db: Session = Depends(deps.get_db) ) -> Any:
     """
-    Get a user milestone
-    Returns {clean_days: 1, milestone: 3}
+    Get a user's total number of clean days and total number of relapses
+    Returns {sober: 1, relapsed: 3}
     """
+    today = datetime.datetime.utcnow()
 
-    # Get current user streak
-    # Check for when the last relapse occured
-    # Subtract today's date from last relapse
-    # Check where the milestone for the date lie
-    # Returns {clean_days: 1, milestone: 3}
+    relapses = db.query(Relapse).filter_by(user=current_user.id).count()
 
-    today = datetime.date.today()
-    last_relapse_date = current_user.last_relapse_date
+    user = db.query(User).filter(User.id==current_user.id).first()
 
-    difference = today - last_relapse_date
+    day_added = user.date_added
 
-    clean_days = difference.days
+    difference = today - day_added
 
-    result = {
-        "clean_days": clean_days,
-        "milestone": 0,
+    total = difference.days
+
+    return {
+        "sober": total,
+        "relapsed": relapses
     }
-
-    for milestone in milestones:
-        if clean_days <= milestone:
-            result = {
-                "clean_days": clean_days,
-                "milestone": milestone,
-            }
-        break
-
-    return result
-
 
 @router.get(
     "/history/list",
