@@ -10,7 +10,7 @@ from db.db import engine
 
 
 def get_app() -> FastAPI:
-    Base.metadata.drop_all(bind=engine)
+    # Base.metadata.drop_all(bind=engine)
     Base.metadata.create_all(bind=engine)
     """
     Get FastAPI application.
